@@ -1,0 +1,121 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Usuario\\source\\repos\\Cod3rsGrowth\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{227AD2BA-88AE-4171-9DA6-91CBC619172D}|Cod3rsGrowth.Testes\\Cod3rsGrowth.Testes.csproj|c:\\users\\usuario\\source\\repos\\cod3rsgrowth\\cod3rsgrowth.testes\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{227AD2BA-88AE-4171-9DA6-91CBC619172D}|Cod3rsGrowth.Testes\\Cod3rsGrowth.Testes.csproj|solutionrelative:cod3rsgrowth.testes\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BDEBF06-5900-4E80-A0F6-489A429930B7}|Cod3rsGrowth.Web\\Cod3rsGrowth.Web.csproj|c:\\users\\usuario\\source\\repos\\cod3rsgrowth\\cod3rsgrowth.web\\cod3rsgrowth.web.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{8BDEBF06-5900-4E80-A0F6-489A429930B7}|Cod3rsGrowth.Web\\Cod3rsGrowth.Web.csproj|solutionrelative:cod3rsgrowth.web\\cod3rsgrowth.web.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BDEBF06-5900-4E80-A0F6-489A429930B7}|Cod3rsGrowth.Web\\Cod3rsGrowth.Web.csproj|c:\\users\\usuario\\source\\repos\\cod3rsgrowth\\cod3rsgrowth.web\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BDEBF06-5900-4E80-A0F6-489A429930B7}|Cod3rsGrowth.Web\\Cod3rsGrowth.Web.csproj|solutionrelative:cod3rsgrowth.web\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2F68CCA-6F1A-44EA-A5F2-4EED61484856}|Cod3rsGrowth.Forms\\Cod3rsGrowth.Forms.csproj|c:\\users\\usuario\\source\\repos\\cod3rsgrowth\\cod3rsgrowth.forms\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{A2F68CCA-6F1A-44EA-A5F2-4EED61484856}|Cod3rsGrowth.Forms\\Cod3rsGrowth.Forms.csproj|solutionrelative:cod3rsgrowth.forms\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{562FB21C-EE94-4B56-8742-63DBF84B4DE8}|Cod3rsGrowth.Infra\\Cod3rsGrowth.Infra.csproj|c:\\users\\usuario\\source\\repos\\cod3rsgrowth\\cod3rsgrowth.infra\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{562FB21C-EE94-4B56-8742-63DBF84B4DE8}|Cod3rsGrowth.Infra\\Cod3rsGrowth.Infra.csproj|solutionrelative:cod3rsgrowth.infra\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30BAAC76-D94B-489C-BC21-0D2669137CA5}|Cod3rsGrowth.Dominio\\Cod3rsGrowth.Dominio.csproj|c:\\users\\usuario\\source\\repos\\cod3rsgrowth\\cod3rsgrowth.dominio\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30BAAC76-D94B-489C-BC21-0D2669137CA5}|Cod3rsGrowth.Dominio\\Cod3rsGrowth.Dominio.csproj|solutionrelative:cod3rsgrowth.dominio\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UnitTest1.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\source\\repos\\Cod3rsGrowth\\Cod3rsGrowth.Testes\\UnitTest1.cs",
+              "RelativeDocumentMoniker": "Cod3rsGrowth.Testes\\UnitTest1.cs",
+              "ToolTip": "C:\\Users\\Usuario\\source\\repos\\Cod3rsGrowth\\Cod3rsGrowth.Testes\\UnitTest1.cs",
+              "RelativeToolTip": "Cod3rsGrowth.Testes\\UnitTest1.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-13T13:04:19.198Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Cod3rsGrowth.Web",
+              "DocumentMoniker": "C:\\Users\\Usuario\\source\\repos\\Cod3rsGrowth\\Cod3rsGrowth.Web\\Cod3rsGrowth.Web.csproj",
+              "RelativeDocumentMoniker": "Cod3rsGrowth.Web\\Cod3rsGrowth.Web.csproj",
+              "ToolTip": "C:\\Users\\Usuario\\source\\repos\\Cod3rsGrowth\\Cod3rsGrowth.Web\\Cod3rsGrowth.Web.csproj",
+              "RelativeToolTip": "Cod3rsGrowth.Web\\Cod3rsGrowth.Web.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-05-13T13:02:54.334Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\source\\repos\\Cod3rsGrowth\\Cod3rsGrowth.Web\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "Cod3rsGrowth.Web\\Controllers\\WeatherForecastController.cs",
+              "ToolTip": "C:\\Users\\Usuario\\source\\repos\\Cod3rsGrowth\\Cod3rsGrowth.Web\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "Cod3rsGrowth.Web\\Controllers\\WeatherForecastController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-13T13:02:22.681Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Form1.cs [Projeto]",
+              "DocumentMoniker": "C:\\Users\\Usuario\\source\\repos\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Form1.cs",
+              "RelativeDocumentMoniker": "Cod3rsGrowth.Forms\\Form1.cs",
+              "ToolTip": "C:\\Users\\Usuario\\source\\repos\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Form1.cs [Projeto]",
+              "RelativeToolTip": "Cod3rsGrowth.Forms\\Form1.cs [Projeto]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-13T12:53:16.833Z",
+              "EditorCaption": " [Projeto]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\source\\repos\\Cod3rsGrowth\\Cod3rsGrowth.Infra\\Class1.cs",
+              "RelativeDocumentMoniker": "Cod3rsGrowth.Infra\\Class1.cs",
+              "ToolTip": "C:\\Users\\Usuario\\source\\repos\\Cod3rsGrowth\\Cod3rsGrowth.Infra\\Class1.cs",
+              "RelativeToolTip": "Cod3rsGrowth.Infra\\Class1.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-13T12:45:57.202Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\source\\repos\\Cod3rsGrowth\\Cod3rsGrowth.Dominio\\Class1.cs",
+              "RelativeDocumentMoniker": "Cod3rsGrowth.Dominio\\Class1.cs",
+              "ToolTip": "C:\\Users\\Usuario\\source\\repos\\Cod3rsGrowth\\Cod3rsGrowth.Dominio\\Class1.cs",
+              "RelativeToolTip": "Cod3rsGrowth.Dominio\\Class1.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-13T12:42:46.668Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
