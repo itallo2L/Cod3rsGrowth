@@ -8,7 +8,6 @@ namespace Cod3rsGrowth.Dominio.Entidades
 {
     public class Agendamento
     {
-        //Declarando as propriedades da classe
         public int Id { get; set; }
         public string NomeResponsavelDoAgendamento { get; set; }
         public string CpfResponsavelDoAgendamento { get; set; }
