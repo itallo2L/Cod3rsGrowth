@@ -12,7 +12,7 @@ namespace Cod3rsGrowth.Dominio.Entidades
         public string NomeResponsavelDoAgendamento { get; set; }
         public string CpfResponsavelDoAgendamento { get; set; }
         public DateTime DataAgendamento { get; set; }
-        public TimeOnly HorasDoAluguel { get; set; }
+        public int HorasDoAluguel { get; set; }
         public decimal ValorTotal { get; set; }
         public EstiloMusical EstiloMusical { get; set; }
         public int EstudioId { get; set; }
