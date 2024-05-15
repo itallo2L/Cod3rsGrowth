@@ -21,7 +21,6 @@ namespace Cod3rsGrowth.Dominio.EnumEstiloMusical
             [Description("Gênero onde a música é gerada através do uso de recursos digitais e tecnológicos, como sintetizadores, computadores ou programas de composição.")]
             Eletronica,
             [Description("Gênero com um ritmo repetitivo com instrumentos de percussão acompanhados de sons eletrônicos.")]
-            Samba,
-            
+            Samba,   
     }
 }
