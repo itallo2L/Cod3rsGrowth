@@ -5,7 +5,8 @@ namespace Cod3rsGrowth.Testes
     public class TesteBase : IDisposable
     {
         protected ServiceProvider ServiceProvider;
-        public TesteBase() {
+        public TesteBase() 
+        {
             var servico = new ServiceCollection();
             ModuloDeInjecao.AdicionarDependeciasNoEscopo(servico);
             ServiceProvider = servico.BuildServiceProvider();
