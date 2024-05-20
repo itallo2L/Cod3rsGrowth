@@ -14,18 +14,10 @@ namespace Cod3rsGrowth.Dominio.Servicos
             };
             return estudioMusical;
         }
-        //public List<EstudioMusical> AdicionarElemento(int parametro)
-        //{
-        //    var listaTeste = new List<EstudioMusical>
-        //    {
-        //        new EstudioMusical { Id = 32, NomeEstudio = "Sonzeira", EstaAberto = false },
-        //        new EstudioMusical { Id = 23, NomeEstudio = "MUSIK", EstaAberto = true },
-        //    };
-        //     if (parametro == 1)
-        //    {
-
-        //    }
-        //    throw new NotImplementedException();
-        //}
+        public List<EstudioMusical> AdicionarElemento(List<EstudioMusical> lista)
+        {
+            lista.Add(new EstudioMusical { Id = 45, NomeEstudio = "Graves", EstaAberto = true });
+            return lista;
+        }
     }
 }

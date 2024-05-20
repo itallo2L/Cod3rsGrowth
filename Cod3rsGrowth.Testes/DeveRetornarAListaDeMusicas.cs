@@ -41,16 +41,11 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void Inserindo_Um_Elemento_Na_Lista()
         {
-            var listaDeComparacao = _servicoEstudioMusical.ObterTodos();
-            var listaComOElementoAdicionado = new List<EstudioMusical>
-            {
-                new EstudioMusical { Id = 32, NomeEstudio = "Sonzeira", EstaAberto = false },
-                new EstudioMusical { Id = 23, NomeEstudio = "MUSIK", EstaAberto = true },
-            };
+            var listaVazia = new List<EstudioMusical>();
 
-            listaComOElementoAdicionado.Add(new EstudioMusical { Id = 23, NomeEstudio = "Graves", EstaAberto = true });
+            listaVazia = _servicoEstudioMusical.AdicionarElemento(listaVazia);
 
-            Assert.Equal(listaComOElementoAdicionado, listaDeComparacao);
+            Assert.NotEmpty(listaVazia);
         }
     }
 }
