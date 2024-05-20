@@ -7,9 +7,11 @@ namespace Cod3rsGrowth.Dominio.Servicos
     {
         public List<EstudioMusical> ObterTodos()
         {
-            List<EstudioMusical> estudioMusical = new List<EstudioMusical>();
-            estudioMusical.Add( new EstudioMusical { Id = 32, NomeEstudio = "Sonzeira", EstaAberto = false });
-            estudioMusical.Add( new EstudioMusical { Id = 23, NomeEstudio = "MUSIK", EstaAberto = true });
+            var estudioMusical = new List<EstudioMusical>
+            {
+                new EstudioMusical { Id = 32, NomeEstudio = "Sonzeira", EstaAberto = false },
+                new EstudioMusical { Id = 23, NomeEstudio = "MUSIK", EstaAberto = true }
+            };
             return estudioMusical;
         }
     }
