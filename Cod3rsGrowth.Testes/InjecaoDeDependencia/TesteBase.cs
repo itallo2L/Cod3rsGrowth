@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Cod3rsGrowth.Testes
+namespace Cod3rsGrowth.Testes.InjecaoDeDependencia
 {
     public class TesteBase : IDisposable
     {
         protected ServiceProvider ServiceProvider;
-        public TesteBase() 
+        public TesteBase()
         {
             var servico = new ServiceCollection();
             ModuloDeInjecao.AdicionarDependeciasNoEscopo(servico);
