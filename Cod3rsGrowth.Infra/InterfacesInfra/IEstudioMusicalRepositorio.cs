@@ -1,12 +1,13 @@
-﻿namespace Cod3rsGrowth.Infra.InterfacesInfra
+﻿using Cod3rsGrowth.Dominio.Entidades;
+
+namespace Cod3rsGrowth.Infra.InterfacesInfra
 {
     public interface IEstudioMusicalRepositorio
     {
-        public void ObterTodos();
-        void Adicionar();
-        void Atualizar();
-        void Deletar();
-        void BuscarPorTipo();
-        void BuscarPorId();
+        List<EstudioMusical> ObterTodos(int id);
+        void Adicionar(EstudioMusical estudioMusical);
+        void Atualizar(EstudioMusical estudioMusical);
+        void Deletar(EstudioMusical estudioMusical);
+        EstudioMusical BuscarPorId(int id);
     }
 }

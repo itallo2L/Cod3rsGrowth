@@ -1,0 +1,13 @@
+﻿using Cod3rsGrowth.Dominio.Entidades;
+
+namespace Cod3rsGrowth.Testes.RepositorioMock
+{
+    public interface IAgendamentoRepositorio
+    {
+        List<Agendamento> ObterTodos(int id);
+        void Adicionar(Agendamento agendamento);
+        void Atualizar(Agendamento agendamento);
+        void Deletar(Agendamento agendamento);
+        Agendamento BuscarPorId(int id);
+    }
+}
