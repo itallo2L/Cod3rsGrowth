@@ -14,10 +14,5 @@ namespace Cod3rsGrowth.Dominio.Servicos
             };
             return estudioMusical;
         }
-        public List<EstudioMusical> AdicionarElemento(List<EstudioMusical> lista)
-        {
-            lista.Add(new EstudioMusical { Id = 45, NomeEstudio = "Graves", EstaAberto = true });
-            return lista;
-        }
     }
 }

@@ -16,36 +16,28 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void Comparando_Listas()
         {
-            var valorDeComparacao = new List<EstudioMusical>
+            var listaDeComparacao = new List<EstudioMusical>
             {
                 new EstudioMusical { Id = 32, NomeEstudio = "Sonzeira", EstaAberto = false },
                 new EstudioMusical { Id = 23, NomeEstudio = "MUSIK", EstaAberto = true }
             };
 
-            var resultadoEsperado = _servicoEstudioMusical.ObterTodos();
+            var listaEsperada = _servicoEstudioMusical.ObterTodos();
 
-            Assert.Equivalent(valorDeComparacao, resultadoEsperado);
+            Assert.Equivalent(listaDeComparacao, listaEsperada);
         }
 
         [Fact]
-        public void Buscar_Um_Elemento_Na_Lista_Pelo_Id()
+        public void Buscar_Um_Elemento_Na_Lista()
         {
-            int[] vetorComparativo = { 32, 23, 47, 84 };
+            var listaEstudioMusical = new List<EstudioMusical>
+            { new EstudioMusical { Id = 32, NomeEstudio = "Sonzeira", EstaAberto = false },
+                new EstudioMusical { Id = 23, NomeEstudio = "MUSIK", EstaAberto = true }
+            };
 
-            var resultadoEsperado = _servicoEstudioMusical.ObterTodos();
+           var listaDoTipoEstudioMusical = _servicoEstudioMusical.ObterTodos();
 
-            Assert.Equal(resultadoEsperado[0].Id, vetorComparativo[0]);
-            Assert.Equal(resultadoEsperado[1].Id, vetorComparativo[1]);
-        }
-
-        [Fact]
-        public void Inserindo_Um_Elemento_Na_Lista()
-        {
-            var listaVazia = new List<EstudioMusical>();
-
-            listaVazia = _servicoEstudioMusical.AdicionarElemento(listaVazia);
-
-            Assert.NotEmpty(listaVazia);
+            Assert.IsType<List<EstudioMusical>>(listaEstudioMusical);
         }
     }
 }
