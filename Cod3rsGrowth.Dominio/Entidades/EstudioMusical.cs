@@ -4,6 +4,6 @@
     {
         public int Id { get; set; }
         public string NomeEstudio { get; set; }
-        public bool EstaAbertoOuFechado { get; set; }
+        public bool EstaAberto { get; set; }
     }
 }
