@@ -3,7 +3,6 @@ using Cod3rsGrowth.Infra.InterfacesInfra;
 
 namespace Cod3rsGrowth.Testes.RepositorioMock
 {
-
     public class EstudioMusicalRepositorioMock : IEstudioMusicalRepositorio
     {
         public void Adicionar(EstudioMusical estudioMusical)
@@ -26,7 +25,7 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
             throw new NotImplementedException();
         }
 
-        public List<EstudioMusical> ObterTodos(int id)
+        public List<EstudioMusical> ObterTodos()
         {
             throw new NotImplementedException();
         }

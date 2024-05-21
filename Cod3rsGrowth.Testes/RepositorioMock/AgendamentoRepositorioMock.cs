@@ -24,7 +24,7 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
             throw new NotImplementedException();
         }
 
-        public List<Agendamento> ObterTodos(int id)
+        public List<Agendamento> ObterTodos()
         {
             throw new NotImplementedException();
         }
