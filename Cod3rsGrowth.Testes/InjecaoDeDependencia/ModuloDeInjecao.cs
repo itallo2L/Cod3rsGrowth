@@ -11,7 +11,7 @@ namespace Cod3rsGrowth.Testes.InjecaoDeDependencia
         public static void AdicionarDependeciasNoEscopo(ServiceCollection servico)
         {
             servico.AddScoped<IServicoEstudioMusical, ServicoEstudioMusical>();
-            servico.AddScoped<IAgendamentoRepositorio,AgendaRepositorioMock>();
+            servico.AddScoped<IAgendamentoRepositorio,AgendamentoRepositorioMock>();
             servico.AddScoped<IEstudioMusicalRepositorio, EstudioMusicalRepositorioMock>();
         }
     }
