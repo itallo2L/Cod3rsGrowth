@@ -1,23 +1,27 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.EnumEstiloMusical;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.Singleton;
+using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Testes.InjecaoDeDependencia;
-using Cod3rsGrowth.Testes.RepositorioMock;
 using Microsoft.Extensions.DependencyInjection;
+using Xunit;
 
 namespace Cod3rsGrowth.Testes.Testes
 {
-    public class TesteRepositorioAgendamento : TesteBase
+    public class TesteServicoAgendamento : TesteBase
     {
-        private readonly IAgendamentoRepositorio _agendamentoRepositorio;
-        public TesteRepositorioAgendamento()
+        private readonly IServicoAgendamento _servicoAgendamento;
+        public TesteServicoAgendamento()
         {
-            _agendamentoRepositorio = ServiceProvider.GetService<IAgendamentoRepositorio>()
-            ?? throw new Exception($"Erro ao obter o serviço {nameof(IAgendamentoRepositorio)}");
+            _servicoAgendamento = ServiceProvider.GetService<IServicoAgendamento>()
+            ?? throw new Exception($"Erro ao obter o serviço {nameof(IServicoAgendamento)}");
         }
-        public void CriarListasDeAgendamentos()
+
+        [Fact]
+        public void Comparando_Listas()
         {
-            var listasDeAgendamentos = new List<Agendamento>
+            var listaDeComparacao = new List<Agendamento>
             {
                 new Agendamento
                 {
@@ -51,7 +55,18 @@ namespace Cod3rsGrowth.Testes.Testes
                     EstudioId = 3
                 }
             };
-            AgendamentoSingleton.InstanciaAgendamento.AddRange(listasDeAgendamentos);
+
+            var listaEsperada = _servicoAgendamento.ObterTodosOsAgendamentos();
+
+            Assert.Equivalent(listaDeComparacao, listaEsperada);
+        }
+
+        [Fact]
+        public void Conferir_Se_A_Lista_E_Do_Tipo_Agendamento_Singleton()
+        {
+            var listaDoTipoAgendamento = _servicoAgendamento.ObterTodosOsAgendamentos();
+
+            Assert.IsType<AgendamentoSingleton>(listaDoTipoAgendamento);
         }
     }
 }

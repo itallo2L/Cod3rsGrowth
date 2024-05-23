@@ -1,18 +1,37 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Infra.Singleton;
 
 namespace Cod3rsGrowth.Dominio.Servicos
 {
     public class ServicoEstudioMusical : IServicoEstudioMusical
     {
-        public List<EstudioMusical> ObterTodos()
+        public List<EstudioMusical> ObterTodosOsEstudiosMusicais()
         {
-            var estudioMusical = new List<EstudioMusical>
+            var listaDeEstudioMusicalSingleton = EstudioMusicalSingleton.InstanciaEstudioMusical;
+            var listasDeEstudiosMusicais = new List<EstudioMusical>
             {
-                new EstudioMusical { Id = 32, NomeEstudio = "Sonzeira", EstaAberto = false },
-                new EstudioMusical { Id = 23, NomeEstudio = "MUSIK", EstaAberto = true }
+                new EstudioMusical
+                {
+                    Id = 1,
+                    NomeEstudio = "Slice",
+                    EstaAberto = true
+                },
+                new EstudioMusical
+                {
+                    Id = 2,
+                    NomeEstudio = "Queizy",
+                    EstaAberto = false
+                },
+                new EstudioMusical
+                {
+                    Id = 3,
+                    NomeEstudio = "Musik",
+                    EstaAberto = true
+                }
             };
-            return estudioMusical;
+            listaDeEstudioMusicalSingleton.AddRange(listasDeEstudiosMusicais);
+            return listaDeEstudioMusicalSingleton;
         }
     }
 }
