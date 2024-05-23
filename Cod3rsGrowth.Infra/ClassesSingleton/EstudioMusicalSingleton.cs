@@ -11,8 +11,6 @@ namespace Cod3rsGrowth.Infra.Singleton
         {
            get
             {
-                if (_instanciaEstudioMusical == null)
-                {
                     lock (typeof(EstudioMusicalSingleton))
                     {
                         if (_instanciaEstudioMusical == null)
@@ -20,7 +18,6 @@ namespace Cod3rsGrowth.Infra.Singleton
                             _instanciaEstudioMusical = new EstudioMusicalSingleton();
                         }
                     }
-                }
                 return _instanciaEstudioMusical;
             }
         }

@@ -22,7 +22,8 @@ namespace Cod3rsGrowth.Servico.Servicos
                     DataEHoraDeSaida = DateTime.Parse("30/06/2024 14:00:00"),
                     ValorTotal = 200m,
                     EstiloMusical = EstiloMusical.Blues,
-                    EstudioId = 1 },
+                    EstudioId = 1 
+                },
                 new Agendamento {
                     Id = 2,
                     NomeResponsavelDoAgendamento = "Rafael",

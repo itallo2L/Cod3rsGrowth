@@ -10,8 +10,6 @@ namespace Cod3rsGrowth.Infra.Singleton
         {
             get
             {
-                if (_instanciaAgendamento == null)
-                {
                     lock (typeof(AgendamentoSingleton))
                     {
                         if (_instanciaAgendamento == null)
@@ -19,7 +17,6 @@ namespace Cod3rsGrowth.Infra.Singleton
                             _instanciaAgendamento = new AgendamentoSingleton();
                         }
                     }
-                }
                 return _instanciaAgendamento;
             }
         }
