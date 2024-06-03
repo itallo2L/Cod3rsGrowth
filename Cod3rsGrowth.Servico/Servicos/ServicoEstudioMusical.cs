@@ -14,7 +14,7 @@ namespace Cod3rsGrowth.Dominio.Servicos
                 new EstudioMusical
                 {
                     Id = 1,
-                    Nome = "Slice",
+                    Nome = "Sliced",
                     EstaAberto = true
                 },
                 new EstudioMusical

@@ -8,19 +8,41 @@ using Xunit;
 
 namespace Cod3rsGrowth.Testes.Testes
 {
-    public class TesteServicoAgendamento : TesteBase
+    public class TestesAgendamento : TesteBase
     {
-        private readonly IServicoAgendamento _servicoAgendamento;
-        public TesteServicoAgendamento()
+        private readonly IServicoAgendamento _agendamento;
+        public TestesAgendamento()
         {
-            _servicoAgendamento = ServiceProvider.GetService<IServicoAgendamento>()
-            ?? throw new Exception($"Erro ao obter o serviço {nameof(IServicoAgendamento)}");
+            _agendamento = ServiceProvider.GetService<IServicoAgendamento>()
+                ?? throw new Exception($"Erro ao obter o serviço {nameof(IServicoAgendamento)}");
+            AgendamentoSingleton.InstanciaAgendamento.Clear();
         }
 
         [Fact]
-        public void Comparando_Listas()
+
+        public void deve_comparar_o_metodo_obter_todos_com_o_criar_lista()
         {
-            var listaDeComparacao = new List<Agendamento>
+            var listaEsperada = criarLista();
+
+            var listaDoObterTodos = _agendamento.ObterTodos();
+
+            Assert.Equivalent(listaDoObterTodos, listaEsperada);
+        }
+
+        [Fact]
+
+        public void deve_verificar_o_tipo_da_lista()
+        {
+            var listaDoTipoAgendamento = _agendamento.ObterTodos();
+
+            Assert.IsType<AgendamentoSingleton>(listaDoTipoAgendamento);
+        }
+
+        public List<Agendamento> criarLista()
+        {
+            var listaDeAgendamentoSingleton = AgendamentoSingleton.InstanciaAgendamento;
+
+            var listasDeAgendamentos = new List<Agendamento>
             {
                 new Agendamento
                 {
@@ -31,7 +53,8 @@ namespace Cod3rsGrowth.Testes.Testes
                     DataEHoraDeSaida = DateTime.Parse("30/06/2024 14:00:00"),
                     ValorTotal = 200m,
                     EstiloMusical = EstiloMusical.Blues,
-                    IdEstudio = 1 },
+                    IdEstudio = 1
+                },
                 new Agendamento {
                     Id = 2,
                     NomeResponsavel = "Rafael",
@@ -54,18 +77,8 @@ namespace Cod3rsGrowth.Testes.Testes
                     IdEstudio = 3
                 }
             };
-
-            var listaEsperada = _servicoAgendamento.ObterTodos();
-
-            Assert.Equivalent(listaDeComparacao, listaEsperada);
-        }
-
-        [Fact]
-        public void Conferir_Se_A_Lista_E_Do_Tipo_Agendamento_Singleton()
-        {
-            var listaDoTipoAgendamento = _servicoAgendamento.ObterTodos();
-
-            Assert.IsType<AgendamentoSingleton>(listaDoTipoAgendamento);
+            listaDeAgendamentoSingleton.AddRange(listasDeAgendamentos);
+            return listaDeAgendamentoSingleton;
         }
     }
 }
