@@ -6,7 +6,7 @@ namespace Cod3rsGrowth.Dominio.Servicos
 {
     public class ServicoEstudioMusical : IServicoEstudioMusical
     {
-        public List<EstudioMusical> ObterTodosOsEstudiosMusicais()
+        public List<EstudioMusical> ObterTodos()
         {
             var listaDeEstudioMusicalSingleton = EstudioMusicalSingleton.InstanciaEstudioMusical;
             var listasDeEstudiosMusicais = new List<EstudioMusical>
@@ -14,19 +14,19 @@ namespace Cod3rsGrowth.Dominio.Servicos
                 new EstudioMusical
                 {
                     Id = 1,
-                    NomeEstudio = "Slice",
+                    Nome = "Slice",
                     EstaAberto = true
                 },
                 new EstudioMusical
                 {
                     Id = 2,
-                    NomeEstudio = "Queizy",
+                    Nome = "Queizy",
                     EstaAberto = false
                 },
                 new EstudioMusical
                 {
                     Id = 3,
-                    NomeEstudio = "Musik",
+                    Nome = "Musik",
                     EstaAberto = true
                 }
             };

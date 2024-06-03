@@ -1,6 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Infra.InterfacesInfra;
-using Cod3rsGrowth.Infra.Singleton;
 
 namespace Cod3rsGrowth.Testes.RepositorioMock
 {

@@ -24,24 +24,24 @@ namespace Cod3rsGrowth.Testes
                 new EstudioMusical
                 {
                     Id = 1,
-                    NomeEstudio = "Slice",
+                    Nome = "Slice",
                     EstaAberto = true
                 },
                 new EstudioMusical
                 {
                     Id = 2,
-                    NomeEstudio = "Queizy",
+                    Nome = "Queizy",
                     EstaAberto = false
                 },
                 new EstudioMusical
                 {
                     Id = 3,
-                    NomeEstudio = "Musik",
+                    Nome = "Musik",
                     EstaAberto = true
                 }
             };
 
-            var listaEsperada = _servicoEstudioMusical.ObterTodosOsEstudiosMusicais();
+            var listaEsperada = _servicoEstudioMusical.ObterTodos();
 
             Assert.Equivalent(listaDeComparacao, listaEsperada);
         }
@@ -49,7 +49,7 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void Conferir_Se_A_Lista_E_Do_Tipo_Estudio_Musical_Singleton()
         {
-            var listaDoTipoEstudioMusical = _servicoEstudioMusical.ObterTodosOsEstudiosMusicais();
+            var listaDoTipoEstudioMusical = _servicoEstudioMusical.ObterTodos();
 
             Assert.IsType<EstudioMusicalSingleton>(listaDoTipoEstudioMusical);
         }
