@@ -2,7 +2,7 @@
 
 namespace Cod3rsGrowth.Infra.InterfacesInfra
 {
-    public interface IEstudioMusicalRepositorio
+    public interface IRepositorioEstudioMusical
     {
         List<EstudioMusical> ObterTodos();
         void Adicionar(EstudioMusical estudioMusical);

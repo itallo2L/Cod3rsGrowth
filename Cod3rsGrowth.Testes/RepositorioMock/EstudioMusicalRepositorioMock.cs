@@ -4,7 +4,7 @@ using Cod3rsGrowth.Infra.Singleton;
 
 namespace Cod3rsGrowth.Testes.RepositorioMock
 {
-    public class EstudioMusicalRepositorioMock : IEstudioMusicalRepositorio
+    public class EstudioMusicalRepositorioMock : IRepositorioEstudioMusical
     {
         public void Adicionar(EstudioMusical estudioMusical)
         {

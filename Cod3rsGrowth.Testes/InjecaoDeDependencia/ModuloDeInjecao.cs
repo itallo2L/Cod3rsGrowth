@@ -13,8 +13,8 @@ namespace Cod3rsGrowth.Testes.InjecaoDeDependencia
         {
             servico.AddScoped<IServicoEstudioMusical, ServicoEstudioMusical>();
             servico.AddScoped<IServicoAgendamento, ServicoAgendamento>();
-            servico.AddScoped<IAgendamentoRepositorio,AgendamentoRepositorioMock>();
-            servico.AddScoped<IEstudioMusicalRepositorio, EstudioMusicalRepositorioMock>();
+            servico.AddScoped<IRepositorioAgendamento,AgendamentoRepositorioMock>();
+            servico.AddScoped<IRepositorioEstudioMusical, EstudioMusicalRepositorioMock>();
         }
     }
 }

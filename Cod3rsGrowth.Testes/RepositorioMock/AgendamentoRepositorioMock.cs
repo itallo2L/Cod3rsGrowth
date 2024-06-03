@@ -1,10 +1,8 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
-using Cod3rsGrowth.Dominio.EnumEstiloMusical;
-using Cod3rsGrowth.Infra.Singleton;
 
 namespace Cod3rsGrowth.Testes.RepositorioMock
 {
-    public class AgendamentoRepositorioMock : IAgendamentoRepositorio
+    public class AgendamentoRepositorioMock : IRepositorioAgendamento
     {
         public void Adicionar(Agendamento agendamento)
         {

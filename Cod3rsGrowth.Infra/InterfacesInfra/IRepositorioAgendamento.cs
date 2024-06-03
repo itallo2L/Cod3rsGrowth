@@ -2,7 +2,7 @@
 
 namespace Cod3rsGrowth.Testes.RepositorioMock
 {
-    public interface IAgendamentoRepositorio
+    public interface IRepositorioAgendamento
     {
         List<Agendamento> ObterTodos();
         void Adicionar(Agendamento agendamento);

@@ -4,6 +4,6 @@ namespace Cod3rsGrowth.Dominio.Interfaces
 {
     public interface IServicoAgendamento
     {
-        public List<Agendamento> ObterTodosOsAgendamentos();
+        List<Agendamento> ObterTodos();
     }
 }
