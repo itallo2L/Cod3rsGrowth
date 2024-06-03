@@ -2,7 +2,6 @@
 using Cod3rsGrowth.Dominio.EnumEstiloMusical;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.Singleton;
-using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Testes.InjecaoDeDependencia;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
