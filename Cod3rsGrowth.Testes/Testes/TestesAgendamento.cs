@@ -37,6 +37,7 @@ namespace Cod3rsGrowth.Testes.Testes
 
             Assert.IsType<AgendamentoSingleton>(listaDoTipoAgendamento);
         }
+
         public List<Agendamento> criarLista()
         {
             var listaDeAgendamentoSingleton = AgendamentoSingleton.InstanciaAgendamento;
