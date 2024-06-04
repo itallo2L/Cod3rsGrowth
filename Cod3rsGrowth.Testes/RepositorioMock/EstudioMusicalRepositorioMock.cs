@@ -15,7 +15,7 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
             throw new NotImplementedException();
         }
 
-        public EstudioMusical BuscarPorId(int id)
+        public EstudioMusical ObterPorId(int id)
         {
             throw new NotImplementedException();
         }

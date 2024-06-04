@@ -5,5 +5,7 @@ namespace Cod3rsGrowth.Dominio.Interfaces
     public interface IServicoAgendamento
     {
         List<Agendamento> ObterTodos();
+
+        Agendamento ObterPorId(int id);
     }
 }

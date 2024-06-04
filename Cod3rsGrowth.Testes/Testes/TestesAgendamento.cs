@@ -38,6 +38,18 @@ namespace Cod3rsGrowth.Testes.Testes
             Assert.IsType<AgendamentoSingleton>(listaDoTipoAgendamento);
         }
 
+        [Fact]
+        public void deve_retornar_um_objeto_pelo_id()
+        {
+            var idEsperado = 2;
+            criarLista();
+
+            var objetoDeComparacao = AgendamentoSingleton.InstanciaAgendamento.Find(x => x.Id == idEsperado);
+            var consultaNoMetodo = _agendamento.ObterPorId(idEsperado);
+
+            Assert.Equivalent(objetoDeComparacao, consultaNoMetodo);
+        }
+
         public List<Agendamento> criarLista()
         {
             var listaDeAgendamentoSingleton = AgendamentoSingleton.InstanciaAgendamento;

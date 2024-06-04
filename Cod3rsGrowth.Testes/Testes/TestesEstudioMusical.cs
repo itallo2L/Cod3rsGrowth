@@ -35,6 +35,17 @@ namespace Cod3rsGrowth.Testes.Testes
             Assert.IsType<EstudioMusicalSingleton>(listaDoTipoEstudioMusical);
         }
 
+        [Fact]
+        public void deve_retornar_o_objeto_pelo_id()
+        {
+            var idEsperado = 1;
+            criarLista();
+
+            var objetoDeComparacao = EstudioMusicalSingleton.InstanciaEstudioMusical.Find(x => x.Id == idEsperado);
+            var consultaNoMetodo = _estudioMusical.ObterPorId(idEsperado);
+
+            Assert.Equivalent(objetoDeComparacao, consultaNoMetodo);
+        }
         private List<EstudioMusical> criarLista()
         {
             var listaDeEstudioMusicalSingleton = EstudioMusicalSingleton.InstanciaEstudioMusical;
