@@ -7,14 +7,53 @@
   "targets": {
     ".NETCoreApp,Version=v7.0": {
       "Cod3rsGrowth.Forms/1.0.0": {
+        "dependencies": {
+          "Cod3rsGrowth.Servico": "1.0.0"
+        },
         "runtime": {
           "Cod3rsGrowth.Forms.dll": {}
+        }
+      },
+      "Cod3rsGrowth.Dominio/1.0.0": {
+        "runtime": {
+          "Cod3rsGrowth.Dominio.dll": {}
+        }
+      },
+      "Cod3rsGrowth.Infra/1.0.0": {
+        "dependencies": {
+          "Cod3rsGrowth.Dominio": "1.0.0"
+        },
+        "runtime": {
+          "Cod3rsGrowth.Infra.dll": {}
+        }
+      },
+      "Cod3rsGrowth.Servico/1.0.0": {
+        "dependencies": {
+          "Cod3rsGrowth.Infra": "1.0.0"
+        },
+        "runtime": {
+          "Cod3rsGrowth.Servico.dll": {}
         }
       }
     }
   },
   "libraries": {
     "Cod3rsGrowth.Forms/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Cod3rsGrowth.Dominio/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Cod3rsGrowth.Infra/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Cod3rsGrowth.Servico/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
