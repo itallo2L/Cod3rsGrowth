@@ -44,9 +44,9 @@ namespace Cod3rsGrowth.Testes.Testes
             var idEsperado = 2;
             criarLista();
 
-            var idDeComparacao = _agendamento.ObterPorId(idEsperado);
+            var agendamentoBuscado = _agendamento.ObterPorId(idEsperado);
 
-            Assert.Equivalent(idEsperado, idDeComparacao.Id);
+            Assert.Equal(idEsperado, agendamentoBuscado.Id);
         }
 
         public List<Agendamento> criarLista()

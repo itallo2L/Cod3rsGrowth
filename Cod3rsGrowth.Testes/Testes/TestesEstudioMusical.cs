@@ -41,9 +41,9 @@ namespace Cod3rsGrowth.Testes.Testes
             var idEsperado = 2;
             criarLista();
 
-            var idDeComparacao = _estudioMusical.ObterPorId(idEsperado);
+            var estudioMusicalBuscado = _estudioMusical.ObterPorId(idEsperado);
 
-            Assert.Equal(idEsperado, idDeComparacao.Id);
+            Assert.Equal(idEsperado, estudioMusicalBuscado.Id);
         }
         private List<EstudioMusical> criarLista()
         {
