@@ -15,7 +15,7 @@ namespace Cod3rsGrowth.Dominio.Servicos
         public EstudioMusical ObterPorId(int id)
         {
             var objetoRetornado = listaDeEstudioMusicalSingleton.Find(x => x.Id == id) 
-                ?? throw new Exception($"Erro ao obter o Id: {id}");
+                ?? throw new Exception($"Erro ao obter o objeto, o Id: {id} é inexistente!");
             return objetoRetornado;
         }
     }

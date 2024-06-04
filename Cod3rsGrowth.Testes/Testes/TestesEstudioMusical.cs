@@ -38,13 +38,12 @@ namespace Cod3rsGrowth.Testes.Testes
         [Fact]
         public void deve_retornar_o_objeto_pelo_id()
         {
-            var idEsperado = 1;
+            var idEsperado = 2;
             criarLista();
 
-            var objetoDeComparacao = EstudioMusicalSingleton.InstanciaEstudioMusical.Find(x => x.Id == idEsperado);
-            var consultaNoMetodo = _estudioMusical.ObterPorId(idEsperado);
+            var idDeComparacao = _estudioMusical.ObterPorId(idEsperado);
 
-            Assert.Equivalent(objetoDeComparacao, consultaNoMetodo);
+            Assert.Equal(idEsperado, idDeComparacao.Id);
         }
         private List<EstudioMusical> criarLista()
         {

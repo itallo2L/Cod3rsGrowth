@@ -14,7 +14,7 @@ namespace Cod3rsGrowth.Servico.Servicos
         public Agendamento ObterPorId(int id)
         {
             var objetoRetornado = listaDeAgendamentoSingleton.Find(x => x.Id == id)
-                ?? throw new Exception($"Erro ao obter o Id: {id}");
+                ?? throw new Exception($"Erro ao obter o objeto, o Id: {id} é inexistente!");
             return objetoRetornado;
         }
     }
