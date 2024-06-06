@@ -60,6 +60,7 @@ namespace Cod3rsGrowth.Testes.Testes
 
             Assert.Contains(EstudioMusicalSingleton.InstanciaEstudioMusical, estudioMusical1 => estudioMusical1 == estudioMusical);
         }
+
         [Fact]
         public void deve_atualizar_a_lista_de_estudio_musical()
         {
@@ -77,6 +78,20 @@ namespace Cod3rsGrowth.Testes.Testes
 
             Assert.Equivalent(listaComElementoAtualizado, listaParaAtualizar);
         }
+
+        [Fact]
+        public void deve_conferir_se_a_validacao_de_nome_esta_correta_e_caso_esteja_adicionar()
+        {
+            var estudioSemNome = new EstudioMusical
+            { Id = 6,
+            EstaAberto = false
+            };
+
+            var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioEstudioMusical.Adicionar(estudioSemNome));
+
+            Assert.Equal("Por favor insira o nome do Estúdio.", mensagemDeErro.Errors.First().ErrorMessage);
+        }
+
         private List<EstudioMusical> CriarLista()
         {
             var listaDeEstudioMusicalSingleton = EstudioMusicalSingleton.InstanciaEstudioMusical;

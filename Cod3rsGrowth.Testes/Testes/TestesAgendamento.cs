@@ -1,6 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.EnumEstiloMusical;
-using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.Singleton;
 using Cod3rsGrowth.Testes.InjecaoDeDependencia;
 using Cod3rsGrowth.Testes.RepositorioMock;
