@@ -11,10 +11,10 @@ namespace Cod3rsGrowth.Testes.Testes
 {
     public class TestesAgendamento : TesteBase
     {
-        private readonly IRepositorioAgendamento _agendamento;
+        private readonly IRepositorioAgendamento _repositorioAgendamento;
         public TestesAgendamento()
         {
-            _agendamento = ServiceProvider.GetService<IRepositorioAgendamento>()
+            _repositorioAgendamento = ServiceProvider.GetService<IRepositorioAgendamento>()
                 ?? throw new Exception($"Erro ao obter o serviço {nameof(IRepositorioAgendamento)}");
             AgendamentoSingleton.InstanciaAgendamento.Clear();
         }
@@ -23,9 +23,9 @@ namespace Cod3rsGrowth.Testes.Testes
 
         public void deve_comparar_o_metodo_obter_todos_com_o_criar_lista()
         {
-            var listaEsperada = criarLista();
+            var listaEsperada = CriarLista();
 
-            var listaDoObterTodos = _agendamento.ObterTodos();
+            var listaDoObterTodos = _repositorioAgendamento.ObterTodos();
 
             Assert.Equivalent(listaDoObterTodos, listaEsperada);
         }
@@ -34,7 +34,7 @@ namespace Cod3rsGrowth.Testes.Testes
 
         public void deve_verificar_o_tipo_da_lista()
         {
-            var listaDoTipoAgendamento = _agendamento.ObterTodos();
+            var listaDoTipoAgendamento = _repositorioAgendamento.ObterTodos();
 
             Assert.IsType<AgendamentoSingleton>(listaDoTipoAgendamento);
         }
@@ -43,9 +43,9 @@ namespace Cod3rsGrowth.Testes.Testes
         public void deve_retornar_um_objeto_pelo_id()
         {
             var idEsperado = 2;
-            criarLista();
+            CriarLista();
 
-            var agendamentoBuscado = _agendamento.ObterPorId(idEsperado);
+            var agendamentoBuscado = _repositorioAgendamento.ObterPorId(idEsperado);
 
             Assert.Equal(idEsperado, agendamentoBuscado.Id);
         }
@@ -65,11 +65,34 @@ namespace Cod3rsGrowth.Testes.Testes
                 IdEstudio = 5
             };
 
-            _agendamento.Adicionar(agendamento);
+            _repositorioAgendamento.Adicionar(agendamento);
 
             Assert.Contains(AgendamentoSingleton.InstanciaAgendamento, agendamento1 => agendamento1 == agendamento);
         }
-        public List<Agendamento> criarLista()
+
+        [Fact]
+        public void deve_atualizar_a_lista_de_agendamento()
+        {
+            var listaComOElementoAtualizado = new Agendamento
+            {
+                Id = 2,
+                NomeResponsavel = "Samuel",
+                CpfResponsavel = "52245622515",
+                DataEHoraDeEntrada = DateTime.Parse("28/06/2025 17:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("28/06/2025 20:00:00"),
+                ValorTotal = 300.00m,
+                EstiloMusical = EstiloMusical.Gospel,
+                IdEstudio = 2
+            };
+            CriarLista();
+
+            _repositorioAgendamento.Atualizar(listaComOElementoAtualizado);
+            var listaParaAtualizar = AgendamentoSingleton.InstanciaAgendamento
+                .Where(agendamento => agendamento.Id == listaComOElementoAtualizado.Id).FirstOrDefault();
+
+            Assert.Equivalent(listaComOElementoAtualizado, listaParaAtualizar);
+        }
+        public List<Agendamento> CriarLista()
         {
             var listaDeAgendamentoSingleton = AgendamentoSingleton.InstanciaAgendamento;
 
