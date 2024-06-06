@@ -1,22 +1,34 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Interfaces;
-using Cod3rsGrowth.Infra.Singleton;
 
 namespace Cod3rsGrowth.Dominio.Servicos
 {
     public class ServicoEstudioMusical : IServicoEstudioMusical
     {
-        EstudioMusicalSingleton listaDeEstudioMusicalSingleton = EstudioMusicalSingleton.InstanciaEstudioMusical;
-        public List<EstudioMusical> ObterTodos()
+        public List<EstudioMusical> CriarLista()
         {
-            return listaDeEstudioMusicalSingleton;
-        }
-
-        public EstudioMusical ObterPorId(int id)
-        {
-            var objetoRetornado = listaDeEstudioMusicalSingleton.Find(x => x.Id == id) 
-                ?? throw new Exception($"Erro ao obter o objeto, o Id: {id} é inexistente!");
-            return objetoRetornado;
+            var listasDeEstudiosMusicais = new List<EstudioMusical>
+            {
+                new EstudioMusical
+                {
+                    Id = 1,
+                    Nome = "Sliced",
+                    EstaAberto = true
+                },
+                new EstudioMusical
+                {
+                    Id = 2,
+                    Nome = "Queizy",
+                    EstaAberto = false
+                },
+                new EstudioMusical
+                {
+                    Id = 3,
+                    Nome = "Musik",
+                    EstaAberto = true
+                }
+            };
+            return listasDeEstudiosMusicais;
         }
     }
 }
