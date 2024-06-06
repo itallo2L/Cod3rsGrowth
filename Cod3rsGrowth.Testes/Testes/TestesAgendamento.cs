@@ -58,16 +58,16 @@ namespace Cod3rsGrowth.Testes.Testes
                 Id = 4,
                 NomeResponsavel = "Lucas",
                 CpfResponsavel = "09636738291",
-                DataEHoraDeEntrada = DateTime.Parse("25/06/2024 17:00:00"),
-                DataEHoraDeSaida = DateTime.Parse("25/06/2024 19:00:00"),
-                ValorTotal = 200m,
+                DataEHoraDeEntrada = DateTime.Parse("30/06/2024 09:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("30/06/2024 10:00:00"),
+                ValorTotal = 200.00m,
                 EstiloMusical = EstiloMusical.Eletronica,
                 IdEstudio = 5
             };
 
             _agendamento.Adicionar(agendamento);
 
-            Assert.Contains(EstudioMusicalSingleton.InstanciaEstudioMusical, estudioMusical1 => estudioMusical1 == estudioMusical);
+            Assert.Contains(AgendamentoSingleton.InstanciaAgendamento, agendamento1 => agendamento1 == agendamento);
         }
         public List<Agendamento> criarLista()
         {
