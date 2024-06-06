@@ -3,6 +3,7 @@ using Cod3rsGrowth.Dominio.EnumEstiloMusical;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.Singleton;
 using Cod3rsGrowth.Testes.InjecaoDeDependencia;
+using Cod3rsGrowth.Testes.RepositorioMock;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
@@ -10,11 +11,11 @@ namespace Cod3rsGrowth.Testes.Testes
 {
     public class TestesAgendamento : TesteBase
     {
-        private readonly IServicoAgendamento _agendamento;
+        private readonly IRepositorioAgendamento _agendamento;
         public TestesAgendamento()
         {
-            _agendamento = ServiceProvider.GetService<IServicoAgendamento>()
-                ?? throw new Exception($"Erro ao obter o serviço {nameof(IServicoAgendamento)}");
+            _agendamento = ServiceProvider.GetService<IRepositorioAgendamento>()
+                ?? throw new Exception($"Erro ao obter o serviço {nameof(IRepositorioAgendamento)}");
             AgendamentoSingleton.InstanciaAgendamento.Clear();
         }
 
@@ -49,6 +50,25 @@ namespace Cod3rsGrowth.Testes.Testes
             Assert.Equal(idEsperado, agendamentoBuscado.Id);
         }
 
+        [Fact]
+        public void deve_adicionar_agendamento_no_repositorio_singleton()
+        {
+            var agendamento = new Agendamento
+            {
+                Id = 4,
+                NomeResponsavel = "Lucas",
+                CpfResponsavel = "09636738291",
+                DataEHoraDeEntrada = DateTime.Parse("25/06/2024 17:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("25/06/2024 19:00:00"),
+                ValorTotal = 200m,
+                EstiloMusical = EstiloMusical.Eletronica,
+                IdEstudio = 5
+            };
+
+            _agendamento.Adicionar(agendamento);
+
+            Assert.Contains(EstudioMusicalSingleton.InstanciaEstudioMusical, estudioMusical1 => estudioMusical1 == estudioMusical);
+        }
         public List<Agendamento> criarLista()
         {
             var listaDeAgendamentoSingleton = AgendamentoSingleton.InstanciaAgendamento;

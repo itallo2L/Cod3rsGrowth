@@ -1,5 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Infra.InterfacesInfra;
 using Cod3rsGrowth.Infra.Singleton;
 using Cod3rsGrowth.Testes.InjecaoDeDependencia;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,7 +42,7 @@ namespace Cod3rsGrowth.Testes
                 }
             };
 
-            var listaEsperada = _servicoEstudioMusical.ObterTodos();
+            var listaEsperada = _servicoEstudioMusical.CriarLista();
 
             Assert.Equivalent(listaDeComparacao, listaEsperada);
         }
@@ -49,9 +50,9 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void Conferir_Se_A_Lista_E_Do_Tipo_Estudio_Musical_Singleton()
         {
-            var listaDoTipoEstudioMusical = _servicoEstudioMusical.ObterTodos();
+            var listaDoTipoEstudioMusical = _servicoEstudioMusical.CriarLista();
 
-            Assert.IsType<EstudioMusicalSingleton>(listaDoTipoEstudioMusical);
+            Assert.IsType<List<EstudioMusical>>(listaDoTipoEstudioMusical);
         }
     }
 }

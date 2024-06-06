@@ -1,5 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
-using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Infra.InterfacesInfra;
 using Cod3rsGrowth.Infra.Singleton;
 using Cod3rsGrowth.Testes.InjecaoDeDependencia;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,11 +9,11 @@ namespace Cod3rsGrowth.Testes.Testes
 {
     public class TestesEstudioMusical : TesteBase
     {
-        private readonly IServicoEstudioMusical _estudioMusical;
+        private readonly IRepositorioEstudioMusical _estudioMusical;
         public TestesEstudioMusical()
         {
-            _estudioMusical = ServiceProvider.GetService<IServicoEstudioMusical>()
-                ?? throw new Exception($"Erro ao obter serviço {nameof(IServicoEstudioMusical)}");
+            _estudioMusical = ServiceProvider.GetService<IRepositorioEstudioMusical>()
+                ?? throw new Exception($"Erro ao obter serviço {nameof(IRepositorioEstudioMusical)}");
             EstudioMusicalSingleton.InstanciaEstudioMusical.Clear();
         }
 
@@ -44,6 +44,21 @@ namespace Cod3rsGrowth.Testes.Testes
             var estudioMusicalBuscado = _estudioMusical.ObterPorId(idEsperado);
 
             Assert.Equal(idEsperado, estudioMusicalBuscado.Id);
+        }
+        
+        [Fact]
+        public void deve_adicionar_estudio_musical_no_repositorio_singleton()
+        {
+            var estudioMusical = new EstudioMusical
+            {
+                Id = 5,
+                Nome = "cleber",
+                EstaAberto = false
+            };
+
+            _estudioMusical.Adicionar(estudioMusical);
+
+            Assert.Contains(EstudioMusicalSingleton.InstanciaEstudioMusical, estudioMusical1 => estudioMusical1 == estudioMusical);
         }
         private List<EstudioMusical> criarLista()
         {

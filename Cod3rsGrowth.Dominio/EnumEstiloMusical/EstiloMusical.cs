@@ -4,6 +4,9 @@ namespace Cod3rsGrowth.Dominio.EnumEstiloMusical
 {
     public enum EstiloMusical
     {
+            [Description("Será selecionado quando o enum não for definido.")]
+            EnumIndefinido,
+            
             [Description("Gênero bastante rítmico, com grandes entregas vocais, letras simples e guitarra bastante presente.")]
             Blues,
 
