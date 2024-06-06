@@ -27,7 +27,10 @@ namespace Cod3rsGrowth.Servico.Validacoes
                 .NotEmpty().WithMessage("Por favor digite uma data e hora válida.")
                 .GreaterThan(DateTime.Today).WithMessage("Por favor digite uma data válida.")
                 .GreaterThan(DateTime.Now).WithMessage("Por favor digite um horário válido.")
-                .NotEqual(Agendamento => Agendamento.DataEHoraDeEntrada).WithMessage("A data e hora de saída não pode ser igual à data e hora de entrada.");
+                .NotEqual(agendamento => agendamento.DataEHoraDeEntrada).WithMessage("A data e hora de saída não pode ser igual à data e hora de entrada.");
+
+            RuleFor(Agendamento => Agendamento)
+                .Must(agendamento => agendamento.DataEHoraDeSaida >= agendamento.DataEHoraDeEntrada.AddHours(1)).WithMessage("A quantidade mínima para agendamento é de 1 hora");
 
             RuleFor(Agendamento => Agendamento.ValorTotal)
             .PrecisionScale(5, 2, true).WithMessage("O valor total não deve conter mais de 4 digitos no total, com duas casas decimais.");

@@ -33,7 +33,7 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
             return objetoRetornado;
         }
         
-        public void Deletar(EstudioMusical estudioMusical)
+        public void Deletar(int id)
         {
             throw new NotImplementedException();
         }

@@ -32,7 +32,7 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
             return objetoRetornado;
         }
 
-        public void Deletar(Agendamento agendamento)
+        public void Deletar(int id)
         {
             throw new NotImplementedException();
         }

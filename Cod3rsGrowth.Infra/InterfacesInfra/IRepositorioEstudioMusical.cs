@@ -7,7 +7,7 @@ namespace Cod3rsGrowth.Infra.InterfacesInfra
         List<EstudioMusical> ObterTodos();
         void Adicionar(EstudioMusical estudioMusical);
         void Atualizar(EstudioMusical estudioMusical);
-        void Deletar(EstudioMusical estudioMusical);
+        void Deletar(int id);
         EstudioMusical ObterPorId(int id);
     }
 }
