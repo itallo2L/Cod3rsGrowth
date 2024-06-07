@@ -39,7 +39,7 @@ namespace Cod3rsGrowth.Servico.Validacoes
                 .IsInEnum().WithMessage("Estilo musical inválido.");
 
             RuleFor(Agendamento => Agendamento)
-                .Must( agendamento => agendamento.EstiloMusical != EstiloMusical.EnumIndefinido).WithMessage("Por favor defina o Estilo Musical");
+                .Must(agendamento => agendamento.EstiloMusical != EstiloMusical.EnumIndefinido).WithMessage("Por favor defina o Estilo Musical");
         }
     }
 }
