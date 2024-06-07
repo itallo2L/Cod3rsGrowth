@@ -20,10 +20,10 @@ namespace Cod3rsGrowth.Testes.Testes
         [Fact]
         public void deve_comparar_o_metodo_criar_lista_com_o_obter_todos()
         {
-            var listaEsperada = CriarLista(); 
+            var listaEsperada = CriarLista();
 
             var listaDoObterTodos = _repositorioEstudioMusical.ObterTodos();
-            
+
             Assert.Equivalent(listaDoObterTodos, listaEsperada);
         }
 
@@ -45,7 +45,7 @@ namespace Cod3rsGrowth.Testes.Testes
 
             Assert.Equal(idEsperado, estudioMusicalBuscado.Id);
         }
-        
+
         [Fact]
         public void deve_adicionar_estudio_musical_no_repositorio_singleton()
         {
@@ -83,13 +83,14 @@ namespace Cod3rsGrowth.Testes.Testes
         public void deve_conferir_se_a_validacao_de_nome_esta_correta_e_caso_esteja_adicionar()
         {
             var estudioSemNome = new EstudioMusical
-            { Id = 6,
-            EstaAberto = false
+            {
+                Id = 6,
+                EstaAberto = false
             };
 
             var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioEstudioMusical.Adicionar(estudioSemNome));
 
-            Assert.Equal("Por favor insira o nome do Estúdio.", mensagemDeErro.Errors.First().ErrorMessage);
+            Assert.Equal("Por favor insira o nome do Estúdio.", mensagemDeErro.Errors.Single().ErrorMessage);
         }
 
         private List<EstudioMusical> CriarLista()
