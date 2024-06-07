@@ -3,6 +3,7 @@ using Cod3rsGrowth.Infra.InterfacesInfra;
 using Cod3rsGrowth.Infra.Singleton;
 using Cod3rsGrowth.Testes.InjecaoDeDependencia;
 using Microsoft.Extensions.DependencyInjection;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace Cod3rsGrowth.Testes.Testes
@@ -93,6 +94,37 @@ namespace Cod3rsGrowth.Testes.Testes
             Assert.Equal("Por favor insira o nome do Estúdio.", mensagemDeErro.Errors.Single().ErrorMessage);
         }
 
+        [Fact]
+        public void deve_deletar_um_objeto_da_lista_de_estudio_musical()
+        {
+            var listaCompleta = CriarLista();
+            var listaQueSeraDeletada = new EstudioMusical
+            {
+                Id = 2,
+                Nome = "Queizy",
+                EstaAberto = false
+            };
+
+            _repositorioEstudioMusical.Deletar(listaQueSeraDeletada.Id);
+
+            Assert.DoesNotContain(listaCompleta, lista => lista == listaQueSeraDeletada);
+        }
+
+        [Fact]
+
+        public void deve_retornar_uma_excecao_quando_o_id_for_inexistente()
+        {
+            CriarLista();
+            
+            var listaComIdInexistente = new EstudioMusical
+            {
+                Id = 10,
+                Nome = "Estudio10",
+                EstaAberto = true
+            };
+
+            Assert.Throws<Exception>(() => _repositorioEstudioMusical.Deletar(listaComIdInexistente.Id));
+        }
         private List<EstudioMusical> CriarLista()
         {
             var listaDeEstudioMusicalSingleton = EstudioMusicalSingleton.InstanciaEstudioMusical;

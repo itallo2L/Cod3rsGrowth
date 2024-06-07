@@ -24,7 +24,7 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
         {
             _agendamentoValidador.ValidateAndThrow(listaAtualizada);
             var verificarSeOIdExiste = _instanciaAgendamento.Find(lista => lista.Id == listaAtualizada.Id)
-                ?? throw new Exception($"Não foi possível encontrar o agendamento com o Id: {listaAtualizada.Id}");
+                ?? throw new Exception($"Não foi possível encontrar o agendamento com o ID: {listaAtualizada.Id}");
             var indice = _instanciaAgendamento.IndexOf(verificarSeOIdExiste);
             _instanciaAgendamento[indice] = listaAtualizada;
         }
@@ -32,13 +32,15 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
         public Agendamento ObterPorId(int id)
         {
             var objetoRetornado = _instanciaAgendamento.Find(x => x.Id == id)
-                ?? throw new Exception($"Erro ao obter o objeto, o Id: {id} é inexistente!");
+                ?? throw new Exception($"Erro ao obter o objeto, o ID: {id} é inexistente!");
             return objetoRetornado;
         }
 
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            var objetoQueSeraRemovido = _instanciaAgendamento.Find(agendamento => agendamento.Id == id)
+                ?? throw new Exception($"Não foi possível encontrar o ID: {id}");
+            _instanciaAgendamento.Remove(objetoQueSeraRemovido);
         }
 
         public List<Agendamento> ObterTodos()

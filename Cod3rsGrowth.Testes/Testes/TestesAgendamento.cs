@@ -72,6 +72,7 @@ namespace Cod3rsGrowth.Testes.Testes
         [Fact]
         public void deve_atualizar_a_lista_de_agendamento()
         {
+            CriarLista();
             var listaComOElementoAtualizado = new Agendamento
             {
                 Id = 2,
@@ -83,13 +84,54 @@ namespace Cod3rsGrowth.Testes.Testes
                 EstiloMusical = EstiloMusical.Gospel,
                 IdEstudio = 2
             };
-            CriarLista();
 
             _repositorioAgendamento.Atualizar(listaComOElementoAtualizado);
             var listaParaAtualizar = AgendamentoSingleton.InstanciaAgendamento
                 .Where(agendamento => agendamento.Id == listaComOElementoAtualizado.Id).FirstOrDefault();
 
             Assert.Equivalent(listaComOElementoAtualizado, listaParaAtualizar);
+        }
+
+        [Fact]
+        public void deve_deletar_um_objeto_da_lista_de_agendamento()
+        {
+            var listaCompleta = CriarLista();
+            var listaQueSeraDeletada = new Agendamento
+            {
+                Id = 1,
+                NomeResponsavel = "Paulo",
+                CpfResponsavel = "03237852811",
+                DataEHoraDeEntrada = DateTime.Parse("30/06/2024 12:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("30/06/2024 14:00:00"),
+                ValorTotal = 200m,
+                EstiloMusical = EstiloMusical.Blues,
+                IdEstudio = 1
+            };
+
+            _repositorioAgendamento.Deletar(listaQueSeraDeletada.Id);
+
+            Assert.DoesNotContain(listaCompleta, lista => lista == listaQueSeraDeletada);
+        }
+
+        [Fact]
+
+        public void deve_retornar_uma_excecao_quando_o_id_for_inexistente()
+        {
+            CriarLista();
+
+            var listaComIdInexistente = new Agendamento
+            {
+                Id = 10,
+                NomeResponsavel = "Rodrigo",
+                CpfResponsavel = "03238202811",
+                DataEHoraDeEntrada = DateTime.Parse("30/06/2025 12:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("30/06/2025 14:00:00"),
+                ValorTotal = 200m,
+                EstiloMusical = EstiloMusical.Sertanejo,
+                IdEstudio = 10
+            };
+
+            Assert.Throws<Exception>(() => _repositorioAgendamento.Deletar(listaComIdInexistente.Id));
         }
         public List<Agendamento> CriarLista()
         {
