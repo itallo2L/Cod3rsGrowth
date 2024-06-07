@@ -72,6 +72,7 @@ namespace Cod3rsGrowth.Testes.Testes
         [Fact]
         public void deve_atualizar_a_lista_de_agendamento()
         {
+            CriarLista();
             var listaComOElementoAtualizado = new Agendamento
             {
                 Id = 2,
@@ -83,7 +84,6 @@ namespace Cod3rsGrowth.Testes.Testes
                 EstiloMusical = EstiloMusical.Gospel,
                 IdEstudio = 2
             };
-            CriarLista();
 
             _repositorioAgendamento.Atualizar(listaComOElementoAtualizado);
             var listaParaAtualizar = AgendamentoSingleton.InstanciaAgendamento
@@ -91,6 +91,28 @@ namespace Cod3rsGrowth.Testes.Testes
 
             Assert.Equivalent(listaComOElementoAtualizado, listaParaAtualizar);
         }
+
+        [Fact]
+        public void deve_deletar_um_objeto_da_lista_de_agendamento()
+        {
+            var listaCompleta = CriarLista();
+            var listaQueSeraDeletada = new Agendamento
+            {
+                Id = 1,
+                NomeResponsavel = "Paulo",
+                CpfResponsavel = "03237852811",
+                DataEHoraDeEntrada = DateTime.Parse("30/06/2024 12:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("30/06/2024 14:00:00"),
+                ValorTotal = 200m,
+                EstiloMusical = EstiloMusical.Blues,
+                IdEstudio = 1
+            };
+
+            _repositorioAgendamento.Deletar(listaQueSeraDeletada.Id);
+
+            Assert.DoesNotContain(listaCompleta, lista => lista == listaQueSeraDeletada);
+        }
+
         public List<Agendamento> CriarLista()
         {
             var listaDeAgendamentoSingleton = AgendamentoSingleton.InstanciaAgendamento;

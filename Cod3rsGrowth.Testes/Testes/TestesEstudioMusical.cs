@@ -93,6 +93,21 @@ namespace Cod3rsGrowth.Testes.Testes
             Assert.Equal("Por favor insira o nome do Estúdio.", mensagemDeErro.Errors.Single().ErrorMessage);
         }
 
+        [Fact]
+        public void deve_deletar_um_objeto_da_lista_de_estudio_musical()
+        {
+            var listaCompleta = CriarLista();
+            var listaQueSeraDeletada = new EstudioMusical
+            {
+                Id = 2,
+                Nome = "Queizy",
+                EstaAberto = false
+            };
+
+            _repositorioEstudioMusical.Deletar(listaQueSeraDeletada.Id);
+
+            Assert.DoesNotContain(listaCompleta, lista => lista == listaQueSeraDeletada);
+        }
         private List<EstudioMusical> CriarLista()
         {
             var listaDeEstudioMusicalSingleton = EstudioMusicalSingleton.InstanciaEstudioMusical;

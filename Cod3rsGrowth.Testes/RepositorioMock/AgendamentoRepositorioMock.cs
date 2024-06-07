@@ -38,7 +38,9 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
 
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            var objetoQueSeraRemovido = _instanciaAgendamento.Find(agendamento => agendamento.Id == id)
+                ?? throw new Exception($"Não foi possível encontrar o Id: {id}");
+            _instanciaAgendamento.Remove(objetoQueSeraRemovido);
         }
 
         public List<Agendamento> ObterTodos()

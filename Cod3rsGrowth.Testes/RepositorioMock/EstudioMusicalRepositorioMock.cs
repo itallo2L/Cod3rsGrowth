@@ -39,7 +39,9 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
         
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            var objetoQueSeraRemovido = _instanciaEstudioMusical.Find(estudio => estudio.Id == id)
+                ?? throw new Exception($"Não foi possível encontrar o estúdio com o ID> {id}");
+            _instanciaEstudioMusical.Remove(objetoQueSeraRemovido);
         }
 
         public List<EstudioMusical> ObterTodos()
