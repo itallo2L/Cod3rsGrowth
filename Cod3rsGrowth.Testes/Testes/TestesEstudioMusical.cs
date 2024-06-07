@@ -9,10 +9,10 @@ namespace Cod3rsGrowth.Testes.Testes
 {
     public class TestesEstudioMusical : TesteBase
     {
-        private readonly IRepositorioEstudioMusical _estudioMusical;
+        private readonly IRepositorioEstudioMusical _repositorioEstudioMusical;
         public TestesEstudioMusical()
         {
-            _estudioMusical = ServiceProvider.GetService<IRepositorioEstudioMusical>()
+            _repositorioEstudioMusical = ServiceProvider.GetService<IRepositorioEstudioMusical>()
                 ?? throw new Exception($"Erro ao obter serviço {nameof(IRepositorioEstudioMusical)}");
             EstudioMusicalSingleton.InstanciaEstudioMusical.Clear();
         }
@@ -20,17 +20,17 @@ namespace Cod3rsGrowth.Testes.Testes
         [Fact]
         public void deve_comparar_o_metodo_criar_lista_com_o_obter_todos()
         {
-            var listaEsperada = criarLista(); 
+            var listaEsperada = CriarLista();
 
-            var listaDoObterTodos = _estudioMusical.ObterTodos();
-            
+            var listaDoObterTodos = _repositorioEstudioMusical.ObterTodos();
+
             Assert.Equivalent(listaDoObterTodos, listaEsperada);
         }
 
         [Fact]
         public void deve_verificar_o_tipo_da_lista()
         {
-            var listaDoTipoEstudioMusical = _estudioMusical.ObterTodos();
+            var listaDoTipoEstudioMusical = _repositorioEstudioMusical.ObterTodos();
 
             Assert.IsType<EstudioMusicalSingleton>(listaDoTipoEstudioMusical);
         }
@@ -39,13 +39,13 @@ namespace Cod3rsGrowth.Testes.Testes
         public void deve_retornar_o_objeto_pelo_id()
         {
             var idEsperado = 2;
-            criarLista();
+            CriarLista();
 
-            var estudioMusicalBuscado = _estudioMusical.ObterPorId(idEsperado);
+            var estudioMusicalBuscado = _repositorioEstudioMusical.ObterPorId(idEsperado);
 
             Assert.Equal(idEsperado, estudioMusicalBuscado.Id);
         }
-        
+
         [Fact]
         public void deve_adicionar_estudio_musical_no_repositorio_singleton()
         {
@@ -56,11 +56,44 @@ namespace Cod3rsGrowth.Testes.Testes
                 EstaAberto = false
             };
 
-            _estudioMusical.Adicionar(estudioMusical);
+            _repositorioEstudioMusical.Adicionar(estudioMusical);
 
             Assert.Contains(EstudioMusicalSingleton.InstanciaEstudioMusical, estudioMusical1 => estudioMusical1 == estudioMusical);
         }
-        private List<EstudioMusical> criarLista()
+
+        [Fact]
+        public void deve_atualizar_a_lista_de_estudio_musical()
+        {
+            var listaComElementoAtualizado = new EstudioMusical
+            {
+                Id = 3,
+                Nome = "Samsungo",
+                EstaAberto = true
+            };
+            CriarLista();
+
+            _repositorioEstudioMusical.Atualizar(listaComElementoAtualizado);
+            var listaParaAtualizar = EstudioMusicalSingleton.InstanciaEstudioMusical
+                .Where(estudioMusical => estudioMusical.Id == listaComElementoAtualizado.Id).FirstOrDefault();
+
+            Assert.Equivalent(listaComElementoAtualizado, listaParaAtualizar);
+        }
+
+        [Fact]
+        public void deve_conferir_se_a_validacao_de_nome_esta_correta_e_caso_esteja_adicionar()
+        {
+            var estudioSemNome = new EstudioMusical
+            {
+                Id = 6,
+                EstaAberto = false
+            };
+
+            var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioEstudioMusical.Adicionar(estudioSemNome));
+
+            Assert.Equal("Por favor insira o nome do Estúdio.", mensagemDeErro.Errors.Single().ErrorMessage);
+        }
+
+        private List<EstudioMusical> CriarLista()
         {
             var listaDeEstudioMusicalSingleton = EstudioMusicalSingleton.InstanciaEstudioMusical;
             var listasDeEstudiosMusicais = new List<EstudioMusical>
