@@ -113,6 +113,26 @@ namespace Cod3rsGrowth.Testes.Testes
             Assert.DoesNotContain(listaCompleta, lista => lista == listaQueSeraDeletada);
         }
 
+        [Fact]
+
+        public void deve_retornar_uma_excecao_quando_o_id_for_inexistente()
+        {
+            CriarLista();
+
+            var listaComIdInexistente = new Agendamento
+            {
+                Id = 10,
+                NomeResponsavel = "Rodrigo",
+                CpfResponsavel = "03238202811",
+                DataEHoraDeEntrada = DateTime.Parse("30/06/2025 12:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("30/06/2025 14:00:00"),
+                ValorTotal = 200m,
+                EstiloMusical = EstiloMusical.Sertanejo,
+                IdEstudio = 10
+            };
+
+            Assert.Throws<Exception>(() => _repositorioAgendamento.Deletar(listaComIdInexistente.Id));
+        }
         public List<Agendamento> CriarLista()
         {
             var listaDeAgendamentoSingleton = AgendamentoSingleton.InstanciaAgendamento;
