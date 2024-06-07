@@ -133,6 +133,28 @@ namespace Cod3rsGrowth.Testes.Testes
 
             Assert.Throws<Exception>(() => _repositorioAgendamento.Deletar(listaComIdInexistente.Id));
         }
+
+        [Fact]
+
+        public void deve_retornar_a_excecao_de_enum_indefinido()
+        {
+            CriarLista();
+            var listaComEnumIndefinido = new Agendamento
+            {
+                Id = 1,
+                NomeResponsavel = "Paulo",
+                CpfResponsavel = "03237852811",
+                DataEHoraDeEntrada = DateTime.Parse("30/06/2024 12:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("30/06/2024 14:00:00"),
+                ValorTotal = 200m,
+                EstiloMusical = EstiloMusical.EnumIndefinido,
+                IdEstudio = 1
+            };
+
+            var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioAgendamento.Adicionar(listaComEnumIndefinido));
+
+            Assert.Equal("Por favor defina o Estilo Musical", mensagemDeErro.Errors.Single().ErrorMessage);
+        }
         public List<Agendamento> CriarLista()
         {
             var listaDeAgendamentoSingleton = AgendamentoSingleton.InstanciaAgendamento;

@@ -3,7 +3,6 @@ using Cod3rsGrowth.Infra.InterfacesInfra;
 using Cod3rsGrowth.Infra.Singleton;
 using Cod3rsGrowth.Testes.InjecaoDeDependencia;
 using Microsoft.Extensions.DependencyInjection;
-using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace Cod3rsGrowth.Testes.Testes

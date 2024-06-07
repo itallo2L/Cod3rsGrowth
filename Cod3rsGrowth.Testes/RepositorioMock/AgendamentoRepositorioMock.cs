@@ -20,13 +20,13 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
           _instanciaAgendamento.Add(agendamento);
         }
 
-        public void Atualizar(Agendamento listaAtualizada)
+        public void Atualizar(Agendamento agendamentoParaAtualizar)
         {
-            _agendamentoValidador.ValidateAndThrow(listaAtualizada);
-            var verificarSeOIdExiste = _instanciaAgendamento.Find(lista => lista.Id == listaAtualizada.Id)
-                ?? throw new Exception($"Não foi possível encontrar o agendamento com o ID: {listaAtualizada.Id}");
+            _agendamentoValidador.ValidateAndThrow(agendamentoParaAtualizar);
+            var verificarSeOIdExiste = _instanciaAgendamento.Find(lista => lista.Id == agendamentoParaAtualizar.Id)
+                ?? throw new Exception($"Não foi possível encontrar o agendamento com o ID: {agendamentoParaAtualizar.Id}");
             var indice = _instanciaAgendamento.IndexOf(verificarSeOIdExiste);
-            _instanciaAgendamento[indice] = listaAtualizada;
+            _instanciaAgendamento[indice] = agendamentoParaAtualizar;
         }
 
         public Agendamento ObterPorId(int id)

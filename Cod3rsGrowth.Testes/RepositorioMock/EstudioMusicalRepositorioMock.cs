@@ -21,13 +21,13 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
             _instanciaEstudioMusical.Add(estudioMusical);
         }
 
-        public void Atualizar(EstudioMusical listaAtualizada)
+        public void Atualizar(EstudioMusical estudioParaAtualizar)
         {
-            _estudioMusicalValidador.ValidateAndThrow(listaAtualizada);
-            var verificaSeOIdExiste = _instanciaEstudioMusical.Find(lista => lista.Id == listaAtualizada.Id)
-                ?? throw new Exception($"Não foi possível encontrar o Estúdio com o ID: {listaAtualizada.Id}");
+            _estudioMusicalValidador.ValidateAndThrow(estudioParaAtualizar);
+            var verificaSeOIdExiste = _instanciaEstudioMusical.Find(lista => lista.Id == estudioParaAtualizar.Id)
+                ?? throw new Exception($"Não foi possível encontrar o Estúdio com o ID: {estudioParaAtualizar.Id}");
             var indice = _instanciaEstudioMusical.IndexOf(verificaSeOIdExiste);
-            _instanciaEstudioMusical[indice] = listaAtualizada;
+            _instanciaEstudioMusical[indice] = estudioParaAtualizar;
         }
 
         public EstudioMusical ObterPorId(int id)

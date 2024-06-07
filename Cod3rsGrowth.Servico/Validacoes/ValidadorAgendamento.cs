@@ -36,13 +36,10 @@ namespace Cod3rsGrowth.Servico.Validacoes
             .PrecisionScale(5, 2, true).WithMessage("O valor total não deve conter mais de 4 digitos no total, com duas casas decimais.");
 
             RuleFor(Agendamento => Agendamento.EstiloMusical)
-                .IsInEnum().WithMessage("Estilo musical inválido.")
-                .Must((Agendamento, EstiloMusical) => VerificarSeOEnumEstaIndefinido(Agendamento.EstiloMusical));
-        }
+                .IsInEnum().WithMessage("Estilo musical inválido.");
 
-        private static bool VerificarSeOEnumEstaIndefinido(EstiloMusical estiloMusical)
-        {
-            return !(estiloMusical == EstiloMusical.EnumIndefinido);
+            RuleFor(Agendamento => Agendamento)
+                .Must( x => x.EstiloMusical != EstiloMusical.EnumIndefinido).WithMessage("Por favor defina o Estilo Musical");
         }
     }
 }
