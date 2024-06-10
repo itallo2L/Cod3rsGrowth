@@ -10,21 +10,22 @@ namespace Cod3rsGrowth.Servico.Validacoes
         {
             ClassLevelCascadeMode = CascadeMode.Stop;
 
+
             RuleFor(Agendamento => Agendamento.NomeResponsavel)
                 .NotEmpty().WithMessage("Por favor digite o nome do responsável pelo agendamento.")
                 .MaximumLength(25).WithMessage("O nome do responsável excedeu o limite de 25 caracteres, digite um nome menor.");
 
-            RuleFor(Agendamento => Agendamento.CpfResponsavel)
+            RuleFor(Agendamento => Agendamento.CpfResponsavel).Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("Por favor digite o CPF do responsável pelo agendamento.")
                 .Length(11).WithMessage("CPF inválido, digite um CPF válido.");
 
-            RuleFor(Agendamento => Agendamento.DataEHoraDeEntrada)
-                .NotEmpty().WithMessage("Por favor digite uma data e hora válida.")
+            RuleFor(Agendamento => Agendamento.DataEHoraDeEntrada).Cascade(CascadeMode.Stop)
+                .NotEmpty().WithMessage("Por favor digite uma data e hora de entrada.")
                 .GreaterThanOrEqualTo(DateTime.Today).WithMessage("Por favor digite uma data válida.")
                 .GreaterThanOrEqualTo(DateTime.Now).WithMessage("Por favor digite um horário válido.");
 
             RuleFor(Agendamento => Agendamento.DataEHoraDeSaida)
-                .NotEmpty().WithMessage("Por favor digite uma data e hora válida.")
+                .NotEmpty().WithMessage("Por favor digite uma data e hora de saída.")
                 .GreaterThan(DateTime.Today).WithMessage("Por favor digite uma data válida.")
                 .GreaterThan(DateTime.Now).WithMessage("Por favor digite um horário válido.")
                 .NotEqual(agendamento => agendamento.DataEHoraDeEntrada).WithMessage("A data e hora de saída não pode ser igual à data e hora de entrada.");

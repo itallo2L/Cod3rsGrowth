@@ -4,7 +4,10 @@ using Cod3rsGrowth.Infra.Singleton;
 using Cod3rsGrowth.Testes.InjecaoDeDependencia;
 using Cod3rsGrowth.Testes.RepositorioMock;
 using Microsoft.Extensions.DependencyInjection;
+using System.ComponentModel;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Cod3rsGrowth.Testes.Testes
 {
@@ -19,7 +22,6 @@ namespace Cod3rsGrowth.Testes.Testes
         }
 
         [Fact]
-
         public void deve_comparar_o_metodo_obter_todos_com_o_criar_lista()
         {
             var listaEsperada = CriarLista();
@@ -30,7 +32,6 @@ namespace Cod3rsGrowth.Testes.Testes
         }
 
         [Fact]
-
         public void deve_verificar_o_tipo_da_lista()
         {
             var listaDoTipoAgendamento = _repositorioAgendamento.ObterTodos();
@@ -114,7 +115,6 @@ namespace Cod3rsGrowth.Testes.Testes
         }
 
         [Fact]
-
         public void deve_retornar_uma_excecao_quando_o_id_for_inexistente()
         {
             CriarLista();
@@ -135,7 +135,154 @@ namespace Cod3rsGrowth.Testes.Testes
         }
 
         [Fact]
+        public void deve_retornar_a_excecao_de_nome_vazio()
+        {
+            CriarLista();
+            var listaTeste = new Agendamento
+            {
+                Id = 8,
+                NomeResponsavel = "",
+                CpfResponsavel = "40028922891",
+                DataEHoraDeEntrada = DateTime.Parse("30/06/2024 12:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("30/06/2024 14:00:00"),
+                ValorTotal = 200m,
+                EstiloMusical = EstiloMusical.Blues,
+                IdEstudio = 3
+            };
 
+            var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioAgendamento.Adicionar(listaTeste));
+
+            Assert.Equal("Por favor digite o nome do responsável pelo agendamento.", mensagemDeErro.Errors.Single().ErrorMessage);
+        }
+
+        [Fact]
+        public void deve_retornar_a_excecao_de_nome_maior_que_25_caracteres()
+        {
+            CriarLista();
+            var listaNomeMaiorQueOEsperado = new Agendamento
+            {
+                Id = 3,
+                NomeResponsavel = "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                CpfResponsavel = "40028922891",
+                DataEHoraDeEntrada = DateTime.Parse("30/06/2024 12:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("30/06/2024 14:00:00"),
+                ValorTotal = 200m,
+                EstiloMusical = EstiloMusical.Blues,
+                IdEstudio = 3
+            };
+
+            var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioAgendamento.Atualizar(listaNomeMaiorQueOEsperado));
+
+            Assert.Equal("O nome do responsável excedeu o limite de 25 caracteres, digite um nome menor.", mensagemDeErro.Errors.Single().ErrorMessage);
+        }
+
+        [Fact]
+        public void deve_retornar_a_excecao_de_cpf_vazio()
+        {
+            CriarLista();
+            var listaComOCpfVazio = new Agendamento
+            {
+                Id = 9,
+                NomeResponsavel = "Josué",
+                CpfResponsavel = "",
+                DataEHoraDeEntrada = DateTime.Parse("30/06/2026 14:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("30/06/2026 15:00:00"),
+                ValorTotal = 100,
+                EstiloMusical = EstiloMusical.Samba,
+                IdEstudio = 3
+            };
+
+            var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioAgendamento.Adicionar(listaComOCpfVazio));
+
+            Assert.Equal("Por favor digite o CPF do responsável pelo agendamento.", mensagemDeErro.Errors.Single().ErrorMessage);
+        }
+
+        [Fact]
+
+        public void deve_retornar_a_execao_de_cpf_invalido()
+        {
+            CriarLista();
+            var listaComCpfInvalido = new Agendamento
+            {
+                Id = 1,
+                NomeResponsavel = "Yudi",
+                CpfResponsavel = "40028922",
+                DataEHoraDeEntrada = DateTime.Parse("30/06/2026 12:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("30/06/2026 14:00:00"),
+                ValorTotal = 200m,
+                EstiloMusical = EstiloMusical.EnumIndefinido,
+                IdEstudio = 1
+            };
+
+            var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioAgendamento.Atualizar(listaComCpfInvalido));
+
+            Assert.Equal("CPF inválido, digite um CPF válido.", mensagemDeErro.Errors.Single().ErrorMessage);
+        }
+
+        [Fact]
+        public void deve_retornar_a_excecao_de_data_e_hora_de_entrada_vazia()
+        {
+            CriarLista();
+            var listaComDataEHoraDeEntradaVazia = new Agendamento
+            {
+                Id = 10,
+                NomeResponsavel = "Josué",
+                CpfResponsavel = "03238202811",
+                DataEHoraDeSaida = DateTime.Parse("30/06/2026 15:00:00"),
+                ValorTotal = 100,
+                EstiloMusical = EstiloMusical.Samba,
+                IdEstudio = 3
+            };
+
+            var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioAgendamento.Adicionar(listaComDataEHoraDeEntradaVazia));
+
+            Assert.Equal("Por favor digite uma data e hora de entrada.", mensagemDeErro.Errors.Single().ErrorMessage);
+        }
+
+        [Fact]
+        public void deve_retornar_a_excecao_quando_a_data_de_entrada_for_menor_do_que_a_data_de_hoje()
+        {
+            CriarLista();
+            var listaComDataMenorDoQueADataDeHoje = new Agendamento
+            {
+                Id = 1,
+                NomeResponsavel = "Paulo",
+                CpfResponsavel = "03237852816",
+                DataEHoraDeEntrada = DateTime.Parse("09/06/2024"), //Encontrar uma forma de colocar a data de hoje menos um dia
+                DataEHoraDeSaida = DateTime.Parse("30/06/2024 14:00:00"),
+                ValorTotal = 200m,
+                EstiloMusical = EstiloMusical.Blues,
+                IdEstudio = 1
+            };
+
+            var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioAgendamento.Atualizar(listaComDataMenorDoQueADataDeHoje));
+
+            Assert.Equal("Por favor digite uma data válida.", mensagemDeErro.Errors.Single().ErrorMessage);
+        }
+
+        [Fact]
+
+        public void deve_retornar_uma_excecao_quando_a_data_for_hoje_e_a_hora_for_menor_que_a_hora_atual()
+        {
+            CriarLista();
+            var listaComADataDeHojeEHoraMenorQueAHoraAtual = new Agendamento
+            {
+                Id = 1,
+                NomeResponsavel = "Paulo",
+                CpfResponsavel = "03237852816",
+                DataEHoraDeEntrada = DateTime.Parse("10/06/2024 13:40:00"), //Encontrar uma forma automática de colocar a data de hoje e uma hora antes da hora atual
+                DataEHoraDeSaida = DateTime.Parse("30/06/2024 14:00:00"),
+                ValorTotal = 200m,
+                EstiloMusical = EstiloMusical.Blues,
+                IdEstudio = 1
+            };
+
+            var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioAgendamento.Atualizar(listaComADataDeHojeEHoraMenorQueAHoraAtual));
+
+            Assert.Equal("Por favor digite um horário válido.", mensagemDeErro.Errors.Single().ErrorMessage);
+        }
+
+        [Fact]
         public void deve_retornar_a_excecao_de_enum_indefinido()
         {
             CriarLista();
@@ -155,6 +302,7 @@ namespace Cod3rsGrowth.Testes.Testes
 
             Assert.Equal("Por favor defina o Estilo Musical", mensagemDeErro.Errors.Single().ErrorMessage);
         }
+
         public List<Agendamento> CriarLista()
         {
             var listaDeAgendamentoSingleton = AgendamentoSingleton.InstanciaAgendamento;
@@ -184,7 +332,7 @@ namespace Cod3rsGrowth.Testes.Testes
                 },
                 new Agendamento
                 {
-                    Id = 1,
+                    Id = 3,
                     NomeResponsavel = "Josué",
                     CpfResponsavel = "09631009047",
                     DataEHoraDeEntrada = DateTime.Parse("30/06/2024 14:00:00"),

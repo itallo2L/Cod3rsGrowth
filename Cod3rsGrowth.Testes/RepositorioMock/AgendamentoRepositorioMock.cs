@@ -14,6 +14,7 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
             _agendamentoValidador = agendamento;
             _instanciaAgendamento = AgendamentoSingleton.InstanciaAgendamento;
         }
+
         public void Adicionar(Agendamento agendamento)
         {
             _agendamentoValidador.ValidateAndThrow(agendamento);
