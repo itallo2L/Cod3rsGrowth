@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void Comparando_Listas()
+        public void deve_comparar_a_lista_obter_todos_com_a_lista_de_comparacao()
         {
             var listaDeComparacao = new List<EstudioMusical>
             {
@@ -46,7 +46,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void Conferir_Se_A_Lista_E_Do_Tipo_Estudio_Musical_Singleton()
+        public void deve_conferir_se_a_lista_e_do_tipo_estudio_musical_singleton()
         {
             var listaDoTipoEstudioMusical = _servicoEstudioMusical.CriarLista();
 
