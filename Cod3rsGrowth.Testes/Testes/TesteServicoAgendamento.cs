@@ -17,7 +17,7 @@ namespace Cod3rsGrowth.Testes.Testes
         }
 
         [Fact]
-        public void Comparando_Listas()
+        public void deve_comparar_a_lista_obter_todos_com_a_lista_de_comparacao()
         {
             var listaDeComparacao = new List<Agendamento>
             {
@@ -60,7 +60,7 @@ namespace Cod3rsGrowth.Testes.Testes
         }
 
         [Fact]
-        public void Conferir_Se_A_Lista_E_Do_Tipo_Agendamento_Singleton()
+        public void deve_conferir_se_a_lista_e_do_tipo_agendamento_singleton()
         {
             var listaDoTipoAgendamento = _servicoAgendamento.CriarLista();
 
