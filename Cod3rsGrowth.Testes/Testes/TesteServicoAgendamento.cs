@@ -1,8 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.EnumEstiloMusical;
 using Cod3rsGrowth.Dominio.Interfaces;
-using Cod3rsGrowth.Infra.Singleton;
-using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Testes.InjecaoDeDependencia;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -19,7 +17,7 @@ namespace Cod3rsGrowth.Testes.Testes
         }
 
         [Fact]
-        public void Comparando_Listas()
+        public void deve_comparar_a_lista_obter_todos_com_a_lista_de_comparacao()
         {
             var listaDeComparacao = new List<Agendamento>
             {
@@ -56,17 +54,17 @@ namespace Cod3rsGrowth.Testes.Testes
                 }
             };
 
-            var listaEsperada = _servicoAgendamento.ObterTodos();
+            var listaEsperada = _servicoAgendamento.CriarLista();
 
             Assert.Equivalent(listaDeComparacao, listaEsperada);
         }
 
         [Fact]
-        public void Conferir_Se_A_Lista_E_Do_Tipo_Agendamento_Singleton()
+        public void deve_conferir_se_a_lista_e_do_tipo_agendamento_singleton()
         {
-            var listaDoTipoAgendamento = _servicoAgendamento.ObterTodos();
+            var listaDoTipoAgendamento = _servicoAgendamento.CriarLista();
 
-            Assert.IsType<AgendamentoSingleton>(listaDoTipoAgendamento);
+            Assert.IsType<List<Agendamento>>(listaDoTipoAgendamento);
         }
     }
 }

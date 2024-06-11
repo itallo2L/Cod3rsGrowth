@@ -1,16 +1,13 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.EnumEstiloMusical;
 using Cod3rsGrowth.Dominio.Interfaces;
-using Cod3rsGrowth.Infra.Singleton;
 
 namespace Cod3rsGrowth.Servico.Servicos
 {
     public class ServicoAgendamento : IServicoAgendamento
     {
-        public List<Agendamento> ObterTodos()
+        public List<Agendamento> CriarLista()
         {
-            var listaDeAgendamentoSingleton = AgendamentoSingleton.InstanciaAgendamento;
-
             var listasDeAgendamentos = new List<Agendamento>
             {
                 new Agendamento
@@ -22,7 +19,7 @@ namespace Cod3rsGrowth.Servico.Servicos
                     DataEHoraDeSaida = DateTime.Parse("30/06/2024 14:00:00"),
                     ValorTotal = 200m,
                     EstiloMusical = EstiloMusical.Blues,
-                    IdEstudio = 1 
+                    IdEstudio = 1
                 },
                 new Agendamento {
                     Id = 2,
@@ -44,10 +41,9 @@ namespace Cod3rsGrowth.Servico.Servicos
                     ValorTotal = 100,
                     EstiloMusical = EstiloMusical.Samba,
                     IdEstudio = 3
-                }
+                },
             };
-            listaDeAgendamentoSingleton.AddRange(listasDeAgendamentos);
-            return listaDeAgendamentoSingleton;
+            return listasDeAgendamentos;
         }
     }
 }

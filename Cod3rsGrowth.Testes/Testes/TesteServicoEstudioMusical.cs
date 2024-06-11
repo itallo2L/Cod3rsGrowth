@@ -1,6 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Interfaces;
-using Cod3rsGrowth.Infra.Singleton;
 using Cod3rsGrowth.Testes.InjecaoDeDependencia;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -17,14 +16,14 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void Comparando_Listas()
+        public void deve_comparar_a_lista_obter_todos_com_a_lista_de_comparacao()
         {
             var listaDeComparacao = new List<EstudioMusical>
             {
                 new EstudioMusical
                 {
                     Id = 1,
-                    Nome = "Slice",
+                    Nome = "Sliced",
                     EstaAberto = true
                 },
                 new EstudioMusical
@@ -41,17 +40,17 @@ namespace Cod3rsGrowth.Testes
                 }
             };
 
-            var listaEsperada = _servicoEstudioMusical.ObterTodos();
+            var listaEsperada = _servicoEstudioMusical.CriarLista();
 
             Assert.Equivalent(listaDeComparacao, listaEsperada);
         }
 
         [Fact]
-        public void Conferir_Se_A_Lista_E_Do_Tipo_Estudio_Musical_Singleton()
+        public void deve_conferir_se_a_lista_e_do_tipo_estudio_musical_singleton()
         {
-            var listaDoTipoEstudioMusical = _servicoEstudioMusical.ObterTodos();
+            var listaDoTipoEstudioMusical = _servicoEstudioMusical.CriarLista();
 
-            Assert.IsType<EstudioMusicalSingleton>(listaDoTipoEstudioMusical);
+            Assert.IsType<List<EstudioMusical>>(listaDoTipoEstudioMusical);
         }
     }
 }

@@ -1,20 +1,18 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Interfaces;
-using Cod3rsGrowth.Infra.Singleton;
 
 namespace Cod3rsGrowth.Dominio.Servicos
 {
     public class ServicoEstudioMusical : IServicoEstudioMusical
     {
-        public List<EstudioMusical> ObterTodos()
+        public List<EstudioMusical> CriarLista()
         {
-            var listaDeEstudioMusicalSingleton = EstudioMusicalSingleton.InstanciaEstudioMusical;
             var listasDeEstudiosMusicais = new List<EstudioMusical>
             {
                 new EstudioMusical
                 {
                     Id = 1,
-                    Nome = "Slice",
+                    Nome = "Sliced",
                     EstaAberto = true
                 },
                 new EstudioMusical
@@ -30,8 +28,7 @@ namespace Cod3rsGrowth.Dominio.Servicos
                     EstaAberto = true
                 }
             };
-            listaDeEstudioMusicalSingleton.AddRange(listasDeEstudiosMusicais);
-            return listaDeEstudioMusicalSingleton;
+            return listasDeEstudiosMusicais;
         }
     }
 }

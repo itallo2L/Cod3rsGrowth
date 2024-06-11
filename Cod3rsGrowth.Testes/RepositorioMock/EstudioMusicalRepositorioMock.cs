@@ -1,33 +1,52 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Infra.InterfacesInfra;
+using Cod3rsGrowth.Infra.Singleton;
+using FluentValidation;
 
 namespace Cod3rsGrowth.Testes.RepositorioMock
 {
     public class EstudioMusicalRepositorioMock : IRepositorioEstudioMusical
     {
+        private EstudioMusicalSingleton _instanciaEstudioMusical;
+        private readonly IValidator<EstudioMusical> _estudioMusicalValidador;
+
+        public EstudioMusicalRepositorioMock(IValidator<EstudioMusical> estudioMusical)
+        {
+            _estudioMusicalValidador = estudioMusical;
+            _instanciaEstudioMusical = EstudioMusicalSingleton.InstanciaEstudioMusical;
+        }
         public void Adicionar(EstudioMusical estudioMusical)
         {
-            throw new NotImplementedException();
+            _estudioMusicalValidador.ValidateAndThrow(estudioMusical);
+            _instanciaEstudioMusical.Add(estudioMusical);
         }
 
-        public void Atualizar(EstudioMusical estudioMusical)
+        public void Atualizar(EstudioMusical estudioParaAtualizar)
         {
-            throw new NotImplementedException();
+            _estudioMusicalValidador.ValidateAndThrow(estudioParaAtualizar);
+            var verificaSeOIdExiste = _instanciaEstudioMusical.Find(lista => lista.Id == estudioParaAtualizar.Id)
+                ?? throw new Exception($"Não foi possível encontrar o Estúdio com o ID: {estudioParaAtualizar.Id}");
+            var indice = _instanciaEstudioMusical.IndexOf(verificaSeOIdExiste);
+            _instanciaEstudioMusical[indice] = estudioParaAtualizar;
         }
 
-        public EstudioMusical BuscarPorId(int id)
+        public EstudioMusical ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            var objetoRetornado = _instanciaEstudioMusical.Find(x => x.Id == id)
+                ?? throw new Exception($"Erro ao obter o objeto, o ID: {id} é inexistente!");
+            return objetoRetornado;
         }
-
-        public void Deletar(EstudioMusical estudioMusical)
+        
+        public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            var objetoQueSeraRemovido = _instanciaEstudioMusical.Find(estudio => estudio.Id == id)
+                ?? throw new Exception($"Não foi possível encontrar o estúdio com o ID: {id}");
+            _instanciaEstudioMusical.Remove(objetoQueSeraRemovido);
         }
 
         public List<EstudioMusical> ObterTodos()
         {
-            throw new NotImplementedException();
+            return _instanciaEstudioMusical;
         }
     }
 }

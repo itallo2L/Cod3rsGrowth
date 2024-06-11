@@ -4,6 +4,6 @@ namespace Cod3rsGrowth.Dominio.Interfaces
 {
     public interface IServicoEstudioMusical
     {
-        List<EstudioMusical> ObterTodos();
+        List<EstudioMusical> CriarLista();
     }
 }

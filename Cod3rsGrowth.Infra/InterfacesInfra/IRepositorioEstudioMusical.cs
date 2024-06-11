@@ -6,8 +6,8 @@ namespace Cod3rsGrowth.Infra.InterfacesInfra
     {
         List<EstudioMusical> ObterTodos();
         void Adicionar(EstudioMusical estudioMusical);
-        void Atualizar(EstudioMusical estudioMusical);
-        void Deletar(EstudioMusical estudioMusical);
-        EstudioMusical BuscarPorId(int id);
+        void Atualizar(EstudioMusical estudioParaAtualizar);
+        void Deletar(int id);
+        EstudioMusical ObterPorId(int id);
     }
 }

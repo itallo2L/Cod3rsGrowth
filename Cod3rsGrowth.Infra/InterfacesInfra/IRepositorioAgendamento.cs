@@ -6,8 +6,8 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
     {
         List<Agendamento> ObterTodos();
         void Adicionar(Agendamento agendamento);
-        void Atualizar(Agendamento agendamento);
-        void Deletar(Agendamento agendamento);
-        Agendamento BuscarPorId(int id);
+        void Atualizar(Agendamento agendamentoParaAtualizar);
+        void Deletar(int id);
+        Agendamento ObterPorId(int id);
     }
 }
