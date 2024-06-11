@@ -265,10 +265,10 @@ namespace Cod3rsGrowth.Testes.Testes
         }
 
         [Fact]
-        public void deve_retornar_uma_excecao_quando_a_data_for_hoje_e_a_hora_for_menor_que_a_hora_atual()
+        public void deve_retornar_uma_excecao_quando_a_data_for_hoje_e_a_hora_for_menor_ou_igual_a_hora_atual()
         {
             CriarLista();
-            var excecaoComHoraMenorQueHoraAtualDoDiaAtual = "A hora de entrada inserida é menor ou igual ao horário atual, por favor digite um horário de entrada válido.";
+            var excecaoDeHoraDeEntradaMenorQueHoraAtualDoDiaAtual = "A hora de entrada inserida é menor ou igual ao horário atual, por favor digite um horário de entrada válido.";
             var listaComADataDeHojeEHoraMenorQueAHoraAtual = new Agendamento
             {
                 Id = 1,
@@ -283,7 +283,7 @@ namespace Cod3rsGrowth.Testes.Testes
 
             var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioAgendamento.Atualizar(listaComADataDeHojeEHoraMenorQueAHoraAtual));
 
-            Assert.Equal(excecaoComHoraMenorQueHoraAtualDoDiaAtual, mensagemDeErro.Errors.Single().ErrorMessage);
+            Assert.Equal(excecaoDeHoraDeEntradaMenorQueHoraAtualDoDiaAtual, mensagemDeErro.Errors.Single().ErrorMessage);
         }
 
         [Fact]
