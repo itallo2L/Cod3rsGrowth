@@ -1,34 +1,46 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
-using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Dominio.InterfacesRepositorio;
+using FluentValidation;
+using System.Collections.Generic;
 
 namespace Cod3rsGrowth.Dominio.Servicos
 {
-    public class ServicoEstudioMusical : IServicoEstudioMusical
+    public class ServicoEstudioMusical
     {
-        public List<EstudioMusical> CriarLista()
+        private readonly IValidator<EstudioMusical> _validadorEstudioMusical;
+        private readonly IRepositorioEstudioMusical _repositorioEstudioMusical;
+
+        public ServicoEstudioMusical(IValidator<EstudioMusical> estudioMusical, IRepositorioEstudioMusical repositorioEstudioMusical)
         {
-            var listasDeEstudiosMusicais = new List<EstudioMusical>
-            {
-                new EstudioMusical
-                {
-                    Id = 1,
-                    Nome = "Sliced",
-                    EstaAberto = true
-                },
-                new EstudioMusical
-                {
-                    Id = 2,
-                    Nome = "Queizy",
-                    EstaAberto = false
-                },
-                new EstudioMusical
-                {
-                    Id = 3,
-                    Nome = "Musik",
-                    EstaAberto = true
-                }
-            };
-            return listasDeEstudiosMusicais;
+            _validadorEstudioMusical = estudioMusical;
+            _repositorioEstudioMusical = repositorioEstudioMusical;
+        }
+
+        public void Adicionar(EstudioMusical estudioMusical)
+        {
+            _validadorEstudioMusical.ValidateAndThrow(estudioMusical);
+            _repositorioEstudioMusical.Adicionar(estudioMusical);
+        }
+
+        public void Atualizar(EstudioMusical estudioParaAtualizar)
+        {
+            _validadorEstudioMusical.ValidateAndThrow(estudioParaAtualizar);
+            _repositorioEstudioMusical.Atualizar(estudioParaAtualizar);
+        }
+
+        public void Deletar(int id)
+        {
+            _repositorioEstudioMusical.Deletar(id);
+        }
+
+        public EstudioMusical ObterPorId(int id)
+        {
+            return _repositorioEstudioMusical.ObterPorId(id);
+        }
+
+        public List<EstudioMusical> ObterTodos()
+        {
+            return _repositorioEstudioMusical.ObterTodos();
         }
     }
 }

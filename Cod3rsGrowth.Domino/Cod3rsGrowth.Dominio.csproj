@@ -5,8 +5,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Cod3rsGrowth.Servico\Cod3rsGrowth.Servico.csproj" />
-  </ItemGroup>
-
 </Project>

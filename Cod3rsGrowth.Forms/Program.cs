@@ -1,4 +1,4 @@
-namespace Cod3rsGrowth.Forms
+﻿namespace Cod3rsGrowth.Forms
 {
     internal static class Program
     {

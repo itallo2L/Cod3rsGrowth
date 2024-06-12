@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.EnumEstiloMusical;
 using FluentValidation;
+using System;
 
 namespace Cod3rsGrowth.Servico.Validacoes
 {

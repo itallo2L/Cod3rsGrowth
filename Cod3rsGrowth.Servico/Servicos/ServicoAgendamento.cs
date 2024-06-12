@@ -1,49 +1,46 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
-using Cod3rsGrowth.Dominio.EnumEstiloMusical;
-using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Dominio.InterfacesRepositorio;
+using FluentValidation;
+using System.Collections.Generic;
 
 namespace Cod3rsGrowth.Servico.Servicos
 {
-    public class ServicoAgendamento : IServicoAgendamento
+    public class ServicoAgendamento
     {
-        public List<Agendamento> CriarLista()
+        private readonly IValidator<Agendamento> _validadorAgendamento;
+        private readonly IRepositorioAgendamento _repositorioAgendamento;
+
+        public ServicoAgendamento(IValidator<Agendamento> valiadorAgendamento, IRepositorioAgendamento repositorioAgendamento)
         {
-            var listasDeAgendamentos = new List<Agendamento>
-            {
-                new Agendamento
-                {
-                    Id = 1,
-                    NomeResponsavel = "Paulo",
-                    CpfResponsavel = "03237852811",
-                    DataEHoraDeEntrada = DateTime.Parse("30/06/2024 12:00:00"),
-                    DataEHoraDeSaida = DateTime.Parse("30/06/2024 14:00:00"),
-                    ValorTotal = 200m,
-                    EstiloMusical = EstiloMusical.Blues,
-                    IdEstudio = 1
-                },
-                new Agendamento {
-                    Id = 2,
-                    NomeResponsavel = "Rafael",
-                    CpfResponsavel = "52273122515",
-                    DataEHoraDeEntrada = DateTime.Parse("26/06/2024 17:00:00"),
-                    DataEHoraDeSaida = DateTime.Parse("26/06/2024 20:00:00"),
-                    ValorTotal = 300m,
-                    EstiloMusical = EstiloMusical.Jazz,
-                    IdEstudio = 2
-                },
-                new Agendamento
-                {
-                    Id = 1,
-                    NomeResponsavel = "Josué",
-                    CpfResponsavel = "09631009047",
-                    DataEHoraDeEntrada = DateTime.Parse("30/06/2024 14:00:00"),
-                    DataEHoraDeSaida = DateTime.Parse("30/06/2024 15:00:00"),
-                    ValorTotal = 100,
-                    EstiloMusical = EstiloMusical.Samba,
-                    IdEstudio = 3
-                },
-            };
-            return listasDeAgendamentos;
+            _validadorAgendamento = valiadorAgendamento;
+            _repositorioAgendamento = repositorioAgendamento;
+        }
+
+        public void Adicionar(Agendamento agendamento)
+        {
+            _validadorAgendamento.ValidateAndThrow(agendamento);
+            _repositorioAgendamento.Adicionar(agendamento);
+        }
+
+        public void Atualizar(Agendamento agendamentoParaAtualizar)
+        {
+            _validadorAgendamento.ValidateAndThrow(agendamentoParaAtualizar);
+            _repositorioAgendamento.Atualizar(agendamentoParaAtualizar);
+        }
+
+        public void Deletar(int id)
+        {
+            _repositorioAgendamento.Deletar(id);
+        }
+
+        public Agendamento ObterPorId(int id)
+        {
+            return _repositorioAgendamento.ObterPorId(id);
+        }
+
+        public List<Agendamento> ObterTodos()
+        {
+            return  _repositorioAgendamento.ObterTodos();
         }
     }
 }
