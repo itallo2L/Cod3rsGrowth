@@ -1,7 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.InterfacesRepositorio;
 using Cod3rsGrowth.Infra.Singleton;
-using FluentValidation;
 
 namespace Cod3rsGrowth.Testes.RepositorioMock
 {
@@ -9,7 +8,7 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
     {
         private EstudioMusicalSingleton _instanciaEstudioMusical;
 
-        public EstudioMusicalRepositorioMock(IValidator<EstudioMusical> estudioMusical)
+        public EstudioMusicalRepositorioMock()
         {
             _instanciaEstudioMusical = EstudioMusicalSingleton.InstanciaEstudioMusical;
         }

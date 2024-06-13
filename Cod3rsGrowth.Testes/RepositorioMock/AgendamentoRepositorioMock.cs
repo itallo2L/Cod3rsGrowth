@@ -1,7 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.InterfacesRepositorio;
 using Cod3rsGrowth.Infra.Singleton;
-using FluentValidation;
 
 namespace Cod3rsGrowth.Testes.RepositorioMock
 {
