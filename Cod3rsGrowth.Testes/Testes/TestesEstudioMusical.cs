@@ -1,5 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
-using Cod3rsGrowth.Infra.InterfacesInfra;
+using Cod3rsGrowth.Dominio.Servicos;
 using Cod3rsGrowth.Infra.Singleton;
 using Cod3rsGrowth.Testes.InjecaoDeDependencia;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,11 +9,11 @@ namespace Cod3rsGrowth.Testes.Testes
 {
     public class TestesEstudioMusical : TesteBase
     {
-        private readonly IRepositorioEstudioMusical _repositorioEstudioMusical;
+        private readonly ServicoEstudioMusical _repositorioEstudioMusical;
         public TestesEstudioMusical()
         {
-            _repositorioEstudioMusical = ServiceProvider.GetService<IRepositorioEstudioMusical>()
-                ?? throw new Exception($"Erro ao obter serviço {nameof(IRepositorioEstudioMusical)}");
+            _repositorioEstudioMusical = ServiceProvider.GetService<ServicoEstudioMusical>()
+                ?? throw new Exception($"Erro ao obter serviço {nameof(ServicoEstudioMusical)}");
             EstudioMusicalSingleton.InstanciaEstudioMusical.Clear();
         }
 

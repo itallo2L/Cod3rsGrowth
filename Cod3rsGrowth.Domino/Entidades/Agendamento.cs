@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.EnumEstiloMusical;
+using System;
 
 namespace Cod3rsGrowth.Dominio.Entidades
 {

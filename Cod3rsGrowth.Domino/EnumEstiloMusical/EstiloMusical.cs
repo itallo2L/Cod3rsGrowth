@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Dominio.EnumEstiloMusical
             [Description("Gênero de música erudito, que se caracteriza por apresentar uma instrumentação complexa e por ser executada em formato de sinfonia.")]
             MusicaClassica,
 
-            [Description("Gênero composto por músicas da tradição caipira, por músicas românticas e por canções populares do sertanejo universitário")]
+            [Description("Gênero composto por músicas da tradição caipira, por músicas românticas e por canções populares do sertanejo universitário.")]
             Sertanejo,
 
             [Description("Gênero onde a música serve como louvor, oração ou graças a Deus, Jesus Cristo e ao Espírito Santo.")]

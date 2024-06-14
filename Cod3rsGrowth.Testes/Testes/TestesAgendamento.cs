@@ -1,8 +1,8 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.EnumEstiloMusical;
 using Cod3rsGrowth.Infra.Singleton;
+using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Testes.InjecaoDeDependencia;
-using Cod3rsGrowth.Testes.RepositorioMock;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
@@ -10,11 +10,11 @@ namespace Cod3rsGrowth.Testes.Testes
 {
     public class TestesAgendamento : TesteBase
     {
-        private readonly IRepositorioAgendamento _repositorioAgendamento;
+        private readonly ServicoAgendamento _repositorioAgendamento;
         public TestesAgendamento()
         {
-            _repositorioAgendamento = ServiceProvider.GetService<IRepositorioAgendamento>()
-                ?? throw new Exception($"Erro ao obter o serviço {nameof(IRepositorioAgendamento)}");
+            _repositorioAgendamento = ServiceProvider.GetService<ServicoAgendamento>()
+                ?? throw new Exception($"Erro ao obter o serviço {nameof(ServicoAgendamento)}");
             AgendamentoSingleton.InstanciaAgendamento.Clear();
         }
 

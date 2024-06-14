@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
+using System.Collections.Generic;
 
-namespace Cod3rsGrowth.Infra.InterfacesInfra
+namespace Cod3rsGrowth.Dominio.InterfacesRepositorio
 {
     public interface IRepositorioEstudioMusical
     {
