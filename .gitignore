@@ -1,7 +1,6 @@
 .vs
 **/obj/
 **/bin/
-#*_wpftmp.csproj
 *.csproj
 #**/Cod3rsGrowth.sln
 #**/Cod3rsGrowth.Forms.csproj.user
