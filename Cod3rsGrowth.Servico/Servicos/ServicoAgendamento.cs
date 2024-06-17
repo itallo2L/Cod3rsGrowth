@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.InterfacesRepositorio;
 using FluentValidation;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace Cod3rsGrowth.Servico.Servicos
             return _repositorioAgendamento.ObterPorId(id);
         }
 
-        public List<Agendamento> ObterTodos()
+        public List<Agendamento> ObterTodos(FiltroAgendamento filtro)
         {
             return  _repositorioAgendamento.ObterTodos();
         }
