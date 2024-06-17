@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.InterfacesRepositorio;
+using LinqToDB;
 using System;
 using System.Collections.Generic;
 
@@ -13,6 +14,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
         public RepositorioAgendamento(BdCod3rsGrowth bdCodersGrowth)
         {
             _bd = bdCodersGrowth;
+            _bd.GetTable<Agendamento>();
         }
 
         public void Adicionar(Agendamento agendamento)

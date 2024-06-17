@@ -6,5 +6,6 @@ namespace Cod3rsGrowth.Dominio.Filtros
     {
         public string? NomeResponsavel { get; set; }
         public DateTime? DataEHoraDeEntrada { get; set; }
+        public decimal? ValorTotal { get; set; }
     }
 }

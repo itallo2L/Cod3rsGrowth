@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.InterfacesRepositorio;
+using LinqToDB;
 using System;
 using System.Collections.Generic;
 
@@ -13,6 +14,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
         public RepositorioEstudioMusical(BdCod3rsGrowth bdCod3RsGrowth)
         {
             _bd = bdCod3RsGrowth;
+            _bd.GetTable<EstudioMusical>();
         }
 
         public void Adicionar(EstudioMusical estudioMusical)
