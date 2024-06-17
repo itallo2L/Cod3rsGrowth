@@ -2,6 +2,7 @@
 **/obj/
 **/bin/
 *.csproj
+*.csproj.user
 #**/Cod3rsGrowth.sln
 #**/Cod3rsGrowth.Forms.csproj.user
 #**/Cod3rsGrowth.Web.csproj.user/
