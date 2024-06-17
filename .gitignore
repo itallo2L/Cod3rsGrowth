@@ -3,7 +3,7 @@
 **/bin/
 *.csproj
 *.csproj.user
-#**/Cod3rsGrowth.sln
+*.sln
 #**/Cod3rsGrowth.Forms.csproj.user
 #**/Cod3rsGrowth.Web.csproj.user/
 #**/Cod3rsGrowth.Dominio.csproj/
