@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.InterfacesRepositorio;
 using Cod3rsGrowth.Infra.Singleton;
 
@@ -39,9 +40,9 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
             _instanciaEstudioMusical.Remove(objetoQueSeraRemovido);
         }
 
-        public List<EstudioMusical> ObterTodos()
+        public List<EstudioMusical> ObterTodos(FiltroEstudioMusical? filtro = null)
         {
-            return _instanciaEstudioMusical;
+            throw new NotImplementedException();
         }
     }
 }

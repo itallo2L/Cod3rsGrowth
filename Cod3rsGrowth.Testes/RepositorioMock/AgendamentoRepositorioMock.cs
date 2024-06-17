@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.InterfacesRepositorio;
 using Cod3rsGrowth.Infra.Singleton;
 
@@ -40,9 +41,9 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
             _instanciaAgendamento.Remove(objetoQueSeraRemovido);
         }
 
-        public List<Agendamento> ObterTodos()
+        public List<Agendamento> ObterTodos(FiltroAgendamento? filtro = null)
         {
-            return _instanciaAgendamento;
+            throw new NotImplementedException();
         }
     }
 }
