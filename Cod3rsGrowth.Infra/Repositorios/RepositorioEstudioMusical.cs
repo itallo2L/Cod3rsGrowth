@@ -9,12 +9,11 @@ namespace Cod3rsGrowth.Infra.Repositorios
 {
     public class RepositorioEstudioMusical : IRepositorioEstudioMusical
     {
-        private readonly BdCod3rsGrowth _bd;
+        private readonly ITable<EstudioMusical> _bd;
 
         public RepositorioEstudioMusical(BdCod3rsGrowth bdCod3RsGrowth)
         {
-            _bd = bdCod3RsGrowth;
-            _bd.GetTable<EstudioMusical>();
+            _bd = bdCod3RsGrowth.GetTable<EstudioMusical>();
         }
 
         public void Adicionar(EstudioMusical estudioMusical)
