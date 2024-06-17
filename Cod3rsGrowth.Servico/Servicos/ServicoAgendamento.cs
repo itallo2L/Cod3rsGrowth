@@ -39,9 +39,9 @@ namespace Cod3rsGrowth.Servico.Servicos
             return _repositorioAgendamento.ObterPorId(id);
         }
 
-        public List<Agendamento> ObterTodos()
+        public List<Agendamento> ObterTodos(FiltroAgendamento? filtro = null)
         {
-            return  _repositorioAgendamento.ObterTodos();
+            return _repositorioAgendamento.ObterTodos(filtro);
         }
     }
 }

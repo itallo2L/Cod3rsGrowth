@@ -43,7 +43,7 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
 
         public List<Agendamento> ObterTodos(FiltroAgendamento? filtro = null)
         {
-            throw new NotImplementedException();
+            return _instanciaAgendamento;
         }
     }
 }

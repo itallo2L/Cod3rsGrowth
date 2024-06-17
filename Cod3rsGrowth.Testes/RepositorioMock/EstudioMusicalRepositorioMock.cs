@@ -42,7 +42,7 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
 
         public List<EstudioMusical> ObterTodos(FiltroEstudioMusical? filtro = null)
         {
-            throw new NotImplementedException();
+            return _instanciaEstudioMusical;
         }
     }
 }
