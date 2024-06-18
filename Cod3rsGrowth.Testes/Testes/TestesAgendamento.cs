@@ -36,10 +36,13 @@ namespace Cod3rsGrowth.Testes.Testes
             Assert.IsType<AgendamentoSingleton>(listaDoTipoAgendamento);
         }
 
-        [Fact]
-        public void deve_retornar_um_objeto_pelo_id()
+        [Theory]
+        [InlineData(2)]
+        [InlineData(1)]
+        [InlineData(3)]
+        public void deve_retornar_um_objeto_pelo_id(int id)
         {
-            var idEsperado = 2;
+            var idEsperado = id;
             CriarLista();
 
             var agendamentoBuscado = _repositorioAgendamento.ObterPorId(idEsperado);
