@@ -90,7 +90,7 @@ namespace Cod3rsGrowth.Testes.Testes
 
             var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioEstudioMusical.Adicionar(estudioSemNome));
 
-            Assert.Equal("Por favor insira o nome do Estúdio.", mensagemDeErro.Errors.Single().ErrorMessage);
+            Assert.Equal("O campo Nome do Estúdio é obrigatório, por favor insira o nome do estúdio.", mensagemDeErro.Errors.Single().ErrorMessage);
         }
 
         [Fact]
