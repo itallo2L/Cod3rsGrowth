@@ -3,5 +3,5 @@
 **/bin/
 *.csproj
 *.csproj.user
-*.sln
+#*.sln
 App.config
