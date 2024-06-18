@@ -4,3 +4,4 @@
 *.csproj
 *.csproj.user
 *.sln
+App.config

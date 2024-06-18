@@ -8,7 +8,7 @@ namespace Cod3rsGrowth.Forms.InjecaoDoBancoDeDados
 {
     public class ModuloDeInjecao
     {
-        public static IConfiguration Configuration { get;}
+        public static IConfiguration? Configuration { get;}
         public static void AdicionarDependenciasNoEscopo(ServiceCollection servico)
         {
             servico.AddLinqToDBContext<BdCod3rsGrowth>((provider, options) => options
