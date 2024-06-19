@@ -7,7 +7,6 @@ namespace Cod3rsGrowth.Infra.Singleton
     {
         private EstudioMusicalSingleton() { }
         private static EstudioMusicalSingleton? _instanciaEstudioMusical;
-        public List<EstudioMusical> EstudioMusical;
         public static EstudioMusicalSingleton InstanciaEstudioMusical
         {
            get

@@ -36,10 +36,13 @@ namespace Cod3rsGrowth.Testes.Testes
             Assert.IsType<AgendamentoSingleton>(listaDoTipoAgendamento);
         }
 
-        [Fact]
-        public void deve_retornar_um_objeto_pelo_id()
+        [Theory]
+        [InlineData(2)]
+        [InlineData(1)]
+        [InlineData(3)]
+        public void deve_retornar_um_objeto_pelo_id(int id)
         {
-            var idEsperado = 2;
+            var idEsperado = id;
             CriarLista();
 
             var agendamentoBuscado = _repositorioAgendamento.ObterPorId(idEsperado);
@@ -136,7 +139,7 @@ namespace Cod3rsGrowth.Testes.Testes
         public void deve_retornar_a_excecao_de_nome_vazio()
         {
             CriarLista();
-            var excecaoDeNomeVazio = "O campo Nome do Responsável é obrigatório, por favor digite o nome do responsável pelo agendamento.";
+            var excecaoDeNomeVazio = "O campo nome do responsável é obrigatório, por favor digite o nome do responsável pelo agendamento.";
             var listaTeste = new Agendamento
             {
                 Id = 8,
@@ -180,7 +183,7 @@ namespace Cod3rsGrowth.Testes.Testes
         public void deve_retornar_a_excecao_de_cpf_vazio()
         {
             CriarLista();
-            var excecaoDeCpfVazio = "O campo CPF é obrigatório,por favor digite o CPF do responsável pelo agendamento.";
+            var excecaoDeCpfVazio = "O campo CPF é obrigatório, por favor digite o CPF do responsável pelo agendamento.";
             var listaComOCpfVazio = new Agendamento
             {
                 Id = 9,
@@ -203,7 +206,7 @@ namespace Cod3rsGrowth.Testes.Testes
         public void deve_retornar_a_execao_de_cpf_invalido()
         {
             CriarLista();
-            var excecaoDeCpfInvalido = "Um CPF contém ao menos 11 digitos, digite um CPF válido.";
+            var excecaoDeCpfInvalido = "Um CPF contém 11 digitos, digite um CPF válido.";
             var listaComCpfInvalido = new Agendamento
             {
                 Id = 1,
@@ -225,7 +228,7 @@ namespace Cod3rsGrowth.Testes.Testes
         public void deve_retornar_a_excecao_de_data_e_hora_de_entrada_vazia()
         {
             CriarLista();
-            var excecaoDaDataEHoraDeEntradaVazia = "O campo Data e Hora de Entrada é obrigatório, por favor digite uma data e hora de entrada.";
+            var excecaoDaDataEHoraDeEntradaVazia = "O campo data e hora de entrada é obrigatório, por favor digite uma data e hora de entrada.";
             var listaComDataEHoraDeEntradaVazia = new Agendamento
             {
                 Id = 10,
