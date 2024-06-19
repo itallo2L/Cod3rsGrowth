@@ -4,6 +4,7 @@ using Cod3rsGrowth.Dominio.InterfacesRepositorio;
 using LinqToDB;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
@@ -38,7 +39,18 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public List<EstudioMusical> ObterTodos(FiltroEstudioMusical? filtro = null)
         {
-            throw new NotImplementedException();
+            var listaEstudioMusical = _bd.ToList();
+
+            if (filtro?.EstaAberto != null)
+            {
+                listaEstudioMusical = listaEstudioMusical.FindAll(estudioMusical => estudioMusical.EstaAberto == filtro?.EstaAberto);
+            }
+            if (!string.IsNullOrEmpty(filtro?.Nome))
+            {
+                listaEstudioMusical = listaEstudioMusical.FindAll(estudioMusical => estudioMusical.Nome.StartsWith(filtro?.Nome));
+            }
+
+            return listaEstudioMusical;
         }
     }
 }

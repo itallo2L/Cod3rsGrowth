@@ -4,6 +4,7 @@ using Cod3rsGrowth.Dominio.InterfacesRepositorio;
 using LinqToDB;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
@@ -38,7 +39,21 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public List<Agendamento> ObterTodos(FiltroAgendamento? filtro = null)
         {
-            throw new NotImplementedException();
+            var listaAgendamento = _bd.ToList();
+
+            if (!string.IsNullOrEmpty(filtro?.NomeResponsavel))
+            {
+                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.NomeResponsavel.StartsWith(filtro?.NomeResponsavel, StringComparison.OrdinalIgnoreCase));
+            }
+            if (filtro?.DataEHoraDeEntrada != null)
+            {
+                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.DataEHoraDeEntrada == filtro?.DataEHoraDeEntrada);
+            }
+            if (filtro?.ValorTotal != null)
+            {
+                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.ValorTotal == filtro?.ValorTotal);
+            }
+            return listaAgendamento;
         }
     }
 }
