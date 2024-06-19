@@ -12,7 +12,7 @@ namespace Cod3rsGrowth.Forms.InjecaoDoBancoDeDados
         public static void AdicionarDependenciasNoEscopo(ServiceCollection servico)
         {
             servico.AddLinqToDBContext<BdCod3rsGrowth>((provider, options) => options
-            .UseSqlServer(Configuration.GetConnectionString("Cod3rsGrowth_BD")));
+            .UseSqlServer(Configuration.GetConnectionString("ConnectionCod3rsGrowth")));
         }
     }
 }
