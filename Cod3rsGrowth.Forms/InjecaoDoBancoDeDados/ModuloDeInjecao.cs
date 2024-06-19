@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Infra;
+﻿
+using Cod3rsGrowth.Infra;
 using LinqToDB;
 using LinqToDB.AspNet;
 using Microsoft.Extensions.Configuration;

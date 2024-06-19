@@ -1,7 +1,5 @@
 .vs
 **/obj/
 **/bin/
-*.csproj
-*.csproj.user
 App.config
 *.json
