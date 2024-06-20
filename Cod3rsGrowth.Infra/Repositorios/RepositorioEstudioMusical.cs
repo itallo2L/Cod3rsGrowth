@@ -2,6 +2,7 @@
 using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.InterfacesRepositorio;
 using LinqToDB;
+using LinqToDB.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             }
             if (!string.IsNullOrEmpty(filtro?.Nome))
             {
-                listaEstudioMusical = listaEstudioMusical.FindAll(estudioMusical => estudioMusical.Nome.StartsWith(filtro?.Nome));
+                listaEstudioMusical = listaEstudioMusical.FindAll(estudioMusical => estudioMusical.Nome.Contains(filtro?.Nome, StringComparison.OrdinalIgnoreCase));
             }
 
             return listaEstudioMusical;

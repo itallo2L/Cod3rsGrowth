@@ -43,7 +43,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
             if (!string.IsNullOrEmpty(filtro?.NomeResponsavel))
             {
-                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.NomeResponsavel.StartsWith(filtro?.NomeResponsavel, StringComparison.OrdinalIgnoreCase));
+                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.NomeResponsavel.Contains(filtro?.NomeResponsavel, StringComparison.OrdinalIgnoreCase));
             }
             if (filtro?.DataEHoraDeEntrada != null)
             {

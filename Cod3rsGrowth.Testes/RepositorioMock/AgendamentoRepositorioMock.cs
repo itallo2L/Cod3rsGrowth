@@ -43,7 +43,21 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
 
         public List<Agendamento> ObterTodos(FiltroAgendamento? filtro = null)
         {
-            return _instanciaAgendamento;
+            var listaAgendamento = _instanciaAgendamento.ToList();
+
+            if (!string.IsNullOrEmpty(filtro?.NomeResponsavel))
+            {
+                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.NomeResponsavel.Contains(filtro?.NomeResponsavel, StringComparison.OrdinalIgnoreCase));
+            }
+            if (filtro?.DataEHoraDeEntrada != null)
+            {
+                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.DataEHoraDeEntrada == filtro?.DataEHoraDeEntrada);
+            }
+            if (filtro?.ValorTotal != null)
+            {
+                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.ValorTotal == filtro?.ValorTotal);
+            }
+            return listaAgendamento;
         }
     }
 }
