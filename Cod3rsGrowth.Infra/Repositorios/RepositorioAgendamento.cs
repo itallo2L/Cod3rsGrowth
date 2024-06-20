@@ -39,21 +39,21 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public List<Agendamento> ObterTodos(FiltroAgendamento? filtro = null)
         {
-            var listaAgendamento = _bd.ToList();
+            var listaAgendamento = _bd.AsQueryable();
 
             if (!string.IsNullOrEmpty(filtro?.NomeResponsavel))
             {
-                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.NomeResponsavel.Contains(filtro?.NomeResponsavel, StringComparison.OrdinalIgnoreCase));
+                listaAgendamento = listaAgendamento.Where(agendamento => agendamento.NomeResponsavel.Contains(filtro.NomeResponsavel, StringComparison.OrdinalIgnoreCase));
             }
             if (filtro?.DataEHoraDeEntrada != null)
             {
-                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.DataEHoraDeEntrada == filtro?.DataEHoraDeEntrada);
+                listaAgendamento = listaAgendamento.Where(agendamento => agendamento.DataEHoraDeEntrada == filtro.DataEHoraDeEntrada);
             }
             if (filtro?.ValorTotal != null)
             {
-                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.ValorTotal == filtro?.ValorTotal);
+                listaAgendamento = listaAgendamento.Where(agendamento => agendamento.ValorTotal == filtro.ValorTotal);
             }
-            return listaAgendamento;
+            return listaAgendamento.ToList();
         }
     }
 }

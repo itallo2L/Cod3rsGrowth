@@ -404,12 +404,25 @@ namespace Cod3rsGrowth.Testes.Testes
         public void deve_verificar_se_o_filtro_de_nome_funciona()
         {
             CriarLista();
+            var listaEsperada = new List<Agendamento>
+            {
+                new Agendamento
+                {
+                    Id = 2,
+                    NomeResponsavel = "Rafael",
+                    CpfResponsavel = "52273122515",
+                    DataEHoraDeEntrada = DateTime.Parse("26/06/2024 17:00:00"),
+                    DataEHoraDeSaida = DateTime.Parse("26/06/2024 20:00:00"),
+                    ValorTotal = 300m,
+                    EstiloMusical = EstiloMusical.Jazz,
+                    IdEstudio = 2
+                }
+            };
             var filtroNome = new FiltroAgendamento { NomeResponsavel = "e" };
 
             var listaDoObterTodos = _repositorioAgendamento.ObterTodos(filtroNome);
 
-            Assert.Contains(listaDoObterTodos, lista => lista.NomeResponsavel
-            .Contains(filtroNome.NomeResponsavel, StringComparison.OrdinalIgnoreCase));
+            Assert.Equivalent(listaEsperada, listaDoObterTodos);
         }
 
         [Fact]

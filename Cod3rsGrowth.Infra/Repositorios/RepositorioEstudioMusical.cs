@@ -40,18 +40,18 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public List<EstudioMusical> ObterTodos(FiltroEstudioMusical? filtro = null)
         {
-            var listaEstudioMusical = _bd.ToList();
+            var listaEstudioMusical = _bd.AsQueryable();
 
             if (filtro?.EstaAberto != null)
             {
-                listaEstudioMusical = listaEstudioMusical.FindAll(estudioMusical => estudioMusical.EstaAberto == filtro?.EstaAberto);
+                listaEstudioMusical = listaEstudioMusical.Where(estudioMusical => estudioMusical.EstaAberto == filtro.EstaAberto);
             }
             if (!string.IsNullOrEmpty(filtro?.Nome))
             {
-                listaEstudioMusical = listaEstudioMusical.FindAll(estudioMusical => estudioMusical.Nome.Contains(filtro?.Nome, StringComparison.OrdinalIgnoreCase));
+                listaEstudioMusical = listaEstudioMusical.Where(estudioMusical => estudioMusical.Nome.Contains(filtro.Nome, StringComparison.OrdinalIgnoreCase));
             }
 
-            return listaEstudioMusical;
+            return listaEstudioMusical.ToList();
         }
     }
 }
