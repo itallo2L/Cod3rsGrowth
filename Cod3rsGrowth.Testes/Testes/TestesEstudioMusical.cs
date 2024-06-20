@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.Servicos;
 using Cod3rsGrowth.Infra.Singleton;
 using Cod3rsGrowth.Testes.InjecaoDeDependencia;
@@ -32,7 +33,7 @@ namespace Cod3rsGrowth.Testes.Testes
         {
             var listaDoTipoEstudioMusical = _repositorioEstudioMusical.ObterTodos();
 
-            Assert.IsType<EstudioMusicalSingleton>(listaDoTipoEstudioMusical);
+            Assert.IsType<List<EstudioMusical>>(listaDoTipoEstudioMusical);
         }
 
         [Fact]
@@ -110,7 +111,6 @@ namespace Cod3rsGrowth.Testes.Testes
         }
 
         [Fact]
-
         public void deve_retornar_uma_excecao_quando_o_id_for_inexistente()
         {
             CriarLista();
@@ -124,6 +124,40 @@ namespace Cod3rsGrowth.Testes.Testes
 
             Assert.Throws<Exception>(() => _repositorioEstudioMusical.Deletar(listaComIdInexistente.Id));
         }
+
+        [Fact]
+        public void deve_verificar_se_o_filtro_de_nome_esta_funcionando()
+        {
+            CriarLista();
+            var listaEstudioMusical = new List<EstudioMusical>
+            {
+                new EstudioMusical
+                {
+                    Id = 1,
+                    Nome = "Sliced",
+                    EstaAberto = true
+                }
+            };
+            var filtro = new FiltroEstudioMusical { Nome = "sl" };
+
+            var listaDoObterTodos = _repositorioEstudioMusical.ObterTodos(filtro);
+
+            Assert.Equivalent(listaEstudioMusical, listaDoObterTodos);
+        }
+
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void deve_verificar_se_o_filtro_de_booleano_esta_funcionando(bool simOuNao)
+        {
+            CriarLista();
+            var filtro = new FiltroEstudioMusical { EstaAberto = simOuNao };
+
+            var listaDoObterTodos = _repositorioEstudioMusical.ObterTodos(filtro);
+
+            Assert.Contains(listaDoObterTodos, lista => lista.EstaAberto == filtro.EstaAberto);
+        }
+
         private List<EstudioMusical> CriarLista()
         {
             var listaDeEstudioMusicalSingleton = EstudioMusicalSingleton.InstanciaEstudioMusical;

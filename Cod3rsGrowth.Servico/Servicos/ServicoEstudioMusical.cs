@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.InterfacesRepositorio;
 using FluentValidation;
 using System.Collections.Generic;
@@ -38,9 +39,9 @@ namespace Cod3rsGrowth.Dominio.Servicos
             return _repositorioEstudioMusical.ObterPorId(id);
         }
 
-        public List<EstudioMusical> ObterTodos()
+        public List<EstudioMusical> ObterTodos(FiltroEstudioMusical? filtro = null)
         {
-            return _repositorioEstudioMusical.ObterTodos();
+            return _repositorioEstudioMusical.ObterTodos(filtro);
         }
     }
 }
