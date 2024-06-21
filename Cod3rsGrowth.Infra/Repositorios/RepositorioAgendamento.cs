@@ -10,16 +10,16 @@ namespace Cod3rsGrowth.Infra.Repositorios
 {
     public class RepositorioAgendamento : IRepositorioAgendamento
     {
-        private readonly ITable<Agendamento> _bd;
+        private readonly BdCod3rsGrowth _bd;
 
         public RepositorioAgendamento(BdCod3rsGrowth bdCodersGrowth)
         {
-            _bd = bdCodersGrowth.GetTable<Agendamento>();
+            _bd = bdCodersGrowth;
         }
 
         public void Adicionar(Agendamento agendamento)
         {
-            throw new NotImplementedException();
+            _bd.Insert(agendamento);
         }
 
         public void Atualizar(Agendamento agendamentoParaAtualizar)
