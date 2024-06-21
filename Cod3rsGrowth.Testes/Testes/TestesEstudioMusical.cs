@@ -50,16 +50,17 @@ namespace Cod3rsGrowth.Testes.Testes
         [Fact]
         public void deve_adicionar_estudio_musical_no_repositorio_singleton()
         {
+            var listaDeEstudioMusical = CriarLista();
             var estudioMusical = new EstudioMusical
             {
                 Id = 5,
-                Nome = "cleber",
+                Nome = "Claudio",
                 EstaAberto = false
             };
 
             _repositorioEstudioMusical.Adicionar(estudioMusical);
 
-            Assert.Contains(EstudioMusicalSingleton.InstanciaEstudioMusical, estudioMusical1 => estudioMusical1 == estudioMusical);
+            Assert.Contains(listaDeEstudioMusical, estudioMusical1 => estudioMusical1 == estudioMusical);
         }
 
         [Fact]
@@ -156,6 +157,23 @@ namespace Cod3rsGrowth.Testes.Testes
             var listaDoObterTodos = _repositorioEstudioMusical.ObterTodos(filtro);
 
             Assert.Contains(listaDoObterTodos, lista => lista.EstaAberto == filtro.EstaAberto);
+        }
+
+        [Fact]
+        public void deve_verificar_se_o_estudio_tem_nome_repetido()
+        {
+            CriarLista();
+            var excecaoNomeRepetido = "Já existe um estúdio musical com esse nome.";
+            var estudioComNomeRepetido = new EstudioMusical
+            {
+                Id = 4,
+                Nome = "Sliced",
+                EstaAberto = true
+            };
+
+            var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioEstudioMusical.Adicionar(estudioComNomeRepetido));
+
+            Assert.Equal(excecaoNomeRepetido, mensagemDeErro.Errors.Single().ErrorMessage);
         }
 
         private List<EstudioMusical> CriarLista()

@@ -39,7 +39,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public List<Agendamento> ObterTodos(FiltroAgendamento? filtro = null)
         {
-            var listaAgendamento = _bd.AsQueryable();
+            var listaAgendamento = _bd.GetTable<Agendamento>().AsQueryable();
 
             if (!string.IsNullOrEmpty(filtro?.NomeResponsavel))
             {
