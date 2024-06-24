@@ -23,7 +23,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public void Atualizar(EstudioMusical estudioParaAtualizar)
         {
-            throw new NotImplementedException();
+            _bd.Update(estudioParaAtualizar);
         }
 
         public void Deletar(int id)

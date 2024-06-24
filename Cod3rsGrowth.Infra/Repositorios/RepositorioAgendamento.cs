@@ -24,7 +24,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public void Atualizar(Agendamento agendamentoParaAtualizar)
         {
-            throw new NotImplementedException();
+            _bd.Update(agendamentoParaAtualizar);
         }
 
         public void Deletar(int id)
