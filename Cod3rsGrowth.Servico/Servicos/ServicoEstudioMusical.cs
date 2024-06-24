@@ -2,6 +2,7 @@
 using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.InterfacesRepositorio;
 using FluentValidation;
+using System;
 using System.Collections.Generic;
 
 namespace Cod3rsGrowth.Dominio.Servicos
@@ -19,8 +20,19 @@ namespace Cod3rsGrowth.Dominio.Servicos
 
         public void Adicionar(EstudioMusical estudioMusical)
         {
-            _validadorEstudioMusical.ValidateAndThrow(estudioMusical);
-            _repositorioEstudioMusical.Adicionar(estudioMusical);
+            try
+            {
+                _validadorEstudioMusical.ValidateAndThrow(estudioMusical);
+                _repositorioEstudioMusical.Adicionar(estudioMusical);
+            }
+            catch (ValidationException ve)
+            {
+                throw new ValidationException(ve.Errors);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public void Atualizar(EstudioMusical estudioParaAtualizar)

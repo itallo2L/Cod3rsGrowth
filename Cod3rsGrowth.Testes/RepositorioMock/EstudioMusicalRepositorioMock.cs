@@ -55,5 +55,12 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
 
             return listaEstudioMusical;
         }
+
+        public bool VerificaSeEstudioTemNomeRepetido(EstudioMusical estudioMusical)
+        {
+            var estudioRepetido = !_instanciaEstudioMusical
+                .Exists(estudio => estudio.Nome == estudioMusical.Nome && estudio.Id != estudioMusical.Id);
+            return estudioRepetido;
+        }
     }
 }
