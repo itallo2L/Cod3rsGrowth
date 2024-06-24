@@ -37,8 +37,19 @@ namespace Cod3rsGrowth.Dominio.Servicos
 
         public void Atualizar(EstudioMusical estudioParaAtualizar)
         {
-            _validadorEstudioMusical.ValidateAndThrow(estudioParaAtualizar);
-            _repositorioEstudioMusical.Atualizar(estudioParaAtualizar);
+            try
+            {
+                _validadorEstudioMusical.ValidateAndThrow(estudioParaAtualizar);
+                _repositorioEstudioMusical.Atualizar(estudioParaAtualizar);
+            }
+            catch (ValidationException ve)
+            {
+                throw new ValidationException(ve.Errors);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public void Deletar(int id)
