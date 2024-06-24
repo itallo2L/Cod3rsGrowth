@@ -66,7 +66,14 @@ namespace Cod3rsGrowth.Dominio.Servicos
 
         public EstudioMusical ObterPorId(int id)
         {
+            try
+            {
             return _repositorioEstudioMusical.ObterPorId(id);
+            } 
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public List<EstudioMusical> ObterTodos(FiltroEstudioMusical? filtro = null)

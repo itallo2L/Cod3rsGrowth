@@ -66,7 +66,14 @@ namespace Cod3rsGrowth.Servico.Servicos
 
         public Agendamento ObterPorId(int id)
         {
+            try
+            {
             return _repositorioAgendamento.ObterPorId(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public List<Agendamento> ObterTodos(FiltroAgendamento? filtro = null)

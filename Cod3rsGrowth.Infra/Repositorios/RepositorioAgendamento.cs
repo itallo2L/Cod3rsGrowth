@@ -34,7 +34,8 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Agendamento ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            var listaObtida = _bd.GetTable<Agendamento>().AsQueryable().FirstOrDefault(agendamento => agendamento.Id == id);
+            return listaObtida;
         }
 
         public List<Agendamento> ObterTodos(FiltroAgendamento? filtro = null)
