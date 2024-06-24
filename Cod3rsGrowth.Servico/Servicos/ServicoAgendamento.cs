@@ -54,7 +54,14 @@ namespace Cod3rsGrowth.Servico.Servicos
 
         public void Deletar(int id)
         {
-            _repositorioAgendamento.Deletar(id);
+            try
+            {
+                _repositorioAgendamento.Deletar(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public Agendamento ObterPorId(int id)

@@ -54,7 +54,14 @@ namespace Cod3rsGrowth.Dominio.Servicos
 
         public void Deletar(int id)
         {
-            _repositorioEstudioMusical.Deletar(id);
+            try
+            {
+                _repositorioEstudioMusical.Deletar(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public EstudioMusical ObterPorId(int id)
