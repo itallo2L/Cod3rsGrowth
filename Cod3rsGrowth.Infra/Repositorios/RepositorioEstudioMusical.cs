@@ -28,7 +28,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            _bd.Delete(id);
         }
 
         public EstudioMusical ObterPorId(int id)
