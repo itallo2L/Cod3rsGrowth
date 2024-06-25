@@ -11,5 +11,6 @@ namespace Cod3rsGrowth.Dominio.InterfacesRepositorio
         void Atualizar(EstudioMusical estudioParaAtualizar);
         void Deletar(int id);
         EstudioMusical ObterPorId(int id);
+        bool VerificaSeEstudioTemNomeRepetido(EstudioMusical estudioMusical);
     }
 }
