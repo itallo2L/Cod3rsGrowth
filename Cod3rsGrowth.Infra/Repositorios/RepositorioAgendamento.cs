@@ -34,7 +34,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Agendamento ObterPorId(int id)
         {
-            var listaObtida = _bd.GetTable<Agendamento>().AsQueryable().FirstOrDefault(agendamento => agendamento.Id == id);
+            var listaObtida = _bd.GetTable<Agendamento>().FirstOrDefault(agendamento => agendamento.Id == id);
             return listaObtida;
         }
 

@@ -33,7 +33,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public EstudioMusical ObterPorId(int id)
         {
-            var listaObtida = _bd.GetTable<EstudioMusical>().AsQueryable().FirstOrDefault(estudio => estudio.Id == id);
+            var listaObtida = _bd.GetTable<EstudioMusical>().FirstOrDefault(estudio => estudio.Id == id);
             return listaObtida;
         }
 
