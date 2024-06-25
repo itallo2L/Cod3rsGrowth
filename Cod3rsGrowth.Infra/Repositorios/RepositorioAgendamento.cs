@@ -29,7 +29,8 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public void Deletar(int id)
         {
-            _bd.Delete(id);
+            var objetoQueSeraDeletado = _bd.GetTable<Agendamento>().Where(agendamento => agendamento.Id == id);
+            _bd.Delete(objetoQueSeraDeletado);
         }
 
         public Agendamento ObterPorId(int id)
