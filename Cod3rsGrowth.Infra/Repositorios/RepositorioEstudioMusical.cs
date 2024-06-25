@@ -33,7 +33,8 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public EstudioMusical ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            var listaObtida = _bd.GetTable<EstudioMusical>().FirstOrDefault(estudio => estudio.Id == id);
+            return listaObtida;
         }
 
         public List<EstudioMusical> ObterTodos(FiltroEstudioMusical? filtro = null)
