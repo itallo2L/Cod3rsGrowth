@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.InterfacesRepositorio;
 using Cod3rsGrowth.Infra.Singleton;
 
@@ -39,9 +40,27 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
             _instanciaEstudioMusical.Remove(objetoQueSeraRemovido);
         }
 
-        public List<EstudioMusical> ObterTodos()
+        public List<EstudioMusical> ObterTodos(FiltroEstudioMusical? filtro = null)
         {
-            return _instanciaEstudioMusical;
+            var listaEstudioMusical = _instanciaEstudioMusical.ToList();
+
+            if (filtro?.EstaAberto != null)
+            {
+                listaEstudioMusical = listaEstudioMusical.FindAll(estudioMusical => estudioMusical.EstaAberto == filtro?.EstaAberto);
+            }
+            if (!string.IsNullOrEmpty(filtro?.Nome))
+            {
+                listaEstudioMusical = listaEstudioMusical.FindAll(estudioMusical => estudioMusical.Nome.Contains(filtro?.Nome, StringComparison.OrdinalIgnoreCase));
+            }
+
+            return listaEstudioMusical;
+        }
+
+        public bool VerificaSeEstudioTemNomeRepetido(EstudioMusical estudioMusical)
+        {
+            var estudioRepetido = !_instanciaEstudioMusical
+                .Exists(estudio => estudio.Nome == estudioMusical.Nome && estudio.Id != estudioMusical.Id);
+            return estudioRepetido;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.EnumEstiloMusical;
+using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Infra.Singleton;
 using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Testes.InjecaoDeDependencia;
@@ -33,13 +34,16 @@ namespace Cod3rsGrowth.Testes.Testes
         {
             var listaDoTipoAgendamento = _repositorioAgendamento.ObterTodos();
 
-            Assert.IsType<AgendamentoSingleton>(listaDoTipoAgendamento);
+            Assert.IsType<List<Agendamento>>(listaDoTipoAgendamento);
         }
 
-        [Fact]
-        public void deve_retornar_um_objeto_pelo_id()
+        [Theory]
+        [InlineData(2)]
+        [InlineData(1)]
+        [InlineData(3)]
+        public void deve_retornar_um_objeto_pelo_id(int id)
         {
-            var idEsperado = 2;
+            var idEsperado = id;
             CriarLista();
 
             var agendamentoBuscado = _repositorioAgendamento.ObterPorId(idEsperado);
@@ -136,7 +140,7 @@ namespace Cod3rsGrowth.Testes.Testes
         public void deve_retornar_a_excecao_de_nome_vazio()
         {
             CriarLista();
-            var excecaoDeNomeVazio = "O campo Nome do Responsável é obrigatório, por favor digite o nome do responsável pelo agendamento.";
+            var excecaoDeNomeVazio = "O campo nome do responsável é obrigatório, por favor digite o nome do responsável pelo agendamento.";
             var listaTeste = new Agendamento
             {
                 Id = 8,
@@ -180,7 +184,7 @@ namespace Cod3rsGrowth.Testes.Testes
         public void deve_retornar_a_excecao_de_cpf_vazio()
         {
             CriarLista();
-            var excecaoDeCpfVazio = "O campo CPF é obrigatório,por favor digite o CPF do responsável pelo agendamento.";
+            var excecaoDeCpfVazio = "O campo CPF é obrigatório, por favor digite o CPF do responsável pelo agendamento.";
             var listaComOCpfVazio = new Agendamento
             {
                 Id = 9,
@@ -203,7 +207,7 @@ namespace Cod3rsGrowth.Testes.Testes
         public void deve_retornar_a_execao_de_cpf_invalido()
         {
             CriarLista();
-            var excecaoDeCpfInvalido = "Um CPF contém ao menos 11 digitos, digite um CPF válido.";
+            var excecaoDeCpfInvalido = "Um CPF contém 11 digitos, digite um CPF válido.";
             var listaComCpfInvalido = new Agendamento
             {
                 Id = 1,
@@ -225,7 +229,7 @@ namespace Cod3rsGrowth.Testes.Testes
         public void deve_retornar_a_excecao_de_data_e_hora_de_entrada_vazia()
         {
             CriarLista();
-            var excecaoDaDataEHoraDeEntradaVazia = "O campo Data e Hora de Entrada é obrigatório, por favor digite uma data e hora de entrada.";
+            var excecaoDaDataEHoraDeEntradaVazia = "O campo data e hora de entrada é obrigatório, por favor digite uma data e hora de entrada.";
             var listaComDataEHoraDeEntradaVazia = new Agendamento
             {
                 Id = 10,
@@ -394,6 +398,67 @@ namespace Cod3rsGrowth.Testes.Testes
             var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioAgendamento.Adicionar(listaComEnumIndefinido));
 
             Assert.Equal(excecaoDeEnumIndefinido, mensagemDeErro.Errors.Single().ErrorMessage);
+        }
+
+        [Fact]
+        public void deve_verificar_se_o_filtro_de_nome_funciona()
+        {
+            CriarLista();
+            var listaEsperada = new List<Agendamento>
+            {
+                new Agendamento
+                {
+                    Id = 2,
+                    NomeResponsavel = "Rafael",
+                    CpfResponsavel = "52273122515",
+                    DataEHoraDeEntrada = DateTime.Parse("26/06/2024 17:00:00"),
+                    DataEHoraDeSaida = DateTime.Parse("26/06/2024 20:00:00"),
+                    ValorTotal = 300m,
+                    EstiloMusical = EstiloMusical.Jazz,
+                    IdEstudio = 2
+                }
+            };
+            var filtroNome = new FiltroAgendamento { NomeResponsavel = "e" };
+
+            var listaDoObterTodos = _repositorioAgendamento.ObterTodos(filtroNome);
+
+            Assert.Equivalent(listaEsperada, listaDoObterTodos);
+        }
+
+        [Fact]
+        public void deve_verificar_se_o_filtro_de_valor_total_funciona()
+        {
+            CriarLista();
+            var listaEsperada = new List<Agendamento>
+            {
+                new Agendamento
+                {
+                    Id = 2,
+                    NomeResponsavel = "Rafael",
+                    CpfResponsavel = "52273122515",
+                    DataEHoraDeEntrada = DateTime.Parse("26/06/2024 17:00:00"),
+                    DataEHoraDeSaida = DateTime.Parse("26/06/2024 20:00:00"),
+                    ValorTotal = 300m,
+                    EstiloMusical = EstiloMusical.Jazz,
+                    IdEstudio = 2
+                }
+            };
+            var filtroValorTotal = new FiltroAgendamento { ValorTotal = 300m };
+
+            var listaDoObterTodos = _repositorioAgendamento.ObterTodos(filtroValorTotal);
+
+            Assert.Equivalent(listaEsperada, listaDoObterTodos);
+        }
+
+        [Fact]
+        public void deve_verificar_se_o_filtro_de_data_e_hora_de_entrada_esta_funcionando()
+        {
+            CriarLista();
+            var filtroDataEHora = new FiltroAgendamento { DataEHoraDeEntrada = DateTime.Parse("26/06/2024 17:00:00") };
+
+            var listaDoObterTodos = _repositorioAgendamento.ObterTodos(filtroDataEHora);
+
+            Assert.Contains(listaDoObterTodos, lista => lista.DataEHoraDeEntrada == filtroDataEHora.DataEHoraDeEntrada);
         }
 
         public List<Agendamento> CriarLista()

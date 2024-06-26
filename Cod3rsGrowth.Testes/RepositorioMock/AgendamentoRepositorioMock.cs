@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.InterfacesRepositorio;
 using Cod3rsGrowth.Infra.Singleton;
 
@@ -40,9 +41,23 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
             _instanciaAgendamento.Remove(objetoQueSeraRemovido);
         }
 
-        public List<Agendamento> ObterTodos()
+        public List<Agendamento> ObterTodos(FiltroAgendamento? filtro = null)
         {
-            return _instanciaAgendamento;
+            var listaAgendamento = _instanciaAgendamento.ToList();
+
+            if (!string.IsNullOrEmpty(filtro?.NomeResponsavel))
+            {
+                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.NomeResponsavel.Contains(filtro?.NomeResponsavel, StringComparison.OrdinalIgnoreCase));
+            }
+            if (filtro?.DataEHoraDeEntrada != null)
+            {
+                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.DataEHoraDeEntrada == filtro?.DataEHoraDeEntrada);
+            }
+            if (filtro?.ValorTotal != null)
+            {
+                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.ValorTotal == filtro?.ValorTotal);
+            }
+            return listaAgendamento;
         }
     }
 }
