@@ -23,7 +23,8 @@ namespace Cod3rsGrowth.Forms
 
         private static ServiceProvider CriarServicos()
         {
-            var stringDeConexao = Environment.GetEnvironmentVariable("ConexaoCod3rsGrowth");
+            const string nomeDaVariavelDeAmbiente = "ConexaoCod3rsGrowth";
+            var stringDeConexao = Environment.GetEnvironmentVariable(nomeDaVariavelDeAmbiente);
 
             return new ServiceCollection()
                 .AddFluentMigratorCore().ConfigureRunner(rb => rb

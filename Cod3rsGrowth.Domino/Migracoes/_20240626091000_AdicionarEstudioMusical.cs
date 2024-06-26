@@ -10,7 +10,7 @@ namespace Cod3rsGrowth.Dominio.Migracoes
             Create.Table("Estudio Musical")
                 .WithColumn("ID").AsInt64().PrimaryKey().Identity()
                 .WithColumn("Nome").AsString().NotNullable()
-                .WithColumn("Esta Aberto").AsBoolean().Nullable();
+                .WithColumn("Esta Aberto").AsBoolean().NotNullable();
         }
 
         public override void Down()
