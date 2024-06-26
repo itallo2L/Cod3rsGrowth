@@ -11,17 +11,17 @@ namespace Cod3rsGrowth.Forms
         [STAThread]
         static void Main()
         {
-            using (var serviceProvider = CreateServices())
+            using (var serviceProvider = CriarServicos())
             using (var scope = serviceProvider.CreateScope())
             {
-                UpdateDatabase(scope.ServiceProvider);
+                AtualizarBD(scope.ServiceProvider);
             }
 
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
         }
 
-        private static ServiceProvider CreateServices()
+        private static ServiceProvider CriarServicos()
         {
             var stringDeConexao = Environment.GetEnvironmentVariable("ConexaoCod3rsGrowth");
 
@@ -34,7 +34,7 @@ namespace Cod3rsGrowth.Forms
                 .BuildServiceProvider(false);
         }
 
-        private static void UpdateDatabase(IServiceProvider serviceProvider)
+        private static void AtualizarBD(IServiceProvider serviceProvider)
         {
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 
