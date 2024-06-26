@@ -1,4 +1,6 @@
-﻿using FluentMigrator.Runner;
+﻿using Cod3rsGrowth.Dominio.Migracoes;
+using FluentMigrator.Runner;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -6,47 +8,33 @@ namespace Cod3rsGrowth.Dominio
 {
     class Program
     {
+        public static IConfiguration? Configuration { get; }
         static void Main(string[] args)
         {
             using (var serviceProvider = CreateServices())
             using (var scope = serviceProvider.CreateScope())
             {
-                // Put the database update into a scope to ensure
-                // that all resources will be disposed.
                 UpdateDatabase(scope.ServiceProvider);
             }
+
         }
 
-        /// <summary>
-        /// Configure the dependency injection services
-        /// </summary>
         private static ServiceProvider CreateServices()
         {
+            var stringDeConexao = Configuration.GetConnectionString(Environment.GetEnvironmentVariable("ConexaoCod3rsGrowth"));
+
             return new ServiceCollection()
-                // Add common FluentMigrator services
-                .AddFluentMigratorCore()
-                /*.ConfigureRunner(rb => rb*/
-                    // Add SQLite support to FluentMigrator
-                    /*.AddSQLite()*/
-                    // Set the connection string
-                    /*.WithGlobalConnectionString("Data Source=test.db")*/
-                    // Define the assembly containing the migrations
-                    /*.ScanIn(typeof(AddLogTable).Assembly).For.Migrations())*/
-                // Enable logging to console in the FluentMigrator way
+                .AddFluentMigratorCore().ConfigureRunner(rb => rb.AddSqlServer()
+                .WithGlobalConnectionString(stringDeConexao)
+                .ScanIn(typeof(_20240625131800_AdicionarEstudioMusical).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
-                // Build the service provider
                 .BuildServiceProvider(false);
         }
 
-        /// <summary>
-        /// Update the database
-        /// </summary>
         private static void UpdateDatabase(IServiceProvider serviceProvider)
         {
-            // Instantiate the runner
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 
-            // Execute the migrations
             runner.MigrateUp();
         }
     }

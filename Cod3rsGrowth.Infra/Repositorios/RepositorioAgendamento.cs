@@ -49,6 +49,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             }
             if (filtro?.DataEHoraDeEntrada != null)
             {
+
                 listaAgendamento = listaAgendamento.Where(agendamento => agendamento.DataEHoraDeEntrada == filtro.DataEHoraDeEntrada);
             }
             if (filtro?.ValorTotal != null)

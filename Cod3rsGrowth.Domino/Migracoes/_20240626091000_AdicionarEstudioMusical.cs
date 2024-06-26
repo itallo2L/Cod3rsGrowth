@@ -2,15 +2,15 @@
 
 namespace Cod3rsGrowth.Dominio.Migracoes
 {
-    [Migration(2024062513180)]
-    internal class _20240625131800_AdicionarEstudioMusical : Migration
+    [Migration(20240626091000)]
+    public class _20240626091000_AdicionarEstudioMusical : Migration
     {
         public override void Up()
         {
             Create.Table("Estudio Musical")
                 .WithColumn("ID").AsInt64().PrimaryKey().Identity()
-                .WithColumn("Nome").AsString().NotNullable();
-                //.WithColumn("Esta Aberto".AsBoolean();
+                .WithColumn("Nome").AsString().NotNullable()
+                .WithColumn("Esta Aberto").AsBoolean().Nullable();
         }
 
         public override void Down()
