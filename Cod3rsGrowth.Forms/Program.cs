@@ -18,7 +18,7 @@ namespace Cod3rsGrowth.Forms
 
             ServiceProvider = ExecutarInjecao();
             ApplicationConfiguration.Initialize();
-            Application.Run(ServiceProvider.GetRequiredService<AgendamentoEmEstudioMusical>());
+            Application.Run(new AgendamentoEmEstudioMusical());
         }
         public static IServiceProvider ServiceProvider { get; private set; }
 
