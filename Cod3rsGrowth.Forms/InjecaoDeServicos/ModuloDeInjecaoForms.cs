@@ -30,6 +30,7 @@ namespace Cod3rsGrowth.Forms.InjecaoDoBancoDeDados
             servico.AddScoped<IRepositorioEstudioMusical, RepositorioEstudioMusical>();
             servico.AddScoped<IValidator<EstudioMusical>, ValidadorEstudioMusical>();
             servico.AddScoped<IValidator<Agendamento>, ValidadorAgendamento>();
+            servico.AddScoped<FormAgendamentoEmEstudioMusical>();
         }
     }
 }
