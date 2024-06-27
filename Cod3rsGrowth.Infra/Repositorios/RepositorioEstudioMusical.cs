@@ -1,5 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Filtros;
+using Cod3rsGrowth.Dominio.InterfacesRepositorio;
 using LinqToDB;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Linq;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
-    public class RepositorioEstudioMusical 
+    public class RepositorioEstudioMusical : IRepositorioEstudioMusical
     {
         private readonly BdCod3rsGrowth _bd;
 

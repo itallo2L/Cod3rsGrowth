@@ -1,13 +1,12 @@
 ﻿using Cod3rsGrowth.Dominio.Migracoes;
+using Cod3rsGrowth.Forms.InjecaoDoBancoDeDados;
 using FluentMigrator.Runner;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Cod3rsGrowth.Forms
 {
     public static class Program
     {
-        public static IConfiguration Configuration { get; }
         [STAThread]
         static void Main()
         {
@@ -17,9 +16,11 @@ namespace Cod3rsGrowth.Forms
                 AtualizarBD(scope.ServiceProvider);
             }
 
+            ServiceProvider = ExecutarInjecao();
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Application.Run(ServiceProvider.GetRequiredService<AgendamentoEmEstudioMusical>());
         }
+        public static IServiceProvider ServiceProvider { get; private set; }
 
         private static ServiceProvider CriarServicos()
         {
@@ -40,6 +41,13 @@ namespace Cod3rsGrowth.Forms
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 
             runner.MigrateUp();
+        }
+
+        public static IServiceProvider ExecutarInjecao()
+        {
+            var servicos = new ServiceCollection();
+            servicos.AdicionarDependenciasNoEscopo();
+            return servicos.BuildServiceProvider();
         }
     }
 }
