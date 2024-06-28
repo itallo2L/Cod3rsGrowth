@@ -44,17 +44,17 @@ namespace Cod3rsGrowth.Infra.Repositorios
             var listaAgendamento = _bd.GetTable<Agendamento>().AsQueryable();
 
             if (!string.IsNullOrEmpty(filtro?.NomeResponsavel))
-            {
                 listaAgendamento = listaAgendamento.Where(agendamento => agendamento.NomeResponsavel.Contains(filtro.NomeResponsavel, StringComparison.OrdinalIgnoreCase));
-            }
+
             if (filtro?.DataEHoraDeEntrada != null)
-            {
                 listaAgendamento = listaAgendamento.Where(agendamento => agendamento.DataEHoraDeEntrada == filtro.DataEHoraDeEntrada);
-            }
+
             if (filtro?.ValorTotal != null)
-            {
                 listaAgendamento = listaAgendamento.Where(agendamento => agendamento.ValorTotal == filtro.ValorTotal);
-            }
+
+            if (filtro?.EstiloMusical != null)
+                listaAgendamento = listaAgendamento.Where(agendamento => agendamento.EstiloMusical == filtro.EstiloMusical);
+
             return listaAgendamento.ToList();
         }
     }

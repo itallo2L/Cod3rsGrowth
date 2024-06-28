@@ -31,11 +31,11 @@
             components = new System.ComponentModel.Container();
             btnAdicionarEstudioMusical = new Button();
             btnAtualizarEstudioMusical = new Button();
-            txtNomeEstudio = new TextBox();
+            txtBuscarEstudio = new TextBox();
             tabAgendamentoEmEstudioMusical = new TabControl();
             tabEstudioMusical = new TabPage();
             lblEstaAberto = new Label();
-            cbSelecione = new ComboBox();
+            cbEstaAberto = new ComboBox();
             dataGridEstudioMusical = new DataGridView();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             nomeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -43,8 +43,19 @@
             estudioMusicalBindingSource = new BindingSource(components);
             btnDeletarEstudioMusical = new Button();
             tabAgendamento = new TabPage();
+            lblFiltrarPorValor = new Label();
+            valorMaximo = new TextBox();
+            lblValorMaximo = new Label();
+            lblValorMinimo = new Label();
+            textValorMinimo = new TextBox();
+            lblFiltrarPorData = new Label();
+            lblDataInicial = new Label();
+            lblDataFinal = new Label();
+            dataFinal = new DateTimePicker();
+            dataInicial = new DateTimePicker();
+            label1 = new Label();
             cbAgendamento = new ComboBox();
-            textBuscarAgendamento = new TextBox();
+            txtBuscarAgendamento = new TextBox();
             btnDeletarAgendamento = new Button();
             btnAtualizarAgendamento = new Button();
             btnAdicionarAgendamento = new Button();
@@ -72,7 +83,7 @@
             // btnAdicionarEstudioMusical
             // 
             btnAdicionarEstudioMusical.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnAdicionarEstudioMusical.Location = new Point(651, 391);
+            btnAdicionarEstudioMusical.Location = new Point(1007, 391);
             btnAdicionarEstudioMusical.Name = "btnAdicionarEstudioMusical";
             btnAdicionarEstudioMusical.Size = new Size(75, 23);
             btnAdicionarEstudioMusical.TabIndex = 0;
@@ -82,20 +93,22 @@
             // btnAtualizarEstudioMusical
             // 
             btnAtualizarEstudioMusical.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnAtualizarEstudioMusical.Location = new Point(732, 391);
+            btnAtualizarEstudioMusical.Location = new Point(1088, 391);
             btnAtualizarEstudioMusical.Name = "btnAtualizarEstudioMusical";
             btnAtualizarEstudioMusical.Size = new Size(75, 23);
             btnAtualizarEstudioMusical.TabIndex = 1;
             btnAtualizarEstudioMusical.Text = "Atualizar";
             btnAtualizarEstudioMusical.UseVisualStyleBackColor = true;
             // 
-            // txtNomeEstudio
+            // txtBuscarEstudio
             // 
-            txtNomeEstudio.Location = new Point(8, 42);
-            txtNomeEstudio.Name = "txtNomeEstudio";
-            txtNomeEstudio.Size = new Size(213, 23);
-            txtNomeEstudio.TabIndex = 3;
-            txtNomeEstudio.Text = "Digite o nome do Estúdio";
+            txtBuscarEstudio.AcceptsReturn = true;
+            txtBuscarEstudio.Location = new Point(8, 42);
+            txtBuscarEstudio.Name = "txtBuscarEstudio";
+            txtBuscarEstudio.PlaceholderText = "Digite o nome do estúdio";
+            txtBuscarEstudio.Size = new Size(213, 23);
+            txtBuscarEstudio.TabIndex = 3;
+            txtBuscarEstudio.TextChanged += EventoDeFiltroAoBuscarEstudioMusical;
             // 
             // tabAgendamentoEmEstudioMusical
             // 
@@ -105,22 +118,22 @@
             tabAgendamentoEmEstudioMusical.Location = new Point(0, 0);
             tabAgendamentoEmEstudioMusical.Name = "tabAgendamentoEmEstudioMusical";
             tabAgendamentoEmEstudioMusical.SelectedIndex = 0;
-            tabAgendamentoEmEstudioMusical.Size = new Size(906, 450);
+            tabAgendamentoEmEstudioMusical.Size = new Size(1262, 450);
             tabAgendamentoEmEstudioMusical.TabIndex = 5;
             // 
             // tabEstudioMusical
             // 
             tabEstudioMusical.Controls.Add(lblEstaAberto);
-            tabEstudioMusical.Controls.Add(cbSelecione);
+            tabEstudioMusical.Controls.Add(cbEstaAberto);
             tabEstudioMusical.Controls.Add(dataGridEstudioMusical);
             tabEstudioMusical.Controls.Add(btnDeletarEstudioMusical);
-            tabEstudioMusical.Controls.Add(txtNomeEstudio);
+            tabEstudioMusical.Controls.Add(txtBuscarEstudio);
             tabEstudioMusical.Controls.Add(btnAtualizarEstudioMusical);
             tabEstudioMusical.Controls.Add(btnAdicionarEstudioMusical);
             tabEstudioMusical.Location = new Point(4, 24);
             tabEstudioMusical.Name = "tabEstudioMusical";
             tabEstudioMusical.Padding = new Padding(3);
-            tabEstudioMusical.Size = new Size(898, 422);
+            tabEstudioMusical.Size = new Size(1254, 422);
             tabEstudioMusical.TabIndex = 0;
             tabEstudioMusical.Text = "Estudio Musical";
             tabEstudioMusical.UseVisualStyleBackColor = true;
@@ -135,13 +148,15 @@
             lblEstaAberto.TabIndex = 10;
             lblEstaAberto.Text = "Está Aberto?";
             // 
-            // cbSelecione
+            // cbEstaAberto
             // 
-            cbSelecione.FormattingEnabled = true;
-            cbSelecione.Location = new Point(301, 42);
-            cbSelecione.Name = "cbSelecione";
-            cbSelecione.Size = new Size(67, 23);
-            cbSelecione.TabIndex = 8;
+            cbEstaAberto.FormattingEnabled = true;
+            cbEstaAberto.Items.AddRange(new object[] { "Não", "Sim", "Todos" });
+            cbEstaAberto.Location = new Point(301, 42);
+            cbEstaAberto.Name = "cbEstaAberto";
+            cbEstaAberto.Size = new Size(67, 23);
+            cbEstaAberto.TabIndex = 8;
+            cbEstaAberto.SelectedIndexChanged += EventoAoFiltrarSeEstaAberto;
             // 
             // dataGridEstudioMusical
             // 
@@ -155,20 +170,21 @@
             dataGridEstudioMusical.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, nomeDataGridViewTextBoxColumn, estaAbertoDataGridViewCheckBoxColumn });
             dataGridEstudioMusical.DataSource = estudioMusicalBindingSource;
             dataGridEstudioMusical.GridColor = Color.Black;
-            dataGridEstudioMusical.Location = new Point(7, 89);
+            dataGridEstudioMusical.Location = new Point(9, 118);
             dataGridEstudioMusical.Name = "dataGridEstudioMusical";
             dataGridEstudioMusical.ReadOnly = true;
             dataGridEstudioMusical.RowHeadersVisible = false;
             dataGridEstudioMusical.RowTemplate.Height = 25;
-            dataGridEstudioMusical.Size = new Size(881, 199);
+            dataGridEstudioMusical.Size = new Size(1237, 199);
             dataGridEstudioMusical.TabIndex = 6;
             // 
             // idDataGridViewTextBoxColumn
             // 
             idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn.HeaderText = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "ID";
             idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
             idDataGridViewTextBoxColumn.ReadOnly = true;
+            idDataGridViewTextBoxColumn.Visible = false;
             // 
             // nomeDataGridViewTextBoxColumn
             // 
@@ -180,9 +196,10 @@
             // estaAbertoDataGridViewCheckBoxColumn
             // 
             estaAbertoDataGridViewCheckBoxColumn.DataPropertyName = "EstaAberto";
-            estaAbertoDataGridViewCheckBoxColumn.HeaderText = "EstaAberto";
+            estaAbertoDataGridViewCheckBoxColumn.HeaderText = "Está Aberto?";
             estaAbertoDataGridViewCheckBoxColumn.Name = "estaAbertoDataGridViewCheckBoxColumn";
             estaAbertoDataGridViewCheckBoxColumn.ReadOnly = true;
+            estaAbertoDataGridViewCheckBoxColumn.Resizable = DataGridViewTriState.True;
             // 
             // estudioMusicalBindingSource
             // 
@@ -191,19 +208,29 @@
             // btnDeletarEstudioMusical
             // 
             btnDeletarEstudioMusical.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnDeletarEstudioMusical.Location = new Point(813, 391);
+            btnDeletarEstudioMusical.Location = new Point(1169, 391);
             btnDeletarEstudioMusical.Name = "btnDeletarEstudioMusical";
             btnDeletarEstudioMusical.Size = new Size(75, 23);
             btnDeletarEstudioMusical.TabIndex = 5;
             btnDeletarEstudioMusical.Text = "Deletar";
             btnDeletarEstudioMusical.UseVisualStyleBackColor = true;
-            btnDeletarEstudioMusical.Click += btnDeletar_Click;
             // 
             // tabAgendamento
             // 
             tabAgendamento.BackColor = Color.White;
+            tabAgendamento.Controls.Add(lblFiltrarPorValor);
+            tabAgendamento.Controls.Add(valorMaximo);
+            tabAgendamento.Controls.Add(lblValorMaximo);
+            tabAgendamento.Controls.Add(lblValorMinimo);
+            tabAgendamento.Controls.Add(textValorMinimo);
+            tabAgendamento.Controls.Add(lblFiltrarPorData);
+            tabAgendamento.Controls.Add(lblDataInicial);
+            tabAgendamento.Controls.Add(lblDataFinal);
+            tabAgendamento.Controls.Add(dataFinal);
+            tabAgendamento.Controls.Add(dataInicial);
+            tabAgendamento.Controls.Add(label1);
             tabAgendamento.Controls.Add(cbAgendamento);
-            tabAgendamento.Controls.Add(textBuscarAgendamento);
+            tabAgendamento.Controls.Add(txtBuscarAgendamento);
             tabAgendamento.Controls.Add(btnDeletarAgendamento);
             tabAgendamento.Controls.Add(btnAtualizarAgendamento);
             tabAgendamento.Controls.Add(btnAdicionarAgendamento);
@@ -211,41 +238,133 @@
             tabAgendamento.Location = new Point(4, 24);
             tabAgendamento.Name = "tabAgendamento";
             tabAgendamento.Padding = new Padding(3);
-            tabAgendamento.Size = new Size(898, 422);
+            tabAgendamento.Size = new Size(1254, 422);
             tabAgendamento.TabIndex = 1;
             tabAgendamento.Text = "Agendamento";
+            // 
+            // lblFiltrarPorValor
+            // 
+            lblFiltrarPorValor.AutoSize = true;
+            lblFiltrarPorValor.Location = new Point(783, 18);
+            lblFiltrarPorValor.Name = "lblFiltrarPorValor";
+            lblFiltrarPorValor.Size = new Size(90, 15);
+            lblFiltrarPorValor.TabIndex = 25;
+            lblFiltrarPorValor.Text = "Filtrar por Valor:";
+            // 
+            // valorMaximo
+            // 
+            valorMaximo.Location = new Point(778, 99);
+            valorMaximo.Name = "valorMaximo";
+            valorMaximo.Size = new Size(100, 23);
+            valorMaximo.TabIndex = 24;
+            // 
+            // lblValorMaximo
+            // 
+            lblValorMaximo.AutoSize = true;
+            lblValorMaximo.Location = new Point(788, 81);
+            lblValorMaximo.Name = "lblValorMaximo";
+            lblValorMaximo.Size = new Size(83, 15);
+            lblValorMaximo.TabIndex = 23;
+            lblValorMaximo.Text = "Valor Máximo:";
+            // 
+            // lblValorMinimo
+            // 
+            lblValorMinimo.AutoSize = true;
+            lblValorMinimo.Location = new Point(788, 34);
+            lblValorMinimo.Name = "lblValorMinimo";
+            lblValorMinimo.Size = new Size(81, 15);
+            lblValorMinimo.TabIndex = 22;
+            lblValorMinimo.Text = "Valor Mínimo:";
+            // 
+            // textValorMinimo
+            // 
+            textValorMinimo.Location = new Point(778, 52);
+            textValorMinimo.Name = "textValorMinimo";
+            textValorMinimo.Size = new Size(100, 23);
+            textValorMinimo.TabIndex = 21;
+            // 
+            // lblFiltrarPorData
+            // 
+            lblFiltrarPorData.AutoSize = true;
+            lblFiltrarPorData.Location = new Point(547, 18);
+            lblFiltrarPorData.Name = "lblFiltrarPorData";
+            lblFiltrarPorData.Size = new Size(88, 15);
+            lblFiltrarPorData.TabIndex = 20;
+            lblFiltrarPorData.Text = "Filtrar por Data:";
+            // 
+            // lblDataInicial
+            // 
+            lblDataInicial.AutoSize = true;
+            lblDataInicial.Location = new Point(473, 34);
+            lblDataInicial.Name = "lblDataInicial";
+            lblDataInicial.Size = new Size(68, 15);
+            lblDataInicial.TabIndex = 19;
+            lblDataInicial.Text = "Data Inicial:";
+            // 
+            // lblDataFinal
+            // 
+            lblDataFinal.AutoSize = true;
+            lblDataFinal.Location = new Point(473, 81);
+            lblDataFinal.Name = "lblDataFinal";
+            lblDataFinal.Size = new Size(62, 15);
+            lblDataFinal.TabIndex = 18;
+            lblDataFinal.Text = "Data Final:";
+            // 
+            // dataFinal
+            // 
+            dataFinal.Location = new Point(474, 99);
+            dataFinal.Name = "dataFinal";
+            dataFinal.Size = new Size(245, 23);
+            dataFinal.TabIndex = 17;
+            // 
+            // dataInicial
+            // 
+            dataInicial.Location = new Point(473, 52);
+            dataInicial.Name = "dataInicial";
+            dataInicial.Size = new Size(246, 23);
+            dataInicial.TabIndex = 16;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(986, 34);
+            label1.Name = "label1";
+            label1.Size = new Size(79, 15);
+            label1.TabIndex = 14;
+            label1.Text = "Estilo Musical";
             // 
             // cbAgendamento
             // 
             cbAgendamento.FormattingEnabled = true;
-            cbAgendamento.Location = new Point(333, 38);
+            cbAgendamento.Items.AddRange(new object[] { "Todos", "Blues", "Jazz", "Música Clássica", "Sertanejo", "Gospel", "Eletrônica", "Samba" });
+            cbAgendamento.Location = new Point(962, 52);
             cbAgendamento.Name = "cbAgendamento";
             cbAgendamento.Size = new Size(121, 23);
             cbAgendamento.TabIndex = 12;
             // 
-            // textBuscarAgendamento
+            // txtBuscarAgendamento
             // 
-            textBuscarAgendamento.Location = new Point(8, 38);
-            textBuscarAgendamento.Name = "textBuscarAgendamento";
-            textBuscarAgendamento.Size = new Size(239, 23);
-            textBuscarAgendamento.TabIndex = 10;
-            textBuscarAgendamento.Text = "Nome do responsável";
+            txtBuscarAgendamento.Location = new Point(6, 52);
+            txtBuscarAgendamento.Name = "txtBuscarAgendamento";
+            txtBuscarAgendamento.PlaceholderText = "Digite o nome do responsável";
+            txtBuscarAgendamento.Size = new Size(239, 23);
+            txtBuscarAgendamento.TabIndex = 10;
+            txtBuscarAgendamento.TextChanged += EventoDeFiltroAoBuscarAgendamento;
             // 
             // btnDeletarAgendamento
             // 
             btnDeletarAgendamento.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnDeletarAgendamento.Location = new Point(814, 391);
+            btnDeletarAgendamento.Location = new Point(1170, 391);
             btnDeletarAgendamento.Name = "btnDeletarAgendamento";
             btnDeletarAgendamento.Size = new Size(75, 23);
             btnDeletarAgendamento.TabIndex = 8;
             btnDeletarAgendamento.Text = "Deletar";
             btnDeletarAgendamento.UseVisualStyleBackColor = true;
-            btnDeletarAgendamento.Click += btnDeletar_Click;
             // 
             // btnAtualizarAgendamento
             // 
             btnAtualizarAgendamento.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnAtualizarAgendamento.Location = new Point(733, 391);
+            btnAtualizarAgendamento.Location = new Point(1089, 391);
             btnAtualizarAgendamento.Name = "btnAtualizarAgendamento";
             btnAtualizarAgendamento.Size = new Size(75, 23);
             btnAtualizarAgendamento.TabIndex = 7;
@@ -255,7 +374,7 @@
             // btnAdicionarAgendamento
             // 
             btnAdicionarAgendamento.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnAdicionarAgendamento.Location = new Point(652, 391);
+            btnAdicionarAgendamento.Location = new Point(1008, 391);
             btnAdicionarAgendamento.Name = "btnAdicionarAgendamento";
             btnAdicionarAgendamento.Size = new Size(75, 23);
             btnAdicionarAgendamento.TabIndex = 6;
@@ -266,6 +385,8 @@
             // 
             dataGridAgendamento.AllowUserToAddRows = false;
             dataGridAgendamento.AllowUserToDeleteRows = false;
+            dataGridAgendamento.AllowUserToResizeColumns = false;
+            dataGridAgendamento.AllowUserToResizeRows = false;
             dataGridAgendamento.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridAgendamento.AutoGenerateColumns = false;
             dataGridAgendamento.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -275,67 +396,68 @@
             dataGridAgendamento.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn1, nomeResponsavelDataGridViewTextBoxColumn, cpfResponsavelDataGridViewTextBoxColumn, dataEHoraDeEntradaDataGridViewTextBoxColumn, dataEHoraDeSaidaDataGridViewTextBoxColumn, valorTotalDataGridViewTextBoxColumn, estiloMusicalDataGridViewTextBoxColumn, idEstudioDataGridViewTextBoxColumn });
             dataGridAgendamento.DataSource = agendamentoBindingSource;
             dataGridAgendamento.GridColor = Color.Black;
-            dataGridAgendamento.Location = new Point(6, 86);
+            dataGridAgendamento.Location = new Point(6, 128);
             dataGridAgendamento.Name = "dataGridAgendamento";
             dataGridAgendamento.ReadOnly = true;
             dataGridAgendamento.RowHeadersVisible = false;
             dataGridAgendamento.RowTemplate.Height = 25;
-            dataGridAgendamento.Size = new Size(886, 199);
+            dataGridAgendamento.Size = new Size(1242, 199);
             dataGridAgendamento.TabIndex = 0;
             // 
             // idDataGridViewTextBoxColumn1
             // 
             idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn1.HeaderText = "Id";
+            idDataGridViewTextBoxColumn1.HeaderText = "ID";
             idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
             idDataGridViewTextBoxColumn1.ReadOnly = true;
+            idDataGridViewTextBoxColumn1.Visible = false;
             // 
             // nomeResponsavelDataGridViewTextBoxColumn
             // 
             nomeResponsavelDataGridViewTextBoxColumn.DataPropertyName = "NomeResponsavel";
-            nomeResponsavelDataGridViewTextBoxColumn.HeaderText = "NomeResponsavel";
+            nomeResponsavelDataGridViewTextBoxColumn.HeaderText = "Nome do Responsável";
             nomeResponsavelDataGridViewTextBoxColumn.Name = "nomeResponsavelDataGridViewTextBoxColumn";
             nomeResponsavelDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // cpfResponsavelDataGridViewTextBoxColumn
             // 
             cpfResponsavelDataGridViewTextBoxColumn.DataPropertyName = "CpfResponsavel";
-            cpfResponsavelDataGridViewTextBoxColumn.HeaderText = "CpfResponsavel";
+            cpfResponsavelDataGridViewTextBoxColumn.HeaderText = "CPF do Responsável";
             cpfResponsavelDataGridViewTextBoxColumn.Name = "cpfResponsavelDataGridViewTextBoxColumn";
             cpfResponsavelDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // dataEHoraDeEntradaDataGridViewTextBoxColumn
             // 
             dataEHoraDeEntradaDataGridViewTextBoxColumn.DataPropertyName = "DataEHoraDeEntrada";
-            dataEHoraDeEntradaDataGridViewTextBoxColumn.HeaderText = "DataEHoraDeEntrada";
+            dataEHoraDeEntradaDataGridViewTextBoxColumn.HeaderText = "Data e Hora de Entrada";
             dataEHoraDeEntradaDataGridViewTextBoxColumn.Name = "dataEHoraDeEntradaDataGridViewTextBoxColumn";
             dataEHoraDeEntradaDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // dataEHoraDeSaidaDataGridViewTextBoxColumn
             // 
             dataEHoraDeSaidaDataGridViewTextBoxColumn.DataPropertyName = "DataEHoraDeSaida";
-            dataEHoraDeSaidaDataGridViewTextBoxColumn.HeaderText = "DataEHoraDeSaida";
+            dataEHoraDeSaidaDataGridViewTextBoxColumn.HeaderText = "Data e Hora de Saída";
             dataEHoraDeSaidaDataGridViewTextBoxColumn.Name = "dataEHoraDeSaidaDataGridViewTextBoxColumn";
             dataEHoraDeSaidaDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // valorTotalDataGridViewTextBoxColumn
             // 
             valorTotalDataGridViewTextBoxColumn.DataPropertyName = "ValorTotal";
-            valorTotalDataGridViewTextBoxColumn.HeaderText = "ValorTotal";
+            valorTotalDataGridViewTextBoxColumn.HeaderText = "Valor Total";
             valorTotalDataGridViewTextBoxColumn.Name = "valorTotalDataGridViewTextBoxColumn";
             valorTotalDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // estiloMusicalDataGridViewTextBoxColumn
             // 
             estiloMusicalDataGridViewTextBoxColumn.DataPropertyName = "EstiloMusical";
-            estiloMusicalDataGridViewTextBoxColumn.HeaderText = "EstiloMusical";
+            estiloMusicalDataGridViewTextBoxColumn.HeaderText = "Estilo Musical";
             estiloMusicalDataGridViewTextBoxColumn.Name = "estiloMusicalDataGridViewTextBoxColumn";
             estiloMusicalDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // idEstudioDataGridViewTextBoxColumn
             // 
             idEstudioDataGridViewTextBoxColumn.DataPropertyName = "IdEstudio";
-            idEstudioDataGridViewTextBoxColumn.HeaderText = "IdEstudio";
+            idEstudioDataGridViewTextBoxColumn.HeaderText = "Estúdio";
             idEstudioDataGridViewTextBoxColumn.Name = "idEstudioDataGridViewTextBoxColumn";
             idEstudioDataGridViewTextBoxColumn.ReadOnly = true;
             // 
@@ -351,7 +473,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(906, 450);
+            ClientSize = new Size(1262, 450);
             Controls.Add(tabAgendamentoEmEstudioMusical);
             Name = "FormAgendamentoEmEstudioMusical";
             Text = "Agendamento em Estúdio Musical";
@@ -372,18 +494,36 @@
 
         private Button btnAdicionarEstudioMusical;
         private Button btnAtualizarEstudioMusical;
-        private TextBox txtNomeEstudio;
+        private TextBox txtBuscarEstudio;
         private TabControl tabAgendamentoEmEstudioMusical;
         private TabPage tabEstudioMusical;
         private TabPage tabAgendamento;
         private Button btnDeletarEstudioMusical;
         private DataGridView dataGridEstudioMusical;
         private BindingSource bdCod3rsGrowthBindingSource;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
-        private DataGridViewCheckBoxColumn estaAbertoDataGridViewCheckBoxColumn;
         private BindingSource estudioMusicalBindingSource;
         private DataGridView dataGridAgendamento;
+        private BindingSource agendamentoBindingSource;
+        private Button btnDeletarAgendamento;
+        private Button btnAtualizarAgendamento;
+        private Button btnAdicionarAgendamento;
+        private Label lblEstaAberto;
+        private ComboBox cbEstaAberto;
+        private TextBox txtBuscarAgendamento;
+        private ComboBox cbAgendamento;
+        private Label label1;
+        private Label lblFiltrarPorData;
+        private Label lblDataInicial;
+        private Label lblDataFinal;
+        private DateTimePicker dataFinal;
+        private DateTimePicker dataInicial;
+        private TextBox valorMaximo;
+        private Label lblValorMaximo;
+        private Label lblValorMinimo;
+        private TextBox textValorMinimo;
+        private Label lblFiltrarPorValor;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn nomeResponsavelDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn cpfResponsavelDataGridViewTextBoxColumn;
@@ -392,13 +532,6 @@
         private DataGridViewTextBoxColumn valorTotalDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn estiloMusicalDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn idEstudioDataGridViewTextBoxColumn;
-        private BindingSource agendamentoBindingSource;
-        private Button btnDeletarAgendamento;
-        private Button btnAtualizarAgendamento;
-        private Button btnAdicionarAgendamento;
-        private Label lblEstaAberto;
-        private ComboBox cbSelecione;
-        private TextBox textBuscarAgendamento;
-        private ComboBox cbAgendamento;
+        private DataGridViewCheckBoxColumn estaAbertoDataGridViewCheckBoxColumn;
     }
 }
