@@ -34,7 +34,7 @@ namespace Cod3rsGrowth.Servico.Validacoes
                 .Must(agendamento => agendamento.DataEHoraDeSaida >= agendamento.DataEHoraDeEntrada.AddHours(1)).WithMessage("A quantidade de tempo mínima para agendamento é de uma hora.");
 
             RuleFor(Agendamento => Agendamento.ValorTotal)
-            .PrecisionScale(5, 2, true).WithMessage("O Valor Total excedeu o limite de 5 algarismos totais com duas casas decimais, por favor digite no formato exigido.");
+            .PrecisionScale(6, 2, true).WithMessage("O Valor Total excedeu o limite de 6 algarismos totais com duas casas decimais, por favor digite no formato exigido.");
 
             RuleFor(Agendamento => Agendamento.EstiloMusical)
                 .IsInEnum().WithMessage("O Estilo Musical não foi encontrado, digite um Estilo Musical válido.");

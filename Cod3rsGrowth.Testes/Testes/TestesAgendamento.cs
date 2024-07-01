@@ -60,8 +60,8 @@ namespace Cod3rsGrowth.Testes.Testes
                 Id = 4,
                 NomeResponsavel = "Lucas",
                 CpfResponsavel = "09636738291",
-                DataEHoraDeEntrada = DateTime.Parse("30/06/2024 09:00:00"),
-                DataEHoraDeSaida = DateTime.Parse("30/06/2024 10:00:00"),
+                DataEHoraDeEntrada = DateTime.Parse("30/06/2026 09:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("30/06/2026 10:00:00"),
                 ValorTotal = 200.00m,
                 EstiloMusical = EstiloMusical.Eletronica,
                 IdEstudio = 5
@@ -338,15 +338,15 @@ namespace Cod3rsGrowth.Testes.Testes
         public void deve_retornar_a_excecao_do_valor_total_maior_que_cinco_algarismos_e_duas_casas_decimais(    )
         {
             CriarLista();
-            var excecaoDoValorTotalMaiorQueCincoAlgarismosEDuasCasasDecimais = "O Valor Total excedeu o limite de 5 algarismos totais com duas casas decimais, por favor digite no formato exigido.";
+            var excecaoDoValorTotalMaiorQueCincoAlgarismosEDuasCasasDecimais = "O Valor Total excedeu o limite de 6 algarismos totais com duas casas decimais, por favor digite no formato exigido.";
             var listaComValortotalMaiorQueCincoAlgarismosEDuasCasasDecimais = new Agendamento
             {
                 Id = 12,
                 NomeResponsavel = "Cirlaneide",
                 CpfResponsavel = "09631009047",
-                DataEHoraDeEntrada = DateTime.Parse("30/06/2024 14:00:00"),
-                DataEHoraDeSaida = DateTime.Parse("30/06/2024 15:00:00"),
-                ValorTotal = 1000.00m,
+                DataEHoraDeEntrada = DateTime.Parse("01/12/2024 14:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("01/12/2024 15:00:00"),
+                ValorTotal = 10000.00m,
                 EstiloMusical = EstiloMusical.Gospel,
                 IdEstudio = 3
             };
@@ -366,8 +366,8 @@ namespace Cod3rsGrowth.Testes.Testes
                 Id = 3,
                 NomeResponsavel = "Cleber Da Silva Rodrigues",
                 CpfResponsavel = "09631009047",
-                DataEHoraDeEntrada = DateTime.Parse("30/06/2024 14:00:00"),
-                DataEHoraDeSaida = DateTime.Parse("30/06/2024 15:00:00"),
+                DataEHoraDeEntrada = DateTime.Parse("30/06/2025 14:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("30/06/2025 15:00:00"),
                 EstiloMusical = (EstiloMusical)8,
                 ValorTotal = 100m,
                 IdEstudio = 3
@@ -388,8 +388,8 @@ namespace Cod3rsGrowth.Testes.Testes
                 Id = 1,
                 NomeResponsavel = "Paulo",
                 CpfResponsavel = "03237852811",
-                DataEHoraDeEntrada = DateTime.Parse("30/06/2024 12:00:00"),
-                DataEHoraDeSaida = DateTime.Parse("30/06/2024 14:00:00"),
+                DataEHoraDeEntrada = DateTime.Parse("30/06/2026 12:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("30/06/2026 14:00:00"),
                 ValorTotal = 200m,
                 EstiloMusical = EstiloMusical.EnumIndefinido,
                 IdEstudio = 1
@@ -443,7 +443,7 @@ namespace Cod3rsGrowth.Testes.Testes
                     IdEstudio = 2
                 }
             };
-            var filtroValorTotal = new FiltroAgendamento { ValorTotal = 300m };
+            var filtroValorTotal = new FiltroAgendamento { ValorMinimo = 300m };
 
             var listaDoObterTodos = _repositorioAgendamento.ObterTodos(filtroValorTotal);
 

@@ -53,9 +53,9 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
             {
                 listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.DataEHoraDeEntrada == filtro?.DataEHoraDeEntrada);
             }
-            if (filtro?.ValorTotal != null)
+            if (filtro?.ValorMinimo != null)
             {
-                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.ValorTotal == filtro?.ValorTotal);
+                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.ValorTotal == filtro?.ValorMinimo);
             }
             return listaAgendamento;
         }

@@ -2,7 +2,7 @@
 
 namespace Cod3rsGrowth.Dominio.Migracoes
 {
-    [Migration(20240627124100)]
+    [Migration(202406271241000)]
     public class _20240626091000_AdicionarEstudioMusical : Migration
     {
         public override void Up()
