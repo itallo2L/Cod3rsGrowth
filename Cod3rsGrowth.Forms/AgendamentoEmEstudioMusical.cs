@@ -72,6 +72,43 @@ namespace Cod3rsGrowth.Forms
             _filtroAgendamento.ValorMaximo = numericValorMaximo.Value;
             dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
         }
+        private void EventoAoClicarNoBotaoDeLimparFiltroDeValor(object sender, EventArgs e)
+        {
+            numericValorMaximo.Value = 0;
+            numericValorMinimo.Value = 0;
+        }
+
+        private void EventoAoClicarNoBotaoDeLimparPesquisaAgendamento(object sender, EventArgs e)
+        {
+            txtBuscarAgendamento.Clear();
+        }
+        private void EventoAoClicarNoBotaoDeLimparPesquisaEstudioMusical(object sender, EventArgs e)
+        {
+            txtBuscarEstudio.Clear();
+        }
+
+        private void EventoDeFiltroDaDataMinimaDoAgendamento(object sender, EventArgs e)
+        {
+            _filtroAgendamento.DataMinima = dataMinima.Value;
+            dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
+        }
+
+        private void EventoDeFiltroDeDataMaximaDoAgendamento(object sender, EventArgs e)
+        {
+            _filtroAgendamento.DataMaxima = dataMaxima.Value;
+            dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
+        }
+
+        private void EventoDeLimparFiltroDeData(object sender, EventArgs e)
+        {
+            dataMaxima.Value = DateTime.Now;
+            dataMinima.Value = DateTime.Now;
+         
+            _filtroAgendamento.DataMinima = null;
+            _filtroAgendamento.DataMaxima = null;
+
+            dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
+        }
 
         private bool GaranteQueSomenteUmaCheckBoxEstejaMarcada(CheckBox marcada, CheckBox desmarcada)
         {
@@ -91,7 +128,8 @@ namespace Cod3rsGrowth.Forms
 
         private void EventoDeFormatacaoDoDataGridAgendamento(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            const string nomeDaColuna = "Estúdio";
+            //Formatando Nome dos Estúdios na lista de Agendamento
+            var nomeDaColuna = "Estúdio";
             if (dataGridAgendamento.Columns[e.ColumnIndex].HeaderText == nomeDaColuna)
             {
                 var agendamento = dataGridAgendamento.Rows[e.RowIndex].DataBoundItem as Agendamento;
@@ -101,6 +139,40 @@ namespace Cod3rsGrowth.Forms
                     if (estudioMusical != null)
                     {
                         e.Value = estudioMusical.Nome;
+                    }
+                }
+            }
+
+            //Formatando Valor Total
+            nomeDaColuna = "Valor Total";
+            if (dataGridAgendamento.Columns[e.ColumnIndex].HeaderText == nomeDaColuna)
+            {
+                var linhaDoAgendamento = dataGridAgendamento.Rows[e.RowIndex].DataBoundItem as Agendamento;
+                if (linhaDoAgendamento != null)
+                {
+                    var agendamento = _servicoAgendamento.ObterPorId(linhaDoAgendamento.Id);
+                    if (agendamento != null)
+                    {
+                        var valorFormatadoParaReal = "R$ " + agendamento.ValorTotal;
+                        e.Value = valorFormatadoParaReal;
+
+                    }
+                }
+            }
+
+            //Formatando CPF
+            nomeDaColuna = "CPF do Responsável";
+            if (dataGridAgendamento.Columns[e.ColumnIndex].HeaderText == nomeDaColuna)
+            {
+                var linhaDoAgendamento = dataGridAgendamento.Rows[e.RowIndex].DataBoundItem as Agendamento;
+                if (linhaDoAgendamento != null)
+                {
+                    var agendamento = _servicoAgendamento.ObterPorId(linhaDoAgendamento.Id);
+                    if (agendamento != null)
+                    {
+                        var cpfconvertido = Convert.ToUInt64(agendamento.CpfResponsavel);
+                        var cpfFormatadoComMascara = String.Format(@"{0:000\.000\.000\-00}", cpfconvertido);
+                        e.Value = cpfFormatadoComMascara;
                     }
                 }
             }

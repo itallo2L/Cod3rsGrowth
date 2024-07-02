@@ -454,11 +454,11 @@ namespace Cod3rsGrowth.Testes.Testes
         public void deve_verificar_se_o_filtro_de_data_e_hora_de_entrada_esta_funcionando()
         {
             CriarLista();
-            var filtroDataEHora = new FiltroAgendamento { DataEHoraDeEntrada = DateTime.Parse("26/06/2024 17:00:00") };
+            var filtroDataEHora = new FiltroAgendamento { DataMinima = DateTime.Parse("26/06/2024 17:00:00") };
 
             var listaDoObterTodos = _repositorioAgendamento.ObterTodos(filtroDataEHora);
 
-            Assert.Contains(listaDoObterTodos, lista => lista.DataEHoraDeEntrada == filtroDataEHora.DataEHoraDeEntrada);
+            Assert.Contains(listaDoObterTodos, lista => lista.DataEHoraDeEntrada == filtroDataEHora.DataMinima);
         }
 
         public List<Agendamento> CriarLista()

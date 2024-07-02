@@ -1,7 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.InterfacesRepositorio;
-using FluentMigrator.Runner.BatchParser.RangeSearchers;
 using LinqToDB;
 using System;
 using System.Collections.Generic;
@@ -47,8 +46,11 @@ namespace Cod3rsGrowth.Infra.Repositorios
             if (!string.IsNullOrEmpty(filtro?.NomeResponsavel))
                 listaAgendamento = listaAgendamento.Where(agendamento => agendamento.NomeResponsavel.Contains(filtro.NomeResponsavel, StringComparison.OrdinalIgnoreCase));
 
-            if (filtro?.DataEHoraDeEntrada != null)
-                listaAgendamento = listaAgendamento.Where(agendamento => agendamento.DataEHoraDeEntrada == filtro.DataEHoraDeEntrada);
+            if (filtro?.DataMinima != null)
+                listaAgendamento = listaAgendamento.Where(agendamento => agendamento.DataEHoraDeEntrada >= filtro.DataMinima);
+
+            if (filtro?.DataMaxima != null)
+                listaAgendamento = listaAgendamento.Where(agendamento => agendamento.DataEHoraDeEntrada <= filtro.DataMaxima);
 
             const int naoPodeSerNegativo = 0;
             if (filtro?.ValorMinimo != null && filtro?.ValorMinimo != naoPodeSerNegativo)
@@ -58,7 +60,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 listaAgendamento = listaAgendamento.Where(agendamento => agendamento.ValorTotal <= filtro.ValorMaximo);
 
             const int indexDoEnumIndefinido = 0;
-            if (filtro?.EstiloMusical != null && filtro ?.EstiloMusical > indexDoEnumIndefinido)
+            if (filtro?.EstiloMusical != null && filtro?.EstiloMusical > indexDoEnumIndefinido)
                 listaAgendamento = listaAgendamento.Where(agendamento => agendamento.EstiloMusical == filtro.EstiloMusical);
 
             return listaAgendamento.ToList();

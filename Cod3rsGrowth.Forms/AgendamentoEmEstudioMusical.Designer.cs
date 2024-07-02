@@ -34,6 +34,7 @@
             txtBuscarEstudio = new TextBox();
             tabAgendamentoEmEstudioMusical = new TabControl();
             tabEstudioMusical = new TabPage();
+            btnLimparPesquisaEstudioMusical = new Button();
             checkBoxNaoEstaAberto = new CheckBox();
             checkBoxEstaAbertoSim = new CheckBox();
             lblEstaAberto = new Label();
@@ -44,16 +45,19 @@
             estudioMusicalBindingSource = new BindingSource(components);
             btnDeletarEstudioMusical = new Button();
             tabAgendamento = new TabPage();
+            lblDeTalData = new Label();
+            btnLimparFiltroDeData = new Button();
+            btnLimparPesquisaAgendamento = new Button();
+            btnLimparFiltro = new Button();
             numericValorMaximo = new NumericUpDown();
             numericValorMinimo = new NumericUpDown();
             lblFiltrarPorValor = new Label();
             lblValorMaximo = new Label();
             lblValorMinimo = new Label();
             lblFiltrarPorData = new Label();
-            lblDataInicial = new Label();
-            lblDataFinal = new Label();
-            dataFinal = new DateTimePicker();
-            dataInicial = new DateTimePicker();
+            lblAteTalData = new Label();
+            dataMaxima = new DateTimePicker();
+            dataMinima = new DateTimePicker();
             label1 = new Label();
             cbEstiloMusical = new ComboBox();
             txtBuscarAgendamento = new TextBox();
@@ -61,6 +65,8 @@
             btnAtualizarAgendamento = new Button();
             btnAdicionarAgendamento = new Button();
             dataGridAgendamento = new DataGridView();
+            agendamentoBindingSource = new BindingSource(components);
+            bdCod3rsGrowthBindingSource = new BindingSource(components);
             idDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             nomeResponsavelDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             cpfResponsavelDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -69,8 +75,6 @@
             valorTotalDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             estiloMusicalDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             idEstudioDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            agendamentoBindingSource = new BindingSource(components);
-            bdCod3rsGrowthBindingSource = new BindingSource(components);
             tabAgendamentoEmEstudioMusical.SuspendLayout();
             tabEstudioMusical.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridEstudioMusical).BeginInit();
@@ -86,6 +90,7 @@
             // btnAdicionarEstudioMusical
             // 
             btnAdicionarEstudioMusical.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnAdicionarEstudioMusical.Cursor = Cursors.Hand;
             btnAdicionarEstudioMusical.Location = new Point(1007, 391);
             btnAdicionarEstudioMusical.Name = "btnAdicionarEstudioMusical";
             btnAdicionarEstudioMusical.Size = new Size(75, 23);
@@ -96,6 +101,7 @@
             // btnAtualizarEstudioMusical
             // 
             btnAtualizarEstudioMusical.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnAtualizarEstudioMusical.Cursor = Cursors.Hand;
             btnAtualizarEstudioMusical.Location = new Point(1088, 391);
             btnAtualizarEstudioMusical.Name = "btnAtualizarEstudioMusical";
             btnAtualizarEstudioMusical.Size = new Size(75, 23);
@@ -106,7 +112,8 @@
             // txtBuscarEstudio
             // 
             txtBuscarEstudio.AcceptsReturn = true;
-            txtBuscarEstudio.Location = new Point(8, 42);
+            txtBuscarEstudio.Cursor = Cursors.Hand;
+            txtBuscarEstudio.Location = new Point(6, 55);
             txtBuscarEstudio.Name = "txtBuscarEstudio";
             txtBuscarEstudio.PlaceholderText = "Digite o nome do estúdio";
             txtBuscarEstudio.Size = new Size(213, 23);
@@ -118,6 +125,7 @@
             tabAgendamentoEmEstudioMusical.Controls.Add(tabEstudioMusical);
             tabAgendamentoEmEstudioMusical.Controls.Add(tabAgendamento);
             tabAgendamentoEmEstudioMusical.Dock = DockStyle.Fill;
+            tabAgendamentoEmEstudioMusical.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
             tabAgendamentoEmEstudioMusical.Location = new Point(0, 0);
             tabAgendamentoEmEstudioMusical.Name = "tabAgendamentoEmEstudioMusical";
             tabAgendamentoEmEstudioMusical.SelectedIndex = 0;
@@ -126,6 +134,7 @@
             // 
             // tabEstudioMusical
             // 
+            tabEstudioMusical.Controls.Add(btnLimparPesquisaEstudioMusical);
             tabEstudioMusical.Controls.Add(checkBoxNaoEstaAberto);
             tabEstudioMusical.Controls.Add(checkBoxEstaAbertoSim);
             tabEstudioMusical.Controls.Add(lblEstaAberto);
@@ -142,10 +151,25 @@
             tabEstudioMusical.Text = "Estúdio Musical";
             tabEstudioMusical.UseVisualStyleBackColor = true;
             // 
+            // btnLimparPesquisaEstudioMusical
+            // 
+            btnLimparPesquisaEstudioMusical.Cursor = Cursors.Hand;
+            btnLimparPesquisaEstudioMusical.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            btnLimparPesquisaEstudioMusical.ImageAlign = ContentAlignment.MiddleLeft;
+            btnLimparPesquisaEstudioMusical.Location = new Point(227, 55);
+            btnLimparPesquisaEstudioMusical.Name = "btnLimparPesquisaEstudioMusical";
+            btnLimparPesquisaEstudioMusical.Size = new Size(57, 23);
+            btnLimparPesquisaEstudioMusical.TabIndex = 13;
+            btnLimparPesquisaEstudioMusical.Text = "Limpar";
+            btnLimparPesquisaEstudioMusical.TextAlign = ContentAlignment.TopLeft;
+            btnLimparPesquisaEstudioMusical.UseVisualStyleBackColor = true;
+            btnLimparPesquisaEstudioMusical.Click += EventoAoClicarNoBotaoDeLimparPesquisaEstudioMusical;
+            // 
             // checkBoxNaoEstaAberto
             // 
             checkBoxNaoEstaAberto.AutoSize = true;
-            checkBoxNaoEstaAberto.Location = new Point(338, 46);
+            checkBoxNaoEstaAberto.Cursor = Cursors.Hand;
+            checkBoxNaoEstaAberto.Location = new Point(443, 55);
             checkBoxNaoEstaAberto.Name = "checkBoxNaoEstaAberto";
             checkBoxNaoEstaAberto.Size = new Size(48, 19);
             checkBoxNaoEstaAberto.TabIndex = 12;
@@ -156,9 +180,10 @@
             // checkBoxEstaAbertoSim
             // 
             checkBoxEstaAbertoSim.AutoSize = true;
-            checkBoxEstaAbertoSim.Location = new Point(295, 46);
+            checkBoxEstaAbertoSim.Cursor = Cursors.Hand;
+            checkBoxEstaAbertoSim.Location = new Point(400, 55);
             checkBoxEstaAbertoSim.Name = "checkBoxEstaAbertoSim";
-            checkBoxEstaAbertoSim.Size = new Size(46, 19);
+            checkBoxEstaAbertoSim.Size = new Size(45, 19);
             checkBoxEstaAbertoSim.TabIndex = 11;
             checkBoxEstaAbertoSim.Text = "Sim";
             checkBoxEstaAbertoSim.UseVisualStyleBackColor = true;
@@ -167,17 +192,22 @@
             // lblEstaAberto
             // 
             lblEstaAberto.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            lblEstaAberto.AutoSize = true;
-            lblEstaAberto.Location = new Point(301, 24);
+            lblEstaAberto.BackColor = Color.Transparent;
+            lblEstaAberto.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            lblEstaAberto.Location = new Point(393, 27);
             lblEstaAberto.Name = "lblEstaAberto";
-            lblEstaAberto.Size = new Size(72, 15);
+            lblEstaAberto.RightToLeft = RightToLeft.No;
+            lblEstaAberto.Size = new Size(108, 25);
             lblEstaAberto.TabIndex = 10;
             lblEstaAberto.Text = "Está Aberto?";
+            lblEstaAberto.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // dataGridEstudioMusical
             // 
             dataGridEstudioMusical.AllowUserToAddRows = false;
             dataGridEstudioMusical.AllowUserToDeleteRows = false;
+            dataGridEstudioMusical.AllowUserToResizeColumns = false;
+            dataGridEstudioMusical.AllowUserToResizeRows = false;
             dataGridEstudioMusical.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridEstudioMusical.AutoGenerateColumns = false;
             dataGridEstudioMusical.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -186,12 +216,12 @@
             dataGridEstudioMusical.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, nomeDataGridViewTextBoxColumn, estaAbertoDataGridViewCheckBoxColumn });
             dataGridEstudioMusical.DataSource = estudioMusicalBindingSource;
             dataGridEstudioMusical.GridColor = Color.Black;
-            dataGridEstudioMusical.Location = new Point(9, 118);
+            dataGridEstudioMusical.Location = new Point(6, 128);
             dataGridEstudioMusical.Name = "dataGridEstudioMusical";
             dataGridEstudioMusical.ReadOnly = true;
             dataGridEstudioMusical.RowHeadersVisible = false;
             dataGridEstudioMusical.RowTemplate.Height = 25;
-            dataGridEstudioMusical.Size = new Size(1237, 199);
+            dataGridEstudioMusical.Size = new Size(1240, 199);
             dataGridEstudioMusical.TabIndex = 6;
             // 
             // idDataGridViewTextBoxColumn
@@ -224,6 +254,7 @@
             // btnDeletarEstudioMusical
             // 
             btnDeletarEstudioMusical.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnDeletarEstudioMusical.Cursor = Cursors.Hand;
             btnDeletarEstudioMusical.Location = new Point(1169, 391);
             btnDeletarEstudioMusical.Name = "btnDeletarEstudioMusical";
             btnDeletarEstudioMusical.Size = new Size(75, 23);
@@ -234,16 +265,19 @@
             // tabAgendamento
             // 
             tabAgendamento.BackColor = Color.White;
+            tabAgendamento.Controls.Add(lblDeTalData);
+            tabAgendamento.Controls.Add(btnLimparFiltroDeData);
+            tabAgendamento.Controls.Add(btnLimparPesquisaAgendamento);
+            tabAgendamento.Controls.Add(btnLimparFiltro);
             tabAgendamento.Controls.Add(numericValorMaximo);
             tabAgendamento.Controls.Add(numericValorMinimo);
             tabAgendamento.Controls.Add(lblFiltrarPorValor);
             tabAgendamento.Controls.Add(lblValorMaximo);
             tabAgendamento.Controls.Add(lblValorMinimo);
             tabAgendamento.Controls.Add(lblFiltrarPorData);
-            tabAgendamento.Controls.Add(lblDataInicial);
-            tabAgendamento.Controls.Add(lblDataFinal);
-            tabAgendamento.Controls.Add(dataFinal);
-            tabAgendamento.Controls.Add(dataInicial);
+            tabAgendamento.Controls.Add(lblAteTalData);
+            tabAgendamento.Controls.Add(dataMaxima);
+            tabAgendamento.Controls.Add(dataMinima);
             tabAgendamento.Controls.Add(label1);
             tabAgendamento.Controls.Add(cbEstiloMusical);
             tabAgendamento.Controls.Add(txtBuscarAgendamento);
@@ -258,9 +292,54 @@
             tabAgendamento.TabIndex = 1;
             tabAgendamento.Text = "Agendamento";
             // 
+            // lblDeTalData
+            // 
+            lblDeTalData.AutoSize = true;
+            lblDeTalData.Location = new Point(375, 56);
+            lblDeTalData.Name = "lblDeTalData";
+            lblDeTalData.Size = new Size(25, 15);
+            lblDeTalData.TabIndex = 31;
+            lblDeTalData.Text = "De:";
+            // 
+            // btnLimparFiltroDeData
+            // 
+            btnLimparFiltroDeData.Cursor = Cursors.Hand;
+            btnLimparFiltroDeData.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            btnLimparFiltroDeData.Location = new Point(491, 82);
+            btnLimparFiltroDeData.Name = "btnLimparFiltroDeData";
+            btnLimparFiltroDeData.Size = new Size(93, 23);
+            btnLimparFiltroDeData.TabIndex = 30;
+            btnLimparFiltroDeData.Text = "Limpar Filtro";
+            btnLimparFiltroDeData.UseVisualStyleBackColor = true;
+            btnLimparFiltroDeData.Click += EventoDeLimparFiltroDeData;
+            // 
+            // btnLimparPesquisaAgendamento
+            // 
+            btnLimparPesquisaAgendamento.Cursor = Cursors.Hand;
+            btnLimparPesquisaAgendamento.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            btnLimparPesquisaAgendamento.Location = new Point(251, 52);
+            btnLimparPesquisaAgendamento.Name = "btnLimparPesquisaAgendamento";
+            btnLimparPesquisaAgendamento.Size = new Size(58, 23);
+            btnLimparPesquisaAgendamento.TabIndex = 29;
+            btnLimparPesquisaAgendamento.Text = "Limpar";
+            btnLimparPesquisaAgendamento.UseVisualStyleBackColor = true;
+            btnLimparPesquisaAgendamento.Click += EventoAoClicarNoBotaoDeLimparPesquisaAgendamento;
+            // 
+            // btnLimparFiltro
+            // 
+            btnLimparFiltro.Cursor = Cursors.Hand;
+            btnLimparFiltro.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            btnLimparFiltro.Location = new Point(733, 81);
+            btnLimparFiltro.Name = "btnLimparFiltro";
+            btnLimparFiltro.Size = new Size(87, 23);
+            btnLimparFiltro.TabIndex = 28;
+            btnLimparFiltro.Text = "Limpar Filtro";
+            btnLimparFiltro.UseVisualStyleBackColor = true;
+            btnLimparFiltro.Click += EventoAoClicarNoBotaoDeLimparFiltroDeValor;
+            // 
             // numericValorMaximo
             // 
-            numericValorMaximo.Location = new Point(788, 99);
+            numericValorMaximo.Location = new Point(789, 52);
             numericValorMaximo.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             numericValorMaximo.Name = "numericValorMaximo";
             numericValorMaximo.Size = new Size(81, 23);
@@ -269,7 +348,7 @@
             // 
             // numericValorMinimo
             // 
-            numericValorMinimo.Location = new Point(788, 52);
+            numericValorMinimo.Location = new Point(690, 52);
             numericValorMinimo.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             numericValorMinimo.Name = "numericValorMinimo";
             numericValorMinimo.Size = new Size(81, 23);
@@ -279,85 +358,92 @@
             // lblFiltrarPorValor
             // 
             lblFiltrarPorValor.AutoSize = true;
-            lblFiltrarPorValor.Location = new Point(783, 18);
+            lblFiltrarPorValor.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            lblFiltrarPorValor.Location = new Point(718, 14);
             lblFiltrarPorValor.Name = "lblFiltrarPorValor";
-            lblFiltrarPorValor.Size = new Size(90, 15);
+            lblFiltrarPorValor.Size = new Size(123, 20);
             lblFiltrarPorValor.TabIndex = 25;
             lblFiltrarPorValor.Text = "Filtrar por Valor:";
             // 
             // lblValorMaximo
             // 
             lblValorMaximo.AutoSize = true;
-            lblValorMaximo.Location = new Point(788, 81);
+            lblValorMaximo.Location = new Point(789, 34);
             lblValorMaximo.Name = "lblValorMaximo";
-            lblValorMaximo.Size = new Size(83, 15);
+            lblValorMaximo.Size = new Size(82, 15);
             lblValorMaximo.TabIndex = 23;
             lblValorMaximo.Text = "Valor Máximo:";
             // 
             // lblValorMinimo
             // 
             lblValorMinimo.AutoSize = true;
-            lblValorMinimo.Location = new Point(788, 34);
+            lblValorMinimo.Location = new Point(690, 34);
             lblValorMinimo.Name = "lblValorMinimo";
-            lblValorMinimo.Size = new Size(81, 15);
+            lblValorMinimo.Size = new Size(80, 15);
             lblValorMinimo.TabIndex = 22;
             lblValorMinimo.Text = "Valor Mínimo:";
             // 
             // lblFiltrarPorData
             // 
             lblFiltrarPorData.AutoSize = true;
-            lblFiltrarPorData.Location = new Point(547, 18);
+            lblFiltrarPorData.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            lblFiltrarPorData.Location = new Point(474, 15);
             lblFiltrarPorData.Name = "lblFiltrarPorData";
-            lblFiltrarPorData.Size = new Size(88, 15);
+            lblFiltrarPorData.Size = new Size(120, 20);
             lblFiltrarPorData.TabIndex = 20;
             lblFiltrarPorData.Text = "Filtrar por Data:";
             // 
-            // lblDataInicial
+            // lblAteTalData
             // 
-            lblDataInicial.AutoSize = true;
-            lblDataInicial.Location = new Point(473, 34);
-            lblDataInicial.Name = "lblDataInicial";
-            lblDataInicial.Size = new Size(68, 15);
-            lblDataInicial.TabIndex = 19;
-            lblDataInicial.Text = "Data Inicial:";
+            lblAteTalData.AutoSize = true;
+            lblAteTalData.Location = new Point(519, 57);
+            lblAteTalData.Name = "lblAteTalData";
+            lblAteTalData.Size = new Size(28, 15);
+            lblAteTalData.TabIndex = 18;
+            lblAteTalData.Text = "Até:";
             // 
-            // lblDataFinal
+            // dataMaxima
             // 
-            lblDataFinal.AutoSize = true;
-            lblDataFinal.Location = new Point(473, 81);
-            lblDataFinal.Name = "lblDataFinal";
-            lblDataFinal.Size = new Size(62, 15);
-            lblDataFinal.TabIndex = 18;
-            lblDataFinal.Text = "Data Final:";
+            dataMaxima.Cursor = Cursors.Hand;
+            dataMaxima.CustomFormat = "dd/m/yyyy 00:00";
+            dataMaxima.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataMaxima.Format = DateTimePickerFormat.Short;
+            dataMaxima.Location = new Point(553, 53);
+            dataMaxima.MinDate = new DateTime(2000, 1, 1, 0, 0, 0, 0);
+            dataMaxima.Name = "dataMaxima";
+            dataMaxima.RightToLeft = RightToLeft.Yes;
+            dataMaxima.Size = new Size(104, 23);
+            dataMaxima.TabIndex = 17;
+            dataMaxima.ValueChanged += EventoDeFiltroDeDataMaximaDoAgendamento;
             // 
-            // dataFinal
+            // dataMinima
             // 
-            dataFinal.Location = new Point(474, 99);
-            dataFinal.Name = "dataFinal";
-            dataFinal.Size = new Size(245, 23);
-            dataFinal.TabIndex = 17;
-            // 
-            // dataInicial
-            // 
-            dataInicial.Location = new Point(473, 52);
-            dataInicial.Name = "dataInicial";
-            dataInicial.Size = new Size(246, 23);
-            dataInicial.TabIndex = 16;
+            dataMinima.Cursor = Cursors.Hand;
+            dataMinima.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataMinima.Format = DateTimePickerFormat.Short;
+            dataMinima.Location = new Point(409, 52);
+            dataMinima.MinDate = new DateTime(2000, 1, 1, 0, 0, 0, 0);
+            dataMinima.Name = "dataMinima";
+            dataMinima.Size = new Size(104, 23);
+            dataMinima.TabIndex = 16;
+            dataMinima.ValueChanged += EventoDeFiltroDaDataMinimaDoAgendamento;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(986, 34);
+            label1.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label1.Location = new Point(907, 15);
             label1.Name = "label1";
-            label1.Size = new Size(79, 15);
+            label1.Size = new Size(173, 20);
             label1.TabIndex = 14;
-            label1.Text = "Estilo Musical";
+            label1.Text = "Filtrar por Estilo Musical";
             // 
             // cbEstiloMusical
             // 
+            cbEstiloMusical.Cursor = Cursors.Hand;
             cbEstiloMusical.FormattingEnabled = true;
             cbEstiloMusical.Items.AddRange(new object[] { "Todos", "Blues", "Jazz", "Música Clássica", "Sertanejo", "Gospel", "Eletrônica", "Samba" });
-            cbEstiloMusical.Location = new Point(962, 52);
+            cbEstiloMusical.Location = new Point(934, 52);
             cbEstiloMusical.Name = "cbEstiloMusical";
             cbEstiloMusical.Size = new Size(121, 23);
             cbEstiloMusical.TabIndex = 12;
@@ -365,6 +451,7 @@
             // 
             // txtBuscarAgendamento
             // 
+            txtBuscarAgendamento.Cursor = Cursors.Hand;
             txtBuscarAgendamento.Location = new Point(6, 52);
             txtBuscarAgendamento.Name = "txtBuscarAgendamento";
             txtBuscarAgendamento.PlaceholderText = "Digite o nome do responsável";
@@ -375,6 +462,8 @@
             // btnDeletarAgendamento
             // 
             btnDeletarAgendamento.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnDeletarAgendamento.Cursor = Cursors.Hand;
+            btnDeletarAgendamento.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             btnDeletarAgendamento.Location = new Point(1170, 391);
             btnDeletarAgendamento.Name = "btnDeletarAgendamento";
             btnDeletarAgendamento.Size = new Size(75, 23);
@@ -385,6 +474,8 @@
             // btnAtualizarAgendamento
             // 
             btnAtualizarAgendamento.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnAtualizarAgendamento.Cursor = Cursors.Hand;
+            btnAtualizarAgendamento.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             btnAtualizarAgendamento.Location = new Point(1089, 391);
             btnAtualizarAgendamento.Name = "btnAtualizarAgendamento";
             btnAtualizarAgendamento.Size = new Size(75, 23);
@@ -395,6 +486,8 @@
             // btnAdicionarAgendamento
             // 
             btnAdicionarAgendamento.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnAdicionarAgendamento.Cursor = Cursors.Hand;
+            btnAdicionarAgendamento.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             btnAdicionarAgendamento.Location = new Point(1008, 391);
             btnAdicionarAgendamento.Name = "btnAdicionarAgendamento";
             btnAdicionarAgendamento.Size = new Size(75, 23);
@@ -425,6 +518,14 @@
             dataGridAgendamento.Size = new Size(1242, 199);
             dataGridAgendamento.TabIndex = 0;
             dataGridAgendamento.CellFormatting += EventoDeFormatacaoDoDataGridAgendamento;
+            // 
+            // agendamentoBindingSource
+            // 
+            agendamentoBindingSource.DataSource = typeof(Dominio.Entidades.Agendamento);
+            // 
+            // bdCod3rsGrowthBindingSource
+            // 
+            bdCod3rsGrowthBindingSource.DataSource = typeof(Infra.BdCod3rsGrowth);
             // 
             // idDataGridViewTextBoxColumn1
             // 
@@ -483,14 +584,6 @@
             idEstudioDataGridViewTextBoxColumn.Name = "idEstudioDataGridViewTextBoxColumn";
             idEstudioDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // agendamentoBindingSource
-            // 
-            agendamentoBindingSource.DataSource = typeof(Dominio.Entidades.Agendamento);
-            // 
-            // bdCod3rsGrowthBindingSource
-            // 
-            bdCod3rsGrowthBindingSource.DataSource = typeof(Infra.BdCod3rsGrowth);
-            // 
             // FormAgendamentoEmEstudioMusical
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -536,15 +629,24 @@
         private ComboBox cbEstiloMusical;
         private Label label1;
         private Label lblFiltrarPorData;
-        private Label lblDataInicial;
-        private Label lblDataFinal;
-        private DateTimePicker dataFinal;
-        private DateTimePicker dataInicial;
+        private Label lblAteTalData;
+        private DateTimePicker dataMaxima;
+        private DateTimePicker dataMinima;
         private Label lblValorMaximo;
         private Label lblValorMinimo;
         private Label lblFiltrarPorValor;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
+        private DataGridViewCheckBoxColumn estaAbertoDataGridViewCheckBoxColumn;
+        private CheckBox checkBoxEstaAbertoSim;
+        private CheckBox checkBoxNaoEstaAberto;
+        private NumericUpDown numericValorMaximo;
+        private NumericUpDown numericValorMinimo;
+        private Button btnLimparFiltro;
+        private Button btnLimparPesquisaAgendamento;
+        private Button btnLimparPesquisaEstudioMusical;
+        private Button btnLimparFiltroDeData;
+        private Label lblDeTalData;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn nomeResponsavelDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn cpfResponsavelDataGridViewTextBoxColumn;
@@ -553,10 +655,5 @@
         private DataGridViewTextBoxColumn valorTotalDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn estiloMusicalDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn idEstudioDataGridViewTextBoxColumn;
-        private DataGridViewCheckBoxColumn estaAbertoDataGridViewCheckBoxColumn;
-        private CheckBox checkBoxEstaAbertoSim;
-        private CheckBox checkBoxNaoEstaAberto;
-        private NumericUpDown numericValorMaximo;
-        private NumericUpDown numericValorMinimo;
     }
 }
