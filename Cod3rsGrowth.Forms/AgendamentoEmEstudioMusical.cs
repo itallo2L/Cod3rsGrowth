@@ -170,8 +170,7 @@ namespace Cod3rsGrowth.Forms
                     var agendamento = _servicoAgendamento.ObterPorId(linhaDoAgendamento.Id);
                     if (agendamento != null)
                     {
-                        var cpfconvertido = Convert.ToUInt64(agendamento.CpfResponsavel);
-                        var cpfFormatadoComMascara = String.Format(@"{0:000\.000\.000\-00}", cpfconvertido);
+                        var cpfFormatadoComMascara = String.Format(@"{0:000\.000\.000\-00}", double.Parse(agendamento.CpfResponsavel));
                         e.Value = cpfFormatadoComMascara;
                     }
                 }
