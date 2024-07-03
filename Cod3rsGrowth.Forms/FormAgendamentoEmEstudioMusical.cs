@@ -3,7 +3,6 @@ using Cod3rsGrowth.Dominio.EnumEstiloMusical;
 using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.Servicos;
 using Cod3rsGrowth.Servico.Servicos;
-using System.Drawing;
 using System.Text.RegularExpressions;
 
 namespace Cod3rsGrowth.Forms
@@ -156,12 +155,7 @@ namespace Cod3rsGrowth.Forms
                     var agendamento = _servicoAgendamento.ObterPorId(linhaDoAgendamento.Id);
                     if (agendamento != null)
                     {
-                        var cpf = agendamento.CpfResponsavel;
-                        var cpfFormatadoComMascara = cpf.Substring(0, 3) + "." + 
-                            cpf.Substring(3, 3) + "." + 
-                            cpf.Substring(6, 3) + "-" + 
-                            cpf.Substring(9, 2);
-                        e.Value = cpfFormatadoComMascara;
+                         e.Value = Regex.Replace(agendamento.CpfResponsavel, "(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
                     }
                 }
             }
