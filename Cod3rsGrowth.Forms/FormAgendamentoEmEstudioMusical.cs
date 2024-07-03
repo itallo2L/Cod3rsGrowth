@@ -3,6 +3,8 @@ using Cod3rsGrowth.Dominio.EnumEstiloMusical;
 using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.Servicos;
 using Cod3rsGrowth.Servico.Servicos;
+using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace Cod3rsGrowth.Forms
 {
@@ -154,7 +156,11 @@ namespace Cod3rsGrowth.Forms
                     var agendamento = _servicoAgendamento.ObterPorId(linhaDoAgendamento.Id);
                     if (agendamento != null)
                     {
-                        var cpfFormatadoComMascara = agendamento.CpfResponsavel.Insert(3, ".").Insert(7, ".").Insert(11, ".").Insert(12, "-");
+                        var cpf = agendamento.CpfResponsavel;
+                        var cpfFormatadoComMascara = cpf.Substring(0, 3) + "." + 
+                            cpf.Substring(3, 3) + "." + 
+                            cpf.Substring(6, 3) + "-" + 
+                            cpf.Substring(9, 2);
                         e.Value = cpfFormatadoComMascara;
                     }
                 }

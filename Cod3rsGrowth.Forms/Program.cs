@@ -1,5 +1,8 @@
-﻿using Cod3rsGrowth.Dominio.Migracoes;
+﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Migracoes;
+using Cod3rsGrowth.Dominio.Servicos;
 using Cod3rsGrowth.Forms.InjecaoDoBancoDeDados;
+using Cod3rsGrowth.Servico.Servicos;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,7 +21,9 @@ namespace Cod3rsGrowth.Forms
 
             ServiceProvider = ExecutarInjecao();
             ApplicationConfiguration.Initialize();
-            Application.Run(ServiceProvider.GetRequiredService<FormAgendamentoEmEstudioMusical>());
+            var servicoAgendamento = ServiceProvider.GetRequiredService<ServicoAgendamento>();
+            var servicoEstudioMusical = ServiceProvider.GetRequiredService<ServicoEstudioMusical>();
+            Application.Run(new FormAgendamentoEmEstudioMusical(servicoAgendamento, servicoEstudioMusical));
         }
         public static IServiceProvider ServiceProvider { get; private set; }
 
@@ -31,7 +36,7 @@ namespace Cod3rsGrowth.Forms
                 .AddFluentMigratorCore().ConfigureRunner(rb => rb
                 .AddSqlServer()
                 .WithGlobalConnectionString(stringDeConexao)
-                .ScanIn(typeof(_20240701123700_FormatandoOValorTotalDoAgendamento).Assembly).For.Migrations())
+                .ScanIn(typeof(_20240626091000_AdicionarEstudioMusical).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
         }
