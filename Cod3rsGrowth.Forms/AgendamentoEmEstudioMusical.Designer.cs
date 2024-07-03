@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             btnAdicionarEstudioMusical = new Button();
             btnAtualizarEstudioMusical = new Button();
             txtBuscarEstudio = new TextBox();
@@ -566,6 +567,9 @@
             // valorTotalDataGridViewTextBoxColumn
             // 
             valorTotalDataGridViewTextBoxColumn.DataPropertyName = "ValorTotal";
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = "R$";
+            valorTotalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             valorTotalDataGridViewTextBoxColumn.HeaderText = "Valor Total";
             valorTotalDataGridViewTextBoxColumn.Name = "valorTotalDataGridViewTextBoxColumn";
             valorTotalDataGridViewTextBoxColumn.ReadOnly = true;

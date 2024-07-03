@@ -143,23 +143,6 @@ namespace Cod3rsGrowth.Forms
                 }
             }
 
-            //Formatando Valor Total
-            nomeDaColuna = "Valor Total";
-            if (dataGridAgendamento.Columns[e.ColumnIndex].HeaderText == nomeDaColuna)
-            {
-                var linhaDoAgendamento = dataGridAgendamento.Rows[e.RowIndex].DataBoundItem as Agendamento;
-                if (linhaDoAgendamento != null)
-                {
-                    var agendamento = _servicoAgendamento.ObterPorId(linhaDoAgendamento.Id);
-                    if (agendamento != null)
-                    {
-                        var valorFormatadoParaReal = "R$ " + agendamento.ValorTotal;
-                        e.Value = valorFormatadoParaReal;
-
-                    }
-                }
-            }
-
             //Formatando CPF
             nomeDaColuna = "CPF do Responsável";
             if (dataGridAgendamento.Columns[e.ColumnIndex].HeaderText == nomeDaColuna)
@@ -170,7 +153,7 @@ namespace Cod3rsGrowth.Forms
                     var agendamento = _servicoAgendamento.ObterPorId(linhaDoAgendamento.Id);
                     if (agendamento != null)
                     {
-                        var cpfFormatadoComMascara = String.Format(@"{0:000\.000\.000\-00}", double.Parse(agendamento.CpfResponsavel));
+                        var cpfFormatadoComMascara = agendamento.CpfResponsavel.Insert(3, ".").Insert(7, ".").Insert(11, ".").Insert(12, "-");
                         e.Value = cpfFormatadoComMascara;
                     }
                 }
