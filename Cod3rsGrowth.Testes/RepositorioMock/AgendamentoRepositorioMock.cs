@@ -49,11 +49,11 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
             {
                 listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.NomeResponsavel.Contains(filtro?.NomeResponsavel, StringComparison.OrdinalIgnoreCase));
             }
-            if (filtro?.DataMinima != null)
+            if ((filtro?.DataMinima).HasValue)
             {
                 listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.DataEHoraDeEntrada == filtro?.DataMinima);
             }
-            if (filtro?.ValorMinimo != null)
+            if ((filtro?.ValorMinimo).HasValue)
             {
                 listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.ValorTotal == filtro?.ValorMinimo);
             }

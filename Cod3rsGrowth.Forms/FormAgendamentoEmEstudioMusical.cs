@@ -32,22 +32,15 @@ namespace Cod3rsGrowth.Forms
             dataGridEstudioMusical.DataSource = _servicoEstudioMusical.ObterTodos();
         }
 
-        private void EventoDeFiltroAoBuscarAgendamento(object sender, EventArgs e)
-        {
-            _filtroAgendamento.NomeResponsavel = txtBuscarAgendamento.Text;
-            dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
-        }
-
         private void EventoDeFiltroAoBuscarEstudioMusical(object sender, EventArgs e)
         {
             _filtroEstudioMusical.Nome = txtBuscarEstudio.Text;
             dataGridEstudioMusical.DataSource = _servicoEstudioMusical.ObterTodos(_filtroEstudioMusical);
         }
 
-        private void EventoDaComboBoxAoFiltrarPeloEstiloMusical(object sender, EventArgs e)
+        private void EventoAoClicarNoBotaoDeLimparPesquisaEstudioMusical(object sender, EventArgs e)
         {
-            _filtroAgendamento.EstiloMusical = (EstiloMusical)cbEstiloMusical.SelectedIndex;
-            dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
+            txtBuscarEstudio.Clear();
         }
 
         private void EventoDeCheckBoxEstaAbertoAoSelecionarSim(object sender, EventArgs e)
@@ -61,30 +54,15 @@ namespace Cod3rsGrowth.Forms
             dataGridEstudioMusical.DataSource = _servicoEstudioMusical.ObterTodos(_filtroEstudioMusical);
         }
 
-        private void EventoDaCaixaNumericaValorMinimo(object sender, EventArgs e)
+        private void EventoDeFiltroAoBuscarAgendamento(object sender, EventArgs e)
         {
-            _filtroAgendamento.ValorMinimo = numericValorMinimo.Value;
+            _filtroAgendamento.NomeResponsavel = txtBuscarAgendamento.Text;
             dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
-        }
-
-        private void EventoDaCaixaNumericaValorMaximo(object sender, EventArgs e)
-        {
-            _filtroAgendamento.ValorMaximo = numericValorMaximo.Value;
-            dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
-        }
-        private void EventoAoClicarNoBotaoDeLimparFiltroDeValor(object sender, EventArgs e)
-        {
-            numericValorMaximo.Value = 0;
-            numericValorMinimo.Value = 0;
         }
 
         private void EventoAoClicarNoBotaoDeLimparPesquisaAgendamento(object sender, EventArgs e)
         {
             txtBuscarAgendamento.Clear();
-        }
-        private void EventoAoClicarNoBotaoDeLimparPesquisaEstudioMusical(object sender, EventArgs e)
-        {
-            txtBuscarEstudio.Clear();
         }
 
         private void EventoDeFiltroDaDataMinimaDoAgendamento(object sender, EventArgs e)
@@ -103,17 +81,42 @@ namespace Cod3rsGrowth.Forms
         {
             dataMaxima.Value = DateTime.Now;
             dataMinima.Value = DateTime.Now;
-         
+
             _filtroAgendamento.DataMinima = null;
             _filtroAgendamento.DataMaxima = null;
 
             dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
         }
 
+        private void EventoDaCaixaNumericaValorMinimo(object sender, EventArgs e)
+        {
+            _filtroAgendamento.ValorMinimo = numericValorMinimo.Value;
+            dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
+        }
+
+        private void EventoDaCaixaNumericaValorMaximo(object sender, EventArgs e)
+        {
+            _filtroAgendamento.ValorMaximo = numericValorMaximo.Value;
+            dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
+        }
+
+        private void EventoAoClicarNoBotaoDeLimparFiltroDeValor(object sender, EventArgs e)
+        {
+            const int limparValores = 0;
+            numericValorMaximo.Value = limparValores;
+            numericValorMinimo.Value = limparValores;
+        }
+
+        private void EventoDaComboBoxAoFiltrarPeloEstiloMusical(object sender, EventArgs e)
+        {
+            _filtroAgendamento.EstiloMusical = (EstiloMusical)cbEstiloMusical.SelectedIndex;
+            dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
+        }
+
         private bool GaranteQueSomenteUmaCheckBoxEstejaMarcada(CheckBox marcada, CheckBox desmarcada)
         {
-            if (marcada.CheckState == CheckState.Checked)
-                if (desmarcada.CheckState == CheckState.Checked)
+            if (marcada.CheckState is CheckState.Checked)
+                if (desmarcada.CheckState is CheckState.Checked)
                 {
                     desmarcada.Checked = false;
                 }
@@ -128,7 +131,6 @@ namespace Cod3rsGrowth.Forms
 
         private void EventoDeFormatacaoDoDataGridAgendamento(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            //Formatando Nome dos Estúdios na lista de Agendamento
             var nomeDaColuna = "Estúdio";
             if (dataGridAgendamento.Columns[e.ColumnIndex].HeaderText == nomeDaColuna)
             {
@@ -143,7 +145,6 @@ namespace Cod3rsGrowth.Forms
                 }
             }
 
-            //Formatando CPF
             nomeDaColuna = "CPF do Responsável";
             if (dataGridAgendamento.Columns[e.ColumnIndex].HeaderText == nomeDaColuna)
             {
