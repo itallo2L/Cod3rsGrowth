@@ -4,5 +4,8 @@
     <Compile Update="FormAgendamentoEmEstudioMusical.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormCadastroEstudioMusical.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

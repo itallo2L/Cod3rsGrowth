@@ -39,9 +39,11 @@ namespace Cod3rsGrowth.Forms
             dataGridEstudioMusical.DataSource = _servicoEstudioMusical.ObterTodos(_filtroEstudioMusical);
         }
 
-        private void EventoAoClicarNoBotaoDeLimparPesquisaEstudioMusical(object sender, EventArgs e)
+        private void EventoAoClicarNoBotaoDeLimparFiltroDeBuscaEEstaAberto(object sender, EventArgs e)
         {
             txtBuscarEstudio.Clear();
+            checkBoxEstaAbertoSim.Checked = false;
+            checkBoxNaoEstaAberto.Checked = false;
         }
 
         private void EventoDeCheckBoxEstaAbertoAoSelecionarSim(object sender, EventArgs e)
@@ -61,9 +63,11 @@ namespace Cod3rsGrowth.Forms
             dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
         }
 
-        private void EventoAoClicarNoBotaoDeLimparPesquisaAgendamento(object sender, EventArgs e)
+        private void EventoAoClicarNoBotaoDeLimparFiltroDeBuscaEDEEstiloMusical(object sender, EventArgs e)
         {
             txtBuscarAgendamento.Clear();
+            const int voltarParaOpcaoTodos = 0;
+            cbEstiloMusical.SelectedIndex = voltarParaOpcaoTodos;
         }
 
         private void EventoDeFiltroDaDataMinimaDoAgendamento(object sender, EventArgs e)
