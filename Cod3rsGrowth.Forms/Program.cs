@@ -1,5 +1,4 @@
-﻿using Cod3rsGrowth.Dominio.Entidades;
-using Cod3rsGrowth.Dominio.Migracoes;
+﻿using Cod3rsGrowth.Dominio.Migracoes;
 using Cod3rsGrowth.Dominio.Servicos;
 using Cod3rsGrowth.Forms.InjecaoDoBancoDeDados;
 using Cod3rsGrowth.Servico.Servicos;
