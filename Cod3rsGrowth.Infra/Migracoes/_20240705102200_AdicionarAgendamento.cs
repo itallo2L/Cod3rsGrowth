@@ -1,6 +1,6 @@
 ﻿using FluentMigrator;
 
-namespace Cod3rsGrowth.Dominio.Migracoes
+namespace Cod3rsGrowth.Infra.Migracoes
 {
     [Migration(20240705102200)]
     public class _20240705102200_AdicionarAgendamento : Migration
