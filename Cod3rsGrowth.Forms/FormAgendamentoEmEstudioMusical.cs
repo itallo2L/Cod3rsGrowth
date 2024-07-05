@@ -159,10 +159,23 @@ namespace Cod3rsGrowth.Forms
                     var agendamento = _servicoAgendamento.ObterPorId(linhaDoAgendamento.Id);
                     if (agendamento != null)
                     {
-                         e.Value = Regex.Replace(agendamento.CpfResponsavel, "(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+                        e.Value = Regex.Replace(agendamento.CpfResponsavel, "(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
                     }
                 }
             }
+        }
+
+        private void EventoAoClicarEmCadastrarEstudio(object sender, EventArgs e)
+        {
+            var cadastrarEstudioMusical = new FormCadastrarEstudioMusical(_servicoAgendamento, _servicoEstudioMusical);
+            cadastrarEstudioMusical.ShowDialog();
+            dataGridEstudioMusical.DataSource = _servicoEstudioMusical.ObterTodos();
+        }
+
+        private void EventoAoClicarEmCadastrarAgendamento(object sender, EventArgs e)
+        {
+            var cadastrarAgendamento = new FormCadastroDeAgendamento(_servicoAgendamento, _servicoEstudioMusical);
+            cadastrarAgendamento.ShowDialog();
         }
     }
 }

@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             btnAdicionarEstudioMusical = new Button();
             btnAtualizarEstudioMusical = new Button();
             txtBuscarEstudio = new TextBox();
             tabAgendamentoEmEstudioMusical = new TabControl();
             tabEstudioMusical = new TabPage();
+            lblEstudioMusicalEstaAberto = new Label();
             btnLimparFiltrosDeBuscaDeEstudioEEstaAberto = new Button();
             checkBoxNaoEstaAberto = new CheckBox();
             checkBoxEstaAbertoSim = new CheckBox();
-            lblEstaAberto = new Label();
             dataGridEstudioMusical = new DataGridView();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             nomeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -92,17 +92,20 @@
             // 
             btnAdicionarEstudioMusical.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnAdicionarEstudioMusical.Cursor = Cursors.Hand;
+            btnAdicionarEstudioMusical.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             btnAdicionarEstudioMusical.Location = new Point(1007, 391);
             btnAdicionarEstudioMusical.Name = "btnAdicionarEstudioMusical";
             btnAdicionarEstudioMusical.Size = new Size(75, 23);
             btnAdicionarEstudioMusical.TabIndex = 0;
             btnAdicionarEstudioMusical.Text = "Adicionar";
             btnAdicionarEstudioMusical.UseVisualStyleBackColor = true;
+            btnAdicionarEstudioMusical.Click += EventoAoClicarEmCadastrarEstudio;
             // 
             // btnAtualizarEstudioMusical
             // 
             btnAtualizarEstudioMusical.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnAtualizarEstudioMusical.Cursor = Cursors.Hand;
+            btnAtualizarEstudioMusical.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             btnAtualizarEstudioMusical.Location = new Point(1088, 391);
             btnAtualizarEstudioMusical.Name = "btnAtualizarEstudioMusical";
             btnAtualizarEstudioMusical.Size = new Size(75, 23);
@@ -113,7 +116,7 @@
             // txtBuscarEstudio
             // 
             txtBuscarEstudio.AcceptsReturn = true;
-            txtBuscarEstudio.Cursor = Cursors.Hand;
+            txtBuscarEstudio.Cursor = Cursors.IBeam;
             txtBuscarEstudio.Location = new Point(8, 50);
             txtBuscarEstudio.Name = "txtBuscarEstudio";
             txtBuscarEstudio.PlaceholderText = "Digite o nome do estúdio";
@@ -135,10 +138,10 @@
             // 
             // tabEstudioMusical
             // 
+            tabEstudioMusical.Controls.Add(lblEstudioMusicalEstaAberto);
             tabEstudioMusical.Controls.Add(btnLimparFiltrosDeBuscaDeEstudioEEstaAberto);
             tabEstudioMusical.Controls.Add(checkBoxNaoEstaAberto);
             tabEstudioMusical.Controls.Add(checkBoxEstaAbertoSim);
-            tabEstudioMusical.Controls.Add(lblEstaAberto);
             tabEstudioMusical.Controls.Add(dataGridEstudioMusical);
             tabEstudioMusical.Controls.Add(btnDeletarEstudioMusical);
             tabEstudioMusical.Controls.Add(txtBuscarEstudio);
@@ -151,6 +154,16 @@
             tabEstudioMusical.TabIndex = 0;
             tabEstudioMusical.Text = "Estúdio Musical";
             tabEstudioMusical.UseVisualStyleBackColor = true;
+            // 
+            // lblEstudioMusicalEstaAberto
+            // 
+            lblEstudioMusicalEstaAberto.AutoSize = true;
+            lblEstudioMusicalEstaAberto.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            lblEstudioMusicalEstaAberto.Location = new Point(282, 27);
+            lblEstudioMusicalEstaAberto.Name = "lblEstudioMusicalEstaAberto";
+            lblEstudioMusicalEstaAberto.Size = new Size(94, 20);
+            lblEstudioMusicalEstaAberto.TabIndex = 21;
+            lblEstudioMusicalEstaAberto.Text = "Está Aberto?";
             // 
             // btnLimparFiltrosDeBuscaDeEstudioEEstaAberto
             // 
@@ -189,19 +202,6 @@
             checkBoxEstaAbertoSim.Text = "Sim";
             checkBoxEstaAbertoSim.UseVisualStyleBackColor = true;
             checkBoxEstaAbertoSim.CheckedChanged += EventoDeCheckBoxEstaAbertoAoSelecionarSim;
-            // 
-            // lblEstaAberto
-            // 
-            lblEstaAberto.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            lblEstaAberto.BackColor = Color.Transparent;
-            lblEstaAberto.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            lblEstaAberto.Location = new Point(279, 31);
-            lblEstaAberto.Name = "lblEstaAberto";
-            lblEstaAberto.RightToLeft = RightToLeft.No;
-            lblEstaAberto.Size = new Size(108, 25);
-            lblEstaAberto.TabIndex = 10;
-            lblEstaAberto.Text = "Está Aberto?";
-            lblEstaAberto.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // dataGridEstudioMusical
             // 
@@ -256,6 +256,7 @@
             // 
             btnDeletarEstudioMusical.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnDeletarEstudioMusical.Cursor = Cursors.Hand;
+            btnDeletarEstudioMusical.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             btnDeletarEstudioMusical.Location = new Point(1169, 391);
             btnDeletarEstudioMusical.Name = "btnDeletarEstudioMusical";
             btnDeletarEstudioMusical.Size = new Size(75, 23);
@@ -452,7 +453,7 @@
             // 
             // txtBuscarAgendamento
             // 
-            txtBuscarAgendamento.Cursor = Cursors.Hand;
+            txtBuscarAgendamento.Cursor = Cursors.IBeam;
             txtBuscarAgendamento.Location = new Point(6, 50);
             txtBuscarAgendamento.Name = "txtBuscarAgendamento";
             txtBuscarAgendamento.PlaceholderText = "Digite o nome do responsável";
@@ -495,6 +496,7 @@
             btnAdicionarAgendamento.TabIndex = 6;
             btnAdicionarAgendamento.Text = "Adicionar";
             btnAdicionarAgendamento.UseVisualStyleBackColor = true;
+            btnAdicionarAgendamento.Click += EventoAoClicarEmCadastrarAgendamento;
             // 
             // dataGridAgendamento
             // 
@@ -559,9 +561,9 @@
             // valorTotalDataGridViewTextBoxColumn
             // 
             valorTotalDataGridViewTextBoxColumn.DataPropertyName = "ValorTotal";
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = "R$";
-            valorTotalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = "R$";
+            valorTotalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
             valorTotalDataGridViewTextBoxColumn.HeaderText = "Valor Total";
             valorTotalDataGridViewTextBoxColumn.Name = "valorTotalDataGridViewTextBoxColumn";
             valorTotalDataGridViewTextBoxColumn.ReadOnly = true;
@@ -661,5 +663,6 @@
         private DataGridViewTextBoxColumn valorTotalDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn estiloMusicalDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn idEstudioDataGridViewTextBoxColumn;
+        private Label lblEstudioMusicalEstaAberto;
     }
 }
