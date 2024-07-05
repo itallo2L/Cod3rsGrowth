@@ -1,6 +1,6 @@
-﻿using Cod3rsGrowth.Dominio.Migracoes;
-using Cod3rsGrowth.Dominio.Servicos;
+﻿using Cod3rsGrowth.Dominio.Servicos;
 using Cod3rsGrowth.Forms.InjecaoDoBancoDeDados;
+using Cod3rsGrowth.Infra.Migracoes;
 using Cod3rsGrowth.Servico.Servicos;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,7 +35,7 @@ namespace Cod3rsGrowth.Forms
                 .AddFluentMigratorCore().ConfigureRunner(rb => rb
                 .AddSqlServer()
                 .WithGlobalConnectionString(stringDeConexao)
-                .ScanIn(typeof(_20240626091000_AdicionarEstudioMusical).Assembly).For.Migrations())
+                .ScanIn(typeof(_20240705102000_AdicionarEstudioMusical).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
         }
