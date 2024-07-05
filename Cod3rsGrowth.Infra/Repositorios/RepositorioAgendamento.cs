@@ -44,17 +44,25 @@ namespace Cod3rsGrowth.Infra.Repositorios
             var listaAgendamento = _bd.GetTable<Agendamento>().AsQueryable();
 
             if (!string.IsNullOrEmpty(filtro?.NomeResponsavel))
-            {
                 listaAgendamento = listaAgendamento.Where(agendamento => agendamento.NomeResponsavel.Contains(filtro.NomeResponsavel, StringComparison.OrdinalIgnoreCase));
-            }
-            if (filtro?.DataEHoraDeEntrada != null)
-            {
-                listaAgendamento = listaAgendamento.Where(agendamento => agendamento.DataEHoraDeEntrada == filtro.DataEHoraDeEntrada);
-            }
-            if (filtro?.ValorTotal != null)
-            {
-                listaAgendamento = listaAgendamento.Where(agendamento => agendamento.ValorTotal == filtro.ValorTotal);
-            }
+
+            if (filtro?.DataMinima != null)
+                listaAgendamento = listaAgendamento.Where(agendamento => agendamento.DataEHoraDeEntrada >= filtro.DataMinima);
+
+            if (filtro?.DataMaxima != null)
+                listaAgendamento = listaAgendamento.Where(agendamento => agendamento.DataEHoraDeEntrada <= filtro.DataMaxima);
+
+            const int naoPodeSerNegativo = 0;
+            if (filtro?.ValorMinimo != null && filtro?.ValorMinimo != naoPodeSerNegativo)
+                listaAgendamento = listaAgendamento.Where(agendamento => agendamento.ValorTotal >= filtro.ValorMinimo);
+
+            if (filtro?.ValorMaximo != null && filtro?.ValorMaximo != naoPodeSerNegativo)
+                listaAgendamento = listaAgendamento.Where(agendamento => agendamento.ValorTotal <= filtro.ValorMaximo);
+
+            const int indexDoEnumIndefinido = 0;
+            if (filtro?.EstiloMusical != null && filtro?.EstiloMusical > indexDoEnumIndefinido)
+                listaAgendamento = listaAgendamento.Where(agendamento => agendamento.EstiloMusical == filtro.EstiloMusical);
+
             return listaAgendamento.ToList();
         }
     }

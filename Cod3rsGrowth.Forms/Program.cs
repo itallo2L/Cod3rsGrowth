@@ -1,5 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Migracoes;
+using Cod3rsGrowth.Dominio.Servicos;
 using Cod3rsGrowth.Forms.InjecaoDoBancoDeDados;
+using Cod3rsGrowth.Servico.Servicos;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,7 +20,9 @@ namespace Cod3rsGrowth.Forms
 
             ServiceProvider = ExecutarInjecao();
             ApplicationConfiguration.Initialize();
-            Application.Run(new AgendamentoEmEstudioMusical());
+            var servicoAgendamento = ServiceProvider.GetRequiredService<ServicoAgendamento>();
+            var servicoEstudioMusical = ServiceProvider.GetRequiredService<ServicoEstudioMusical>();
+            Application.Run(new FormAgendamentoEmEstudioMusical(servicoAgendamento, servicoEstudioMusical));
         }
         public static IServiceProvider ServiceProvider { get; private set; }
 

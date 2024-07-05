@@ -43,13 +43,16 @@ namespace Cod3rsGrowth.Infra.Repositorios
         {
             var listaEstudioMusical = _bd.GetTable<EstudioMusical>().AsQueryable();
 
-            if (filtro?.EstaAberto != null)
-            {
-                listaEstudioMusical = listaEstudioMusical.Where(estudioMusical => estudioMusical.EstaAberto == filtro.EstaAberto);
-            }
             if (!string.IsNullOrEmpty(filtro?.Nome))
-            {
                 listaEstudioMusical = listaEstudioMusical.Where(estudioMusical => estudioMusical.Nome.Contains(filtro.Nome, StringComparison.OrdinalIgnoreCase));
+
+            if (filtro?.EstaAberto != null || filtro?.EstaFechado != null)
+            {
+                if (filtro?.EstaAberto == true)
+                    listaEstudioMusical = listaEstudioMusical.Where(estudioMusical => estudioMusical.EstaAberto == filtro.EstaAberto);
+
+                if (filtro?.EstaFechado == true)
+                    listaEstudioMusical = listaEstudioMusical.Where(estudioMusical => estudioMusical.EstaAberto != filtro.EstaFechado);
             }
 
             return listaEstudioMusical.ToList();
@@ -58,7 +61,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
         public bool VerificaSeEstudioTemNomeRepetido(EstudioMusical estudioMusical)
         {
             var estudioRepetido = !_bd.GetTable<EstudioMusical>().Any(estudio => estudio.Nome == estudioMusical.Nome && estudio.Id != estudioMusical.Id);
-                return estudioRepetido;
+            return estudioRepetido;
         }
     }
 }
