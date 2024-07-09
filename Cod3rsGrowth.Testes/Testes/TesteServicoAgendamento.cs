@@ -1,5 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.EnumEstiloMusical;
+using Cod3rsGrowth.Infra.Singleton;
 using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Testes.InjecaoDeDependencia;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,68 @@ namespace Cod3rsGrowth.Testes.Testes
         {
             _servicoAgendamento = ServiceProvider.GetService<ServicoAgendamento>()
             ?? throw new Exception($"Erro ao obter o serviço {nameof(ServicoAgendamento)}");
+        }
+
+        [Fact]
+        public void teste_validacao_estudio_em_uso_deve_salva_no_banco() //corrigir nome
+        {
+            var estudio = new EstudioMusical
+            {
+                EstaAberto = true,
+                Nome = "Samuel Aaaag",
+                Id = 15
+            };
+
+            EstudioMusicalSingleton.InstanciaEstudioMusical.Add(estudio);
+
+            var agendamento = new Agendamento
+            {
+                Id = 1,
+                NomeResponsavel = "Paulo",
+                CpfResponsavel = "424.977.200-45",
+                DataEHoraDeEntrada = DateTime.Parse("30/07/2024 09:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("30/07/2024 10:00:00"),
+                ValorTotal = 200m,
+                EstiloMusical = EstiloMusical.Blues,
+                IdEstudio = 15
+            };
+
+            _servicoAgendamento.Adicionar(agendamento);
+
+            var itemSalvoNoBanco = _servicoAgendamento.ObterPorId(agendamento.Id);
+
+            Assert.Equal(agendamento.NomeResponsavel, itemSalvoNoBanco.NomeResponsavel);
+            Assert.Equal(agendamento.CpfResponsavel, itemSalvoNoBanco.CpfResponsavel);
+        }
+
+        [Fact]
+        public void teste_validacao_estudio_em_uso_deve_retornar_erro() //corrigir nome
+        {
+            var estudio = new EstudioMusical
+            {
+                EstaAberto = true,
+                Nome = "Samuel Aaaag",
+                Id = 15
+            };
+
+            EstudioMusicalSingleton.InstanciaEstudioMusical.Add(estudio);
+            
+            var lista = CriarLista();
+            AgendamentoSingleton.InstanciaAgendamento.AddRange(lista);
+
+            var agendamento = new Agendamento
+            {
+                Id = 1,
+                NomeResponsavel = "Paulo",
+                CpfResponsavel = "424.977.200-45",
+                DataEHoraDeEntrada = DateTime.Parse("30/07/2024 14:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("30/07/2024 15:00:00"),
+                ValorTotal = 200m,
+                EstiloMusical = EstiloMusical.Blues,
+                IdEstudio = 15
+            };
+
+            Assert.Throws<FluentValidation.ValidationException>(() => _servicoAgendamento.Adicionar(agendamento));
         }
 
         [Fact]
@@ -102,6 +165,17 @@ namespace Cod3rsGrowth.Testes.Testes
                     ValorTotal = 100,
                     EstiloMusical = EstiloMusical.Samba,
                     IdEstudio = 3
+                },
+                new Agendamento
+                {
+                    Id = 1,
+                    NomeResponsavel = "Sam",
+                    CpfResponsavel = "09631009047",
+                    DataEHoraDeEntrada = DateTime.Parse("30/07/2024 14:00:00"),
+                    DataEHoraDeSaida = DateTime.Parse("30/07/2024 15:00:00"),
+                    ValorTotal = 100,
+                    EstiloMusical = EstiloMusical.Samba,
+                    IdEstudio = 15
                 },
             };
             return listasDeAgendamentos;

@@ -176,6 +176,7 @@ namespace Cod3rsGrowth.Forms
         {
             var cadastrarAgendamento = new FormCadastroDeAgendamento(_servicoAgendamento, _servicoEstudioMusical);
             cadastrarAgendamento.ShowDialog();
+            dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos();
         }
     }
 }

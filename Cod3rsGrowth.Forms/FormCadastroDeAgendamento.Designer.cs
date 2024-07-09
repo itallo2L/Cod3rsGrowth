@@ -29,15 +29,16 @@
         private void InitializeComponent()
         {
             groupBoxAgendamento = new GroupBox();
+            textBoxNomeDoResponsavel = new TextBox();
+            comboBoxEstiloMusical = new ComboBox();
+            dataDeAgendamento = new DateTimePicker();
+            comboBoxListaDeEstudioMusical = new ComboBox();
             maskedTextBoxCpfDoResponsavel = new MaskedTextBox();
             btnCancelarCadastro = new Button();
             btnSalvarCadastro = new Button();
             textBoxValorTotal = new TextBox();
-            comboBoxEstiloMusical = new ComboBox();
             comboBoxHorarioFinal = new ComboBox();
             comboBoxHorarioInicial = new ComboBox();
-            dataDoAgendamento = new DateTimePicker();
-            textBoxNomeDoResponsavel = new TextBox();
             lblEstiloMusical = new Label();
             lblValorTotal = new Label();
             lblAteTalHorario = new Label();
@@ -47,22 +48,21 @@
             lblCpfDoResponsavel = new Label();
             lblNomeDoEstudioMusical = new Label();
             lblNomeDoResponsavel = new Label();
-            comboBoxListaDeEstudioMusical = new ComboBox();
             groupBoxAgendamento.SuspendLayout();
             SuspendLayout();
             // 
             // groupBoxAgendamento
             // 
+            groupBoxAgendamento.Controls.Add(textBoxNomeDoResponsavel);
+            groupBoxAgendamento.Controls.Add(comboBoxEstiloMusical);
+            groupBoxAgendamento.Controls.Add(dataDeAgendamento);
             groupBoxAgendamento.Controls.Add(comboBoxListaDeEstudioMusical);
             groupBoxAgendamento.Controls.Add(maskedTextBoxCpfDoResponsavel);
             groupBoxAgendamento.Controls.Add(btnCancelarCadastro);
             groupBoxAgendamento.Controls.Add(btnSalvarCadastro);
             groupBoxAgendamento.Controls.Add(textBoxValorTotal);
-            groupBoxAgendamento.Controls.Add(comboBoxEstiloMusical);
             groupBoxAgendamento.Controls.Add(comboBoxHorarioFinal);
             groupBoxAgendamento.Controls.Add(comboBoxHorarioInicial);
-            groupBoxAgendamento.Controls.Add(dataDoAgendamento);
-            groupBoxAgendamento.Controls.Add(textBoxNomeDoResponsavel);
             groupBoxAgendamento.Controls.Add(lblEstiloMusical);
             groupBoxAgendamento.Controls.Add(lblValorTotal);
             groupBoxAgendamento.Controls.Add(lblAteTalHorario);
@@ -78,6 +78,45 @@
             groupBoxAgendamento.TabIndex = 0;
             groupBoxAgendamento.TabStop = false;
             groupBoxAgendamento.Text = "Agendar Horário";
+            // 
+            // textBoxNomeDoResponsavel
+            // 
+            textBoxNomeDoResponsavel.Cursor = Cursors.IBeam;
+            textBoxNomeDoResponsavel.Location = new Point(6, 92);
+            textBoxNomeDoResponsavel.Name = "textBoxNomeDoResponsavel";
+            textBoxNomeDoResponsavel.PlaceholderText = "Ex: Victor Samuel Rodrigues";
+            textBoxNomeDoResponsavel.Size = new Size(230, 24);
+            textBoxNomeDoResponsavel.TabIndex = 23;
+            // 
+            // comboBoxEstiloMusical
+            // 
+            comboBoxEstiloMusical.Cursor = Cursors.Hand;
+            comboBoxEstiloMusical.FormattingEnabled = true;
+            comboBoxEstiloMusical.Items.AddRange(new object[] { "Todos", "Blues", "Jazz", "Música Clássica", "Sertanejo", "Gospel", "Eletrônica", "Samba" });
+            comboBoxEstiloMusical.Location = new Point(93, 360);
+            comboBoxEstiloMusical.Name = "comboBoxEstiloMusical";
+            comboBoxEstiloMusical.Size = new Size(143, 23);
+            comboBoxEstiloMusical.TabIndex = 22;
+            // 
+            // dataDeAgendamento
+            // 
+            dataDeAgendamento.Cursor = Cursors.Hand;
+            dataDeAgendamento.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataDeAgendamento.Format = DateTimePickerFormat.Short;
+            dataDeAgendamento.Location = new Point(4, 212);
+            dataDeAgendamento.MinDate = new DateTime(2000, 1, 1, 0, 0, 0, 0);
+            dataDeAgendamento.Name = "dataDeAgendamento";
+            dataDeAgendamento.Size = new Size(104, 23);
+            dataDeAgendamento.TabIndex = 21;
+            // 
+            // comboBoxListaDeEstudioMusical
+            // 
+            comboBoxListaDeEstudioMusical.FormattingEnabled = true;
+            comboBoxListaDeEstudioMusical.Location = new Point(6, 36);
+            comboBoxListaDeEstudioMusical.Name = "comboBoxListaDeEstudioMusical";
+            comboBoxListaDeEstudioMusical.Size = new Size(230, 23);
+            comboBoxListaDeEstudioMusical.TabIndex = 20;
+            comboBoxListaDeEstudioMusical.SelectedIndexChanged += EventoDaComboBoxNomeEstudio;
             // 
             // maskedTextBoxCpfDoResponsavel
             // 
@@ -107,6 +146,7 @@
             btnSalvarCadastro.TabIndex = 17;
             btnSalvarCadastro.Text = "Salvar";
             btnSalvarCadastro.UseVisualStyleBackColor = true;
+            btnSalvarCadastro.Click += EventoAoSalvarAgendamento;
             // 
             // textBoxValorTotal
             // 
@@ -116,21 +156,13 @@
             textBoxValorTotal.Size = new Size(82, 24);
             textBoxValorTotal.TabIndex = 16;
             // 
-            // comboBoxEstiloMusical
-            // 
-            comboBoxEstiloMusical.FormattingEnabled = true;
-            comboBoxEstiloMusical.Location = new Point(93, 360);
-            comboBoxEstiloMusical.Name = "comboBoxEstiloMusical";
-            comboBoxEstiloMusical.Size = new Size(143, 23);
-            comboBoxEstiloMusical.TabIndex = 15;
-            // 
             // comboBoxHorarioFinal
             // 
             comboBoxHorarioFinal.FormattingEnabled = true;
             comboBoxHorarioFinal.Items.AddRange(new object[] { "", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00" });
-            comboBoxHorarioFinal.Location = new Point(155, 278);
+            comboBoxHorarioFinal.Location = new Point(150, 278);
             comboBoxHorarioFinal.Name = "comboBoxHorarioFinal";
-            comboBoxHorarioFinal.Size = new Size(81, 23);
+            comboBoxHorarioFinal.Size = new Size(86, 23);
             comboBoxHorarioFinal.TabIndex = 14;
             comboBoxHorarioFinal.SelectedIndexChanged += EventoDaComboBoxHoraFinal;
             // 
@@ -143,23 +175,6 @@
             comboBoxHorarioInicial.Size = new Size(86, 23);
             comboBoxHorarioInicial.TabIndex = 13;
             comboBoxHorarioInicial.SelectedIndexChanged += EventoDaComboBoxHoraInicial;
-            // 
-            // dataDoAgendamento
-            // 
-            dataDoAgendamento.Format = DateTimePickerFormat.Short;
-            dataDoAgendamento.Location = new Point(6, 212);
-            dataDoAgendamento.Name = "dataDoAgendamento";
-            dataDoAgendamento.Size = new Size(100, 24);
-            dataDoAgendamento.TabIndex = 12;
-            // 
-            // textBoxNomeDoResponsavel
-            // 
-            textBoxNomeDoResponsavel.Cursor = Cursors.IBeam;
-            textBoxNomeDoResponsavel.Location = new Point(6, 92);
-            textBoxNomeDoResponsavel.Name = "textBoxNomeDoResponsavel";
-            textBoxNomeDoResponsavel.PlaceholderText = "Ex: Victor Samuel Rodrigues";
-            textBoxNomeDoResponsavel.Size = new Size(230, 24);
-            textBoxNomeDoResponsavel.TabIndex = 10;
             // 
             // lblEstiloMusical
             // 
@@ -242,14 +257,6 @@
             lblNomeDoResponsavel.TabIndex = 0;
             lblNomeDoResponsavel.Text = "Nome do Responsável:";
             // 
-            // comboBoxListaDeEstudioMusical
-            // 
-            comboBoxListaDeEstudioMusical.FormattingEnabled = true;
-            comboBoxListaDeEstudioMusical.Location = new Point(6, 36);
-            comboBoxListaDeEstudioMusical.Name = "comboBoxListaDeEstudioMusical";
-            comboBoxListaDeEstudioMusical.Size = new Size(230, 23);
-            comboBoxListaDeEstudioMusical.TabIndex = 20;
-            // 
             // FormCadastroDeAgendamento
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -281,14 +288,15 @@
         private Label lblEstiloMusical;
         private Label lblValorTotal;
         private TextBox textBoxNomeDoResponsavel;
-        private DateTimePicker dataDoAgendamento;
         private ComboBox comboBoxHorarioFinal;
         private ComboBox comboBoxHorarioInicial;
-        private ComboBox comboBoxEstiloMusical;
         private TextBox textBoxValorTotal;
         private Button btnCancelarCadastro;
         private Button btnSalvarCadastro;
         private MaskedTextBox maskedTextBoxCpfDoResponsavel;
         private ComboBox comboBoxListaDeEstudioMusical;
+        private DateTimePicker dataDeAgendamento;
+        private ComboBox comboBoxEstiloMusical;
+        private TextBox textBoxNomeAoCadastrarEstudio;
     }
 }
