@@ -18,7 +18,7 @@ namespace Cod3rsGrowth.Testes.Testes
         }
 
         [Fact]
-        public void teste_validacao_estudio_em_uso_deve_salva_no_banco() //corrigir nome
+        public void deve_certificar_se_o_agendamento_adicionado_esta_no_banco()
         {
             var estudio = new EstudioMusical
             {
@@ -49,8 +49,11 @@ namespace Cod3rsGrowth.Testes.Testes
             Assert.Equal(agendamento.CpfResponsavel, itemSalvoNoBanco.CpfResponsavel);
         }
 
-        [Fact]
-        public void teste_validacao_estudio_em_uso_deve_retornar_erro() //corrigir nome
+        [Theory] //Horário ocupado: das 12:00 até as 15:00
+        [InlineData("12:00:00", "13:00:00")] 
+        [InlineData("13:00:00", "16:00:00")]
+        [InlineData("14:00:00", "18:00:00")]
+        public void deve_retornar_erro_de_validacao_quando_ha_um_cadastro_no_mesmo_estudio_e_entre_data_e_hora(string horaEntrada, string horaSaida)
         {
             var estudio = new EstudioMusical
             {
@@ -69,8 +72,8 @@ namespace Cod3rsGrowth.Testes.Testes
                 Id = 1,
                 NomeResponsavel = "Paulo",
                 CpfResponsavel = "424.977.200-45",
-                DataEHoraDeEntrada = DateTime.Parse("30/07/2024 14:00:00"),
-                DataEHoraDeSaida = DateTime.Parse("30/07/2024 15:00:00"),
+                DataEHoraDeEntrada = DateTime.Parse($"30/07/2024 {horaEntrada}"),
+                DataEHoraDeSaida = DateTime.Parse($"30/07/2024 {horaSaida}"),
                 ValorTotal = 200m,
                 EstiloMusical = EstiloMusical.Blues,
                 IdEstudio = 15
@@ -171,7 +174,7 @@ namespace Cod3rsGrowth.Testes.Testes
                     Id = 1,
                     NomeResponsavel = "Sam",
                     CpfResponsavel = "09631009047",
-                    DataEHoraDeEntrada = DateTime.Parse("30/07/2024 14:00:00"),
+                    DataEHoraDeEntrada = DateTime.Parse("30/07/2024 12:00:00"),
                     DataEHoraDeSaida = DateTime.Parse("30/07/2024 15:00:00"),
                     ValorTotal = 100,
                     EstiloMusical = EstiloMusical.Samba,
