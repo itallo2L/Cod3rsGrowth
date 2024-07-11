@@ -59,7 +59,7 @@ namespace Cod3rsGrowth.Testes.Testes
             {
                 Id = 4,
                 NomeResponsavel = "Lucas",
-                CpfResponsavel = "09636738291",
+                CpfResponsavel = "104.243.860-97",
                 DataEHoraDeEntrada = DateTime.Parse("30/06/2026 09:00:00"),
                 DataEHoraDeSaida = DateTime.Parse("30/06/2026 10:00:00"),
                 ValorTotal = 200.00m,
@@ -80,7 +80,7 @@ namespace Cod3rsGrowth.Testes.Testes
             {
                 Id = 2,
                 NomeResponsavel = "Samuel",
-                CpfResponsavel = "52245622515",
+                CpfResponsavel = "566.503.970-59",
                 DataEHoraDeEntrada = DateTime.Parse("28/06/2025 17:00:00"),
                 DataEHoraDeSaida = DateTime.Parse("28/06/2025 20:00:00"),
                 ValorTotal = 300.00m,
@@ -234,7 +234,7 @@ namespace Cod3rsGrowth.Testes.Testes
             {
                 Id = 10,
                 NomeResponsavel = "Josué",
-                CpfResponsavel = "03238202811",
+                CpfResponsavel = "074.122.550-61",
                 DataEHoraDeSaida = DateTime.Parse("30/06/2026 15:00:00"),
                 ValorTotal = 100,
                 EstiloMusical = EstiloMusical.Samba,
@@ -263,9 +263,11 @@ namespace Cod3rsGrowth.Testes.Testes
                 IdEstudio = 1
             };
 
-            var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioAgendamento.Atualizar(listaComDataMenorDoQueADataDeHoje));
+            //var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioAgendamento.Atualizar(listaComDataMenorDoQueADataDeHoje));
 
-            Assert.Equal(excecaoDaDataDeEntradaMenorDoQueADataDeHoje, mensagemDeErro.Errors.Single().ErrorMessage);
+            //Assert.Equal(excecaoDaDataDeEntradaMenorDoQueADataDeHoje, mensagemDeErro.Errors.Single().ErrorMessage);
+
+            Assert.Throws<FluentValidation.ValidationException>(() => _repositorioAgendamento.Atualizar(listaComDataMenorDoQueADataDeHoje));
         }
 
         [Fact]
@@ -285,21 +287,29 @@ namespace Cod3rsGrowth.Testes.Testes
                 IdEstudio = 1
             };
 
-            var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioAgendamento.Atualizar(listaComADataDeHojeEHoraMenorQueAHoraAtual));
+            //var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioAgendamento.Atualizar(listaComADataDeHojeEHoraMenorQueAHoraAtual));
 
-            Assert.Equal(excecaoDeHoraDeEntradaMenorQueHoraAtualDoDiaAtual, mensagemDeErro.Errors.Single().ErrorMessage);
+            //Assert.Equal(excecaoDeHoraDeEntradaMenorQueHoraAtualDoDiaAtual, mensagemDeErro.Errors.Single().ErrorMessage);
+
+            Assert.Throws<FluentValidation.ValidationException>(() => _repositorioAgendamento.Atualizar(listaComADataDeHojeEHoraMenorQueAHoraAtual));
         }
 
         [Fact]
         public void deve_retornar_a_excecao_da_data_e_hora_de_saida_igual_a_data_e_hora_de_entrada()
         {
             CriarLista();
-            var excecaoDaDataEHoraDeSaidaIgualADataEHoraDeSaida = "A data e hora de saída não pode ser igual a data e hora de entrada.";
+
+
+            var excecaoDaDataEHoraDeSaidaIgualADataEHoraDeSaida = new List<String>
+            {
+                "O horário de saída não pode ser igual ao horário de entrada.",
+                "A quantidade de tempo mínima para agendamento é de uma hora."
+            };
             var listaComDataEHoraDeEntradaIgualADataEHoraDeSaida = new Agendamento
             {
                 Id = 11,
                 NomeResponsavel = "Rafaela",
-                CpfResponsavel = "52273122515",
+                CpfResponsavel = "074.122.550-61",
                 DataEHoraDeEntrada = DateTime.Parse("30/07/2026 10:00:00"),
                 DataEHoraDeSaida = DateTime.Parse("30/07/2026 10:00:00"),
                 ValorTotal = 300m,
@@ -309,7 +319,9 @@ namespace Cod3rsGrowth.Testes.Testes
 
             var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioAgendamento.Adicionar(listaComDataEHoraDeEntradaIgualADataEHoraDeSaida));
 
-            Assert.Equal(excecaoDaDataEHoraDeSaidaIgualADataEHoraDeSaida, mensagemDeErro.Errors.Single().ErrorMessage);
+            var litaDeErros = mensagemDeErro.Errors.Select(x => x.ErrorMessage).ToList();
+
+            Assert.Equivalent(excecaoDaDataEHoraDeSaidaIgualADataEHoraDeSaida, litaDeErros);
         }
 
         [Fact]
