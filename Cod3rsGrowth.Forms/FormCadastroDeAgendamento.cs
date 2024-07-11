@@ -3,6 +3,7 @@ using Cod3rsGrowth.Dominio.EnumEstiloMusical;
 using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.Servicos;
 using Cod3rsGrowth.Servico.Servicos;
+using FluentValidation;
 using LinqToDB;
 
 namespace Cod3rsGrowth.Forms
@@ -33,6 +34,9 @@ namespace Cod3rsGrowth.Forms
         {
             comboBoxHorarioInicial.Tag = dataDeAgendamento.Text;
             comboBoxHorarioInicial.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            var valorTotal = CalculaValorTotalEmRelacaoAoHorarioAgendado(comboBoxHorarioInicial.SelectedIndex, comboBoxHorarioFinal.SelectedIndex);
+            textBoxValorTotal.Text = $"R$ {valorTotal},00";
         }
 
         private void EventoDaComboBoxHoraFinal(object sender, EventArgs e)
@@ -55,8 +59,8 @@ namespace Cod3rsGrowth.Forms
 
                 maskedTextBoxCpfDoResponsavel.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
 
-                var textoDaHoraInicial = Convert.ToString(comboBoxHorarioInicial.Text).Replace(":00", "");
-                var textoDaHoraFinal = Convert.ToString(comboBoxHorarioFinal.Text).Replace(":00", "");
+                var textoDaHoraInicial = Convert.ToString(comboBoxHorarioInicial.Text).Replace(":00", " ");
+                var textoDaHoraFinal = Convert.ToString(comboBoxHorarioFinal.Text).Replace(":00", " ");
                 var horarioDeEntrada = Convert.ToInt32(textoDaHoraInicial);
                 var horarioDeSaida = Convert.ToInt32(textoDaHoraFinal);
 
@@ -73,10 +77,14 @@ namespace Cod3rsGrowth.Forms
 
                 _servicoAgendamento.Adicionar(agendamento);
                 this.Close();
-            } catch (Exception ex)
+            } catch (ValidationException ve)
             {
-                const string tituloDoErro = "Erro ao cadastrar:";
-                MostrarMensagemErro(tituloDoErro, ex.Message);
+                const string tituloDoErro = "Erro ao cadastrar";
+                var listaDeErros = ve.Errors.ToList();
+                var mensagemDeErro = "";
+                listaDeErros.ForEach(erro => mensagemDeErro += erro.ToString() + "\n");
+
+                MostrarMensagemErro(tituloDoErro, mensagemDeErro);
             }
         }
 

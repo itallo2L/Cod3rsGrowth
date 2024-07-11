@@ -10,18 +10,21 @@ namespace Cod3rsGrowth.Servico.Validacoes
         public ValidadorEstudioMusical(IRepositorioEstudioMusical repositorioEstudioMusical)
         {
             _repositorioEstudioMusical = repositorioEstudioMusical;
-            ClassLevelCascadeMode = CascadeMode.Stop;
+            ClassLevelCascadeMode = CascadeMode.Continue;
 
             RuleFor(EstudioMusical => EstudioMusical.Nome)
-                .NotEmpty().WithMessage("O campo Nome do Estúdio é obrigatório, por favor insira o nome do estúdio.")
-                .MaximumLength(25).WithMessage("O nome do estúdio excedeu o limite de 25 caracteres, digite um nome menor.");
+                .NotEmpty()
+                .WithMessage("O campo Nome do Estúdio é obrigatório, por favor insira o nome do estúdio.")
+                .MaximumLength(25)
+                .WithMessage("O nome do estúdio excedeu o limite de 25 caracteres, digite um nome menor.");
 
             RuleFor(EstudioMusical => EstudioMusical)
                 .Must(estudioMusical => _repositorioEstudioMusical.VerificaSeEstudioTemNomeRepetido(estudioMusical))
                 .WithMessage("Já existe um estúdio musical com esse nome.");
 
             RuleFor(EstudioMusical => EstudioMusical.EstaAberto)
-                .NotNull().WithMessage("Por favor informe se o estúdio está aberto ou não.");
+                .NotNull()
+                .WithMessage("Por favor informe se o estúdio está aberto ou não.");
 
         }
     }
