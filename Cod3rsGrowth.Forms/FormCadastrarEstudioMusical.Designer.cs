@@ -82,7 +82,7 @@
             btnSalvarCadastroDeEstudioMusical.TabIndex = 3;
             btnSalvarCadastroDeEstudioMusical.Text = "Salvar";
             btnSalvarCadastroDeEstudioMusical.UseVisualStyleBackColor = true;
-            btnSalvarCadastroDeEstudioMusical.Click += EventoAoclicarEmSalvar;
+            btnSalvarCadastroDeEstudioMusical.Click += EventoAoClicarEmSalvarEstudio;
             // 
             // checkBoxSimEstaAbertoAoCadastrarEstudio
             // 

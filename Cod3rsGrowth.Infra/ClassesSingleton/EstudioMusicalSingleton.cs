@@ -9,15 +9,13 @@ namespace Cod3rsGrowth.Infra.Singleton
         private static EstudioMusicalSingleton? _instanciaEstudioMusical;
         public static EstudioMusicalSingleton InstanciaEstudioMusical
         {
-           get
+            get
             {
-                    lock (typeof(EstudioMusicalSingleton))
-                    {
-                        if (_instanciaEstudioMusical == null)
-                        {
-                            _instanciaEstudioMusical = new EstudioMusicalSingleton();
-                        }
-                    }
+                lock (typeof(EstudioMusicalSingleton))
+                {
+                    if (_instanciaEstudioMusical == null)
+                        _instanciaEstudioMusical = new EstudioMusicalSingleton();
+                }
                 return _instanciaEstudioMusical;
             }
         }

@@ -25,7 +25,6 @@ namespace Cod3rsGrowth.Servico.Validacoes
             RuleFor(EstudioMusical => EstudioMusical.EstaAberto)
                 .NotNull()
                 .WithMessage("Por favor informe se o estúdio está aberto ou não.");
-
         }
     }
 }

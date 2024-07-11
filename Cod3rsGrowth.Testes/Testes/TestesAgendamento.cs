@@ -250,7 +250,7 @@ namespace Cod3rsGrowth.Testes.Testes
         public void deve_retornar_a_excecao_da_data_de_entrada_menor_do_que_a_data_de_hoje()
         {
             CriarLista();
-            var excecaoDaDAtaDeEntradaMenorDoQueADataDeHoje = "A data de entrada inserida é menor do que a data atual, por favor digite uma data de entrada válida.";
+            var excecaoDaDataDeEntradaMenorDoQueADataDeHoje = "A data de entrada inserida é menor do que a data atual, por favor digite uma data de entrada válida.";
             var listaComDataMenorDoQueADataDeHoje = new Agendamento
             {
                 Id = 1,
@@ -265,7 +265,7 @@ namespace Cod3rsGrowth.Testes.Testes
 
             var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _repositorioAgendamento.Atualizar(listaComDataMenorDoQueADataDeHoje));
 
-            Assert.Equal(excecaoDaDAtaDeEntradaMenorDoQueADataDeHoje, mensagemDeErro.Errors.Single().ErrorMessage);
+            Assert.Equal(excecaoDaDataDeEntradaMenorDoQueADataDeHoje, mensagemDeErro.Errors.Single().ErrorMessage);
         }
 
         [Fact]
@@ -335,7 +335,7 @@ namespace Cod3rsGrowth.Testes.Testes
         }
 
         [Fact]
-        public void deve_retornar_a_excecao_do_valor_total_maior_que_cinco_algarismos_e_duas_casas_decimais(    )
+        public void deve_retornar_a_excecao_do_valor_total_maior_que_cinco_algarismos_e_duas_casas_decimais()
         {
             CriarLista();
             var excecaoDoValorTotalMaiorQueCincoAlgarismosEDuasCasasDecimais = "O Valor Total excedeu o limite de 6 algarismos totais com duas casas decimais, por favor digite no formato exigido.";
@@ -478,7 +478,7 @@ namespace Cod3rsGrowth.Testes.Testes
                     EstiloMusical = EstiloMusical.Blues,
                     IdEstudio = 1
                 },
-                new Agendamento 
+                new Agendamento
                 {
                     Id = 2,
                     NomeResponsavel = "Rafael",

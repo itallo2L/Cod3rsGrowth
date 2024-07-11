@@ -115,7 +115,7 @@ namespace Cod3rsGrowth.Testes.Testes
         public void deve_retornar_uma_excecao_quando_o_id_for_inexistente()
         {
             CriarLista();
-            
+
             var listaComIdInexistente = new EstudioMusical
             {
                 Id = 10,

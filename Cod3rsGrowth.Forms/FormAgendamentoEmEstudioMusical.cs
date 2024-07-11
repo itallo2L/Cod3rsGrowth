@@ -21,7 +21,7 @@ namespace Cod3rsGrowth.Forms
 
             InitializeComponent();
             CarregarListas();
-            GerarColunaChaveEstrangeira();
+            GerarColunaParaFormatarDataGridAgendamento();
 
             const int iniciarNaOpcaoTodos = 0;
             cbEstiloMusical.SelectedIndex = iniciarNaOpcaoTodos;
@@ -51,10 +51,18 @@ namespace Cod3rsGrowth.Forms
             _filtroEstudioMusical.EstaAberto = GaranteQueSomenteUmaCheckBoxEstejaMarcada(checkBoxEstaAbertoSim, checkBoxNaoEstaAberto);
             dataGridEstudioMusical.DataSource = _servicoEstudioMusical.ObterTodos(_filtroEstudioMusical);
         }
+
         private void EventoDeCheckBoxEstaAbertoAoSelecionarNao(object sender, EventArgs e)
         {
             _filtroEstudioMusical.EstaFechado = GaranteQueSomenteUmaCheckBoxEstejaMarcada(checkBoxNaoEstaAberto, checkBoxEstaAbertoSim);
             dataGridEstudioMusical.DataSource = _servicoEstudioMusical.ObterTodos(_filtroEstudioMusical);
+        }
+
+        private void EventoAoClicarEmCadastrarEstudio(object sender, EventArgs e)
+        {
+            var cadastrarEstudioMusical = new FormCadastrarEstudioMusical(_servicoAgendamento, _servicoEstudioMusical);
+            cadastrarEstudioMusical.ShowDialog();
+            dataGridEstudioMusical.DataSource = _servicoEstudioMusical.ObterTodos();
         }
 
         private void EventoDeFiltroAoBuscarAgendamento(object sender, EventArgs e)
@@ -63,7 +71,13 @@ namespace Cod3rsGrowth.Forms
             dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
         }
 
-        private void EventoAoClicarNoBotaoDeLimparFiltroDeBuscaEDEEstiloMusical(object sender, EventArgs e)
+        private void EventoDaComboBoxAoFiltrarPeloEstiloMusical(object sender, EventArgs e)
+        {
+            _filtroAgendamento.EstiloMusical = (EstiloMusical)cbEstiloMusical.SelectedIndex;
+            dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
+        }
+
+        private void EventoAoClicarNoBotaoDeLimparFiltroDeBuscaEDeEstiloMusical(object sender, EventArgs e)
         {
             txtBuscarAgendamento.Clear();
             const int voltarParaOpcaoTodos = 0;
@@ -112,10 +126,11 @@ namespace Cod3rsGrowth.Forms
             numericValorMinimo.Value = limparValores;
         }
 
-        private void EventoDaComboBoxAoFiltrarPeloEstiloMusical(object sender, EventArgs e)
+        private void EventoAoClicarEmCadastrarAgendamento(object sender, EventArgs e)
         {
-            _filtroAgendamento.EstiloMusical = (EstiloMusical)cbEstiloMusical.SelectedIndex;
-            dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
+            var cadastrarAgendamento = new FormCadastroDeAgendamento(_servicoAgendamento, _servicoEstudioMusical);
+            cadastrarAgendamento.ShowDialog();
+            dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos();
         }
 
         private bool GaranteQueSomenteUmaCheckBoxEstejaMarcada(CheckBox marcada, CheckBox desmarcada)
@@ -128,7 +143,7 @@ namespace Cod3rsGrowth.Forms
             return marcada.Checked;
         }
 
-        private void GerarColunaChaveEstrangeira()
+        private void GerarColunaParaFormatarDataGridAgendamento()
         {
             dataGridAgendamento.AutoGenerateColumns = false;
             dataGridAgendamento.CellFormatting += EventoDeFormatacaoDoDataGridAgendamento;
@@ -163,20 +178,6 @@ namespace Cod3rsGrowth.Forms
                     }
                 }
             }
-        }
-
-        private void EventoAoClicarEmCadastrarEstudio(object sender, EventArgs e)
-        {
-            var cadastrarEstudioMusical = new FormCadastrarEstudioMusical(_servicoAgendamento, _servicoEstudioMusical);
-            cadastrarEstudioMusical.ShowDialog();
-            dataGridEstudioMusical.DataSource = _servicoEstudioMusical.ObterTodos();
-        }
-
-        private void EventoAoClicarEmCadastrarAgendamento(object sender, EventArgs e)
-        {
-            var cadastrarAgendamento = new FormCadastroDeAgendamento(_servicoAgendamento, _servicoEstudioMusical);
-            cadastrarAgendamento.ShowDialog();
-            dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos();
         }
     }
 }

@@ -50,7 +50,7 @@ namespace Cod3rsGrowth.Testes.Testes
         }
 
         [Theory] //Horário ocupado: das 12:00 até as 15:00
-        [InlineData("12:00:00", "13:00:00")] 
+        [InlineData("12:00:00", "13:00:00")]
         [InlineData("13:00:00", "16:00:00")]
         [InlineData("14:00:00", "18:00:00")]
         public void deve_retornar_erro_de_validacao_quando_ha_um_cadastro_no_mesmo_estudio_e_entre_data_e_hora(string horaEntrada, string horaSaida)
@@ -63,7 +63,7 @@ namespace Cod3rsGrowth.Testes.Testes
             };
 
             EstudioMusicalSingleton.InstanciaEstudioMusical.Add(estudio);
-            
+
             var lista = CriarLista();
             AgendamentoSingleton.InstanciaAgendamento.AddRange(lista);
 

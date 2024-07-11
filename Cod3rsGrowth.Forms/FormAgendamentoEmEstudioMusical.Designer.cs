@@ -325,7 +325,7 @@
             btnLimparPesquisaAgendamento.TabIndex = 29;
             btnLimparPesquisaAgendamento.Text = "Limpar Filtros";
             btnLimparPesquisaAgendamento.UseVisualStyleBackColor = true;
-            btnLimparPesquisaAgendamento.Click += EventoAoClicarNoBotaoDeLimparFiltroDeBuscaEDEEstiloMusical;
+            btnLimparPesquisaAgendamento.Click += EventoAoClicarNoBotaoDeLimparFiltroDeBuscaEDeEstiloMusical;
             // 
             // btnLimparFiltro
             // 

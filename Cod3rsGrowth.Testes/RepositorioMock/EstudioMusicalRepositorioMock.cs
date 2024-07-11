@@ -32,7 +32,7 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
                 ?? throw new Exception($"Erro ao obter o objeto, o ID: {id} é inexistente!");
             return objetoRetornado;
         }
-        
+
         public void Deletar(int id)
         {
             var objetoQueSeraRemovido = _instanciaEstudioMusical.Find(estudio => estudio.Id == id)

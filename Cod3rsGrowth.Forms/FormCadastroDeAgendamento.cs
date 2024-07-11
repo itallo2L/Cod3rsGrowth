@@ -5,6 +5,7 @@ using Cod3rsGrowth.Dominio.Servicos;
 using Cod3rsGrowth.Servico.Servicos;
 using FluentValidation;
 using LinqToDB;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Cod3rsGrowth.Forms
 {
@@ -23,11 +24,9 @@ namespace Cod3rsGrowth.Forms
             comboBoxListaDeEstudioMusical.DataSource = _servicoEstudioMusical.ObterTodos().Select(x => x.Nome).ToList();
         }
 
-        private void EventoAoCancelarCadastro(object sender, EventArgs e)
+        private void EventoDaComboBoxNomeEstudio(object sender, EventArgs e)
         {
-            DialogResult retorno = MessageBox.Show("Tem certeza que deseja cancelar o cadastro?", "Cancelar Cadastro", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (retorno == DialogResult.Yes)
-                this.Close();
+            comboBoxListaDeEstudioMusical.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void EventoDaComboBoxHoraInicial(object sender, EventArgs e)
@@ -50,6 +49,11 @@ namespace Cod3rsGrowth.Forms
 
         private void EventoAoSalvarAgendamento(object sender, EventArgs e)
         {
+            if (!ValidacaoDeTela())
+            {
+                return;
+            }
+
             try
             {
                 FiltroEstudioMusical filtroDoEstudio = new FiltroEstudioMusical();
@@ -59,9 +63,13 @@ namespace Cod3rsGrowth.Forms
 
                 maskedTextBoxCpfDoResponsavel.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
 
-                var textoDaHoraInicial = Convert.ToString(comboBoxHorarioInicial.Text).Replace(":00", " ");
-                var textoDaHoraFinal = Convert.ToString(comboBoxHorarioFinal.Text).Replace(":00", " ");
+                var textoDaHoraInicial = comboBoxHorarioInicial.Text.Replace(":00", "");
+                var textoDaHoraFinal = comboBoxHorarioFinal.Text.Replace(":00", "");
+
+                textoDaHoraInicial = textoDaHoraInicial == "" ? "0" : textoDaHoraInicial;
                 var horarioDeEntrada = Convert.ToInt32(textoDaHoraInicial);
+
+                textoDaHoraFinal = textoDaHoraFinal == "" ? "0" : textoDaHoraFinal;
                 var horarioDeSaida = Convert.ToInt32(textoDaHoraFinal);
 
                 var agendamento = new Agendamento()
@@ -77,9 +85,11 @@ namespace Cod3rsGrowth.Forms
 
                 _servicoAgendamento.Adicionar(agendamento);
                 this.Close();
-            } catch (ValidationException ve)
+            }
+            catch (ValidationException ve)
             {
                 const string tituloDoErro = "Erro ao cadastrar";
+
                 var listaDeErros = ve.Errors.ToList();
                 var mensagemDeErro = "";
                 listaDeErros.ForEach(erro => mensagemDeErro += erro.ToString() + "\n");
@@ -88,10 +98,11 @@ namespace Cod3rsGrowth.Forms
             }
         }
 
-        private void EventoDaComboBoxNomeEstudio(object sender, EventArgs e)
+        private void EventoAoCancelarCadastro(object sender, EventArgs e)
         {
-            comboBoxListaDeEstudioMusical.DropDownStyle = ComboBoxStyle.DropDownList;
-
+            DialogResult retorno = MessageBox.Show("Tem certeza que deseja cancelar o cadastro?", "Cancelar Cadastro", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (retorno == DialogResult.Yes)
+                this.Close();
         }
 
         private int MetodoParaCompararOsHorarios(int primeiroIndex, int segundoIndex)
@@ -115,5 +126,34 @@ namespace Cod3rsGrowth.Forms
         {
             MessageBox.Show(mensagemDeErro, tituloDoErro, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+        private bool ValidacaoDeTela()
+        {
+            const string tituloDoErro = "Erro de validação";
+            const int comboBoxNaoSelecionada = 0;
+            var mensagemDeErro = "";
+
+            if (textBoxNomeDoResponsavel.Text.IsNullOrEmpty())
+                mensagemDeErro += "O campo nome do responsável é obrigatório!\n";
+
+            maskedTextBoxCpfDoResponsavel.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            if (maskedTextBoxCpfDoResponsavel.Text.IsNullOrEmpty())
+                mensagemDeErro += "O campo CPF do responsável é obrigatório!\n";
+
+            if (comboBoxHorarioInicial.SelectedIndex == comboBoxNaoSelecionada)
+                mensagemDeErro += "O campo horário de entrada no estúdio é obrigatório!\n";
+
+            if (comboBoxHorarioFinal.SelectedIndex == comboBoxNaoSelecionada)
+                mensagemDeErro += "O campo horário de saída no estúdio é obrigatório!\n";
+
+            if (comboBoxEstiloMusical.SelectedIndex == comboBoxNaoSelecionada)
+                mensagemDeErro += "O campo estilo musical é obrigatório!\n";
+
+            if (mensagemDeErro.IsNullOrEmpty())
+                return true;
+            MostrarMensagemErro(tituloDoErro, mensagemDeErro);
+            return false;
+        }
+
     }
 }

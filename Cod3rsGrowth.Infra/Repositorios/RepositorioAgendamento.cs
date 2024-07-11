@@ -2,7 +2,6 @@
 using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.InterfacesRepositorio;
 using LinqToDB;
-using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,19 +65,5 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
             return listaAgendamento.ToList();
         }
-
-        //public bool VerificaSeHorarioEstaDisponivel(Agendamento agendamento)
-        //{
-        //    var listaDeAgendamento = _bd.GetTable<Agendamento>().ToList();
-        //    //if (listaDeAgendamento.Exists(estudio => estudio.IdEstudio == agendamento.IdEstudio))
-        //    //{
-        //        listaDeAgendamento.Find(estudio => estudio.IdEstudio == agendamento.IdEstudio && estudio.DataEHoraDeEntrada >= agendamento.DataEHoraDeEntrada && estudio.DataEHoraDeSaida <= agendamento.DataEHoraDeSaida);
-        //        if (listaDeAgendamento.IsNullOrEmpty())
-        //        {
-        //            return true;
-        //        }
-        //    //}
-        //    return false;
-        //}
     }
 }
