@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
 
         public void Adicionar(Agendamento agendamento)
         {
-          _instanciaAgendamento.Add(agendamento);
+            _instanciaAgendamento.Add(agendamento);
         }
 
         public void Atualizar(Agendamento agendamentoParaAtualizar)
