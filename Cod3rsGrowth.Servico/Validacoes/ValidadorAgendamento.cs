@@ -68,7 +68,7 @@ namespace Cod3rsGrowth.Servico.Validacoes
 
             RuleFor(Agendamento => Agendamento)
                 .Must(agendamento => VerificarEnumIndefinido(agendamento.EstiloMusical) != VerificarEnumIndefinido(EstiloMusical.EnumIndefinido))
-                .WithMessage("Estilo Musical indefinido, por favor defina o Estilo Musical");
+                .WithMessage("Estilo Musical indefinido, por favor defina o Estilo Musical.");
             _repositorioEstudioMusical = repositorioEstudioMusical;
         }
 

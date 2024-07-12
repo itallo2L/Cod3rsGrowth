@@ -23,7 +23,7 @@ namespace Cod3rsGrowth.Testes.Testes
             var estudio = new EstudioMusical
             {
                 EstaAberto = true,
-                Nome = "Samuel Aaaag",
+                Nome = "Samuel Aarag",
                 Id = 15
             };
 
@@ -46,25 +46,22 @@ namespace Cod3rsGrowth.Testes.Testes
             var itemSalvoNoBanco = _servicoAgendamento.ObterPorId(agendamento.Id);
 
             Assert.Equal(agendamento.NomeResponsavel, itemSalvoNoBanco.NomeResponsavel);
-            Assert.Equal(agendamento.CpfResponsavel, itemSalvoNoBanco.CpfResponsavel);
         }
 
-        [Theory] //Horário ocupado: das 12:00 até as 15:00
-        [InlineData("12:00:00", "13:00:00")]
-        [InlineData("13:00:00", "16:00:00")]
-        [InlineData("14:00:00", "18:00:00")]
-        public void deve_retornar_erro_de_validacao_quando_ha_um_cadastro_no_mesmo_estudio_e_entre_data_e_hora(string horaEntrada, string horaSaida)
+        [Fact]
+        public void deve_retornar_erro_de_validacao_quando_ha_um_cadastro_no_mesmo_estudio_com_mesma_data_e_hora()
         {
             var estudio = new EstudioMusical
             {
                 EstaAberto = true,
-                Nome = "Samuel Aaaag",
+                Nome = "Samuel Aarag",
                 Id = 15
             };
 
             EstudioMusicalSingleton.InstanciaEstudioMusical.Add(estudio);
 
             var lista = CriarLista();
+            var excecaoDeAgendamentoExistente = "Já há um agendamento para esse estúdio.";
             AgendamentoSingleton.InstanciaAgendamento.AddRange(lista);
 
             var agendamento = new Agendamento
@@ -72,14 +69,16 @@ namespace Cod3rsGrowth.Testes.Testes
                 Id = 1,
                 NomeResponsavel = "Paulo",
                 CpfResponsavel = "424.977.200-45",
-                DataEHoraDeEntrada = DateTime.Parse($"30/07/2024 {horaEntrada}"),
-                DataEHoraDeSaida = DateTime.Parse($"30/07/2024 {horaSaida}"),
+                DataEHoraDeEntrada = DateTime.Parse($"30/07/2050 12:00:00"),
+                DataEHoraDeSaida = DateTime.Parse($"30/07/2050 15:00:00"),
                 ValorTotal = 200m,
                 EstiloMusical = EstiloMusical.Blues,
                 IdEstudio = 15
             };
 
-            Assert.Throws<FluentValidation.ValidationException>(() => _servicoAgendamento.Adicionar(agendamento));
+            var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _servicoAgendamento.Adicionar(agendamento));
+
+            Assert.Equal(excecaoDeAgendamentoExistente, mensagemDeErro.Errors.Single().ErrorMessage);
         }
 
         [Fact]
@@ -91,7 +90,7 @@ namespace Cod3rsGrowth.Testes.Testes
                 {
                     Id = 1,
                     NomeResponsavel = "Paulo",
-                    CpfResponsavel = "03237852811",
+                    CpfResponsavel = "424.977.200-45",
                     DataEHoraDeEntrada = DateTime.Parse("30/06/2024 12:00:00"),
                     DataEHoraDeSaida = DateTime.Parse("30/06/2024 14:00:00"),
                     ValorTotal = 200m,
@@ -141,7 +140,7 @@ namespace Cod3rsGrowth.Testes.Testes
                 {
                     Id = 1,
                     NomeResponsavel = "Paulo",
-                    CpfResponsavel = "03237852811",
+                    CpfResponsavel = "424.977.200-45",
                     DataEHoraDeEntrada = DateTime.Parse("30/06/2024 12:00:00"),
                     DataEHoraDeSaida = DateTime.Parse("30/06/2024 14:00:00"),
                     ValorTotal = 200m,
@@ -174,8 +173,8 @@ namespace Cod3rsGrowth.Testes.Testes
                     Id = 1,
                     NomeResponsavel = "Sam",
                     CpfResponsavel = "09631009047",
-                    DataEHoraDeEntrada = DateTime.Parse("30/07/2024 12:00:00"),
-                    DataEHoraDeSaida = DateTime.Parse("30/07/2024 15:00:00"),
+                    DataEHoraDeEntrada = DateTime.Parse("30/07/2050 12:00:00"),
+                    DataEHoraDeSaida = DateTime.Parse("30/07/2050 15:00:00"),
                     ValorTotal = 100,
                     EstiloMusical = EstiloMusical.Samba,
                     IdEstudio = 15

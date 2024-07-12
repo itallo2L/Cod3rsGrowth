@@ -66,7 +66,7 @@ namespace Cod3rsGrowth.Testes.Testes
         [Fact]
         public void deve_atualizar_a_lista_de_estudio_musical()
         {
-            var listaComElementoAtualizado = new EstudioMusical
+            var elementoAtualizado = new EstudioMusical
             {
                 Id = 3,
                 Nome = "Samsungo",
@@ -74,11 +74,11 @@ namespace Cod3rsGrowth.Testes.Testes
             };
             CriarLista();
 
-            _repositorioEstudioMusical.Atualizar(listaComElementoAtualizado);
+            _repositorioEstudioMusical.Atualizar(elementoAtualizado);
             var listaParaAtualizar = EstudioMusicalSingleton.InstanciaEstudioMusical
-                .Where(estudioMusical => estudioMusical.Id == listaComElementoAtualizado.Id).FirstOrDefault();
+                .Where(estudioMusical => estudioMusical.Id == elementoAtualizado.Id).FirstOrDefault();
 
-            Assert.Equivalent(listaComElementoAtualizado, listaParaAtualizar);
+            Assert.Equivalent(elementoAtualizado, listaParaAtualizar);
         }
 
         [Fact]
