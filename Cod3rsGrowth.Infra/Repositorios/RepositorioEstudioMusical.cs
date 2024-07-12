@@ -29,8 +29,8 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public void Deletar(int id)
         {
-            var objetoQueSeraDeletado = _bd.GetTable<EstudioMusical>().Where(estudio => estudio.Id == id);
-            _bd.Delete(objetoQueSeraDeletado);
+            _bd.EstudioMusical
+                .Delete(x => x.Id == id);
         }
 
         public EstudioMusical ObterPorId(int id)

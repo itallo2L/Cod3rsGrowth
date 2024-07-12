@@ -3,6 +3,7 @@ using Cod3rsGrowth.Dominio.EnumEstiloMusical;
 using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.Servicos;
 using Cod3rsGrowth.Servico.Servicos;
+using System.Data;
 using System.Text.RegularExpressions;
 
 namespace Cod3rsGrowth.Forms
@@ -179,5 +180,36 @@ namespace Cod3rsGrowth.Forms
                 }
             }
         }
+
+        private static void MostrarMensagemErro(string tituloDoErro, string mensagemDeErro)
+        {
+            MessageBox.Show(mensagemDeErro, tituloDoErro, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void btnDeletarEstudioMusical_Click(object sender, EventArgs e)
+        {
+            const int posicaoDaColuna = 0;
+            const int quantidadeDeLinhasSelecionadas = 1;
+
+            if (dataGridEstudioMusical.SelectedRows.Count != quantidadeDeLinhasSelecionadas)
+            {
+                MostrarMensagemErro("Erro ao deletar", "Você selecionou mais de uma linha.");
+            }
+
+            try
+            {
+
+
+                var idDoEstudio = (int)dataGridEstudioMusical.CurrentRow.Cells[posicaoDaColuna].Value;
+
+                _servicoEstudioMusical.Deletar(idDoEstudio)
+
+                dataGridEstudioMusical.DataSource = _servicoEstudioMusical.ObterTodos(_filtroEstudioMusical);
+            }
+            catch (Exception ex) 
+            {
+
+            }
+            }
     }
 }

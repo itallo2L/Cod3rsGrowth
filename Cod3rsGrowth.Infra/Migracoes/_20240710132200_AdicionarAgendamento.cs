@@ -15,7 +15,7 @@ namespace Cod3rsGrowth.Infra.Migracoes
                 .WithColumn("DataEHoraDeSaida").AsDateTime().NotNullable()
                 .WithColumn("ValorTotal").AsDecimal().NotNullable()
                 .WithColumn("EstiloMusical").AsInt32()
-                .WithColumn("IdEstudio").AsInt64().ForeignKey("EstudioMusical", "Id");
+                .WithColumn("IdEstudio").AsInt64().ForeignKey("EstudioMusical", "Id").OnDeleteOrUpdate(System.Data.Rule.Cascade);
         }
 
         public override void Down()
