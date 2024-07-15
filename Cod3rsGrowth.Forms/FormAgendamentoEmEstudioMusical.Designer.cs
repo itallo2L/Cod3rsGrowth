@@ -222,6 +222,7 @@
             dataGridEstudioMusical.ReadOnly = true;
             dataGridEstudioMusical.RowHeadersVisible = false;
             dataGridEstudioMusical.RowTemplate.Height = 25;
+            dataGridEstudioMusical.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridEstudioMusical.Size = new Size(1240, 199);
             dataGridEstudioMusical.TabIndex = 6;
             // 
@@ -231,7 +232,6 @@
             idDataGridViewTextBoxColumn.HeaderText = "ID";
             idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
             idDataGridViewTextBoxColumn.ReadOnly = true;
-            idDataGridViewTextBoxColumn.Visible = false;
             // 
             // nomeDataGridViewTextBoxColumn
             // 
@@ -263,6 +263,7 @@
             btnDeletarEstudioMusical.TabIndex = 5;
             btnDeletarEstudioMusical.Text = "Deletar";
             btnDeletarEstudioMusical.UseVisualStyleBackColor = true;
+            btnDeletarEstudioMusical.Click += EventoAoDeletarEstudioMusical;
             // 
             // tabAgendamento
             // 
@@ -472,6 +473,7 @@
             btnDeletarAgendamento.TabIndex = 8;
             btnDeletarAgendamento.Text = "Deletar";
             btnDeletarAgendamento.UseVisualStyleBackColor = true;
+            btnDeletarAgendamento.Click += EventoAoDeletarAgendamento;
             // 
             // btnAtualizarAgendamento
             // 
@@ -518,6 +520,7 @@
             dataGridAgendamento.ReadOnly = true;
             dataGridAgendamento.RowHeadersVisible = false;
             dataGridAgendamento.RowTemplate.Height = 25;
+            dataGridAgendamento.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridAgendamento.Size = new Size(1242, 199);
             dataGridAgendamento.TabIndex = 0;
             dataGridAgendamento.CellFormatting += EventoDeFormatacaoDoDataGridAgendamento;

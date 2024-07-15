@@ -35,7 +35,7 @@ namespace Cod3rsGrowth.Forms
                 .AddFluentMigratorCore().ConfigureRunner(rb => rb
                 .AddSqlServer()
                 .WithGlobalConnectionString(stringDeConexao)
-                .ScanIn(typeof(_20240710132000_AdicionarEstudioMusical).Assembly).For.Migrations())
+                .ScanIn(typeof(_20240715092000_AdicionarEstudioMusical).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
         }

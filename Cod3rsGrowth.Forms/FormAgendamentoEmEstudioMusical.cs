@@ -3,6 +3,7 @@ using Cod3rsGrowth.Dominio.EnumEstiloMusical;
 using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.Servicos;
 using Cod3rsGrowth.Servico.Servicos;
+using System.Data;
 using System.Text.RegularExpressions;
 
 namespace Cod3rsGrowth.Forms
@@ -177,6 +178,66 @@ namespace Cod3rsGrowth.Forms
                         e.Value = Regex.Replace(agendamento.CpfResponsavel, "(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
                     }
                 }
+            }
+        }
+
+        private static void MostrarMensagemErro(string tituloDoErro, string mensagemDeErro)
+        {
+            MessageBox.Show(mensagemDeErro, tituloDoErro, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void EventoAoDeletarEstudioMusical(object sender, EventArgs e)
+        {
+            const int posicaoDaColunaId = 0;
+            const int posicaoDaColunaNome = 1;
+            const int quantidadeDeLinhasSelecionadas = 1;
+
+            if (dataGridEstudioMusical.SelectedRows.Count != quantidadeDeLinhasSelecionadas)
+            {
+                MostrarMensagemErro("Erro ao deletar", "Você selecionou mais de uma linha.");
+            }
+
+            try
+            {
+                var idDoEstudio = (int)dataGridEstudioMusical.CurrentRow.Cells[posicaoDaColunaId].Value;
+                var nomeDoEstudio = (string)dataGridEstudioMusical.CurrentRow.Cells[posicaoDaColunaNome].Value;
+
+                if (MessageBox.Show($"Todos os agendamentos relacionados a esse estúdio serão apagados!\nTem certeza de que deseja deletar o estúdio {nomeDoEstudio}?", "Deletar estúdio", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    _servicoEstudioMusical.Deletar(idDoEstudio);
+
+                dataGridEstudioMusical.DataSource = _servicoEstudioMusical.ObterTodos(_filtroEstudioMusical);
+                dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
+            }
+            catch (Exception ex)
+            {
+                MostrarMensagemErro("Erro ao deletar", ex.Message);
+            }
+        }
+
+        private void EventoAoDeletarAgendamento(object sender, EventArgs e)
+        {
+            const int colunaIdAgendamento = 0;
+            const int colunaNomeResponsavelAgendamento = 1;
+            const int quantidadeDeLinhasSelecionadas = 1;
+
+            if (dataGridAgendamento.SelectedRows.Count != quantidadeDeLinhasSelecionadas)
+            { 
+                MostrarMensagemErro("Erro ao deletar", "Você selecionou mais de uma linha.");
+            }
+
+            try
+            {
+                var idDoAgendamento = (int)dataGridAgendamento.CurrentRow.Cells[colunaIdAgendamento].Value;
+                var nomeDoResponsavelDoAgendamento = (string)dataGridAgendamento.CurrentRow.Cells[colunaNomeResponsavelAgendamento].Value;
+            
+                if(MessageBox.Show($"Tem certeza de que deseja deletar o agendamento do {nomeDoResponsavelDoAgendamento}?", "Deletar agendamento", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    _servicoAgendamento.Deletar(idDoAgendamento);
+
+                dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
+            }
+            catch(Exception ex)
+            {
+                MostrarMensagemErro("Erro ao deletar", ex.Message);
             }
         }
     }
