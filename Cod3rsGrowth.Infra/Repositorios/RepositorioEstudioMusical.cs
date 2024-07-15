@@ -30,7 +30,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
         public void Deletar(int id)
         {
             _bd.EstudioMusical
-                .Delete(x => x.Id == id);
+                .Delete(estudio => estudio.Id == id);
         }
 
         public EstudioMusical ObterPorId(int id)

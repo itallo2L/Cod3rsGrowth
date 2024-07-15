@@ -263,7 +263,7 @@
             btnDeletarEstudioMusical.TabIndex = 5;
             btnDeletarEstudioMusical.Text = "Deletar";
             btnDeletarEstudioMusical.UseVisualStyleBackColor = true;
-            btnDeletarEstudioMusical.Click += btnDeletarEstudioMusical_Click;
+            btnDeletarEstudioMusical.Click += EventoAoDeletarEstudioMusical;
             // 
             // tabAgendamento
             // 
@@ -473,6 +473,7 @@
             btnDeletarAgendamento.TabIndex = 8;
             btnDeletarAgendamento.Text = "Deletar";
             btnDeletarAgendamento.UseVisualStyleBackColor = true;
+            btnDeletarAgendamento.Click += EventoAoDeletarAgendamento;
             // 
             // btnAtualizarAgendamento
             // 
@@ -519,6 +520,7 @@
             dataGridAgendamento.ReadOnly = true;
             dataGridAgendamento.RowHeadersVisible = false;
             dataGridAgendamento.RowTemplate.Height = 25;
+            dataGridAgendamento.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridAgendamento.Size = new Size(1242, 199);
             dataGridAgendamento.TabIndex = 0;
             dataGridAgendamento.CellFormatting += EventoDeFormatacaoDoDataGridAgendamento;

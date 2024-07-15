@@ -2,8 +2,8 @@
 
 namespace Cod3rsGrowth.Infra.Migracoes
 {
-    [Migration(20240710132200)]
-    public class _20240710132200_AdicionarAgendamento : Migration
+    [Migration(20240715092200)]
+    public class _20240715092200_AdicionarAgendamento : Migration
     {
         public override void Up()
         {

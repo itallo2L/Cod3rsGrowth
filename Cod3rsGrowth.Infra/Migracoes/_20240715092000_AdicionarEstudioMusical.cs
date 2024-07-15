@@ -2,8 +2,8 @@
 
 namespace Cod3rsGrowth.Infra.Migracoes
 {
-    [Migration(20240710132000)]
-    public class _20240710132000_AdicionarEstudioMusical : Migration
+    [Migration(20240715092000)]
+    public class _20240715092000_AdicionarEstudioMusical : Migration
     {
         public override void Up()
         {
