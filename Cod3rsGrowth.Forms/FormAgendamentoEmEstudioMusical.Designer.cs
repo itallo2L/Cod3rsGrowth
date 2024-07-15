@@ -112,6 +112,7 @@
             btnAtualizarEstudioMusical.TabIndex = 1;
             btnAtualizarEstudioMusical.Text = "Atualizar";
             btnAtualizarEstudioMusical.UseVisualStyleBackColor = true;
+            btnAtualizarEstudioMusical.Click += EventoAoAtualizarEstudio;
             // 
             // txtBuscarEstudio
             // 
@@ -486,6 +487,7 @@
             btnAtualizarAgendamento.TabIndex = 7;
             btnAtualizarAgendamento.Text = "Atualizar";
             btnAtualizarAgendamento.UseVisualStyleBackColor = true;
+            btnAtualizarAgendamento.Click += EventoAoAtualizarAgendamento;
             // 
             // btnAdicionarAgendamento
             // 

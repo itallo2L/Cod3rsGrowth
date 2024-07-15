@@ -5,6 +5,7 @@ using Cod3rsGrowth.Dominio.Servicos;
 using Cod3rsGrowth.Servico.Servicos;
 using System.Data;
 using System.Text.RegularExpressions;
+using System.Xml;
 
 namespace Cod3rsGrowth.Forms
 {
@@ -63,7 +64,55 @@ namespace Cod3rsGrowth.Forms
         {
             var cadastrarEstudioMusical = new FormCadastrarEstudioMusical(_servicoAgendamento, _servicoEstudioMusical);
             cadastrarEstudioMusical.ShowDialog();
-            dataGridEstudioMusical.DataSource = _servicoEstudioMusical.ObterTodos();
+            dataGridEstudioMusical.DataSource = _servicoEstudioMusical.ObterTodos(_filtroEstudioMusical);
+        }
+
+        private void EventoAoAtualizarEstudio(object sender, EventArgs e)
+        {
+            const int indiceIdEstudio = 0;
+            const int quantidadeDeLinhasSelecionadas = 1;
+
+            if (dataGridEstudioMusical.SelectedRows.Count != quantidadeDeLinhasSelecionadas)
+            {
+                MostrarMensagemErro("Erro ao atualizar", "Você selecionou mais de uma linha.");
+                return;
+            }
+
+            var idDoEstudio = (int)dataGridEstudioMusical.CurrentRow.Cells[indiceIdEstudio].Value;
+            var estudio = _servicoEstudioMusical.ObterPorId(idDoEstudio);
+
+            var atualizarEstudioMusical = new FormCadastrarEstudioMusical(_servicoAgendamento, _servicoEstudioMusical, estudio);
+            atualizarEstudioMusical.ShowDialog();
+            dataGridEstudioMusical.DataSource = _servicoEstudioMusical.ObterTodos(_filtroEstudioMusical);
+        }
+
+        private void EventoAoDeletarEstudioMusical(object sender, EventArgs e)
+        {
+            const int posicaoDaColunaId = 0;
+            const int posicaoDaColunaNome = 1;
+            const int quantidadeDeLinhasSelecionadas = 1;
+
+            if (dataGridEstudioMusical.SelectedRows.Count != quantidadeDeLinhasSelecionadas)
+            {
+                MostrarMensagemErro("Erro ao deletar", "Você selecionou mais de uma linha.");
+                return;
+            }
+
+            try
+            {
+                var idDoEstudio = (int)dataGridEstudioMusical.CurrentRow.Cells[posicaoDaColunaId].Value;
+                var nomeDoEstudio = (string)dataGridEstudioMusical.CurrentRow.Cells[posicaoDaColunaNome].Value;
+
+                if (MessageBox.Show($"Todos os agendamentos relacionados a esse estúdio serão apagados!\nTem certeza de que deseja deletar o estúdio {nomeDoEstudio}?", "Deletar estúdio", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    _servicoEstudioMusical.Deletar(idDoEstudio);
+
+                dataGridEstudioMusical.DataSource = _servicoEstudioMusical.ObterTodos(_filtroEstudioMusical);
+                dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
+            }
+            catch (Exception ex)
+            {
+                MostrarMensagemErro("Erro ao deletar", ex.Message);
+            }
         }
 
         private void EventoDeFiltroAoBuscarAgendamento(object sender, EventArgs e)
@@ -134,6 +183,34 @@ namespace Cod3rsGrowth.Forms
             dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos();
         }
 
+        private void EventoAoDeletarAgendamento(object sender, EventArgs e)
+        {
+            const int colunaIdAgendamento = 0;
+            const int colunaNomeResponsavelAgendamento = 1;
+            const int quantidadeDeLinhasSelecionadas = 1;
+
+            if (dataGridAgendamento.SelectedRows.Count != quantidadeDeLinhasSelecionadas)
+            {
+                MostrarMensagemErro("Erro ao deletar", "Você selecionou mais de uma linha.");
+                return;
+            }
+
+            try
+            {
+                var idDoAgendamento = (int)dataGridAgendamento.CurrentRow.Cells[colunaIdAgendamento].Value;
+                var nomeDoResponsavelDoAgendamento = (string)dataGridAgendamento.CurrentRow.Cells[colunaNomeResponsavelAgendamento].Value;
+
+                if (MessageBox.Show($"Tem certeza de que deseja deletar o agendamento do {nomeDoResponsavelDoAgendamento}?", "Deletar agendamento", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    _servicoAgendamento.Deletar(idDoAgendamento);
+
+                dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
+            }
+            catch (Exception ex)
+            {
+                MostrarMensagemErro("Erro ao deletar", ex.Message);
+            }
+        }
+
         private bool GaranteQueSomenteUmaCheckBoxEstejaMarcada(CheckBox marcada, CheckBox desmarcada)
         {
             if (marcada.CheckState is CheckState.Checked)
@@ -186,59 +263,23 @@ namespace Cod3rsGrowth.Forms
             MessageBox.Show(mensagemDeErro, tituloDoErro, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void EventoAoDeletarEstudioMusical(object sender, EventArgs e)
+        private void EventoAoAtualizarAgendamento(object sender, EventArgs e)
         {
-            const int posicaoDaColunaId = 0;
-            const int posicaoDaColunaNome = 1;
-            const int quantidadeDeLinhasSelecionadas = 1;
-
-            if (dataGridEstudioMusical.SelectedRows.Count != quantidadeDeLinhasSelecionadas)
-            {
-                MostrarMensagemErro("Erro ao deletar", "Você selecionou mais de uma linha.");
-            }
-
-            try
-            {
-                var idDoEstudio = (int)dataGridEstudioMusical.CurrentRow.Cells[posicaoDaColunaId].Value;
-                var nomeDoEstudio = (string)dataGridEstudioMusical.CurrentRow.Cells[posicaoDaColunaNome].Value;
-
-                if (MessageBox.Show($"Todos os agendamentos relacionados a esse estúdio serão apagados!\nTem certeza de que deseja deletar o estúdio {nomeDoEstudio}?", "Deletar estúdio", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    _servicoEstudioMusical.Deletar(idDoEstudio);
-
-                dataGridEstudioMusical.DataSource = _servicoEstudioMusical.ObterTodos(_filtroEstudioMusical);
-                dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
-            }
-            catch (Exception ex)
-            {
-                MostrarMensagemErro("Erro ao deletar", ex.Message);
-            }
-        }
-
-        private void EventoAoDeletarAgendamento(object sender, EventArgs e)
-        {
-            const int colunaIdAgendamento = 0;
-            const int colunaNomeResponsavelAgendamento = 1;
+            const int indiceIdAgendamento = 0;
             const int quantidadeDeLinhasSelecionadas = 1;
 
             if (dataGridAgendamento.SelectedRows.Count != quantidadeDeLinhasSelecionadas)
-            { 
-                MostrarMensagemErro("Erro ao deletar", "Você selecionou mais de uma linha.");
+            {
+                MostrarMensagemErro("Erro ao atualizar", "Você selecionou mais de uma linha.");
+                return;
             }
 
-            try
-            {
-                var idDoAgendamento = (int)dataGridAgendamento.CurrentRow.Cells[colunaIdAgendamento].Value;
-                var nomeDoResponsavelDoAgendamento = (string)dataGridAgendamento.CurrentRow.Cells[colunaNomeResponsavelAgendamento].Value;
-            
-                if(MessageBox.Show($"Tem certeza de que deseja deletar o agendamento do {nomeDoResponsavelDoAgendamento}?", "Deletar agendamento", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    _servicoAgendamento.Deletar(idDoAgendamento);
+            var idDoAgendamento = (int)dataGridAgendamento.CurrentRow.Cells[indiceIdAgendamento].Value;
+            var agendamento = _servicoAgendamento.ObterPorId(idDoAgendamento);
 
-                dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
-            }
-            catch(Exception ex)
-            {
-                MostrarMensagemErro("Erro ao deletar", ex.Message);
-            }
+            var atualizarAgendamento = new FormCadastroDeAgendamento(_servicoAgendamento, _servicoEstudioMusical, agendamento);
+            atualizarAgendamento.ShowDialog();
+            dataGridAgendamento.DataSource = _servicoAgendamento.ObterTodos(_filtroAgendamento);
         }
     }
 }
