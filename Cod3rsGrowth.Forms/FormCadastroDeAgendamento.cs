@@ -22,25 +22,14 @@ namespace Cod3rsGrowth.Forms
 
             InitializeComponent();
 
-            if (_agendamento != null)
-                PreencherDadosAgendamento();
-
             const int iniciarNaPrimeiraOpcao = 0;
-            //comboBoxHorarioInicial.SelectedIndex = iniciarNaPrimeiraOpcao;
+            comboBoxHorarioInicial.SelectedIndex = iniciarNaPrimeiraOpcao;
             comboBoxHorarioFinal.SelectedIndex = iniciarNaPrimeiraOpcao;
+
             comboBoxListaDeEstudioMusical.DataSource = _servicoEstudioMusical.ObterTodos().Select(x => x.Nome).ToList();
 
-            var dataHora = _agendamento.DataEHoraDeEntrada;
-            var hora = dataHora.Hour.ToString().Length > 1
-                ? dataHora.Hour.ToString()
-                : $"0{dataHora.Hour}";
-
-            var minuto = dataHora.Minute.ToString().Length > 1
-                ? dataHora.Minute.ToString()
-                : $"0{dataHora.Minute}";
-
-            comboBoxHorarioInicial.Text =  $"{hora}:{minuto}";
-
+            if (_agendamento != null)
+                PreencherDadosAgendamento();
         }
 
         private void EventoDaComboBoxNomeEstudio(object sender, EventArgs e)
@@ -59,11 +48,11 @@ namespace Cod3rsGrowth.Forms
 
         private void EventoDaComboBoxHoraFinal(object sender, EventArgs e)
         {
-            //comboBoxHorarioFinal.Tag = dataDeAgendamento.Text;
-            //comboBoxHorarioFinal.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxHorarioFinal.Tag = dataDeAgendamento.Text;
+            comboBoxHorarioFinal.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            //var valorTotal = CalculaValorTotalEmRelacaoAoHorarioAgendado(comboBoxHorarioInicial.SelectedIndex, comboBoxHorarioFinal.SelectedIndex);
-            //textBoxValorTotal.Text = $"R$ {valorTotal},00";
+            var valorTotal = CalculaValorTotalEmRelacaoAoHorarioAgendado(comboBoxHorarioInicial.SelectedIndex, comboBoxHorarioFinal.SelectedIndex);
+            textBoxValorTotal.Text = $"R$ {valorTotal},00";
         }
 
         private void EventoAoSalvarAgendamento(object sender, EventArgs e)
@@ -85,10 +74,14 @@ namespace Cod3rsGrowth.Forms
                 var textoDaHoraInicial = comboBoxHorarioInicial.Text.Replace(":00", "");
                 var textoDaHoraFinal = comboBoxHorarioFinal.Text.Replace(":00", "");
 
-                textoDaHoraInicial = textoDaHoraInicial == "" ? "0" : textoDaHoraInicial;
+                textoDaHoraInicial = textoDaHoraInicial == "" 
+                    ? "0" 
+                    : textoDaHoraInicial;
                 var horarioDeEntrada = Convert.ToInt32(textoDaHoraInicial);
 
-                textoDaHoraFinal = textoDaHoraFinal == "" ? "0" : textoDaHoraFinal;
+                textoDaHoraFinal = textoDaHoraFinal == "" 
+                    ? "0" 
+                    : textoDaHoraFinal;
                 var horarioDeSaida = Convert.ToInt32(textoDaHoraFinal);
 
                 var agendamento = new Agendamento()
@@ -184,18 +177,28 @@ namespace Cod3rsGrowth.Forms
 
         private void PreencherDadosAgendamento()
         {
+            var estudioMusical = _servicoEstudioMusical.ObterPorId(_agendamento.IdEstudio);
+            comboBoxListaDeEstudioMusical.Text = estudioMusical.Nome.ToString();
             textBoxNomeDoResponsavel.Text = _agendamento.NomeResponsavel;
             maskedTextBoxCpfDoResponsavel.Text = _agendamento.CpfResponsavel;
-            dataDeAgendamento.Text = Convert.ToString(_agendamento.DataEHoraDeEntrada);
-            comboBoxHorarioInicial.Text = Convert.ToString(dataDeAgendamento.Value.Hour);
-            dataDeAgendamento.Value = _agendamento.DataEHoraDeSaida;
-            textBoxValorTotal.Text = Convert.ToString(_agendamento.ValorTotal);
-            comboBoxEstiloMusical.SelectedItem = _agendamento.EstiloMusical;
+            comboBoxHorarioInicial.Text = _agendamento.DataEHoraDeEntrada.Hour.ToString();
+            dataDeAgendamento.Text = _agendamento.DataEHoraDeSaida.ToString();
+            comboBoxHorarioFinal.Text = _agendamento.DataEHoraDeSaida.Hour.ToString();
+            textBoxValorTotal.Text = _agendamento.ValorTotal.ToString();
+            comboBoxEstiloMusical.Text = _agendamento.EstiloMusical.ToString();
 
-            var a = dataDeAgendamento.Value.Hour.ToString();
+            comboBoxHorarioInicial.Text = MascaraDeHorario(_agendamento.DataEHoraDeEntrada.Hour, comboBoxHorarioInicial);
+            comboBoxHorarioFinal.Text =  MascaraDeHorario(_agendamento.DataEHoraDeSaida.Hour, comboBoxHorarioFinal);
+        }
 
-           
-            //comboBoxHorarioFinal.Tag = a;
+        private string MascaraDeHorario(int DataEHoraPontoHour, ComboBox horario)
+        {
+            var dataHora = DataEHoraPontoHour;
+            var hora = DataEHoraPontoHour.ToString().Length > 1
+                ? DataEHoraPontoHour.ToString()
+                : $"0{DataEHoraPontoHour}";
+
+           return horario.Text = $"{hora}:00";
         }
     }
 }
