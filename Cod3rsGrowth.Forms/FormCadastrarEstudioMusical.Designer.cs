@@ -51,7 +51,7 @@
             groupBoxCadastraEstudio.Size = new Size(200, 246);
             groupBoxCadastraEstudio.TabIndex = 0;
             groupBoxCadastraEstudio.TabStop = false;
-            groupBoxCadastraEstudio.Text = "Cadastro de Estúdio";
+            groupBoxCadastraEstudio.Text = "Estúdio";
             // 
             // textBoxNomeAoCadastrarEstudio
             // 
@@ -124,7 +124,7 @@
             MaximizeBox = false;
             Name = "FormCadastrarEstudioMusical";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Cadastrar Estúdio";
+            Text = "Estúdio";
             groupBoxCadastraEstudio.ResumeLayout(false);
             groupBoxCadastraEstudio.PerformLayout();
             ResumeLayout(false);

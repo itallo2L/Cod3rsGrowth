@@ -64,7 +64,7 @@ namespace Cod3rsGrowth.Forms
 
         private void EventoAoClicarEmCancelarCadastro(object sender, EventArgs e)
         {
-            DialogResult retorno = MessageBox.Show("Tem certeza que deseja cancelar o cadastro?", "Cancelar Cadastro", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult retorno = MessageBox.Show("Tem certeza que deseja cancelar?", "Cancelar Operação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (retorno == DialogResult.Yes)
                 this.Close();
         }

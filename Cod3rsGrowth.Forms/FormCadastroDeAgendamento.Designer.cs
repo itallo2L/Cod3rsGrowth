@@ -77,7 +77,7 @@
             groupBoxAgendamento.Size = new Size(242, 441);
             groupBoxAgendamento.TabIndex = 0;
             groupBoxAgendamento.TabStop = false;
-            groupBoxAgendamento.Text = "Agendar Horário";
+            groupBoxAgendamento.Text = "Agendamento";
             // 
             // textBoxNomeDoResponsavel
             // 
@@ -269,7 +269,7 @@
             MaximizeBox = false;
             Name = "FormCadastroDeAgendamento";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Cadastro de Agendamento";
+            Text = "Agendamento";
             groupBoxAgendamento.ResumeLayout(false);
             groupBoxAgendamento.PerformLayout();
             ResumeLayout(false);
