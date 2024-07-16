@@ -97,6 +97,7 @@
             comboBoxEstiloMusical.Name = "comboBoxEstiloMusical";
             comboBoxEstiloMusical.Size = new Size(143, 23);
             comboBoxEstiloMusical.TabIndex = 22;
+            comboBoxEstiloMusical.SelectedIndexChanged += EventoDeComboBoxEstiloMusical;
             // 
             // dataDeAgendamento
             // 

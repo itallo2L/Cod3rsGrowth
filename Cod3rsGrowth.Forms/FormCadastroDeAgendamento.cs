@@ -25,6 +25,7 @@ namespace Cod3rsGrowth.Forms
             const int iniciarNaPrimeiraOpcao = 0;
             comboBoxHorarioInicial.SelectedIndex = iniciarNaPrimeiraOpcao;
             comboBoxHorarioFinal.SelectedIndex = iniciarNaPrimeiraOpcao;
+            comboBoxEstiloMusical.SelectedIndex = iniciarNaPrimeiraOpcao;
 
             comboBoxListaDeEstudioMusical.DataSource = _servicoEstudioMusical.ObterTodos().Select(x => x.Nome).ToList();
 
@@ -74,13 +75,13 @@ namespace Cod3rsGrowth.Forms
                 var textoDaHoraInicial = comboBoxHorarioInicial.Text.Replace(":00", "");
                 var textoDaHoraFinal = comboBoxHorarioFinal.Text.Replace(":00", "");
 
-                textoDaHoraInicial = textoDaHoraInicial == "" 
-                    ? "0" 
+                textoDaHoraInicial = textoDaHoraInicial == ""
+                    ? "0"
                     : textoDaHoraInicial;
                 var horarioDeEntrada = Convert.ToInt32(textoDaHoraInicial);
 
-                textoDaHoraFinal = textoDaHoraFinal == "" 
-                    ? "0" 
+                textoDaHoraFinal = textoDaHoraFinal == ""
+                    ? "0"
                     : textoDaHoraFinal;
                 var horarioDeSaida = Convert.ToInt32(textoDaHoraFinal);
 
@@ -188,7 +189,7 @@ namespace Cod3rsGrowth.Forms
             comboBoxEstiloMusical.Text = _agendamento.EstiloMusical.ToString();
 
             comboBoxHorarioInicial.Text = MascaraDeHorario(_agendamento.DataEHoraDeEntrada.Hour, comboBoxHorarioInicial);
-            comboBoxHorarioFinal.Text =  MascaraDeHorario(_agendamento.DataEHoraDeSaida.Hour, comboBoxHorarioFinal);
+            comboBoxHorarioFinal.Text = MascaraDeHorario(_agendamento.DataEHoraDeSaida.Hour, comboBoxHorarioFinal);
         }
 
         private string MascaraDeHorario(int DataEHoraPontoHour, ComboBox horario)
@@ -198,7 +199,12 @@ namespace Cod3rsGrowth.Forms
                 ? DataEHoraPontoHour.ToString()
                 : $"0{DataEHoraPontoHour}";
 
-           return horario.Text = $"{hora}:00";
+            return horario.Text = $"{hora}:00";
+        }
+
+        private void EventoDeComboBoxEstiloMusical(object sender, EventArgs e)
+        {
+           comboBoxEstiloMusical.DropDownStyle = ComboBoxStyle.DropDownList;
         }
     }
 }
