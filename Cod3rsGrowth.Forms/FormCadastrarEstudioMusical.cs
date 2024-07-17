@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Forms
             _servicoAgendamento = servicoAgendamento;
             _servicoEstudioMusical = servicoEstudioMusical;
             _estudioMusical = estudio;
-            
+
             InitializeComponent();
 
             if (_estudioMusical != null)
