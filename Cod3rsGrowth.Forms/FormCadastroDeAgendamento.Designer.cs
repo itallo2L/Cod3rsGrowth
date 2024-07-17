@@ -77,7 +77,7 @@
             groupBoxAgendamento.Size = new Size(242, 441);
             groupBoxAgendamento.TabIndex = 0;
             groupBoxAgendamento.TabStop = false;
-            groupBoxAgendamento.Text = "Agendar Horário";
+            groupBoxAgendamento.Text = "Agendamento";
             // 
             // textBoxNomeDoResponsavel
             // 
@@ -97,6 +97,7 @@
             comboBoxEstiloMusical.Name = "comboBoxEstiloMusical";
             comboBoxEstiloMusical.Size = new Size(143, 23);
             comboBoxEstiloMusical.TabIndex = 22;
+            comboBoxEstiloMusical.SelectedIndexChanged += EventoDeComboBoxEstiloMusical;
             // 
             // dataDeAgendamento
             // 
@@ -269,7 +270,7 @@
             MaximizeBox = false;
             Name = "FormCadastroDeAgendamento";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Cadastro de Agendamento";
+            Text = "Agendamento";
             groupBoxAgendamento.ResumeLayout(false);
             groupBoxAgendamento.PerformLayout();
             ResumeLayout(false);

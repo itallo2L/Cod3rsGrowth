@@ -10,11 +10,17 @@ namespace Cod3rsGrowth.Forms
     {
         private readonly ServicoAgendamento _servicoAgendamento;
         private readonly ServicoEstudioMusical _servicoEstudioMusical;
-        public FormCadastrarEstudioMusical(ServicoAgendamento servicoAgendamento, ServicoEstudioMusical servicoEstudioMusical)
+        private readonly EstudioMusical _estudioMusical;
+        public FormCadastrarEstudioMusical(ServicoAgendamento servicoAgendamento, ServicoEstudioMusical servicoEstudioMusical, EstudioMusical? estudio = null)
         {
             _servicoAgendamento = servicoAgendamento;
             _servicoEstudioMusical = servicoEstudioMusical;
+            _estudioMusical = estudio;
+
             InitializeComponent();
+
+            if (_estudioMusical != null)
+                PreencherDadosParaAtualizar();
         }
 
         private void EventoAoClicarEmSalvarEstudio(object sender, EventArgs e)
@@ -26,13 +32,22 @@ namespace Cod3rsGrowth.Forms
 
             try
             {
-                var estudioMuscial = new EstudioMusical()
+                var estudioMusical = new EstudioMusical()
                 {
                     Nome = textBoxNomeAoCadastrarEstudio.Text,
                     EstaAberto = checkBoxSimEstaAbertoAoCadastrarEstudio.Checked
                 };
 
-                _servicoEstudioMusical.Adicionar(estudioMuscial);
+                if (_estudioMusical != null)
+                {
+                    estudioMusical.Id = _estudioMusical.Id;
+                    _servicoEstudioMusical.Atualizar(estudioMusical);
+                }
+                else
+                {
+                    _servicoEstudioMusical.Adicionar(estudioMusical);
+                }
+
                 this.Close();
             }
             catch (ValidationException ve)
@@ -49,7 +64,7 @@ namespace Cod3rsGrowth.Forms
 
         private void EventoAoClicarEmCancelarCadastro(object sender, EventArgs e)
         {
-            DialogResult retorno = MessageBox.Show("Tem certeza que deseja cancelar o cadastro?", "Cancelar Cadastro", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult retorno = MessageBox.Show("Tem certeza que deseja cancelar?", "Cancelar Operação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (retorno == DialogResult.Yes)
                 this.Close();
         }
@@ -71,6 +86,12 @@ namespace Cod3rsGrowth.Forms
                 return true;
             MostrarMensagemErro(tituloDoErro, mensagemDeErro);
             return false;
+        }
+
+        private void PreencherDadosParaAtualizar()
+        {
+            textBoxNomeAoCadastrarEstudio.Text = _estudioMusical.Nome;
+            checkBoxSimEstaAbertoAoCadastrarEstudio.Checked = _estudioMusical.EstaAberto;
         }
     }
 }

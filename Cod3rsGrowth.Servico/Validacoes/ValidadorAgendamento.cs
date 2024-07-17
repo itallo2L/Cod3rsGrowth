@@ -116,18 +116,54 @@ namespace Cod3rsGrowth.Servico.Validacoes
         public bool EhEstudioDisponivel(Agendamento agendamento)
         {
             var agendamentos = _repositorioAgendamento.ObterTodos();
+            var jaExisteAgendamentoComMesmoId = agendamentos.Any(x => x.Id == agendamento.Id);
 
-            var agendamentoEstudio = agendamentos.FindAll(x => x.IdEstudio == agendamento.IdEstudio);
+            var jaExisteAgendamentoNesseEstudio = agendamentos.FindAll(x => x.IdEstudio == agendamento.IdEstudio);
 
-            var ehMesmaDataeHora = agendamentoEstudio.Any(x => (agendamento.DataEHoraDeEntrada >= x.DataEHoraDeEntrada) && (agendamento.DataEHoraDeEntrada < x.DataEHoraDeSaida));
-            if (ehMesmaDataeHora)
-                return !ehMesmaDataeHora;
+            if (jaExisteAgendamentoComMesmoId)
+            {
+                var agendamentoAtualNoBanco = _repositorioAgendamento.ObterPorId(agendamento.Id);
+                var ehNaMesmaDataEEstudioDoAgendamentoAtualNoBanco = (agendamento.IdEstudio == agendamentoAtualNoBanco.IdEstudio)
+                    && (agendamento.DataEHoraDeEntrada == agendamentoAtualNoBanco.DataEHoraDeEntrada)
+                    && (agendamento.DataEHoraDeSaida == agendamentoAtualNoBanco.DataEHoraDeSaida);
 
-            ehMesmaDataeHora = agendamentoEstudio.Any(x => (agendamento.DataEHoraDeSaida > x.DataEHoraDeEntrada) && (agendamento.DataEHoraDeSaida <= x.DataEHoraDeSaida));
-            if (ehMesmaDataeHora)
-                return !ehMesmaDataeHora;
+                if (ehNaMesmaDataEEstudioDoAgendamentoAtualNoBanco)
+                    return ehNaMesmaDataEEstudioDoAgendamentoAtualNoBanco;
 
-            return !ehMesmaDataeHora;
+                var horarioDeEntradaEstaEntreAlgumHorarioAgendado = jaExisteAgendamentoNesseEstudio.Any(x => (agendamento.DataEHoraDeEntrada >= x.DataEHoraDeEntrada) && (agendamento.DataEHoraDeEntrada < x.DataEHoraDeSaida));
+                if (horarioDeEntradaEstaEntreAlgumHorarioAgendado)
+                    return !horarioDeEntradaEstaEntreAlgumHorarioAgendado;
+
+                var horarioDeSaidaEstaEntreAlgumHorarioAgendado = jaExisteAgendamentoNesseEstudio.Any(x => (agendamento.DataEHoraDeSaida > x.DataEHoraDeEntrada) && (agendamento.DataEHoraDeSaida <= x.DataEHoraDeSaida));
+                if (horarioDeSaidaEstaEntreAlgumHorarioAgendado)
+                    return !horarioDeSaidaEstaEntreAlgumHorarioAgendado;
+
+                var horarioAgendadoEstaEntreHorarioAtualDoAgendamento = jaExisteAgendamentoNesseEstudio
+                    .Any(x => (agendamento.DataEHoraDeEntrada < x.DataEHoraDeEntrada) && (agendamento.DataEHoraDeSaida > x.DataEHoraDeSaida));
+                if (horarioAgendadoEstaEntreHorarioAtualDoAgendamento)
+                    return !horarioAgendadoEstaEntreHorarioAtualDoAgendamento;
+
+                return jaExisteAgendamentoComMesmoId;
+            }
+            else
+            {
+                var horarioDeEntradaEstaEntreAlgumHorarioAgendado = jaExisteAgendamentoNesseEstudio
+                    .Any(x => (agendamento.DataEHoraDeEntrada >= x.DataEHoraDeEntrada) && (agendamento.DataEHoraDeEntrada < x.DataEHoraDeSaida));
+                if (horarioDeEntradaEstaEntreAlgumHorarioAgendado)
+                    return !horarioDeEntradaEstaEntreAlgumHorarioAgendado;
+
+                var horarioDeSaidaEstaEntreAlgumHorarioAgendado = jaExisteAgendamentoNesseEstudio
+                    .Any(x => (agendamento.DataEHoraDeSaida > x.DataEHoraDeEntrada) && (agendamento.DataEHoraDeSaida <= x.DataEHoraDeSaida));
+                if (horarioDeSaidaEstaEntreAlgumHorarioAgendado)
+                    return !horarioDeSaidaEstaEntreAlgumHorarioAgendado;
+
+                var horarioAgendadoEstaEntreHorarioAtualDoAgendamento = jaExisteAgendamentoNesseEstudio
+                    .Any(x => (agendamento.DataEHoraDeEntrada < x.DataEHoraDeEntrada) && (agendamento.DataEHoraDeSaida > x.DataEHoraDeSaida));
+                if (horarioAgendadoEstaEntreHorarioAtualDoAgendamento)
+                    return !horarioAgendadoEstaEntreHorarioAtualDoAgendamento;
+            }
+
+            return !jaExisteAgendamentoComMesmoId;
         }
     }
 }
