@@ -10,15 +10,10 @@ namespace Cod3rsGrowth.Servico.Validacoes
     public class ValidadorAgendamento : AbstractValidator<Agendamento>
     {
         private readonly IRepositorioAgendamento _repositorioAgendamento;
-        private readonly IRepositorioEstudioMusical _repositorioEstudioMusical;
 
-        public ValidadorAgendamento(
-            IRepositorioAgendamento repositorioAgendamento,
-            IRepositorioEstudioMusical repositorioEstudioMusical
-            )
+        public ValidadorAgendamento(IRepositorioAgendamento repositorioAgendamento)
         {
             _repositorioAgendamento = repositorioAgendamento;
-            _repositorioEstudioMusical = repositorioEstudioMusical;
 
             ClassLevelCascadeMode = CascadeMode.Continue;
 
@@ -69,7 +64,6 @@ namespace Cod3rsGrowth.Servico.Validacoes
             RuleFor(Agendamento => Agendamento)
                 .Must(agendamento => VerificarEnumIndefinido(agendamento.EstiloMusical) != VerificarEnumIndefinido(EstiloMusical.EnumIndefinido))
                 .WithMessage("Estilo Musical indefinido, por favor defina o Estilo Musical.");
-            _repositorioEstudioMusical = repositorioEstudioMusical;
         }
 
         public static bool VerificarEnumIndefinido(EstiloMusical enumIndefinido)
