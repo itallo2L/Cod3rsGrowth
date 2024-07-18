@@ -11,13 +11,11 @@ namespace Cod3rsGrowth.Infra.Singleton
         {
             get
             {
-                    lock (typeof(AgendamentoSingleton))
-                    {
-                        if (_instanciaAgendamento == null)
-                        {
-                            _instanciaAgendamento = new AgendamentoSingleton();
-                        }
-                    }
+                lock (typeof(AgendamentoSingleton))
+                {
+                    if (_instanciaAgendamento == null)
+                        _instanciaAgendamento = new AgendamentoSingleton();
+                }
                 return _instanciaAgendamento;
             }
         }

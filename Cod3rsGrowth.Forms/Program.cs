@@ -1,13 +1,14 @@
-﻿using Cod3rsGrowth.Dominio.Migracoes;
+﻿using Cod3rsGrowth.Dominio.Servicos;
+using Cod3rsGrowth.Forms.InjecaoDoBancoDeDados;
+using Cod3rsGrowth.Infra.Migracoes;
+using Cod3rsGrowth.Servico.Servicos;
 using FluentMigrator.Runner;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Cod3rsGrowth.Forms
 {
     public static class Program
     {
-        public static IConfiguration Configuration { get; }
         [STAThread]
         static void Main()
         {
@@ -17,9 +18,13 @@ namespace Cod3rsGrowth.Forms
                 AtualizarBD(scope.ServiceProvider);
             }
 
+            ServiceProvider = ExecutarInjecao();
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            var servicoAgendamento = ServiceProvider.GetRequiredService<ServicoAgendamento>();
+            var servicoEstudioMusical = ServiceProvider.GetRequiredService<ServicoEstudioMusical>();
+            Application.Run(new FormAgendamentoEmEstudioMusical(servicoAgendamento, servicoEstudioMusical));
         }
+        public static IServiceProvider ServiceProvider { get; private set; }
 
         private static ServiceProvider CriarServicos()
         {
@@ -30,7 +35,7 @@ namespace Cod3rsGrowth.Forms
                 .AddFluentMigratorCore().ConfigureRunner(rb => rb
                 .AddSqlServer()
                 .WithGlobalConnectionString(stringDeConexao)
-                .ScanIn(typeof(_20240626091000_AdicionarEstudioMusical).Assembly).For.Migrations())
+                .ScanIn(typeof(_20240715092000_AdicionarEstudioMusical).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
         }
@@ -40,6 +45,13 @@ namespace Cod3rsGrowth.Forms
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 
             runner.MigrateUp();
+        }
+
+        public static IServiceProvider ExecutarInjecao()
+        {
+            var servicos = new ServiceCollection();
+            servicos.AdicionarDependenciasNoEscopo();
+            return servicos.BuildServiceProvider();
         }
     }
 }

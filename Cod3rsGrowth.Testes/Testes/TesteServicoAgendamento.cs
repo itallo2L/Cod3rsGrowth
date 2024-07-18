@@ -1,5 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.EnumEstiloMusical;
+using Cod3rsGrowth.Infra.Singleton;
 using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Testes.InjecaoDeDependencia;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,70 @@ namespace Cod3rsGrowth.Testes.Testes
         }
 
         [Fact]
+        public void deve_certificar_se_o_agendamento_adicionado_esta_no_banco()
+        {
+            var estudio = new EstudioMusical
+            {
+                EstaAberto = true,
+                Nome = "Samuel Aarag",
+                Id = 15
+            };
+
+            EstudioMusicalSingleton.InstanciaEstudioMusical.Add(estudio);
+
+            var agendamento = new Agendamento
+            {
+                Id = 1,
+                NomeResponsavel = "Paulo",
+                CpfResponsavel = "424.977.200-45",
+                DataEHoraDeEntrada = DateTime.Parse("30/07/2024 09:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("30/07/2024 10:00:00"),
+                ValorTotal = 200m,
+                EstiloMusical = EstiloMusical.Blues,
+                IdEstudio = 15
+            };
+
+            _servicoAgendamento.Adicionar(agendamento);
+
+            var itemSalvoNoBanco = _servicoAgendamento.ObterPorId(agendamento.Id);
+
+            Assert.Equal(agendamento.NomeResponsavel, itemSalvoNoBanco.NomeResponsavel);
+        }
+
+        [Fact]
+        public void deve_retornar_erro_de_validacao_quando_ha_um_cadastro_no_mesmo_estudio_com_mesma_data_e_hora()
+        {
+            var estudio = new EstudioMusical
+            {
+                EstaAberto = true,
+                Nome = "Samuel Aarag",
+                Id = 15
+            };
+
+            EstudioMusicalSingleton.InstanciaEstudioMusical.Add(estudio);
+
+            var lista = CriarLista();
+            var excecaoDeAgendamentoExistente = "Já há um agendamento para esse estúdio.";
+            AgendamentoSingleton.InstanciaAgendamento.AddRange(lista);
+
+            var agendamento = new Agendamento
+            {
+                Id = 1,
+                NomeResponsavel = "Paulo",
+                CpfResponsavel = "424.977.200-45",
+                DataEHoraDeEntrada = DateTime.Parse($"30/07/2050 12:00:00"),
+                DataEHoraDeSaida = DateTime.Parse($"30/07/2050 15:00:00"),
+                ValorTotal = 200m,
+                EstiloMusical = EstiloMusical.Blues,
+                IdEstudio = 15
+            };
+
+            var mensagemDeErro = Assert.Throws<FluentValidation.ValidationException>(() => _servicoAgendamento.Adicionar(agendamento));
+
+            Assert.Equal(excecaoDeAgendamentoExistente, mensagemDeErro.Errors.Single().ErrorMessage);
+        }
+
+        [Fact]
         public void deve_comparar_a_lista_obter_todos_com_a_lista_de_comparacao()
         {
             var listaDeComparacao = new List<Agendamento>
@@ -25,7 +90,7 @@ namespace Cod3rsGrowth.Testes.Testes
                 {
                     Id = 1,
                     NomeResponsavel = "Paulo",
-                    CpfResponsavel = "03237852811",
+                    CpfResponsavel = "424.977.200-45",
                     DataEHoraDeEntrada = DateTime.Parse("30/06/2024 12:00:00"),
                     DataEHoraDeSaida = DateTime.Parse("30/06/2024 14:00:00"),
                     ValorTotal = 200m,
@@ -75,7 +140,7 @@ namespace Cod3rsGrowth.Testes.Testes
                 {
                     Id = 1,
                     NomeResponsavel = "Paulo",
-                    CpfResponsavel = "03237852811",
+                    CpfResponsavel = "424.977.200-45",
                     DataEHoraDeEntrada = DateTime.Parse("30/06/2024 12:00:00"),
                     DataEHoraDeSaida = DateTime.Parse("30/06/2024 14:00:00"),
                     ValorTotal = 200m,
@@ -102,6 +167,17 @@ namespace Cod3rsGrowth.Testes.Testes
                     ValorTotal = 100,
                     EstiloMusical = EstiloMusical.Samba,
                     IdEstudio = 3
+                },
+                new Agendamento
+                {
+                    Id = 1,
+                    NomeResponsavel = "Sam",
+                    CpfResponsavel = "09631009047",
+                    DataEHoraDeEntrada = DateTime.Parse("30/07/2050 12:00:00"),
+                    DataEHoraDeSaida = DateTime.Parse("30/07/2050 15:00:00"),
+                    ValorTotal = 100,
+                    EstiloMusical = EstiloMusical.Samba,
+                    IdEstudio = 15
                 },
             };
             return listasDeAgendamentos;

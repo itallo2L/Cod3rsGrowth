@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
 
         public void Adicionar(Agendamento agendamento)
         {
-          _instanciaAgendamento.Add(agendamento);
+            _instanciaAgendamento.Add(agendamento);
         }
 
         public void Atualizar(Agendamento agendamentoParaAtualizar)
@@ -49,13 +49,13 @@ namespace Cod3rsGrowth.Testes.RepositorioMock
             {
                 listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.NomeResponsavel.Contains(filtro?.NomeResponsavel, StringComparison.OrdinalIgnoreCase));
             }
-            if (filtro?.DataEHoraDeEntrada != null)
+            if ((filtro?.DataMinima).HasValue)
             {
-                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.DataEHoraDeEntrada == filtro?.DataEHoraDeEntrada);
+                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.DataEHoraDeEntrada == filtro?.DataMinima);
             }
-            if (filtro?.ValorTotal != null)
+            if ((filtro?.ValorMinimo).HasValue)
             {
-                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.ValorTotal == filtro?.ValorTotal);
+                listaAgendamento = listaAgendamento.FindAll(agendamento => agendamento.ValorTotal == filtro?.ValorMinimo);
             }
             return listaAgendamento;
         }
