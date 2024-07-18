@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Filtros;
+﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Servico.Servicos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,11 +7,11 @@ namespace Cod3rsGrowth.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Agendamento : ControllerBase
+    public class AgendamentoController : ControllerBase
     {
         private readonly ServicoAgendamento _servicoAgendamento;
 
-        public Agendamento(ServicoAgendamento servicoAgendamento)
+        public AgendamentoController(ServicoAgendamento servicoAgendamento)
         {
             _servicoAgendamento = servicoAgendamento;
         }

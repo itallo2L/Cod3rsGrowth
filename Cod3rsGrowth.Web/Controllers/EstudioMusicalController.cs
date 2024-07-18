@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Filtros;
+﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.Servicos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,11 +7,11 @@ namespace Cod3rsGrowth.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EstudioMusical : ControllerBase
+    public class EstudioMusicalController : ControllerBase
     {
         private readonly ServicoEstudioMusical _servicoEstudioMusical;
 
-        public EstudioMusical(ServicoEstudioMusical servicoEstudioMusical)
+        public EstudioMusicalController(ServicoEstudioMusical servicoEstudioMusical)
         {
             _servicoEstudioMusical = servicoEstudioMusical;
         }
