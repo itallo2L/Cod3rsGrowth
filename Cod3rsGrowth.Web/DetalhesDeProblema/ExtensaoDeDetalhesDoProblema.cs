@@ -7,16 +7,16 @@ namespace Cod3rsGrowth.Web.DetalhesDeProblema
 {
     public static class ExtensaoDeDetalhesDoProblema
     {
-        public static void ManipuladorDeDetalhesDoProblema(this IApplicationBuilder app, ILoggerFactory loggerFactory)
+        public static void ManipuladorDetalhesDoProblema(this IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             app.UseExceptionHandler(construtor =>
             {
                 construtor.Run(async contexto =>
                 {
-                    var manipuladorDeExecao = contexto.Features.Get<IExceptionHandlerFeature>();
-                    if (manipuladorDeExecao != null)
+                    var erroDoManipuladorDaExcecao = contexto.Features.Get<IExceptionHandlerFeature>();
+                    if (erroDoManipuladorDaExcecao != null)
                     {
-                        var excecao = manipuladorDeExecao.Error;
+                        var excecao = erroDoManipuladorDaExcecao.Error;
                         var detalhesDoProblema = new ProblemDetails
                         {
                             Instance = contexto.Request.HttpContext.Request.Path
@@ -39,7 +39,7 @@ namespace Cod3rsGrowth.Web.DetalhesDeProblema
                         else
                         {
                             var logger = loggerFactory.CreateLogger("GlobalExceptionHandler");
-                            logger.LogError($"Unexpected error: {manipuladorDeExecao.Error}");
+                            logger.LogError($"Unexpected error: {erroDoManipuladorDaExcecao.Error}");
                             detalhesDoProblema.Title = excecao.Message;
                             detalhesDoProblema.Status = StatusCodes.Status500InternalServerError;
                             detalhesDoProblema.Detail = excecao.Message;
