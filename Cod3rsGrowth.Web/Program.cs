@@ -20,7 +20,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.ManipuladorDeDetalhesDoProblema(app.Services.GetRequiredService<ILoggerFactory>());
+app.ManipuladorDetalhesDoProblema(app.Services.GetRequiredService<ILoggerFactory>());
 
 app.UseHttpsRedirection();
 

@@ -17,7 +17,7 @@ namespace Cod3rsGrowth.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ObterTodos([FromBody] FiltroAgendamento filtro)
+        public IActionResult ObterTodos([FromQuery] FiltroAgendamento filtro)
         {
             throw new NotImplementedException();
         }
