@@ -1,3 +1,4 @@
+using Cod3rsGrowth.Web.DetalhesDeProblema;
 using Cod3rsGrowth.Web.InjecaoDeDependencia;
 
 var construtor = WebApplication.CreateBuilder(args);
@@ -18,6 +19,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.ManipuladorDeDetalhesDoProblema(app.Services.GetRequiredService<ILoggerFactory>());
 
 app.UseHttpsRedirection();
 
