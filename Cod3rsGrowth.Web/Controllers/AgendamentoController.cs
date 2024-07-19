@@ -19,7 +19,7 @@ namespace Cod3rsGrowth.Web.Controllers
         [HttpGet]
         public IActionResult ObterTodos([FromQuery] FiltroAgendamento filtro)
         {
-            return Ok(_servicoAgendamento.ObterTodos(filtro));
+            throw new NotImplementedException();
         }
 
         [HttpGet("{id}")]
