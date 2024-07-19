@@ -13,23 +13,23 @@ namespace Cod3rsGrowth.Web.DetalhesDeProblema
             {
                 construtor.Run(async contexto =>
                 {
-                    var erroDoManipuladorDaExcecao = contexto.Features.Get<IExceptionHandlerFeature>();
-                    if (erroDoManipuladorDaExcecao != null)
+                    var manipuladorDeExecao = contexto.Features.Get<IExceptionHandlerFeature>();
+                    if (manipuladorDeExecao != null)
                     {
-                        var excecao = erroDoManipuladorDaExcecao.Error;
+                        var erroDoManipuladorDaExcecao = manipuladorDeExecao.Error;
                         var detalhesDoProblema = new ProblemDetails
                         {
                             Instance = contexto.Request.HttpContext.Request.Path
                         };
 
-                        if (excecao is FluentValidation.ValidationException excecaoDeValidacao)
+                        if (erroDoManipuladorDaExcecao is FluentValidation.ValidationException excecaoDeValidacao)
                         {
                             detalhesDoProblema.Title = "Erro de validação";
                             detalhesDoProblema.Detail = excecaoDeValidacao.Message;
                             detalhesDoProblema.Type = "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.1";
                             detalhesDoProblema.Status = StatusCodes.Status400BadRequest;
                         }
-                        else if (excecao is SqlException sqlException)
+                        else if (erroDoManipuladorDaExcecao is SqlException sqlException)
                         {
                             detalhesDoProblema.Title = "Erro no Banco de Dados!";
                             detalhesDoProblema.Detail = sqlException.Message;
@@ -39,10 +39,10 @@ namespace Cod3rsGrowth.Web.DetalhesDeProblema
                         else
                         {
                             var logger = loggerFactory.CreateLogger("GlobalExceptionHandler");
-                            logger.LogError($"Unexpected error: {erroDoManipuladorDaExcecao.Error}");
-                            detalhesDoProblema.Title = excecao.Message;
+                            logger.LogError($"Unexpected error: {manipuladorDeExecao.Error}");
+                            detalhesDoProblema.Title = erroDoManipuladorDaExcecao.Message;
                             detalhesDoProblema.Status = StatusCodes.Status500InternalServerError;
-                            detalhesDoProblema.Detail = excecao.Message;
+                            detalhesDoProblema.Detail = erroDoManipuladorDaExcecao.Message;
                         }
 
                         contexto.Response.StatusCode = detalhesDoProblema.Status.Value;
