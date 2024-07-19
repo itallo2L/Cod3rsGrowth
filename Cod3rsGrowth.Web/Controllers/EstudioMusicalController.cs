@@ -28,10 +28,11 @@ namespace Cod3rsGrowth.Web.Controllers
             return Ok(_servicoEstudioMusical.ObterPorId(id));
         }
 
-        [HttpPut]
+        [HttpPost]
         public IActionResult Adicionar([FromBody] EstudioMusical estudioMusical)
         {
-            throw new NotImplementedException();
+            _servicoEstudioMusical.Adicionar(estudioMusical);
+            return Ok();
         }
 
         [HttpDelete("{id}")]
