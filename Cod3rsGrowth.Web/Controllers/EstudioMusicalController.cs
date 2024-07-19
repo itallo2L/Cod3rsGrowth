@@ -19,7 +19,7 @@ namespace Cod3rsGrowth.Web.Controllers
         [HttpGet]
         public IActionResult ObterTodos([FromQuery] FiltroEstudioMusical filtro)
         {
-            throw new NotImplementedException();
+            return Ok(_servicoEstudioMusical.ObterTodos(filtro));
         }
 
         [HttpGet("{id}")]
