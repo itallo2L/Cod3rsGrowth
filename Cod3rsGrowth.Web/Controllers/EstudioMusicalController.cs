@@ -25,7 +25,7 @@ namespace Cod3rsGrowth.Web.Controllers
         [HttpGet("{id}")]
         public IActionResult ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            return Ok(_servicoEstudioMusical.ObterPorId(id));
         }
 
         [HttpPut]
