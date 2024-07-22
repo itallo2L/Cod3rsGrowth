@@ -45,7 +45,8 @@ namespace Cod3rsGrowth.Web.Controllers
         [HttpDelete("{id}")]
         public IActionResult Deletar(int id)
         {
-            throw new NotImplementedException();
+            _servicoEstudioMusical.Deletar(id);
+            return NoContent();
         }
     }
 }
