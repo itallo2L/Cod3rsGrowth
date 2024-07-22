@@ -31,7 +31,8 @@ namespace Cod3rsGrowth.Web.Controllers
         [HttpPut]
         public IActionResult Adicionar([FromBody] Agendamento agendamento)
         {
-            throw new NotImplementedException();
+            _servicoAgendamento.Adicionar(agendamento);
+            return Ok();
         }
 
         [HttpDelete("{id}")]
