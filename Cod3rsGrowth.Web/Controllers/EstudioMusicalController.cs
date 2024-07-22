@@ -46,5 +46,6 @@ namespace Cod3rsGrowth.Web.Controllers
         public IActionResult Deletar(int id)
         {
             throw new NotImplementedException();
+        }
     }
 }
