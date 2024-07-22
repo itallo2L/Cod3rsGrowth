@@ -35,14 +35,15 @@ namespace Cod3rsGrowth.Web.Controllers
             return Ok();
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Deletar(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         [HttpPatch]
         public IActionResult Atualizar([FromBody] EstudioMusical estudioMusical)
+        {
+            _servicoEstudioMusical.Atualizar(estudioMusical);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Deletar(int id)
         {
             throw new NotImplementedException();
         }
