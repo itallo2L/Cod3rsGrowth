@@ -60,8 +60,8 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public bool VerificaSeEstudioTemNomeRepetido(EstudioMusical estudioMusical)
         {
-            var haEstudioRepetido = _bd.GetTable<EstudioMusical>().Any(estudio => estudio.Nome == estudioMusical.Nome && estudio.Id != estudioMusical.Id);
-            return !haEstudioRepetido;
+            var existeEstudioComMesmoNome = _bd.GetTable<EstudioMusical>().Any(estudio => estudio.Nome == estudioMusical.Nome && estudio.Id != estudioMusical.Id);
+            return !existeEstudioComMesmoNome;
         }
     }
 }
