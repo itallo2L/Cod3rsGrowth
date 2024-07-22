@@ -17,33 +17,36 @@ namespace Cod3rsGrowth.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ObterTodos([FromBody] FiltroAgendamento filtro)
+        public IActionResult ObterTodos([FromQuery] FiltroAgendamento filtro)
         {
-            throw new NotImplementedException();
+            return Ok(_servicoAgendamento.ObterTodos(filtro));
         }
 
         [HttpGet("{id}")]
         public IActionResult ObtertPorId(int id)
         {
-            throw new NotImplementedException();
+            return Ok(_servicoAgendamento.ObterPorId(id));
         }
 
         [HttpPut]
         public IActionResult Adicionar([FromBody] Agendamento agendamento)
         {
-            throw new NotImplementedException();
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult Deletar(int id)
-        {
-            throw new NotImplementedException();
+            _servicoAgendamento.Adicionar(agendamento);
+            return Ok();
         }
 
         [HttpPatch]
         public IActionResult Atualizar([FromBody] Agendamento agendamento)
         {
-            throw new NotImplementedException();
+            _servicoAgendamento.Atualizar(agendamento);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Deletar(int id)
+        {
+            _servicoAgendamento.Deletar(id);
+            return NoContent();
         }
     }
 }

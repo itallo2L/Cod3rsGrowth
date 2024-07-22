@@ -19,31 +19,34 @@ namespace Cod3rsGrowth.Web.Controllers
         [HttpGet]
         public IActionResult ObterTodos([FromQuery] FiltroEstudioMusical filtro)
         {
-            throw new NotImplementedException();
+            return Ok(_servicoEstudioMusical.ObterTodos(filtro));
         }
 
         [HttpGet("{id}")]
         public IActionResult ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            return Ok(_servicoEstudioMusical.ObterPorId(id));
         }
 
-        [HttpPut]
+        [HttpPost]
         public IActionResult Adicionar([FromBody] EstudioMusical estudioMusical)
         {
-            throw new NotImplementedException();
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult Deletar(int id)
-        {
-            throw new NotImplementedException();
+            _servicoEstudioMusical.Adicionar(estudioMusical);
+            return Ok();
         }
 
         [HttpPatch]
         public IActionResult Atualizar([FromBody] EstudioMusical estudioMusical)
         {
-            throw new NotImplementedException();
+            _servicoEstudioMusical.Atualizar(estudioMusical);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Deletar(int id)
+        {
+            _servicoEstudioMusical.Deletar(id);
+            return NoContent();
         }
     }
 }
