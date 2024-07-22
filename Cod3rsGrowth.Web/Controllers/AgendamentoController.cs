@@ -25,7 +25,7 @@ namespace Cod3rsGrowth.Web.Controllers
         [HttpGet("{id}")]
         public IActionResult ObtertPorId(int id)
         {
-            throw new NotImplementedException();
+            return Ok(_servicoAgendamento.ObterPorId(id));
         }
 
         [HttpPut]
