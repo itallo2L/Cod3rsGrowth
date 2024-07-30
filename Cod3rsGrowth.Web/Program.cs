@@ -1,5 +1,6 @@
 using Cod3rsGrowth.Web.DetalhesDeProblema;
 using Cod3rsGrowth.Web.InjecaoDeDependencia;
+using Microsoft.Extensions.FileProviders;
 
 var construtor = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,15 @@ if (app.Environment.IsDevelopment())
 app.ManipuladorDetalhesDoProblema(app.Services.GetRequiredService<ILoggerFactory>());
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true });
+
+app.UseFileServer(new FileServerOptions
+{
+    FileProvider = new PhysicalFileProvider(
+           Path.Combine(construtor.Environment.ContentRootPath, "wwwroot")),
+    EnableDirectoryBrowsing = true
+});
 
 app.UseAuthorization();
 
