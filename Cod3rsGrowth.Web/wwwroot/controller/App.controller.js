@@ -1,9 +1,9 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
-    "sap/ui/model/resource/ResourceModel"
- ], (Controller, ResourceModel) => {
-    "use strict";
-    return Controller.extend("ui5.cod3rsgrowth.controller.App", {
+   "sap/ui/core/mvc/Controller",
+   "sap/ui/model/resource/ResourceModel"
+], (Controller, ResourceModel) => {
+   "use strict";
+   return Controller.extend("ui5.cod3rsgrowth.controller.App", {
       onInit: function () {
          const i18nModel = new ResourceModel({
             bundleName: "ui5.cod3rsgrowth.i18n.i18n"
@@ -14,4 +14,4 @@ sap.ui.define([
          document.title = sTitulo;
       }
    });
- });
+});

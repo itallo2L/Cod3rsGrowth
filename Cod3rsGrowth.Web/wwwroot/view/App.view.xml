@@ -2,5 +2,5 @@
    controllerName="ui5.cod3rsgrowth.controller.App"
    xmlns="sap.m"
    xmlns:mvc="sap.ui.core.mvc">
-   <Text text="{i18n>textoOlaMundo}"/>
+		<App id="app"/>
 </mvc:View>
