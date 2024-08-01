@@ -4,7 +4,9 @@
    xmlns:mvc="sap.ui.core.mvc">
    <Page title="{i18n>tituloEstudio}" class="sapUiResponsiveContentPadding">
       <content>
-         <Button id="exibirPaginaNaoEncontrada" text="{i18n>exibirPaginaNaoEncontrada}" press=".aoExibirPaginaNaoEncontrada" class="sapUiTinyMarginEnd"/>
+      <FlexBox height="100px" alignItems="Center" justifyContent="End">
+      <Button id="exibirPaginaNaoEncontrada" type="Emphasized" text="{i18n>exibirPaginaNaoEncontrada}" press=".aoExibirPaginaNaoEncontrada" class="sapUiTinyMarginEnd"/>
+      </FlexBox>
 		</content>
 	</Page>
 </mvc:View>
