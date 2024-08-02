@@ -13,6 +13,6 @@ sap.ui.define([
          const oBundle = this.getView().getModel("i18n").getResourceBundle();
          const sTitulo = oBundle.getText("tituloEstudio");
          document.title = sTitulo;
-      },
+      }
    });
 });

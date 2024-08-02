@@ -1,9 +1,17 @@
 <mvc:View
    controllerName="ui5.cod3rsgrowth.controller.Estudio"
    xmlns="sap.m"
-   xmlns:mvc="sap.ui.core.mvc">
+   xmlns:mvc="sap.ui.core.mvc"
+   displayBlock="true">
    <Shell>
-      <Page title="{i18n>tituloEstudio}" class="sapUiResponsiveContentPadding">
+      <Page title="{i18n>tituloEstudio}" class="sapUiContentPadding">
+         <customHeader>
+            <Toolbar>
+               <ToolbarSpacer/>
+               <SearchField id="barraDePesquisa" width="30%" placeholder="Nome do Estúdio" enableSuggestions="true"></SearchField>
+               <Button icon="sap-icon://edit" type="Transparent" press="" ariaLabelledBy="editButtonLabel"/>
+            </Toolbar>
+         </customHeader>
       </Page>
    </Shell>
 </mvc:View>
