@@ -11,6 +11,10 @@ sap.ui.define([
 			oTarget.attachDisplay(function (oEvent) {
 				this._oData = oEvent.getParameter("data");
 			}, this);
+		},
+		
+		aoClicarPaginaInicial: function () {
+				this.getRouter().navTo("appEstudio", {}, true);
 		}
     });
  });
