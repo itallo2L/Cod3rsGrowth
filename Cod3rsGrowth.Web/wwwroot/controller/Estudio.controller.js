@@ -14,11 +14,5 @@ sap.ui.define([
          const sTitulo = oBundle.getText("tituloEstudio");
          document.title = sTitulo;
       },
-
-      aoExibirPaginaNaoEncontrada: function () {
-         this.getRouter().getTargets().display("notFound", {
-            fromTarget: "estudio"
-         });
-      }
    });
 });

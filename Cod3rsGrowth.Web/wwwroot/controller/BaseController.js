@@ -22,6 +22,10 @@ sap.ui.define([
 			} else {
 				this.getRouter().navTo("appEstudio", {}, true);
 			}
+		},
+		
+		aoRetornarParaPaginaInicial: function () {
+				this.getRouter().navTo("appEstudio", {}, true);
 		}
 	});
 });

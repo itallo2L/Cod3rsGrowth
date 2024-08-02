@@ -2,10 +2,17 @@
    controllerName="ui5.cod3rsgrowth.controller.NotFound"
    xmlns="sap.m"
    xmlns:mvc="sap.ui.core.mvc">
+
+	<Toolbar>
+      <Button id= "retornarParaPaginaAnterior" type= "Back" press=".onNavBack"/>
+      <ToolbarSpacer/>
+      <Button id= "retornarParaPaginaInicial" text="{i18n>retornarParaPaginaInicial}" type= "Transparent" press=".aoRetornarParaPaginaInicial" ariaLabelledBy="editButtonLabel"/>
+   </Toolbar>
+
    <MessagePage
+      showHeader="false"
       title="{i18n>paginaNaoEncontrada}"
       text="{i18n>paginaNaoEncontrada.texto}"
-      description="{i18n>paginaNaoEncontrada.descricao}"
-      showNavButton="true"
-      navButtonPress="onNavBack"/>
+      description="{i18n>paginaNaoEncontrada.descricao}"/>
+
 </mvc:View>

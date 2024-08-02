@@ -2,11 +2,8 @@
    controllerName="ui5.cod3rsgrowth.controller.Estudio"
    xmlns="sap.m"
    xmlns:mvc="sap.ui.core.mvc">
-   <Page title="{i18n>tituloEstudio}" class="sapUiResponsiveContentPadding">
-      <content>
-      <FlexBox height="100px" alignItems="Center" justifyContent="End">
-      <Button id="exibirPaginaNaoEncontrada" type="Emphasized" text="{i18n>exibirPaginaNaoEncontrada}" press=".aoExibirPaginaNaoEncontrada" class="sapUiTinyMarginEnd"/>
-      </FlexBox>
-		</content>
-	</Page>
+   <Shell>
+      <Page title="{i18n>tituloEstudio}" class="sapUiResponsiveContentPadding">
+      </Page>
+   </Shell>
 </mvc:View>
