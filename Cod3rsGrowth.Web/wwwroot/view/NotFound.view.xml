@@ -6,7 +6,7 @@
 	<Toolbar>
       <Button id= "retornarParaPaginaAnterior" type= "Back" press=".onNavBack"/>
       <ToolbarSpacer/>
-      <Button id= "retornarParaPaginaInicial" text="{i18n>retornarParaPaginaInicial}" type= "Transparent" press=".aoRetornarParaPaginaInicial"/>
+      <Button id= "retornarParaPaginaInicial" text="{i18n>retornarParaPaginaInicial}" type= "Transparent" press=".aoClicarPaginaInicial"/>
    </Toolbar>
 
    <MessagePage
