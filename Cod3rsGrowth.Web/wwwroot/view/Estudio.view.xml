@@ -3,15 +3,72 @@
    xmlns="sap.m"
    xmlns:mvc="sap.ui.core.mvc"
    displayBlock="true">
-   <Shell>
-      <Page title="{i18n>tituloEstudio}" class="sapUiContentPadding">
-         <customHeader>
+   <Page title="{i18n>listaEstudio}">
+     <customHeader>
+         <Toolbar>
+            <Title text="{i18n>tituloAgendamentoEmEstudio}" class="sapUiResponsiveMargin"/>         
+         </Toolbar>
+      </customHeader>
+      <Table
+         id="listaEstudio"
+         class="sapUiResponsiveMargin"
+         growing="true"
+         growingThreshold="20"
+         sticky="ColumnHeaders,HeaderToolbar"
+			width="auto"
+			fixedLayout="false"
+			autoPopinMode="true"
+			hiddenInPopin="None"
+         items="{listaEstudio>/}">
+         <headerToolbar>
             <Toolbar>
+               <Title text="{i18n>listaEstudio} ({= ${listaEstudio>/}.length})" />
                <ToolbarSpacer/>
-               <SearchField id="barraDePesquisa" width="30%" placeholder="Nome do Estúdio" enableSuggestions="true"></SearchField>
-               <Button icon="sap-icon://edit" type="Transparent" press="" ariaLabelledBy="editButtonLabel"/>
+               <SearchField 
+               id="searchField"
+               width="25%"
+               placeholder="{i18n>textoDaBarraDePesquisa}"/>
             </Toolbar>
-         </customHeader>
-      </Page>
-   </Shell>
+         </headerToolbar>
+         <columns> 
+            <Column 
+            minScreenWidth="Small"
+            demandPopin="true"
+            vAlign="Middle"
+            hAlign="Begin">
+               <header>
+                  <Label text="{i18n>idEstudio}" />
+               </header>
+            </Column>
+            <Column 
+            minScreenWidth="Small"
+            demandPopin="true"
+            vAlign="Middle"
+            hAlign="Center">
+               <header>
+                  <Label text="{i18n>nomeEstudio}"/>
+               </header>
+            </Column>
+            <Column 
+            minScreenWidth="Small"
+            demandPopin="true"
+            vAlign="Middle"
+            hAlign="Center">
+               <header>
+                  <Label text="{i18n>estudioEstaAbertoOuFechado}"/>
+               </header>
+            </Column>
+            <Column hAlign="End"/>
+         </columns>
+         <items>
+            <ColumnListItem type="Active">
+               <cells>
+                  <ObjectIdentifier title="{listaEstudio>id}"/>
+                  <Text text="{listaEstudio>nome}"/>
+                  <Text text="{listaEstudio>estaAberto}"/>
+               </cells>
+            </ColumnListItem>
+         </items>
+        </Table>
+   </Page>
 </mvc:View>

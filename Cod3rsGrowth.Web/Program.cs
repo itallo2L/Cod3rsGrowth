@@ -13,6 +13,11 @@ construtor.Services.AddEndpointsApiExplorer();
 construtor.Services.AddSwaggerGen();
 construtor.AdicionarDependenciasNoEscopo();
 
+construtor.Services.AddCors(p => p.AddPolicy("SAPApp", builder =>
+{
+    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
+
 var app = construtor.Build();
 
 if (app.Environment.IsDevelopment())
@@ -24,6 +29,8 @@ if (app.Environment.IsDevelopment())
 app.ManipuladorDetalhesDoProblema(app.Services.GetRequiredService<ILoggerFactory>());
 
 app.UseHttpsRedirection();
+
+app.UseCors("SAPApp");
 
 app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true });
 
