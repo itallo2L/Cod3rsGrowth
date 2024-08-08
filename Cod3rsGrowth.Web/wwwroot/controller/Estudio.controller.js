@@ -6,6 +6,10 @@ sap.ui.define([
 ], (BaseController, ResourceModel, JSONModel, formatter) => {
    "use strict";
 
+   let filtroNome = "";
+   let filtroEstaAberto = "";
+   let filtroEstaFechado = "";
+
    return BaseController.extend("ui5.cod3rsgrowth.controller.EstudioController", {
       formatter: formatter,
       onInit: function () {
@@ -21,10 +25,41 @@ sap.ui.define([
          this.buscarApi(urlEstudio);
       },
       buscarApi: function (url){
-         fetch(url).then(res => res.json()).then(res => {
+         fetch(url).then(resposta => resposta.json()).then(resposta => {
             const dataModel = new JSONModel();
-            dataModel.setData(res);
-            this.getView().setModel(dataModel, "listaEstudio")
+            dataModel.setData(resposta);
+
+            this.getView().setModel(dataModel, "listaEstudio");
+        });
+        },
+        filtroBarraDePesquisa: function (oEvent){
+         filtroNome = oEvent.getSource().getValue();
+
+         this.filtrosEstudioMusical();
+        },
+        filtroSelectEstaAberto: function (oEvent){
+           let chave = oEvent.getSource().getSelectedKey();
+           if(chave === "Aberto"){
+             filtroEstaAberto = "true";
+             filtroEstaFechado = "false";
+           } else if (chave === "Fechado"){
+              filtroEstaFechado = "true";
+              filtroEstaAberto = "false";
+           } else {
+               filtroEstaAberto = "";
+               filtroEstaFechado = "";
+           }
+         
+         this.filtrosEstudioMusical();
+        },
+         filtrosEstudioMusical: function (){
+            let url = `/api/EstudioMusical?Nome=${filtroNome}&EstaAberto=${filtroEstaAberto}&EstaFechado=${filtroEstaFechado}`;
+
+            fetch(url).then(resposta => resposta.json()).then(resposta => {
+               const dataModel = new JSONModel();
+               dataModel.setData(resposta);
+
+               this.getView().setModel(dataModel, "listaEstudio");
         });
         }
     });
