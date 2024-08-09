@@ -32,7 +32,7 @@ sap.ui.define([
             this.getView().setModel(dataModel, "listaEstudio");
         });
         },
-        filtroBarraDePesquisa: function (oEvent){
+        filtroBarraDePesquisa : function (oEvent){
          filtroNome = oEvent.getSource().getValue();
 
          this.filtrosEstudioMusical();
@@ -46,13 +46,12 @@ sap.ui.define([
               filtroEstaFechado = "true";
               filtroEstaAberto = "false";
            } else {
-               filtroEstaAberto = "";
-               filtroEstaFechado = "";
+               this.limparFiltros();
            }
          
          this.filtrosEstudioMusical();
         },
-         filtrosEstudioMusical: function (){
+         filtrosEstudioMusical : function (){
             let url = `/api/EstudioMusical?Nome=${filtroNome}&EstaAberto=${filtroEstaAberto}&EstaFechado=${filtroEstaFechado}`;
 
             fetch(url).then(resposta => resposta.json()).then(resposta => {
@@ -61,6 +60,11 @@ sap.ui.define([
 
                this.getView().setModel(dataModel, "listaEstudio");
         });
-        }
+        },
+         limparFiltros : function () {
+            let vazio = "";
+            filtroEstaAberto = vazio;
+            filtroEstaFechado = vazio;
+         }
     });
 });

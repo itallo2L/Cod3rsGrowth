@@ -26,7 +26,8 @@
                   <core:Item key="Fechado" text="Fechado"/>
                </Select>
             <SearchField id="barraDePesquisa" width="25%" placeholder="{i18n>textoDaBarraDePesquisa}" liveChange=".filtroBarraDePesquisa"/>
-         </Toolbar>
+            <Button id="botaoAdicionar" type="Emphasized" text="Adicionar" enabled="false"/>
+            </Toolbar>
       </headerToolbar>
 		<CustomListItem type="Navigation">
          <HBox>
