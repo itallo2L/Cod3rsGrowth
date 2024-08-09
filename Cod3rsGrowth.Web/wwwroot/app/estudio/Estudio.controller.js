@@ -1,8 +1,8 @@
 sap.ui.define([
-   "./BaseController",
+   "../BaseController",
    "sap/ui/model/resource/ResourceModel",
    "sap/ui/model/json/JSONModel",
-	"../model/formatter"
+	"../../model/formatter"
 ], (BaseController, ResourceModel, JSONModel, formatter) => {
    "use strict";
 
@@ -10,7 +10,7 @@ sap.ui.define([
    let filtroEstaAberto = "";
    let filtroEstaFechado = "";
 
-   return BaseController.extend("ui5.cod3rsgrowth.controller.EstudioController", {
+   return BaseController.extend("ui5.cod3rsgrowth.app.estudio.EstudioController", {
       formatter: formatter,
       onInit: function () {
          const i18nModel = new ResourceModel({

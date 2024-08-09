@@ -1,8 +1,8 @@
 sap.ui.define([
-    "./BaseController"
+    "../BaseController"
  ], function (BaseController) {
     "use strict";
-    return BaseController.extend("ui5.cod3rsgrowth.controller.NotFound", {
+    return BaseController.extend("ui5.cod3rsgrowth.app.notFound.NotFound", {
        onInit: function () {
          var oRouter, oTarget;
 
