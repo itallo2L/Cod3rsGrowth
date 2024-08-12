@@ -17,9 +17,17 @@ namespace Cod3rsGrowth.Web.InjecaoDeDependencia
     {
         public static void AdicionarDependenciasNoEscopo(this WebApplicationBuilder construtor)
         {
-            const string nomeDaVariavelDeAmbiente = "ConexaoCod3rsGrowth";
+            var nomeDaVariavelDeAmbiente = ConnectionString.StringDeConexao;
             var stringDeConexao = Environment.GetEnvironmentVariable(nomeDaVariavelDeAmbiente)
                 ?? throw new Exception($"A variável de ambiente [{nomeDaVariavelDeAmbiente}] não foi encontrada.");
+
+            construtor.Services.AddFluentMigratorCore()
+                .AddFluentMigratorCore().ConfigureRunner(rb => rb
+                .AddSqlServer()
+                .WithGlobalConnectionString(stringDeConexao)
+                .ScanIn(typeof(_20240715092000_AdicionarEstudioMusical).Assembly).For.Migrations())
+                .AddLogging(lb => lb.AddFluentMigratorConsole())
+                .BuildServiceProvider(false);
 
             construtor.Services.AddLinqToDBContext<BdCod3rsGrowth>((provider, options) => options
             .UseSqlServer((stringDeConexao)));
@@ -31,13 +39,14 @@ namespace Cod3rsGrowth.Web.InjecaoDeDependencia
             construtor.Services.AddScoped<IValidator<EstudioMusical>, ValidadorEstudioMusical>();
             construtor.Services.AddScoped<IValidator<Agendamento>, ValidadorAgendamento>();
 
-            construtor.Services.AddFluentMigratorCore()
-                .AddFluentMigratorCore().ConfigureRunner(rb => rb
-                .AddSqlServer()
-                .WithGlobalConnectionString(stringDeConexao)
-                .ScanIn(typeof(_20240715092000_AdicionarEstudioMusical).Assembly).For.Migrations())
-                .AddLogging(lb => lb.AddFluentMigratorConsole())
-                .BuildServiceProvider(false);
+            construtor.Services.AddControllers();
+            construtor.Services.AddEndpointsApiExplorer();
+            construtor.Services.AddSwaggerGen();
+
+            construtor.Services.AddCors(p => p.AddPolicy("SAPApp", builder =>
+            {
+                builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+            }));
         }
     }
 }

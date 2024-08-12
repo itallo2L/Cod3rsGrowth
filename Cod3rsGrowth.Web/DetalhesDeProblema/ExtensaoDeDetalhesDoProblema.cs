@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace Cod3rsGrowth.Web.DetalhesDeProblema
 {
@@ -37,12 +38,12 @@ namespace Cod3rsGrowth.Web.DetalhesDeProblema
                             detalhesDoProblema.Status = StatusCodes.Status500InternalServerError;
                         }
                         else
-                        {
+                        {       
                             var logger = loggerFactory.CreateLogger("GlobalExceptionHandler");
-                            logger.LogError($"Unexpected error: {manipuladorDeExecao.Error}");
-                            detalhesDoProblema.Title = erroDoManipuladorDaExcecao.Message;
+                            logger.LogError($"Erro inesperado: {manipuladorDeExecao.Error}");
+                            detalhesDoProblema.Title = $"{manipuladorDeExecao.Error.Message}";
                             detalhesDoProblema.Status = StatusCodes.Status500InternalServerError;
-                            detalhesDoProblema.Detail = erroDoManipuladorDaExcecao.Message;
+                            detalhesDoProblema.Detail = erroDoManipuladorDaExcecao.Demystify().ToString();
                         }
 
                         contexto.Response.StatusCode = detalhesDoProblema.Status.Value;

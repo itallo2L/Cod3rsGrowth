@@ -2,8 +2,9 @@ sap.ui.define([
    "../BaseController",
    "sap/ui/model/resource/ResourceModel",
    "sap/ui/model/json/JSONModel",
-	"../../model/formatter"
-], (BaseController, ResourceModel, JSONModel, formatter) => {
+	"../../model/formatter",
+   "sap/m/MessageBox"
+], (BaseController, ResourceModel, JSONModel, formatter, MessageBox) => {
    "use strict";
 
    let filtroNome = "";
@@ -22,15 +23,21 @@ sap.ui.define([
          document.title = sTitulo;
 
          const urlEstudio = '/api/EstudioMusical';
-         this.buscarApi(urlEstudio);
+         const statusOk = 200;
+         this.buscarApi(urlEstudio, statusOk);
       },
-      buscarApi: function (url){
+      buscarApi: function (url, statusOk){
          fetch(url).then(resposta => resposta.json()).then(resposta => {
+            if (resposta.Status && resposta.Status !== statusOk) {
+               this.mensagemDeErroExtensaoDeProblema(resposta);
+            } 
+            else {
             const dataModel = new JSONModel();
             dataModel.setData(resposta);
 
             this.getView().setModel(dataModel, "listaEstudio");
-        });
+            }
+         });
         },
         filtroBarraDePesquisa : function (oEvent){
          filtroNome = oEvent.getSource().getValue();
@@ -65,6 +72,24 @@ sap.ui.define([
             let vazio = "";
             filtroEstaAberto = vazio;
             filtroEstaFechado = vazio;
-         }
-    });
+         },
+         mensagemDeErroExtensaoDeProblema: function (erro) {
+            const tituloMensagem = "Erro";
+            const detalhesMensagem = "Detalhes:";
+            const statusMensagem = "Status:"
+   
+            MessageBox.error(`${erro.Title}`, {
+               title: tituloMensagem,
+               id: "messageBoxErro",
+               details: 
+               `<p><strong>${statusMensagem} ${erro.Status}</strong></p>` +
+               `<p><strong> ${detalhesMensagem} </strong></p>`+
+               "<ul>" +
+               `<li>${erro.Detail}</li>` +
+               "</ul>",
+               styleClass: "sResponsivePaddingClasses",
+               dependentOn: this.getView()
+            });
+      }
+   });
 });
