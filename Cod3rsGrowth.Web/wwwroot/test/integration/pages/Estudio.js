@@ -1,20 +1,10 @@
 sap.ui.define([
-    'sap/ui/test/Opa5',
-    'spa/ui/test/actions/EnterText',
-    'spa/ui/test/actions/Press',
-    'spa/ui/test/matchers/AggregationLengthEquals',
-    'spa/ui/test/matchers/PropertyStrictEquals',
-    'spa/ui/test/matchers/BidingPath'
+    'sap/ui/test/Opa5'
 ],
-    function (Opa5,
-        EnterText,
-        Press,
-        AggregationLengthEquals,
-        PropertyStrictEquals,
-        BidingPath) {
+    function (Opa5) {
         "use strict";
 
-        let viewName = ".estudio.Lista";
+        const viewName = "ui5.cod3rsgrowth.app.estudio.Estudio";
 
         Opa5.createPageObjects({
             naPaginaListaEstudio: {
