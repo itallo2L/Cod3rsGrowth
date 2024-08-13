@@ -14,7 +14,7 @@ namespace Cod3rsGrowth.Web.Controllers
         public EstudioMusicalController(ServicoEstudioMusical servicoEstudioMusical)
         {
             _servicoEstudioMusical = servicoEstudioMusical;
-        }
+        }   
 
         [HttpGet]
         public IActionResult ObterTodos([FromQuery] FiltroEstudioMusical filtro)

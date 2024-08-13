@@ -1,8 +1,8 @@
 sap.ui.define([
     "sap/ui/test/opaQunit",
-    "./Lista"
+    "./ListaEstudio"
 ], function (opaQunit,
-    Lista) {
+    ListaEstudio) {
         "use strict";
     opaQunit.module("ListaEstudio", () => {
 
