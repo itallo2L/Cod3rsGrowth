@@ -46,13 +46,13 @@ sap.ui.define([
         },
         filtroSelectEstaAberto: function (oEvent){
            let chave = oEvent.getSource().getSelectedKey();
-           if(chave === "Aberto"){
+           if(chave === "aberto"){
              filtroEstaAberto = "true";
              filtroEstaFechado = "false";
-           } else if (chave === "Fechado"){
+           } else if (chave === "fechado"){
               filtroEstaFechado = "true";
               filtroEstaAberto = "false";
-           } else {
+           } else if (chave === "todos") {
                this.limparFiltros();
            }
          

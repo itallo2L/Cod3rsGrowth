@@ -18,24 +18,82 @@ sap.ui.define([
 				.aTelaFoiCarregadaCorretamente();
 		});
 			
-		opaTest("Deve mostrar 25 Estúdios listados na view do Estúdio", function (Given, When, Then) {
+		opaTest("Deve mostrar 20 Estúdios listados na view do Estúdio", function (Given, When, Then) {
 			Then
 				.naPaginaListaEstudio
-				.aListaDeveTerPaginacao()
-				.and.oTituloDeveMostrarOTamanhoTotalDeItens();
-
+				.aListaDeveTerPaginacao();
 		});
 
-		opaTest("Deve carregar mais itens", function (Given, When, Then) {
+		opaTest("Deve carregar mais Estúdios", function (Given, When, Then) {
 			When
 				.naPaginaListaEstudio
-				.euClicoEmMaisDados();
+				.aoClicarEmCarregarMaisEstudios();
 
 			Then
 				.naPaginaListaEstudio
-				.aPaginaDeveConterTodosOsEstudios();
+				.aListaDeveConterVinteECincoEstudios(25);
+		});
+
+		opaTest("Deve filtrar por Estúdios abertos", function (Given, When, Then) {
+			When
+				.naPaginaListaEstudio
+				.aoSelecionarEstudiosAbertos("aberto");
 
 			Then
+				.naPaginaListaEstudio
+				.aListaDeveConterTrezeEstudios(13);
+		});
+
+		opaTest("Deve filtrar por Estúdios fechados", function (Given, When, Then) {
+			When
+				.naPaginaListaEstudio
+				.aoSelecionarEstudiosFechados("fechado");
+
+			Then
+				.naPaginaListaEstudio
+				.aListaDeveConterDozeEstudios(12);
+		});
+
+		opaTest("Deve pesquisar por três Estúdios", function (Given, When, Then) {
+			When
+				.naPaginaListaEstudio
+				.aoPesquisarPor("Estudio Vinte");
+
+			Then
+				.naPaginaListaEstudio
+				.aTabelaTemUmEstudio();
+		});
+
+		opaTest("Deve pesquisar por um Estúdio inexistente", function (Given, When, Then) {
+			When
+				.naPaginaListaEstudio
+				.aoPesquisarNomeInexistente("Inexistente");
+
+			Then
+				.naPaginaListaEstudio
+				.aListaDeveConterZeroEstudios(0);
+		});
+
+		opaTest("Deve limpar o filtro de pesquisa", function (Given, When, Then) {
+			When
+				.naPaginaListaEstudio
+				.aoLimparFiltroDePesquisa("");
+
+			Then
+				.naPaginaListaEstudio
+				.aListaDeveConterDozeEstudios(12);
+		});
+
+		opaTest("Deve limpar o filtro de está aberto", function (Given, When, Then) {
+			When
+				.naPaginaListaEstudio
+				.aoSelecionarTodosOsEstudios("todos");
+
+			Then
+				.naPaginaListaEstudio
+				.aListaDeveConterTodosOsEstudios(25);
+			
+			Then
 				.iTeardownMyApp();
-		})
+		});
 });

@@ -18,15 +18,15 @@
    items="{listaEstudio>/}">
       <headerToolbar>
          <Toolbar>
-            <Title text="{i18n>listaEstudio} ({= ${listaEstudio>/}.length})" titleStyle="H3"/>
+            <Title id="idTituloBarraDeFerramentas" text="{i18n>listaEstudio} ({= ${listaEstudio>/}.length})" titleStyle="H3"/>
             <ToolbarSpacer/>
-               <Select change=".filtroSelectEstaAberto">
-                  <core:Item key="" text="Todos"/>
-                  <core:Item key="Aberto" text="Aberto"/>
-                  <core:Item key="Fechado" text="Fechado"/>
+               <Select id="idSelecionarEstaAbertoOuFechado" change=".filtroSelectEstaAberto">
+                  <core:Item key="todos" text="Todos"/>
+                  <core:Item key="aberto" text="Aberto"/>
+                  <core:Item key="fechado" text="Fechado"/>
                </Select>
-            <SearchField id="barraDePesquisa" width="25%" placeholder="{i18n>textoDaBarraDePesquisa}" liveChange=".filtroBarraDePesquisa"/>
-            <Button id="botaoAdicionar" type="Emphasized" text="{i18n>botaoAdicionar}" enabled="false"/>
+            <SearchField id="idBarraDePesquisa" width="25%" placeholder="{i18n>textoDaBarraDePesquisa}" liveChange=".filtroBarraDePesquisa"/>
+            <Button id="idBotaoAdicionar" type="Emphasized" text="{i18n>botaoAdicionar}" enabled="false"/>
             </Toolbar>
       </headerToolbar>
 		<CustomListItem type="Navigation">
