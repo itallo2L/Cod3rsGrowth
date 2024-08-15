@@ -50,14 +50,17 @@ sap.ui.define([
 
       filtroSelecaoEstaAberto: function (oEvent) {
          let chave = oEvent.getSource().getSelectedKey();
-         if (chave === "aberto") {
-            filtroEstaAberto = "true";
-            filtroEstaFechado = "false";
-         } else if (chave === "fechado") {
-            filtroEstaFechado = "true";
-            filtroEstaAberto = "false";
-         } else if (chave === "todos") {
-            this._limparFiltros();
+
+         switch (chave) {
+            case 'aberto':
+               this._alterarValoresFiltroSelecao(true, false);
+               break;
+            case 'fechado':
+               this._alterarValoresFiltroSelecao(false, true);
+               break;
+            case 'todos':
+               this._alterarValoresFiltroSelecao("", "");
+               break;
          }
 
          this._filtrosEstudioMusical();
@@ -74,10 +77,9 @@ sap.ui.define([
          });
       },
 
-      _limparFiltros: function () {
-         let vazio = "";
-         filtroEstaAberto = vazio;
-         filtroEstaFechado = vazio;
+      _alterarValoresFiltroSelecao: function (estaAberto, estaFechado) {
+         filtroEstaAberto = estaAberto;
+         filtroEstaFechado = estaFechado;
       },
 
       _mensagemDeErroExtensaoDeProblema: function (erro) {
