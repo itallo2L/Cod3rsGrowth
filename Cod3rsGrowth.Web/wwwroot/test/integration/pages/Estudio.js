@@ -1,20 +1,20 @@
 sap.ui.define([
-    'sap/ui/test/Opa5',
+	'sap/ui/test/Opa5',
 	'sap/ui/test/matchers/AggregationLengthEquals',
 	'sap/ui/test/matchers/I18NText',
 	'sap/ui/test/matchers/Properties',
-    'sap/ui/test/actions/Press',
+	'sap/ui/test/actions/Press',
 	'sap/ui/test/actions/EnterText'
 ],
-    function (Opa5, AggregationLengthEquals, I18NText, Properties, Press, EnterText) {
-        "use strict";
+	function (Opa5, AggregationLengthEquals, I18NText, Properties, Press, EnterText) {
+		"use strict";
 
-        const viewName = "ui5.cod3rsgrowth.app.estudio.Estudio";
+		const viewName = "ui5.cod3rsgrowth.app.estudio.Estudio";
 		const idListaEstudio = "idListaEstudio";
 
-        Opa5.createPageObjects({
-            naPaginaListaEstudio: {
-                actions: {
+		Opa5.createPageObjects({
+			naPaginaListaEstudio: {
+				actions: {
 					aoClicarEmCarregarMaisEstudios: function () {
 						return this.waitFor({
 							viewName: viewName,
@@ -40,13 +40,13 @@ sap.ui.define([
 						this.metodoPesquisarPor(nomeDoEstudio);
 					},
 
-					aoPesquisarNomeInexistente: function (nomeDoEstudio) {
+					aoPesquisarEstudioInexistente: function (nomeDoEstudio) {
 						this.metodoPesquisarPor(nomeDoEstudio);
 					},
 
 					aoLimparFiltroDePesquisa: function (nomeDoEstudio) {
 						this.metodoPesquisarPor(nomeDoEstudio);
-					},	
+					},
 
 					metodoSelecionar: function (statusDoEstudio) {
 						return this.waitFor({
@@ -81,99 +81,88 @@ sap.ui.define([
 					aoSelecionarTodosOsEstudios(statusDoEstudio) {
 						this.metodoSelecionar(statusDoEstudio);
 					}
-                },
-                assertions: {
-                    aTelaFoiCarregadaCorretamente: function () {
-                        return this.waitFor({
-                            viewName: viewName,
-                            success: () => Opa5.assert.ok(true, "A tela de listagem carregou corretamente."),
-                            errorMessage: "A tela de listagem não carregou corretamente"
-                        });
-                    },
-
-                    aListaDeveTerPaginacao: function () {
-					return this.waitFor({
-						id: idListaEstudio,
-						viewName: viewName,
-						matchers: new AggregationLengthEquals({
-							name: "items",
-							length: 20
-						}),
-						success: function () {
-							Opa5.assert.ok(true, "A Lista contém 20 estúdios na primeira página.");
-						},
-						errorMessage: "A Lista não contém todos os estúdios."
-					});
 				},
+				assertions: {
+					aTelaDeveCarregarCorretamente: function () {
+						return this.waitFor({
+							viewName: viewName,
+							success: () => Opa5.assert.ok(true, "A tela de listagem carregou corretamente."),
+							errorMessage: "A tela de listagem não carregou corretamente"
+						});
+					},
 
-				aListaDeveConterVinteECincoEstudios: function (quantidadeDeEstudios) {
-					this.metodoQuantidadeDeEstudiosNaLista(quantidadeDeEstudios);
-				},
+					aListaDeveConterVinteEstudios: function (quantidadeDeEstudios) {
+						this.metodoQuantidadeDeEstudiosNaLista(quantidadeDeEstudios);
+					},
 
-				aListaDeveConterTrezeEstudios: function (quantidadeDeEstudios) {
-					this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
-				},
+					aListaDeveConterVinteECincoEstudios: function (quantidadeDeEstudios) {
+						this.metodoQuantidadeDeEstudiosNaLista(quantidadeDeEstudios);
+					},
 
-				aListaDeveConterDozeEstudios: function (quantidadeDeEstudios) {
-					this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
-				},
+					aListaDeveConterTrezeEstudios: function (quantidadeDeEstudios) {
+						this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
+					},
 
-				aListaDeveConterZeroEstudios: function (quantidadeDeEstudios) {
-					this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
-				},
+					aListaDeveConterDozeEstudios: function (quantidadeDeEstudios) {
+						this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
+					},
 
-				aListaDeveConterDozeEstudios(quantidadeDeEstudios) {
-					this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
-				},
+					aListaDeveConterZeroEstudios: function (quantidadeDeEstudios) {
+						this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
+					},
 
-				aListaDeveConterTodosOsEstudios (quantidadeDeEstudios) {
-					this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
-				},
+					aListaDeveConterDozeEstudios(quantidadeDeEstudios) {
+						this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
+					},
 
-				aTabelaTemUmEstudio: function () {
-					return this.waitFor({
-						id: idListaEstudio,
-						viewName: viewName,
-						matchers: new AggregationLengthEquals({
-							name: "items",
-							length: 3
-						}),
-						success: function () {
-							Opa5.assert.ok(true, "A Lista contém três estúdios.")
-						},
-						errorMessage: "A lista não contém um item."
-					});
-				},
+					aListaDeveConterTodosOsEstudios(quantidadeDeEstudios) {
+						this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
+					},
 
-				metodoQuantidadeDeEstudiosNoTitulo: function (quantidadeDeEstudios) {
-					return this.waitFor({
-						id: "idTituloBarraDeFerramentas",
-						viewName: viewName,
-						matchers: new I18NText({
-							key: "tituloContadorDaBarraDeFerramentasEstudio",
-							propertyName: "text",
-							parameters: [quantidadeDeEstudios]
-						}),
-						success: () => Opa5.assert.ok(true, `O título da lista contém ${quantidadeDeEstudios} Estúdios.`),
-						errorMessage: `O título da lista não contém ${quantidadeDeEstudios} Estúdios.`
-					});
-				},
+					aListaDeveConterTresEstudios: function () {
+						return this.waitFor({
+							id: idListaEstudio,
+							viewName: viewName,
+							matchers: new AggregationLengthEquals({
+								name: "items",
+								length: 3
+							}),
+							success: function () {
+								Opa5.assert.ok(true, "A lista contém três estúdios.")
+							},
+							errorMessage: "A lista não contém três estúdios."
+						});
+					},
 
-				metodoQuantidadeDeEstudiosNaLista: function (quantidadeDeEstudios) {
-					return this.waitFor({
-						id: idListaEstudio,
-						viewName: viewName,
-						matchers: new AggregationLengthEquals({
-							name: "items",
-							length: quantidadeDeEstudios
-						}),
-						success: function () {
-							Opa5.assert.ok(true, `A Lista contém ${quantidadeDeEstudios} estúdios.`);
-						},
-						errorMessage: `A Lista não contém todos os ${quantidadeDeEstudios} estúdios.`
-					});
+					metodoQuantidadeDeEstudiosNoTitulo: function (quantidadeDeEstudios) {
+						return this.waitFor({
+							id: "idTituloBarraDeFerramentas",
+							viewName: viewName,
+							matchers: new I18NText({
+								key: "tituloContadorDaBarraDeFerramentasEstudio",
+								propertyName: "text",
+								parameters: [quantidadeDeEstudios]
+							}),
+							success: () => Opa5.assert.ok(true, `O título da lista contém ${quantidadeDeEstudios} Estúdios.`),
+							errorMessage: `O título da lista não contém ${quantidadeDeEstudios} Estúdios.`
+						});
+					},
+
+					metodoQuantidadeDeEstudiosNaLista: function (quantidadeDeEstudios) {
+						return this.waitFor({
+							id: idListaEstudio,
+							viewName: viewName,
+							matchers: new AggregationLengthEquals({
+								name: "items",
+								length: quantidadeDeEstudios
+							}),
+							success: function () {
+								Opa5.assert.ok(true, `A lista contém ${quantidadeDeEstudios} estúdios.`);
+							},
+							errorMessage: `A lista não contém todos os ${quantidadeDeEstudios} estúdios.`
+						});
+					}
 				}
-            }
-        }
-    });
-});
+			}
+		});
+	});

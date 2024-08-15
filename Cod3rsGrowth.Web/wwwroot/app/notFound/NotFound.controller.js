@@ -1,10 +1,10 @@
 sap.ui.define([
-    "../BaseController"
- ], function (BaseController) {
-    "use strict";
-    return BaseController.extend("ui5.cod3rsgrowth.app.notFound.NotFound", {
-       onInit: function () {
-         var oRouter, oTarget;
+	"../BaseController"
+], function (BaseController) {
+	"use strict";
+	return BaseController.extend("ui5.cod3rsgrowth.app.notFound.NotFound", {
+		onInit: function () {
+			var oRouter, oTarget;
 
 			oRouter = this.getRouter();
 			oTarget = oRouter.getTarget("notFound");
@@ -12,9 +12,9 @@ sap.ui.define([
 				this._oData = oEvent.getParameter("data");
 			}, this);
 		},
-		
+
 		aoClicarPaginaInicial: function () {
-				this.getRouter().navTo("appEstudio", {}, true);
+			this.getRouter().navTo("appEstudio", {}, true);
 		}
-    });
- });
+	});
+});

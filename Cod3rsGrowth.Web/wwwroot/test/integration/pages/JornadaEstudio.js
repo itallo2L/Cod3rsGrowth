@@ -6,94 +6,94 @@ sap.ui.define([
 
 	QUnit.module("Lista Estúdio");
 
-		opaTest("Deve carregar a tela de listagem do Estúdio", function (Given, When, Then) {
-			Given.iStartMyUIComponent({
-				componentConfig: {
-					name: "ui5.cod3rsgrowth"
-				}
-			});
-	
-			Then
-				.naPaginaListaEstudio
-				.aTelaFoiCarregadaCorretamente();
-		});
-			
-		opaTest("Deve mostrar 20 Estúdios listados na view do Estúdio", function (Given, When, Then) {
-			Then
-				.naPaginaListaEstudio
-				.aListaDeveTerPaginacao();
+	opaTest("Deve carregar a tela de listagem do Estúdio", function (Given, When, Then) {
+		Given.iStartMyUIComponent({
+			componentConfig: {
+				name: "ui5.cod3rsgrowth"
+			}
 		});
 
-		opaTest("Deve carregar mais Estúdios", function (Given, When, Then) {
-			When
-				.naPaginaListaEstudio
-				.aoClicarEmCarregarMaisEstudios();
+		Then
+			.naPaginaListaEstudio
+			.aTelaDeveCarregarCorretamente();
+	});
 
-			Then
-				.naPaginaListaEstudio
-				.aListaDeveConterVinteECincoEstudios(25);
-		});
+	opaTest("Deve mostrar 20 Estúdios listados na view do Estúdio", function (Given, When, Then) {
+		Then
+			.naPaginaListaEstudio
+			.aListaDeveConterVinteEstudios(20);
+	});
 
-		opaTest("Deve filtrar por Estúdios abertos", function (Given, When, Then) {
-			When
-				.naPaginaListaEstudio
-				.aoSelecionarEstudiosAbertos("aberto");
+	opaTest("Deve carregar mais Estúdios", function (Given, When, Then) {
+		When
+			.naPaginaListaEstudio
+			.aoClicarEmCarregarMaisEstudios();
 
-			Then
-				.naPaginaListaEstudio
-				.aListaDeveConterTrezeEstudios(13);
-		});
+		Then
+			.naPaginaListaEstudio
+			.aListaDeveConterVinteECincoEstudios(25);
+	});
 
-		opaTest("Deve filtrar por Estúdios fechados", function (Given, When, Then) {
-			When
-				.naPaginaListaEstudio
-				.aoSelecionarEstudiosFechados("fechado");
+	opaTest("Deve filtrar por Estúdios abertos", function (Given, When, Then) {
+		When
+			.naPaginaListaEstudio
+			.aoSelecionarEstudiosAbertos("aberto");
 
-			Then
-				.naPaginaListaEstudio
-				.aListaDeveConterDozeEstudios(12);
-		});
+		Then
+			.naPaginaListaEstudio
+			.aListaDeveConterTrezeEstudios(13);
+	});
 
-		opaTest("Deve pesquisar por três Estúdios", function (Given, When, Then) {
-			When
-				.naPaginaListaEstudio
-				.aoPesquisarPor("Estudio Vinte");
+	opaTest("Deve filtrar por Estúdios fechados", function (Given, When, Then) {
+		When
+			.naPaginaListaEstudio
+			.aoSelecionarEstudiosFechados("fechado");
 
-			Then
-				.naPaginaListaEstudio
-				.aTabelaTemUmEstudio();
-		});
+		Then
+			.naPaginaListaEstudio
+			.aListaDeveConterDozeEstudios(12);
+	});
 
-		opaTest("Deve pesquisar por um Estúdio inexistente", function (Given, When, Then) {
-			When
-				.naPaginaListaEstudio
-				.aoPesquisarNomeInexistente("Inexistente");
+	opaTest("Deve pesquisar por três Estúdios", function (Given, When, Then) {
+		When
+			.naPaginaListaEstudio
+			.aoPesquisarPor("Estudio Vinte");
 
-			Then
-				.naPaginaListaEstudio
-				.aListaDeveConterZeroEstudios(0);
-		});
+		Then
+			.naPaginaListaEstudio
+			.aListaDeveConterTresEstudios();
+	});
 
-		opaTest("Deve limpar o filtro de pesquisa", function (Given, When, Then) {
-			When
-				.naPaginaListaEstudio
-				.aoLimparFiltroDePesquisa("");
+	opaTest("Deve pesquisar por um Estúdio inexistente", function (Given, When, Then) {
+		When
+			.naPaginaListaEstudio
+			.aoPesquisarEstudioInexistente("Inexistente");
 
-			Then
-				.naPaginaListaEstudio
-				.aListaDeveConterDozeEstudios(12);
-		});
+		Then
+			.naPaginaListaEstudio
+			.aListaDeveConterZeroEstudios(0);
+	});
 
-		opaTest("Deve limpar o filtro de está aberto", function (Given, When, Then) {
-			When
-				.naPaginaListaEstudio
-				.aoSelecionarTodosOsEstudios("todos");
+	opaTest("Deve limpar o filtro de pesquisa", function (Given, When, Then) {
+		When
+			.naPaginaListaEstudio
+			.aoLimparFiltroDePesquisa("");
 
-			Then
-				.naPaginaListaEstudio
-				.aListaDeveConterTodosOsEstudios(25);
-			
-			Then
-				.iTeardownMyApp();
-		});
+		Then
+			.naPaginaListaEstudio
+			.aListaDeveConterDozeEstudios(12);
+	});
+
+	opaTest("Deve limpar o filtro de está aberto", function (Given, When, Then) {
+		When
+			.naPaginaListaEstudio
+			.aoSelecionarTodosOsEstudios("todos");
+
+		Then
+			.naPaginaListaEstudio
+			.aListaDeveConterTodosOsEstudios(25);
+
+		Then
+			.iTeardownMyApp();
+	});
 });

@@ -2,7 +2,7 @@ sap.ui.define([
    "../BaseController",
    "sap/ui/model/resource/ResourceModel",
    "sap/ui/model/json/JSONModel",
-	"../../model/formatter",
+   "../../model/formatter",
    "sap/m/MessageBox"
 ], (BaseController, ResourceModel, JSONModel, formatter, MessageBox) => {
    "use strict";
@@ -24,72 +24,79 @@ sap.ui.define([
 
          const urlEstudio = '/api/EstudioMusical';
          const statusOk = 200;
-         this.buscarApi(urlEstudio, statusOk);
+         this._obterTodos(urlEstudio, statusOk);
       },
-      buscarApi: function (url, statusOk){
-         fetch(url).then(resposta => resposta.json()).then(resposta => {
-            if (resposta.Status && resposta.Status !== statusOk) {
-               this.mensagemDeErroExtensaoDeProblema(resposta);
-            } 
-            else {
-            const dataModel = new JSONModel();
-            dataModel.setData(resposta);
 
-            this.getView().setModel(dataModel, "listaEstudio");
-            }
-         });
-        },
-        filtroBarraDePesquisa : function (oEvent){
-         filtroNome = oEvent.getSource().getValue();
-
-         this.filtrosEstudioMusical();
-        },
-        filtroSelectEstaAberto: function (oEvent){
-           let chave = oEvent.getSource().getSelectedKey();
-           if(chave === "aberto"){
-             filtroEstaAberto = "true";
-             filtroEstaFechado = "false";
-           } else if (chave === "fechado"){
-              filtroEstaFechado = "true";
-              filtroEstaAberto = "false";
-           } else if (chave === "todos") {
-               this.limparFiltros();
-           }
-         
-         this.filtrosEstudioMusical();
-        },
-         filtrosEstudioMusical : function (){
-            let url = `/api/EstudioMusical?Nome=${filtroNome}&EstaAberto=${filtroEstaAberto}&EstaFechado=${filtroEstaFechado}`;
-
-            fetch(url).then(resposta => resposta.json()).then(resposta => {
+      _obterTodos: function (url) {
+         fetch(url).then(resposta => {
+            return resposta.ok
+               ? resposta.json()
+               : resposta.json()
+                  .then(resposta => { this._mensagemDeErroExtensaoDeProblema(resposta) })
+         })
+            .then(resposta => {
                const dataModel = new JSONModel();
                dataModel.setData(resposta);
 
                this.getView().setModel(dataModel, "listaEstudio");
-        });
-        },
-         limparFiltros : function () {
-            let vazio = "";
-            filtroEstaAberto = vazio;
-            filtroEstaFechado = vazio;
-         },
-         mensagemDeErroExtensaoDeProblema: function (erro) {
-            const tituloMensagem = "Erro";
-            const detalhesMensagem = "Detalhes:";
-            const statusMensagem = "Status:"
-   
-            MessageBox.error(`${erro.Title}`, {
-               title: tituloMensagem,
-               id: "messageBoxErro",
-               details: 
+            })
+      },
+
+      filtroBarraDePesquisa: function (oEvent) {
+         filtroNome = oEvent.getSource().getValue();
+
+         this._filtrosEstudioMusical();
+      },
+
+      filtroSelecaoEstaAberto: function (oEvent) {
+         let chave = oEvent.getSource().getSelectedKey();
+         if (chave === "aberto") {
+            filtroEstaAberto = "true";
+            filtroEstaFechado = "false";
+         } else if (chave === "fechado") {
+            filtroEstaFechado = "true";
+            filtroEstaAberto = "false";
+         } else if (chave === "todos") {
+            this._limparFiltros();
+         }
+
+         this._filtrosEstudioMusical();
+      },
+
+      _filtrosEstudioMusical: function () {
+         let url = `/api/EstudioMusical?Nome=${filtroNome}&EstaAberto=${filtroEstaAberto}&EstaFechado=${filtroEstaFechado}`;
+
+         fetch(url).then(resposta => resposta.json()).then(resposta => {
+            const dataModel = new JSONModel();
+            dataModel.setData(resposta);
+
+            this.getView().setModel(dataModel, "listaEstudio");
+         });
+      },
+
+      _limparFiltros: function () {
+         let vazio = "";
+         filtroEstaAberto = vazio;
+         filtroEstaFechado = vazio;
+      },
+
+      _mensagemDeErroExtensaoDeProblema: function (erro) {
+         const tituloMensagem = "Erro";
+         const detalhesMensagem = "Detalhes:";
+         const statusMensagem = "Status:"
+
+         MessageBox.error(`${erro.Title}`, {
+            title: tituloMensagem,
+            id: "messageBoxErro",
+            details:
                `<p><strong>${statusMensagem} ${erro.Status}</strong></p>` +
-               `<p><strong> ${detalhesMensagem} </strong></p>`+
+               `<p><strong> ${detalhesMensagem} </strong></p>` +
                "<ul>" +
                `<li>${erro.Detail}</li>` +
                "</ul>",
-               styleClass: "sResponsivePaddingClasses",
-               dependentOn: this.getView()
-            });
+            styleClass: "sResponsivePaddingClasses",
+            dependentOn: this.getView()
+         });
       }
    });
 });

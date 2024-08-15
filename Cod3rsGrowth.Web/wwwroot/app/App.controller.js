@@ -3,7 +3,7 @@ sap.ui.define([
    "sap/ui/model/resource/ResourceModel"
 ], (BaseController, ResourceModel) => {
    "use strict";
-   
+
    return BaseController.extend("ui5.cod3rsgrowth.app.App", {
       onInit: function () {
          const i18nModel = new ResourceModel({
