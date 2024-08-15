@@ -7,9 +7,10 @@ sap.ui.define([
 ], (BaseController, ResourceModel, JSONModel, formatter, MessageBox) => {
    "use strict";
 
-   let filtroNome = "";
-   let filtroEstaAberto = "";
-   let filtroEstaFechado = "";
+   const filtroVazio = "";
+   var filtroNome;
+   var filtroEstaAberto;
+   var filtroEstaFechado;
 
    return BaseController.extend("ui5.cod3rsgrowth.app.estudio.EstudioController", {
       formatter: formatter,
@@ -59,7 +60,7 @@ sap.ui.define([
                this._alterarValoresFiltroSelecao(false, true);
                break;
             case 'todos':
-               this._alterarValoresFiltroSelecao("", "");
+               this._alterarValoresFiltroSelecao(filtroVazio, filtroVazio);
                break;
          }
 
@@ -67,7 +68,18 @@ sap.ui.define([
       },
 
       _filtrosEstudioMusical: function () {
-         let url = `/api/EstudioMusical?Nome=${filtroNome}&EstaAberto=${filtroEstaAberto}&EstaFechado=${filtroEstaFechado}`;
+         let query = {};
+
+         if (filtroNome)
+            query.nome = filtroNome;
+
+         if (filtroEstaAberto)
+            query.estaAberto = filtroEstaAberto;
+
+         if (filtroEstaFechado)
+            query.estaFechado = filtroEstaFechado;
+
+         let url = `/api/EstudioMusical?` + new URLSearchParams(query);
 
          fetch(url).then(resposta => resposta.json()).then(resposta => {
             const dataModel = new JSONModel();

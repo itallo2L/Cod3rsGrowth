@@ -4,7 +4,7 @@ sap.ui.define([
 	"use strict";
 	return BaseController.extend("ui5.cod3rsgrowth.app.notFound.NotFound", {
 		onInit: function () {
-			var oRouter, oTarget;
+			let oRouter, oTarget;
 
 			oRouter = this.getRouter();
 			oTarget = oRouter.getTarget("notFound");

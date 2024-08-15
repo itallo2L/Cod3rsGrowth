@@ -33,7 +33,6 @@ using (var scope = app.Services.CreateScope())
     runner.MigrateUp();
 }
 
-
 app.UseHttpsRedirection();
 
 app.UseCors("SAPApp");
