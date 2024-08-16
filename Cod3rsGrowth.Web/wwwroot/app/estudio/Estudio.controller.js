@@ -24,8 +24,7 @@ sap.ui.define([
          document.title = sTitulo;
 
          const urlEstudio = '/api/EstudioMusical';
-         const statusOk = 200;
-         this._obterTodos(urlEstudio, statusOk);
+         this._obterTodos(urlEstudio);
       },
 
       _obterTodos: function (url) {
