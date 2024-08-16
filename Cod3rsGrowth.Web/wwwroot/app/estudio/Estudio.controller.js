@@ -27,6 +27,10 @@ sap.ui.define([
          this._obterTodos(urlEstudio);
       },
 
+      aoClicarAdicionarEstudio: function () {
+         this.getRouter().navTo("appAdicionarEstudio", {}, true);
+     },
+
       _obterTodos: function (url) {
          fetch(url).then(resposta => {
             return resposta.ok

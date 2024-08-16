@@ -6,8 +6,10 @@
    <Page title="{i18n>listaEstudio}">
       <customHeader>
           <Toolbar>
-             <Title text="{i18n>tituloAgendamentoEmEstudio}" titleStyle="H3" class="sapUiResponsiveMargin"/>         
-          </Toolbar>
+            <ToolbarSpacer/>
+               <Title text="{i18n>tituloAgendamentoEmEstudio}" titleStyle="H3" class="sapUiResponsiveMargin"/>         
+            <ToolbarSpacer/>
+         </Toolbar>
        </customHeader>
       <List id="idListaEstudio"
       class="sapUiResponsiveMargin"
@@ -26,7 +28,7 @@
                         <core:Item key="fechado" text="Fechado"/>
                      </Select>
                   <SearchField id="idBarraDePesquisa" width="25%" placeholder="{i18n>textoDaBarraDePesquisa}" liveChange=".filtroBarraDePesquisa"/>
-               <Button id="idBotaoAdicionar" type="Emphasized" text="{i18n>botaoAdicionar}" enabled="false"/>
+               <Button id="idBotaoAdicionar" type="Transparent" text="{i18n>botaoAdicionar}" press=".aoClicarAdicionarEstudio"/>
             </Toolbar>
          </headerToolbar>
          <CustomListItem type="Navigation">

@@ -1,0 +1,11 @@
+<mvc:View
+   controllerName="ui5.cod3rsgrowth.app.estudio.AdicionarEstudio"
+   xmlns="sap.m"
+   xmlns:mvc="sap.ui.core.mvc">
+	<Toolbar>
+      <Button id= "retornarParaPaginaAnterior" type= "Back" press=".onNavBack"/>
+         <ToolbarSpacer/>
+         <Title text="{i18n>adicionarEstudio.titulo}" titleStyle="H3" class="sapUiResponsiveMargin"/>  
+         <ToolbarSpacer/>
+   </Toolbar>
+</mvc:View>
