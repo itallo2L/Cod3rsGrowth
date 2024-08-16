@@ -1,9 +1,0 @@
-<mvc:View
-   controllerName="ui5.cod3rsgrowth.controller.Estudio"
-   xmlns="sap.m"
-   xmlns:mvc="sap.ui.core.mvc">
-   <Shell>
-      <Page title="{i18n>tituloEstudio}" class="sapUiResponsiveContentPadding">
-      </Page>
-   </Shell>
-</mvc:View>

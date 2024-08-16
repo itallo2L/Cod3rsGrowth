@@ -2,17 +2,17 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/core/routing/History",
 	"sap/ui/core/UIComponent"
-], function(Controller, History, UIComponent) {
+], function (Controller, History, UIComponent) {
 	"use strict";
 
-	return Controller.extend("ui5.cod3rsgrowth.controller.BaseController", {
+	return Controller.extend("ui5.cod3rsgrowth.app.BaseController", {
 
-		getRouter : function () {
+		getRouter: function () {
 			return UIComponent.getRouterFor(this);
 		},
 
 		onNavBack: function () {
-			var oHistory, sPreviousHash;
+			let oHistory, sPreviousHash;
 
 			oHistory = History.getInstance();
 			sPreviousHash = oHistory.getPreviousHash();

@@ -1,0 +1,82 @@
+{
+  "_version": "1.58.0",
+  "sap.app": {
+    "id": "ui5.cod3rsgrowth",
+    "i18n": "i18n/i18n.properties",
+    "type": "application",
+    "applicationVersion": {
+      "version": "1.0.0"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "ui5.cod3rsgrowth.app.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    },
+    "dependencies": {
+      "minUI5Version": "1.108.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {}
+      }
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "ui5.cod3rsgrowth.i18n.i18n",
+          "supportedLocales": [
+            ""
+          ],
+          "fallbackLocale": ""
+        }
+      }
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "type": "View",
+        "viewType": "XML",
+        "path": "ui5.cod3rsgrowth.app",
+        "controlId": "app",
+        "controlAggregation": "pages",
+        "transition": "slide",
+        "bypassed": {
+          "target": "notFound"
+        },
+        "async": true
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "appEstudio",
+          "target": "estudio"
+        }
+      ],
+      "targets": {
+        "estudio": {
+          "path": "ui5.cod3rsgrowth.app.estudio",
+          "id": "estudio",
+          "name": "Estudio",
+          "level": 1
+        },
+        "notFound": {
+          "path": "ui5.cod3rsgrowth.app.notFound",
+          "id": "notFound",
+          "name": "NotFound",
+          "transition": "show"
+        }
+      }
+    }
+  }
+}
