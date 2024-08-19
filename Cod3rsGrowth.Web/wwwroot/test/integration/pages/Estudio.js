@@ -18,13 +18,14 @@ sap.ui.define([
 					aoClicarEmCarregarMaisEstudios: function () {
 						return this.waitFor({
 							viewName: viewName,
+							controlType: sap.m.CustomListItem,
 							actions: new Press(),
 							success: () => Opa5.assert.ok(true, "O botão de carregar mais foi acionado."),
 							errorMessage: "A página não tem um botão para mostrar mais itens."
 						});
 					},
 
-					metodoPesquisarPor: function (nomeDoEstudio) {
+					_metodoPesquisarPor: function (nomeDoEstudio) {
 						return this.waitFor({
 							id: "idBarraDePesquisa",
 							viewName: viewName,
@@ -37,18 +38,18 @@ sap.ui.define([
 					},
 
 					aoPesquisarPor: function (nomeDoEstudio) {
-						this.metodoPesquisarPor(nomeDoEstudio);
+						this._metodoPesquisarPor(nomeDoEstudio);
 					},
 
 					aoPesquisarEstudioInexistente: function (nomeDoEstudio) {
-						this.metodoPesquisarPor(nomeDoEstudio);
+						this._metodoPesquisarPor(nomeDoEstudio);
 					},
 
 					aoLimparFiltroDePesquisa: function (nomeDoEstudio) {
-						this.metodoPesquisarPor(nomeDoEstudio);
+						this._metodoPesquisarPor(nomeDoEstudio);
 					},
 
-					metodoSelecionar: function (statusDoEstudio) {
+					_metodoSelecionar: function (statusDoEstudio) {
 						return this.waitFor({
 							id: "idSelecionarEstaAbertoOuFechado",
 							viewName: viewName,
@@ -71,15 +72,15 @@ sap.ui.define([
 					},
 
 					aoSelecionarEstudiosAbertos: function (statusDoEstudio) {
-						this.metodoSelecionar(statusDoEstudio);
+						this._metodoSelecionar(statusDoEstudio);
 					},
 
 					aoSelecionarEstudiosFechados: function (statusDoEstudio) {
-						this.metodoSelecionar(statusDoEstudio);
+						this._metodoSelecionar(statusDoEstudio);
 					},
 
 					aoSelecionarTodosOsEstudios(statusDoEstudio) {
-						this.metodoSelecionar(statusDoEstudio);
+						this._metodoSelecionar(statusDoEstudio);
 					}
 				},
 				assertions: {
@@ -92,31 +93,31 @@ sap.ui.define([
 					},
 
 					aListaDeveConterVinteEstudios: function (quantidadeDeEstudios) {
-						this.metodoQuantidadeDeEstudiosNaLista(quantidadeDeEstudios);
+						this._metodoQuantidadeDeEstudiosNaLista(quantidadeDeEstudios);
 					},
 
 					aListaDeveConterVinteECincoEstudios: function (quantidadeDeEstudios) {
-						this.metodoQuantidadeDeEstudiosNaLista(quantidadeDeEstudios);
+						this._metodoQuantidadeDeEstudiosNaLista(quantidadeDeEstudios);
 					},
 
 					aListaDeveConterTrezeEstudios: function (quantidadeDeEstudios) {
-						this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
+						this._metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
 					},
 
 					aListaDeveConterDozeEstudios: function (quantidadeDeEstudios) {
-						this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
+						this._metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
 					},
 
 					aListaDeveConterZeroEstudios: function (quantidadeDeEstudios) {
-						this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
+						this._metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
 					},
 
 					aListaDeveConterDozeEstudios(quantidadeDeEstudios) {
-						this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
+						this._metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
 					},
 
 					aListaDeveConterTodosOsEstudios(quantidadeDeEstudios) {
-						this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
+						this._metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
 					},
 
 					aListaDeveConterTresEstudios: function () {
@@ -134,7 +135,7 @@ sap.ui.define([
 						});
 					},
 
-					metodoQuantidadeDeEstudiosNoTitulo: function (quantidadeDeEstudios) {
+					_metodoQuantidadeDeEstudiosNoTitulo: function (quantidadeDeEstudios) {
 						return this.waitFor({
 							id: "idTituloBarraDeFerramentas",
 							viewName: viewName,
@@ -148,7 +149,7 @@ sap.ui.define([
 						});
 					},
 
-					metodoQuantidadeDeEstudiosNaLista: function (quantidadeDeEstudios) {
+					_metodoQuantidadeDeEstudiosNaLista: function (quantidadeDeEstudios) {
 						return this.waitFor({
 							id: idListaEstudio,
 							viewName: viewName,

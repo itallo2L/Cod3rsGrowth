@@ -1,11 +1,43 @@
 <mvc:View
    controllerName="ui5.cod3rsgrowth.app.estudio.AdicionarEstudio"
    xmlns="sap.m"
+   xmlns:l="sap.ui.layout"
+   xmlns:f="sap.ui.layout.form"
    xmlns:mvc="sap.ui.core.mvc">
-	<Toolbar>
-      <Button id= "retornarParaPaginaAnterior" type= "Back" press=".onNavBack"/>
-         <ToolbarSpacer/>
-         <Title text="{i18n>adicionarEstudio.titulo}" titleStyle="H3" class="sapUiResponsiveMargin"/>  
-         <ToolbarSpacer/>
-   </Toolbar>
+   <Page>
+      <customHeader>
+         <Toolbar>
+            <Button id= "retornarParaPaginaAnterior" type= "Back" press=".onNavBack"/>
+            <ToolbarSpacer/>
+            <Button id="idBotaoSalvarEstudio" type="Emphasized" text="Salvar" press=".aoClicarSalvarEstudio"/>
+            <Button id="idBotaoCancelarCadastroEstudio" type="Transparent" text="Cancelar" press=".aoClicarCancelarCadastroEstudio"/>
+         </Toolbar>
+      </customHeader>
+      <FlexBox class="sapUiResponsiveMargin" justifyContent="Center">
+         <f:SimpleForm id="idFormAdicionarEstudio"
+         editable="true">
+         <f:toolbar>
+            <OverflowToolbar>
+                  <ToolbarSpacer/>
+                  <Title text="{i18n>adicionarEstudio.titulo}" titleStyle="H3" class="sapUiResponsiveMargin"/>
+                  <ToolbarSpacer/>
+                  </OverflowToolbar>
+            </f:toolbar>
+            <f:content>
+               <Label text="Nome" required="true"/>
+               <Input required="true" placeholder="Estúdio tal..." valueState="None"
+               valueStateText="O Campo nome é obrigatório, máximo de 25 caracteres."
+               value="{
+                  path: '#',
+                  type: 'sap.ui.model.type.String',
+                  constraints: {
+                     minLength: 1,
+                     maxLength: 25
+                  }}"/>
+               <Label text="Está Aberto" required="false"/>
+               <CheckBox/>
+            </f:content>
+         </f:SimpleForm>
+      </FlexBox>
+   </Page>
 </mvc:View>
