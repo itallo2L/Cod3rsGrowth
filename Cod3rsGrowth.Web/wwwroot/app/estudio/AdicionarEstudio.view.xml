@@ -1,7 +1,6 @@
 <mvc:View
    controllerName="ui5.cod3rsgrowth.app.estudio.AdicionarEstudio"
    xmlns="sap.m"
-   xmlns:l="sap.ui.layout"
    xmlns:f="sap.ui.layout.form"
    xmlns:mvc="sap.ui.core.mvc">
    <Page>
@@ -9,18 +8,23 @@
          <Toolbar>
             <Button id= "retornarParaPaginaAnterior" type= "Back" press=".onNavBack"/>
             <ToolbarSpacer/>
-            <Button id="idBotaoSalvarEstudio" type="Emphasized" text="Salvar" press=".aoClicarSalvarEstudio"/>
-            <Button id="idBotaoCancelarCadastroEstudio" type="Transparent" text="Cancelar" press=".aoClicarCancelarCadastroEstudio"/>
          </Toolbar>
       </customHeader>
-      <FlexBox class="sapUiResponsiveMargin" justifyContent="Center">
-         <f:SimpleForm id="idFormAdicionarEstudio"
-         editable="true">
+      <FlexBox class="sapUiResponsiveMargin" justifyContent="SpaceBetween" direction="Column" backgroundDesign="Translucent">
+         <f:SimpleForm 
+         maxContainerCols="2"
+         editable="true"
+         layout="ResponsiveGridLayout"
+         labelSpanL="1" labelSpanM="1"
+         emptySpanL="8" emptySpanM="8"
+         columnsL="1" columnsM="1"
+         >
          <f:toolbar>
             <OverflowToolbar>
+               <Title text="{i18n>adicionarEstudio.titulo}" titleStyle="H3" class="sapUiResponsiveMargin"/>
                   <ToolbarSpacer/>
-                  <Title text="{i18n>adicionarEstudio.titulo}" titleStyle="H3" class="sapUiResponsiveMargin"/>
-                  <ToolbarSpacer/>
+                  <Button id="idBotaoSalvarEstudio" type="Emphasized" text="Salvar" press=".aoClicarSalvarEstudio"/>
+                  <Button id="idBotaoCancelarCadastroEstudio" type="Transparent" text="Cancelar" press=".aoClicarCancelarEstudio" ariaHasPopup="Dialog"/>
                   </OverflowToolbar>
             </f:toolbar>
             <f:content>
@@ -33,7 +37,8 @@
                   constraints: {
                      minLength: 1,
                      maxLength: 25
-                  }}"/>
+                  }}"
+                  change=".aoClicarAdicionarEstudio"/>
                <Label text="Está Aberto" required="false"/>
                <CheckBox/>
             </f:content>

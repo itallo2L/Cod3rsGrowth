@@ -27,7 +27,7 @@ sap.ui.define([
          this._obterTodos(urlEstudio);
       },
 
-      aoClicarAdicionarEstudio: function () {
+      aoClicarAdicionarEstudioTelaListagem: function () {
          this.getRouter().navTo("appAdicionarEstudio", {}, true);
      },
 

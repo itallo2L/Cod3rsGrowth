@@ -2,6 +2,7 @@
    controllerName="ui5.cod3rsgrowth.app.estudio.Estudio"
    xmlns="sap.m"
    xmlns:mvc="sap.ui.core.mvc"
+   xmlns:l="sap.ui.layout"
    displayBlock="true">
    <Page title="{i18n>listaEstudio}">
       <customHeader>
@@ -11,12 +12,14 @@
             <ToolbarSpacer/>
          </Toolbar>
        </customHeader>
+       <l:VerticalLayout
+		class="sapUiContentPadding"
+		width="100%">
+		<l:content>
       <List id="idListaEstudio"
-      class="sapUiResponsiveMargin"
       growing="true"
       growingThreshold="20"
       sticky="ColumnHeaders,HeaderToolbar"
-      width="auto"
       items="{listaEstudio>/}">
          <headerToolbar>
             <Toolbar>
@@ -28,7 +31,7 @@
                         <core:Item key="fechado" text="Fechado"/>
                      </Select>
                   <SearchField id="idBarraDePesquisa" width="25%" placeholder="{i18n>textoDaBarraDePesquisa}" liveChange=".filtroBarraDePesquisa"/>
-               <Button id="idBotaoAdicionar" type="Transparent" text="{i18n>botaoAdicionar}" press=".aoClicarAdicionarEstudio"/>
+               <Button id="idBotaoAdicionar" type="Transparent" text="{i18n>botaoAdicionar}" press=".aoClicarAdicionarEstudioTelaListagem"/>
             </Toolbar>
          </headerToolbar>
          <CustomListItem type="Navigation">
@@ -41,5 +44,7 @@
             </HBox>
          </CustomListItem>
       </List>
+   </l:content>
+</l:VerticalLayout>
    </Page>
 </mvc:View>
