@@ -9,23 +9,39 @@ sap.ui.define([
 ], (BaseController, coreLibrary, Dialog, Button, mobileLibrary, Text, MessageToast) => {
     "use strict";
 
-    const nomeEsudioVazio = "";
+    const nomeEstudioVazio = "";
     const idInputEstudio = "idInputEstudio";
+    const idCheckBoxEstaAberto = "idCheckBoxEstaAberto";
 
     return BaseController.extend("ui5.cod3rsgrowth.app.estudio.AdicionarEstudio", {
         onInit: function () {
         },
 
         aoClicarSalvarEstudio: function () {
-            let entrada = this.getView().byId(idInputEstudio).getValue();
-            this._aovalidarEntrada(entrada);
+            let estudio = {};
+            estudio.nome = this.getView().byId(idInputEstudio).getValue();
+            estudio.estaAberto = this.getView().byId(idCheckBoxEstaAberto).getSelected();
+            this._aovalidarEntrada(estudio.nome);
+
+            let urlEstudio = '/api/EstudioMusical';
+            this._adicionarEstudio(urlEstudio, estudio);
+            
+            this.getRouter().navTo("appEstudio", {}, true);
         },
 
-        _aovalidarEntrada: function (entrada) {
+        _adicionarEstudio: function (url, estudio) {
+            const requestOptions = {method: 'POST', 
+                body: JSON.stringify(estudio), 
+                headers: {"Content-Type": "application/json"}}
+
+              fetch(url, requestOptions).then(response => response.json()).then(response => console.log(response))
+        },
+
+        _aovalidarEntrada: function (estudio) {
             let erro = "Error";
             let sucesso = "None";
 
-            if(entrada === nomeEsudioVazio)
+            if(estudio === nomeEstudioVazio)
                 this.getView().byId(idInputEstudio).setValueState(erro);
             else
                 this.getView().byId(idInputEstudio).setValueState(sucesso)
