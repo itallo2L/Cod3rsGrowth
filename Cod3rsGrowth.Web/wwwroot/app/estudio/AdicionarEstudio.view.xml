@@ -11,36 +11,37 @@
          </Toolbar>
       </customHeader>
       <FlexBox class="sapUiResponsiveMargin" justifyContent="SpaceBetween" direction="Column" backgroundDesign="Translucent">
-         <f:SimpleForm 
-         maxContainerCols="2"
-         editable="true"
-         layout="ResponsiveGridLayout"
-         labelSpanL="1" labelSpanM="1"
-         emptySpanL="8" emptySpanM="8"
-         columnsL="1" columnsM="1"
-         >
-         <f:toolbar>
-            <OverflowToolbar>
-               <Title text="{i18n>adicionarEstudio.titulo}" titleStyle="H3" class="sapUiResponsiveMargin"/>
+      <f:SimpleForm 
+      maxContainerCols="2"
+      editable="true"
+      layout="ResponsiveGridLayout"
+      labelSpanL="1" labelSpanM="1"
+      emptySpanL="8" emptySpanM="8"
+      columnsL="1" columnsM="1">
+      <f:toolbar>
+               <OverflowToolbar>
+                  <Title text="{i18n>adicionarEstudio.titulo}" titleStyle="H3" class="sapUiResponsiveMargin"/>
                   <ToolbarSpacer/>
                   <Button id="idBotaoSalvarEstudio" type="Emphasized" text="Salvar" press=".aoClicarSalvarEstudio"/>
                   <Button id="idBotaoCancelarCadastroEstudio" type="Transparent" text="Cancelar" press=".aoClicarCancelarEstudio" ariaHasPopup="Dialog"/>
-                  </OverflowToolbar>
+               </OverflowToolbar>
             </f:toolbar>
             <f:content>
-               <Label text="Nome" required="true"/>
-               <Input required="true" placeholder="Estúdio tal..." valueState="None"
-               valueStateText="O Campo nome é obrigatório, máximo de 25 caracteres."
-               value="{
-                  path: '#',
-                  type: 'sap.ui.model.type.String',
-                  constraints: {
-                     minLength: 1,
-                     maxLength: 25
-                  }}"
-                  change=".aoClicarAdicionarEstudio"/>
-               <Label text="Está Aberto" required="false"/>
-               <CheckBox/>
+               <FlexBox class="sapUiResponsiveMargin" justifyContent="SpaceBetween" direction="Row" alignItems="Center" width="350px">
+                     <Label text="Nome:" required="true"/>
+                     <Input id="idInputEstudio" required="true" placeholder="Estúdio"
+                     valueStateText="O Campo nome é obrigatório, máximo de 25 caracteres."
+                     value="{
+                        path: '#',
+                        type: 'sap.ui.model.type.String',
+                        constraints: {
+                           minLength: 1,
+                           maxLength: 25
+                        }}"
+                        change=".aoClicarAdicionarEstudio"/>
+                     <Label text="Está Aberto?" required="false"/>
+                     <CheckBox/>
+               </FlexBox>
             </f:content>
          </f:SimpleForm>
       </FlexBox>

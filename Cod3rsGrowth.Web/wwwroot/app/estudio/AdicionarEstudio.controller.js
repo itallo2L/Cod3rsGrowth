@@ -9,31 +9,26 @@ sap.ui.define([
 ], (BaseController, coreLibrary, Dialog, Button, mobileLibrary, Text, MessageToast) => {
     "use strict";
 
+    const nomeEsudioVazio = "";
+    const idInputEstudio = "idInputEstudio";
+
     return BaseController.extend("ui5.cod3rsgrowth.app.estudio.AdicionarEstudio", {
         onInit: function () {
         },
 
-        aoClicarSalvarEstudio: function (oEvent) {
-            let entrada = oEvent.getSource();
+        aoClicarSalvarEstudio: function () {
+            let entrada = this.getView().byId(idInputEstudio).getValue();
             this._aovalidarEntrada(entrada);
         },
 
         _aovalidarEntrada: function (entrada) {
-            let valueState = "None";
-            let erroDeValidacao = false;
-            let oBinding = entrada.getBinding("value"); 
+            let erro = "Error";
+            let sucesso = "None";
 
-            try {
-                oBinding.getType
-                ().validateValue(entrada.getValue());
-            } catch (execao) {
-                valueState = "Error";
-                erroDeValidacao = true;
-            }
-
-            entrada.setValueState(valueState);
-
-            return erroDeValidacao;
+            if(entrada === nomeEsudioVazio)
+                this.getView().byId(idInputEstudio).setValueState(erro);
+            else
+                this.getView().byId(idInputEstudio).setValueState(sucesso)
         },
 
         aoClicarCancelarEstudio: function () {
