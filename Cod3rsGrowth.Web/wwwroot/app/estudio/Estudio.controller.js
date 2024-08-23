@@ -3,8 +3,7 @@ sap.ui.define([
    "sap/ui/model/resource/ResourceModel",
    "sap/ui/model/json/JSONModel",
    "../../model/formatter",
-   "sap/m/MessageBox"
-], (BaseController, ResourceModel, JSONModel, formatter, MessageBox) => {
+], (BaseController, ResourceModel, JSONModel, formatter) => {
    "use strict";
 
    const filtroVazio = "";
@@ -18,32 +17,19 @@ sap.ui.define([
          const i18nModel = new ResourceModel({
             bundleName: "ui5.cod3rsgrowth.i18n.i18n"
          });
+
          this.getView().setModel(i18nModel, "i18n");
          const oBundle = this.getView().getModel("i18n").getResourceBundle();
          const sTitulo = oBundle.getText("tituloEstudio");
          document.title = sTitulo;
 
-         const urlEstudio = '/api/EstudioMusical';
-         this._obterTodos(urlEstudio);
+         const urlObterTodos = "/api/EstudioMusical";
+         const listaEstudio = "listaEstudio";
+         this._requisicaoGet(urlObterTodos, listaEstudio);
       },
 
       aoClicarAdicionarEstudioTelaListagem: function () {
          this.getRouter().navTo("appAdicionarEstudio", {}, true);
-     },
-
-      _obterTodos: function (url) {
-         fetch(url).then(resposta => {
-            return resposta.ok
-               ? resposta.json()
-               : resposta.json()
-                  .then(resposta => { this._mensagemDeErroExtensaoDeProblema(resposta) })
-         })
-            .then(resposta => {
-               const dataModel = new JSONModel();
-               dataModel.setData(resposta);
-
-               this.getView().setModel(dataModel, "listaEstudio");
-            })
       },
 
       filtroBarraDePesquisa: function (oEvent) {
@@ -66,7 +52,6 @@ sap.ui.define([
                this._alterarValoresFiltroSelecao(filtroVazio, filtroVazio);
                break;
          }
-
          this._filtrosEstudioMusical();
       },
 

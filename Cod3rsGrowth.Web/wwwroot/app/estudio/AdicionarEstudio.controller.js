@@ -4,29 +4,38 @@ sap.ui.define([
 	"sap/m/Dialog",
 	"sap/m/Button",
 	"sap/m/library",
-	"sap/m/Text",
-    "sap/m/MessageToast"
-], (BaseController, coreLibrary, Dialog, Button, mobileLibrary, Text, MessageToast) => {
+	"sap/m/Text"
+], (BaseController, coreLibrary, Dialog, Button, mobileLibrary, Text) => {
     "use strict";
 
     const nomeEstudioVazio = "";
     const idInputEstudio = "idInputEstudio";
     const idCheckBoxEstaAberto = "idCheckBoxEstaAberto";
+    const nenhum = "None";
+
+    var estudio = {};
 
     return BaseController.extend("ui5.cod3rsgrowth.app.estudio.AdicionarEstudio", {
         onInit: function () {
+            const rotaTelaDeAdicionarEstudio = "appAdicionarEstudio"
+            this.getRouter().getRoute(rotaTelaDeAdicionarEstudio).attachMatched(this._limparNomeECheckBoxEstudio, this);
+        },
+  
+        _limparNomeECheckBoxEstudio: function () {
+           this.getView().byId(idInputEstudio).setValueState(nenhum);
+           this.getView().byId(idInputEstudio).setValue("");
+
+           this.getView().byId(idCheckBoxEstaAberto).setSelected(false);
         },
 
         aoClicarSalvarEstudio: function () {
-            let estudio = {};
             estudio.nome = this.getView().byId(idInputEstudio).getValue();
             estudio.estaAberto = this.getView().byId(idCheckBoxEstaAberto).getSelected();
-            this._aovalidarEntrada(estudio.nome);
-
-            let urlEstudio = '/api/EstudioMusical';
-            this._adicionarEstudio(urlEstudio, estudio);
             
-            this.getRouter().navTo("appEstudio", {}, true);
+            this._aoValidarEntrada(estudio.nome);
+            
+            let urlEstudio = '/api/EstudioMusical';
+            this._requisicaoPost(urlEstudio, estudio);
         },
 
         _adicionarEstudio: function (url, estudio) {
@@ -34,17 +43,19 @@ sap.ui.define([
                 body: JSON.stringify(estudio), 
                 headers: {"Content-Type": "application/json"}}
 
-              fetch(url, requestOptions).then(response => response.json()).then(response => console.log(response))
+              fetch(url, requestOptions).then(resposta => {
+                if(!resposta.ok) {resposta.json()
+                .then(resposta => {this._erroDeValidacao(resposta)})
+            }
+        });
         },
 
-        _aovalidarEntrada: function (estudio) {
+        _aoValidarEntrada: function (estudio) {
             let erro = "Error";
-            let sucesso = "None";
 
-            if(estudio === nomeEstudioVazio)
-                this.getView().byId(idInputEstudio).setValueState(erro);
-            else
-                this.getView().byId(idInputEstudio).setValueState(sucesso)
+            estudio === nomeEstudioVazio
+            ? this.getView().byId(idInputEstudio).setValueState(erro)
+            : this.getView().byId(idInputEstudio).setValueState(nenhum)
         },
 
         aoClicarCancelarEstudio: function () {
