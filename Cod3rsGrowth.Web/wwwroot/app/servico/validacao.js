@@ -1,9 +1,9 @@
 sap.ui.define([
-	"sap/m/MessageBox"
+    "sap/m/MessageBox"
 ], (MessageBox) => {
-	"use strict";
+    "use strict";
 
-	return {
+    return {
         _aoValidarEntrada: function (estudio, view) {
             let nomeEstudioVazio = "";
             let idInputEstudio = "idInputEstudio";
@@ -16,40 +16,40 @@ sap.ui.define([
         },
 
         _mostrarErroDeValidacao: function (erro, view) {
-			const erroDeValidacao = "Erro de validação"
-			const tituloMensagem = "Erro";
-			const detalhesMensagem = "Detalhes:";
-			const statusMensagem = "Status:"
+            const erroDeValidacao = "Erro de validação"
+            const tituloMensagem = "Erro";
+            const detalhesMensagem = "Detalhes:";
+            const statusMensagem = "Status:"
 
-			if (erro.Title === erroDeValidacao) {
-				const mensagensDeErro = Object.values(erro.Extensions.ErroDeValidacao).join("\r \n");
+            if (erro.Title === erroDeValidacao) {
+                const mensagensDeErro = Object.values(erro.Extensions.ErroDeValidacao).join("\r \n");
 
-				MessageBox.error(`${erro.Title} \n \n ${mensagensDeErro}`, {
-					title: tituloMensagem,
-					id: "idMessageBoxErroValidacao",
-					details:
-						`<p><strong>${statusMensagem} ${erro.Status}</strong></p>` +
-						`<p><strong> ${detalhesMensagem} </strong></p>` +
-						"<ul>" +
-						`<li>${erro.Detail}</li>` +
-						"</ul>",
-					styleClass: "sResponsivePaddingClasses",
-					dependentOn: view
-				});
-			} else {
-				MessageBox.error(`${erro.Title}`, {
-					title: tituloMensagem,
-					id: "idMessageBoxErro",
-					details:
-						`<p><strong>${statusMensagem} ${erro.Status}</strong></p>` +
-						`<p><strong> ${detalhesMensagem} </strong></p>` +
-						"<ul>" +
-						`<li>${erro.Detail}</li>` +
-						"</ul>",
-					styleClass: "sResponsivePaddingClasses",
-					dependentOn: view
-				});
-			}
-		}
-	};
+                MessageBox.error(`${erro.Title} \n \n ${mensagensDeErro}`, {
+                    title: tituloMensagem,
+                    id: "idMessageBoxErroValidacao",
+                    details:
+                        `<p><strong>${statusMensagem} ${erro.Status}</strong></p>` +
+                        `<p><strong> ${detalhesMensagem} </strong></p>` +
+                        "<ul>" +
+                        `<li>${erro.Detail}</li>` +
+                        "</ul>",
+                    styleClass: "sResponsivePaddingClasses",
+                    dependentOn: view
+                });
+            } else {
+                MessageBox.error(`${erro.Title}`, {
+                    title: tituloMensagem,
+                    id: "idMessageBoxErro",
+                    details:
+                        `<p><strong>${statusMensagem} ${erro.Status}</strong></p>` +
+                        `<p><strong> ${detalhesMensagem} </strong></p>` +
+                        "<ul>" +
+                        `<li>${erro.Detail}</li>` +
+                        "</ul>",
+                    styleClass: "sResponsivePaddingClasses",
+                    dependentOn: view
+                });
+            }
+        }
+    };
 });
