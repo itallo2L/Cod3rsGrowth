@@ -2,7 +2,7 @@ sap.ui.define([
    "../BaseController",
    "sap/ui/model/resource/ResourceModel",
    "sap/ui/model/json/JSONModel",
-   "../../model/formatter",
+   "ui5/cod3rsgrowth/model/formatter"
 ], (BaseController, ResourceModel, JSONModel, formatter) => {
    "use strict";
 
@@ -13,6 +13,7 @@ sap.ui.define([
 
    return BaseController.extend("ui5.cod3rsgrowth.app.estudio.EstudioController", {
       formatter: formatter,
+
       onInit: function () {
          const i18nModel = new ResourceModel({
             bundleName: "ui5.cod3rsgrowth.i18n.i18n"

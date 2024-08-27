@@ -107,11 +107,13 @@ sap.ui.define([
 	opaTest("Deve retornar para a tela de listagem", function (Given, When, Then) {
 		When
 			.naPaginaAdicionarEstudio
-			.aoClicarEmRetornarParaTelaDeListagem("estudio.AdicionarEstudio", "idRetornarParaPaginaAnterior", "retornar para a tela de listagem");
+			.aoClicarEmRetornarParaTelaDeListagem("idRetornarParaPaginaAnterior", "retornar para a tela de listagem");
 
 		Then
 			.naPaginaListaEstudio
-			.aTelaDeListagemDeveCarregarCorretamente("estudio.Estudio", "listagem")
+			.aTelaDeListagemDeveCarregarCorretamente("estudio.Estudio", "listagem");
+
+		Then
 			.iTeardownMyApp();
 	});
 });

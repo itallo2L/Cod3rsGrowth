@@ -1,4 +1,5 @@
 ﻿using LinqToDB;
+using System.Linq;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
@@ -6,9 +7,10 @@ namespace Cod3rsGrowth.Infra.Repositorios
     {
         public static void DeletarEstudioAdicionadoEmTeste(BdCod3rsGrowth bancoDeDadosTestes)
         {
-            const int numeroDeEstudiosEsperado = 30052;
+            const string estudioASerDeletado = "Estudio Vinte e Seis";
+
             bancoDeDadosTestes.EstudioMusical
-                .Delete(estudio => estudio.Id > numeroDeEstudiosEsperado);
+                .Delete(estudio => estudio.Nome == estudioASerDeletado);
         }
     }
 }

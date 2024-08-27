@@ -4,18 +4,19 @@ sap.ui.define([
     "sap/m/Dialog",
     "sap/m/Button",
     "sap/m/library",
-    "sap/m/Text"
-], (BaseController, coreLibrary, Dialog, Button, mobileLibrary, Text) => {
+    "sap/m/Text",
+    "../servico/validacao"
+], (BaseController, coreLibrary, Dialog, Button, mobileLibrary, Text, validacao) => {
     "use strict";
 
-    const nomeEstudioVazio = "";
     const idInputEstudio = "idInputEstudio";
     const idCheckBoxEstaAberto = "idCheckBoxEstaAberto";
-    const nenhum = "None";
-
+    const nenhum = "None"
     var estudio = {};
 
     return BaseController.extend("ui5.cod3rsgrowth.app.estudio.AdicionarEstudio", {
+        validacao: validacao,
+
         onInit: function () {
             const rotaTelaDeAdicionarEstudio = "appAdicionarEstudio"
             this.getRouter().getRoute(rotaTelaDeAdicionarEstudio).attachMatched(this._limparNomeECheckBoxEstudio, this);
@@ -32,33 +33,14 @@ sap.ui.define([
             estudio.nome = this.getView().byId(idInputEstudio).getValue();
             estudio.estaAberto = this.getView().byId(idCheckBoxEstaAberto).getSelected();
 
-            this._aoValidarEntrada(estudio.nome);
+            this._aoValidarInputNome(estudio.nome, this.getView());
 
             let urlEstudio = '/api/EstudioMusical';
             this._requisicaoPost(urlEstudio, estudio);
         },
 
-        _adicionarEstudio: function (url, estudio) {
-            const requestOptions = {
-                method: 'POST',
-                body: JSON.stringify(estudio),
-                headers: { "Content-Type": "application/json" }
-            }
-
-            fetch(url, requestOptions).then(resposta => {
-                if (!resposta.ok) {
-                    resposta.json()
-                    .then(resposta => { this._erroDeValidacao(resposta) })
-                }
-            });
-        },
-
-        _aoValidarEntrada: function (estudio) {
-            let erro = "Error";
-
-            estudio === nomeEstudioVazio
-                ? this.getView().byId(idInputEstudio).setValueState(erro)
-                : this.getView().byId(idInputEstudio).setValueState(nenhum)
+        _aoValidarInputNome: function (estudio, view) {
+            this.validacao._aoValidarEntrada(estudio, view);
         },
 
         aoClicarCancelarEstudio: function () {

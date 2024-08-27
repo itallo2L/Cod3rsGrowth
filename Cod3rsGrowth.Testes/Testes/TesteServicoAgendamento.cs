@@ -34,8 +34,8 @@ namespace Cod3rsGrowth.Testes.Testes
                 Id = 1,
                 NomeResponsavel = "Paulo",
                 CpfResponsavel = "424.977.200-45",
-                DataEHoraDeEntrada = DateTime.Parse("30/07/2024 09:00:00"),
-                DataEHoraDeSaida = DateTime.Parse("30/07/2024 10:00:00"),
+                DataEHoraDeEntrada = DateTime.Parse("30/07/2124 09:00:00"),
+                DataEHoraDeSaida = DateTime.Parse("30/07/2124 10:00:00"),
                 ValorTotal = 200m,
                 EstiloMusical = EstiloMusical.Blues,
                 IdEstudio = 15
@@ -141,8 +141,8 @@ namespace Cod3rsGrowth.Testes.Testes
                     Id = 1,
                     NomeResponsavel = "Paulo",
                     CpfResponsavel = "424.977.200-45",
-                    DataEHoraDeEntrada = DateTime.Parse("30/06/2024 12:00:00"),
-                    DataEHoraDeSaida = DateTime.Parse("30/06/2024 14:00:00"),
+                    DataEHoraDeEntrada = DateTime.Parse("30/06/2124 12:00:00"),
+                    DataEHoraDeSaida = DateTime.Parse("30/06/2124 14:00:00"),
                     ValorTotal = 200m,
                     EstiloMusical = EstiloMusical.Blues,
                     IdEstudio = 1

@@ -15,6 +15,6 @@ sap.ui.define([], () => {
 				return pacotesDeRecurso.getText("statusDeSucesso");
 			}
 			return pacotesDeRecurso.getText("statusDeErro");
-		}
+		},
 	};
 });
