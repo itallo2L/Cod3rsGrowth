@@ -57,20 +57,20 @@ sap.ui.define([
 				});
 		},
 
-		_mensagemDeSucessoAoSalvarEstudio : function (estudio) {
-            const mensagemDeSucesso = `Estúdio ${estudio.nome} adicionado com sucesso!`
-            MessageBox.success(mensagemDeSucesso, {
-                id: "idMessageBoxSucesso",
-                styleClass: "sResponsivePaddingClasses",
-                dependentOn: this.getView(),
-                actions: [MessageBox.Action.OK],
-                onClose: (sAction) => {
-                    if (sAction === MessageBox.Action.OK) {
-                        this.getRouter().navTo("appEstudio", {}, true);
-                    }
-                }
-            })
-        },
+		_mensagemDeSucessoAoSalvarEstudio: function (estudio) {
+			const mensagemDeSucesso = `Estúdio ${estudio.nome} adicionado com sucesso!`
+			MessageBox.success(mensagemDeSucesso, {
+				id: "idMessageBoxSucesso",
+				styleClass: "sResponsivePaddingClasses",
+				dependentOn: this.getView(),
+				actions: [MessageBox.Action.OK],
+				onClose: (sAction) => {
+					if (sAction === MessageBox.Action.OK) {
+						this.getRouter().navTo("appEstudio", {}, true);
+					}
+				}
+			})
+		},
 
 		_mostrarErroDeValidacao: function (erro) {
 			const erroDeValidacao = "Erro de validação"

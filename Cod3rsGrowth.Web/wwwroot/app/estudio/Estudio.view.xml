@@ -12,39 +12,39 @@
             <ToolbarSpacer/>
          </Toolbar>
        </customHeader>
-       <l:VerticalLayout
-		class="sapUiContentPadding"
-		width="100%">
-		<l:content>
-      <List id="idListaEstudio"
-      growing="true"
-      growingThreshold="20"
-      sticky="ColumnHeaders,HeaderToolbar"
-      items="{listaEstudio>/}">
-         <headerToolbar>
-            <Toolbar>
-               <Title id="idTituloBarraDeFerramentas" text="{i18n>listaEstudio} ({= ${listaEstudio>/}.length})" titleStyle="H3"/>
-                  <ToolbarSpacer/>
-                     <Select id="idSelecionarEstaAbertoOuFechado" change=".filtroSelecaoEstaAberto">
-                        <core:Item key="todos" text="Todos"/>
-                        <core:Item key="aberto" text="Aberto"/>
-                        <core:Item key="fechado" text="Fechado"/>
-                     </Select>
-                  <SearchField id="idBarraDePesquisa" width="25%" placeholder="{i18n>textoDaBarraDePesquisa}" liveChange=".filtroBarraDePesquisa"/>
-               <Button id="idBotaoAdicionar" type="Transparent" text="{i18n>botaoAdicionar}" press=".aoClicarAdicionarEstudioTelaListagem"/>
-            </Toolbar>
-         </headerToolbar>
-         <CustomListItem type="Navigation">
-            <HBox>
-               <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
-                  <Title text="{listaEstudio>nome}"/>
-                     <ObjectStatus state="{path: 'listaEstudio>estaAberto', formatter: '.formatter.formatarStatusEstaAberto'}" 
-                        text="{path: 'listaEstudio>estaAberto', formatter: '.formatter.formatarEstaAberto'}"/>
-               </VBox>
-            </HBox>
-         </CustomListItem>
-      </List>
-   </l:content>
-</l:VerticalLayout>
+      <l:VerticalLayout
+         class="sapUiContentPadding"
+         width="100%">
+         <l:content>
+            <List id="idListaEstudio"
+               growing="true"
+               growingThreshold="20"
+               sticky="ColumnHeaders,HeaderToolbar"
+               items="{listaEstudio>/}">
+               <headerToolbar>
+                  <Toolbar>
+                     <Title id="idTituloBarraDeFerramentas" text="{i18n>listaEstudio} ({= ${listaEstudio>/}.length})" titleStyle="H3"/>
+                        <ToolbarSpacer/>
+                           <Select id="idSelecionarEstaAbertoOuFechado" change=".filtroSelecaoEstaAberto">
+                              <core:Item key="todos" text="Todos"/>
+                              <core:Item key="aberto" text="Aberto"/>
+                              <core:Item key="fechado" text="Fechado"/>
+                           </Select>
+                        <SearchField id="idBarraDePesquisa" width="25%" placeholder="{i18n>textoDaBarraDePesquisa}" liveChange=".filtroBarraDePesquisa"/>
+                     <Button id="idBotaoAdicionar" type="Transparent" text="{i18n>botaoAdicionar}" press=".aoClicarAdicionarEstudioTelaListagem"/>
+                  </Toolbar>
+               </headerToolbar>
+               <CustomListItem type="Navigation">
+                  <HBox>
+                     <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+                        <Title text="{listaEstudio>nome}"/>
+                           <ObjectStatus state="{path: 'listaEstudio>estaAberto', formatter: '.formatter.formatarStatusEstaAberto'}" 
+                              text="{path: 'listaEstudio>estaAberto', formatter: '.formatter.formatarEstaAberto'}"/>
+                     </VBox>
+                  </HBox>
+               </CustomListItem>
+            </List>
+         </l:content>
+      </l:VerticalLayout>
    </Page>
 </mvc:View>

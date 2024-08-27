@@ -23,6 +23,11 @@ sap.ui.define([
          const sTitulo = oBundle.getText("tituloEstudio");
          document.title = sTitulo;
 
+         const rotaTelaDeListagemEstudio = "appEstudio";
+         this.getRouter().getRoute(rotaTelaDeListagemEstudio).attachMatched(this._atualizarListaDeEstudios, this);
+      },
+
+      _atualizarListaDeEstudios: function () {
          const urlObterTodos = "/api/EstudioMusical";
          const listaEstudio = "listaEstudio";
          this._requisicaoGet(urlObterTodos, listaEstudio);
