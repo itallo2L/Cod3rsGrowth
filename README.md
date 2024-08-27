@@ -37,4 +37,8 @@ Este projeto é destinado à auxiliar o agendamento de horários em um estúdio 
 
 ## Tela de listagem Estúdio Musical:
 
-![image](https://github.com/user-attachments/assets/59feb59d-d875-4f42-89f9-2f468ec0483d)
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/3b6620c1-74be-45de-b544-ed6abe8af6bb/8cefd32c-c8b7-424a-b81e-cd4d6b3a652b/image.png)
+
+## Tela de adicionar Estúdio Musical:
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/3b6620c1-74be-45de-b544-ed6abe8af6bb/a7770591-6574-4168-a9bc-da233ed9985a/image.png)
