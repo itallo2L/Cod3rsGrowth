@@ -35,35 +35,20 @@ sap.ui.define([
          this.requisicaoGet(urlObterTodos, listaEstudio);
       },
 
-      aoClicarAdicionarEstudioTelaListagem: function () {
-         this.getRouter().navTo("appAdicionarEstudio", {}, true);
+      _navegarParaDetalhes: function (id) {
+         const rotaDetalhes = 'appDetalhesEstudio';
+         this._navegarPara(rotaDetalhes, id);
       },
 
-      aoClicarEmDetalhes: function () {
-         this.getRouter().navTo("appDetalhesEstudio", {}, true);
+      _obterEstudioPorId: function (evento) {
+         const contexto = 'listaEstudio';
+         const propriedadeId = "id";
+         let idEstudio = evento.getSource().getBindingContext(contexto).getProperty(propriedadeId);
+         return idEstudio;
       },
 
-      filtroBarraDePesquisa: function (oEvent) {
-         filtroNome = oEvent.getSource().getValue();
-
-         this._filtrosEstudioMusical();
-      },
-
-      filtroSelecaoEstaAberto: function (oEvent) {
-         let chave = oEvent.getSource().getSelectedKey();
-
-         switch (chave) {
-            case 'aberto':
-               this._alterarValoresFiltroSelecao(true, false);
-               break;
-            case 'fechado':
-               this._alterarValoresFiltroSelecao(false, true);
-               break;
-            case 'todos':
-               this._alterarValoresFiltroSelecao(filtroVazio, filtroVazio);
-               break;
-         }
-         this._filtrosEstudioMusical();
+      _navegarPara: function (nomeRota, id) {
+         this.getRouter().navTo(nomeRota, { estudioId: id }, true);
       },
 
       _filtrosEstudioMusical: function () {
@@ -93,23 +78,36 @@ sap.ui.define([
          filtroEstaFechado = estaFechado;
       },
 
-      _mensagemDeErroExtensaoDeProblema: function (erro) {
-         const tituloMensagem = "Erro";
-         const detalhesMensagem = "Detalhes:";
-         const statusMensagem = "Status:"
+      filtroBarraDePesquisa: function (oEvent) {
+         filtroNome = oEvent.getSource().getValue();
 
-         MessageBox.error(`${erro.Title}`, {
-            title: tituloMensagem,
-            id: "messageBoxErro",
-            details:
-               `<p><strong>${statusMensagem} ${erro.Status}</strong></p>` +
-               `<p><strong> ${detalhesMensagem} </strong></p>` +
-               "<ul>" +
-               `<li>${erro.Detail}</li>` +
-               "</ul>",
-            styleClass: "sResponsivePaddingClasses",
-            dependentOn: this.getView()
-         });
+         this._filtrosEstudioMusical();
+      },
+
+      filtroSelecaoEstaAberto: function (oEvent) {
+         let chave = oEvent.getSource().getSelectedKey();
+
+         switch (chave) {
+            case 'aberto':
+               this._alterarValoresFiltroSelecao(true, false);
+               break;
+            case 'fechado':
+               this._alterarValoresFiltroSelecao(false, true);
+               break;
+            case 'todos':
+               this._alterarValoresFiltroSelecao(filtroVazio, filtroVazio);
+               break;
+         }
+         this._filtrosEstudioMusical();
+      },
+
+      aoClicarAdicionarEstudioTelaListagem: function () {
+         this.getRouter().navTo("appAdicionarEstudio", {}, true);
+      },
+
+      aoClicarEmDetalhes: function (oEvent) {
+         const id = this._obterEstudioPorId(oEvent);
+         this._navegarParaDetalhes(id);
       }
    });
 });

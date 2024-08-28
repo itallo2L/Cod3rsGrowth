@@ -31,7 +31,7 @@ sap.ui.define([
 
         aoClicarSalvarEstudio: function () {
             estudio.nome = this.getView().byId(idInputEstudio).getValue();
-            
+
             estudio.estaAberto = this.getView().byId(idCheckBoxEstaAberto).getSelected();
 
             this.validacao.aoValidarEntrada(estudio.nome, this.getView());

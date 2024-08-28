@@ -15,17 +15,19 @@ sap.ui.define([
 			return UIComponent.getRouterFor(this);
 		},
 
-		onNavBack: function () {
-			let oHistory, sPreviousHash;
-
-			oHistory = History.getInstance();
-			sPreviousHash = oHistory.getPreviousHash();
-
-			if (sPreviousHash !== undefined) {
-				window.history.go(-1);
-			} else {
-				this.getRouter().navTo("appEstudio", {}, true);
-			}
+		_mensagemDeSucessoAoSalvarEstudio: function (estudio) {
+			const mensagemDeSucesso = `Estúdio ${estudio.nome} adicionado com sucesso!`
+			MessageBox.success(mensagemDeSucesso, {
+				id: "idMessageBoxSucesso",
+				styleClass: "sResponsivePaddingClasses",
+				dependentOn: this.getView(),
+				actions: [MessageBox.Action.OK],
+				onClose: (sAction) => {
+					if (sAction === MessageBox.Action.OK) {
+						this.getRouter().navTo("appEstudio", {}, true);
+					}
+				}
+			})
 		},
 
 		requisicaoGet: function (url, nomeDaLista) {
@@ -59,19 +61,17 @@ sap.ui.define([
 				});
 		},
 
-		_mensagemDeSucessoAoSalvarEstudio: function (estudio) {
-			const mensagemDeSucesso = `Estúdio ${estudio.nome} adicionado com sucesso!`
-			MessageBox.success(mensagemDeSucesso, {
-				id: "idMessageBoxSucesso",
-				styleClass: "sResponsivePaddingClasses",
-				dependentOn: this.getView(),
-				actions: [MessageBox.Action.OK],
-				onClose: (sAction) => {
-					if (sAction === MessageBox.Action.OK) {
-						this.getRouter().navTo("appEstudio", {}, true);
-					}
-				}
-			})
+		onNavBack: function () {
+			let oHistory, sPreviousHash;
+
+			oHistory = History.getInstance();
+			sPreviousHash = oHistory.getPreviousHash();
+
+			if (sPreviousHash !== undefined) {
+				window.history.go(-1);
+			} else {
+				this.getRouter().navTo("appEstudio", {}, true);
+			}
 		},
 	});
 });
