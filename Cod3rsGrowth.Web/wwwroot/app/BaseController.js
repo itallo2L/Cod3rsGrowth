@@ -33,7 +33,7 @@ sap.ui.define([
 				return resposta.ok
 					? resposta.json()
 					: resposta.json()
-						.then(resposta => { this.validacao._mostrarErroDeValidacao(resposta, this.getView()) });
+						.then(resposta => { this.validacao.mostrarErroDeValidacao(resposta, this.getView()) });
 			})
 				.then(resposta => {
 					const dataModel = new JSONModel();
@@ -55,7 +55,7 @@ sap.ui.define([
 					resposta.ok
 						? this._mensagemDeSucessoAoSalvarEstudio(estudio)
 						: resposta.json()
-							.then(resposta => { this.validacao._mostrarErroDeValidacao(resposta, this.getView()) });
+							.then(resposta => { this.validacao.mostrarErroDeValidacao(resposta, this.getView()) });
 				});
 		},
 

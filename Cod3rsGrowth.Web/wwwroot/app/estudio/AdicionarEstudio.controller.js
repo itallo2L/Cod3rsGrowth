@@ -33,7 +33,7 @@ sap.ui.define([
             estudio.nome = this.getView().byId(idInputEstudio).getValue();
             estudio.estaAberto = this.getView().byId(idCheckBoxEstaAberto).getSelected();
 
-            this.validacao._aoValidarEntrada(estudio.nome, this.getView());
+            this.validacao.aoValidarEntrada(estudio.nome, this.getView());
 
             let urlEstudio = '/api/EstudioMusical';
             this.requisicaoPost(urlEstudio, estudio);
