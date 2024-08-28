@@ -7,7 +7,7 @@ sap.ui.define([
     QUnit.module("Adicionar Estúdio");
 
     opaTest("Deve carregar a tela de Adicionar Estúdio", function (Given, When, Then) {
-        Given.euInicioMinhaApp({
+        Given.iniciarApp({
             hash: "/AdicionarEstudio"
         });
 

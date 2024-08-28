@@ -4,7 +4,7 @@ sap.ui.define([
     "use strict";
 
     return {
-        _aoValidarEntrada: function (estudio, view) {
+        aoValidarEntrada: function (estudio, view) {
             let nomeEstudioVazio = "";
             let idInputEstudio = "idInputEstudio";
             let erro = "Error";
@@ -15,7 +15,7 @@ sap.ui.define([
                 : view.byId(idInputEstudio).setValueState(nenhum)
         },
 
-        _mostrarErroDeValidacao: function (erro, view) {
+        mostrarErroDeValidacao: function (erro, view) {
             const erroDeValidacao = "Erro de validação"
             const tituloMensagem = "Erro";
             const detalhesMensagem = "Detalhes:";

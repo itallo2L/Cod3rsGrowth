@@ -4,7 +4,7 @@ sap.ui.define([
     "use strict";
 
     return Opa5.extend("ui5.cod3rsgrowth.test.integration.arrangements.Startup", {
-        euInicioMinhaApp: function (parametroOpcoes) {
+        iniciarApp: function (parametroOpcoes) {
             const nomeApp = "ui5.cod3rsgrowth";
             var opcoes = parametroOpcoes || {};
 

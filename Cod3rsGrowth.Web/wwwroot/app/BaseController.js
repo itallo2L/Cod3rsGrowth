@@ -28,7 +28,7 @@ sap.ui.define([
 			}
 		},
 
-		_requisicaoGet: function (url, nomeDaLista) {
+		requisicaoGet: function (url, nomeDaLista) {
 			fetch(url).then(resposta => {
 				return resposta.ok
 					? resposta.json()
@@ -43,7 +43,7 @@ sap.ui.define([
 				});
 		},
 
-		_requisicaoPost: function (url, estudio) {
+		requisicaoPost: function (url, estudio) {
 			const solicitacaoDeOpcoes = {
 				method: 'POST',
 				body: JSON.stringify(estudio),
@@ -59,7 +59,7 @@ sap.ui.define([
 				});
 		},
 
-		_mensagemDeSucessoAoSalvarEstudio: function (estudio) {
+		mensagemDeSucessoAoSalvarEstudio: function (estudio) {
 			const mensagemDeSucesso = `Estúdio ${estudio.nome} adicionado com sucesso!`
 			MessageBox.success(mensagemDeSucesso, {
 				id: "idMessageBoxSucesso",
