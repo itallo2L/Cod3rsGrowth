@@ -1,0 +1,38 @@
+<mvc:View
+    controllerName="ui5.cod3rsgrowth.app.estudio.DetalhesEstudio"
+    xmlns="sap.m"
+   xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    displayBlock="true">
+    <Page>
+        <customHeader>
+            <Toolbar>
+                <Button type= "Back" press=".onNavBack"/>
+            </Toolbar>
+        </customHeader>
+        <FlexBox class="sapUiResponsiveMargin" justifyContent="SpaceBetween" direction="Column" backgroundDesign="Translucent">
+            <f:SimpleForm 
+                maxContainerCols="2"
+                editable="true"
+                layout="ResponsiveGridLayout"
+                labelSpanL="1" labelSpanM="1"
+                emptySpanL="8" emptySpanM="8"
+                columnsL="1" columnsM="1">
+                <f:toolbar> 
+                <OverflowToolbar>
+                    <Title text="{i18n>detalhesEstudio.titulo}" titleStyle="H3" class="sapUiResponsiveMargin"/>
+                    <ToolbarSpacer/>
+                </OverflowToolbar>
+                </f:toolbar>
+                <f:content>
+                    <Label text="{i18n>adicionarEstudio.inputNomeEstudio}"/>
+                    <Text text="Estúdio Teste"/>
+                    <Label text="Status"/>
+                    <Text text="Aberto"/>
+                </f:content>
+            </f:SimpleForm>
+        </FlexBox>
+    </Page>
+</mvc:View>

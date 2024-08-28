@@ -2,7 +2,8 @@ sap.ui.define([
    "../BaseController",
    "sap/ui/model/resource/ResourceModel",
    "sap/ui/model/json/JSONModel",
-   "ui5/cod3rsgrowth/model/formatter"
+   "ui5/cod3rsgrowth/model/formatter",
+
 ], (BaseController, ResourceModel, JSONModel, formatter) => {
    "use strict";
 
@@ -36,6 +37,10 @@ sap.ui.define([
 
       aoClicarAdicionarEstudioTelaListagem: function () {
          this.getRouter().navTo("appAdicionarEstudio", {}, true);
+      },
+
+      aoClicarEmDetalhes: function () {
+         this.getRouter().navTo("appDetalhesEstudio", {}, true);
       },
 
       filtroBarraDePesquisa: function (oEvent) {
@@ -73,7 +78,7 @@ sap.ui.define([
          if (filtroEstaFechado)
             query.estaFechado = filtroEstaFechado;
 
-         let url = `/api/EstudioMusical?` + new URLSearchParams(query);
+         let url = `/api/EstudioMusical? ${new URLSearchParams(query)}`;
 
          fetch(url).then(resposta => resposta.json()).then(resposta => {
             const dataModel = new JSONModel();
