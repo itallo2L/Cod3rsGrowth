@@ -31,7 +31,7 @@ sap.ui.define([
       _atualizarListaDeEstudios: function () {
          const urlObterTodos = "/api/EstudioMusical";
          const listaEstudio = "listaEstudio";
-         this._requisicaoGet(urlObterTodos, listaEstudio);
+         this.requisicaoGet(urlObterTodos, listaEstudio);
       },
 
       aoClicarAdicionarEstudioTelaListagem: function () {

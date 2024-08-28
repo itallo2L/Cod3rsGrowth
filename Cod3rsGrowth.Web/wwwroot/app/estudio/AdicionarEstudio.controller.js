@@ -36,7 +36,7 @@ sap.ui.define([
             this.validacao._aoValidarEntrada(estudio.nome, this.getView());
 
             let urlEstudio = '/api/EstudioMusical';
-            this._requisicaoPost(urlEstudio, estudio);
+            this.requisicaoPost(urlEstudio, estudio);
         },
 
         aoClicarCancelarEstudio: function () {

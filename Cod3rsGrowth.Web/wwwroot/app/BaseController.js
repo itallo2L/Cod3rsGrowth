@@ -59,7 +59,7 @@ sap.ui.define([
 				});
 		},
 
-		mensagemDeSucessoAoSalvarEstudio: function (estudio) {
+		_mensagemDeSucessoAoSalvarEstudio: function (estudio) {
 			const mensagemDeSucesso = `Estúdio ${estudio.nome} adicionado com sucesso!`
 			MessageBox.success(mensagemDeSucesso, {
 				id: "idMessageBoxSucesso",
