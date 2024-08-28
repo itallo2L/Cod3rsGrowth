@@ -1,5 +1,5 @@
 <mvc:View
-   controllerName="ui5.cod3rsgrowth.app.estudio.AdicionarEstudio"
+   controllerName="ui5.cod3rsgrowth.app.adicionarEstudio.AdicionarEstudio"
    xmlns="sap.m"
    xmlns:f="sap.ui.layout.form"
    xmlns:mvc="sap.ui.core.mvc">

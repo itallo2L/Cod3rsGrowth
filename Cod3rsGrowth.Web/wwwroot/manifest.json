@@ -87,13 +87,13 @@
           "transition": "show"
         },
         "adicionarEstudio": {
-          "path": "ui5.cod3rsgrowth.app.estudio",
+          "path": "ui5.cod3rsgrowth.app.adicionarEstudio",
           "id": "adicionarEstudio",
           "name": "AdicionarEstudio",
           "transition": "show"
         },
         "detalhesEstudio": {
-          "path": "ui5.cod3rsgrowth.app.estudio",
+          "path": "ui5.cod3rsgrowth.app.detalhesEstudio",
           "id": "detalhesEstudio",
           "name": "DetalhesEstudio",
           "transition": "show"

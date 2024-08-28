@@ -4,9 +4,10 @@ sap.ui.define([
 	'sap/ui/test/matchers/I18NText',
 	'sap/ui/test/matchers/Properties',
 	'sap/ui/test/actions/Press',
-	'sap/ui/test/actions/EnterText'
+	'sap/ui/test/actions/EnterText',
+	'sap/ui/test/matchers/PropertyStrictEquals'
 ],
-	function (Opa5, AggregationLengthEquals, I18NText, Properties, Press, EnterText) {
+	function (Opa5, AggregationLengthEquals, I18NText, Properties, Press, EnterText, PropertyStrictEquals) {
 		"use strict";
 
 		const telaDeListagem = "estudio.Estudio";
@@ -19,6 +20,10 @@ sap.ui.define([
 						return this.waitFor({
 							viewName: telaDeListagem,
 							controlType: sap.m.CustomListItem,
+							matchers: new PropertyStrictEquals({
+								name: "text",
+								value: "Mais"
+							}),
 							actions: new Press(),
 							success: () => Opa5.assert.ok(true, "O botão de carregar mais foi acionado."),
 							errorMessage: "A página não tem um botão para mostrar mais itens."

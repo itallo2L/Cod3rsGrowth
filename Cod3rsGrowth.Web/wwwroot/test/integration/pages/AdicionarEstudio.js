@@ -1,14 +1,13 @@
 sap.ui.define([
 	'sap/ui/test/Opa5',
 	'sap/ui/test/actions/Press',
-	'sap/ui/test/matchers/PropertyStrictEquals',
 	'sap/ui/core/library',
 	'sap/ui/test/actions/EnterText'
 ],
 	function (Opa5, Press, PropertyStrictEquals, library, EnterText) {
 		"use strict";
 
-		const telaDeAdicionar = "estudio.AdicionarEstudio";
+		const telaDeAdicionar = "adicionarEstudio.AdicionarEstudio";
 
 		Opa5.createPageObjects({
 			naPaginaAdicionarEstudio: {

@@ -14,7 +14,7 @@ sap.ui.define([
     const nenhum = "None"
     var estudio = {};
 
-    return BaseController.extend("ui5.cod3rsgrowth.app.estudio.AdicionarEstudio", {
+    return BaseController.extend("ui5.cod3rsgrowth.app.adicionarEstudio.AdicionarEstudio", {
         validacao: validacao,
 
         onInit: function () {
