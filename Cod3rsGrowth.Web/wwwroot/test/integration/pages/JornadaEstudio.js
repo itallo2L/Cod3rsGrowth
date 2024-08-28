@@ -15,7 +15,7 @@ sap.ui.define([
 
 		Then
 			.naPaginaListaEstudio
-			.aTelaDeveCarregarCorretamente();
+			.aTelaDeListagemDeveCarregarCorretamente("estudio.Estudio", "listagem");
 	});
 
 	opaTest("Deve mostrar 20 Estúdios listados na view do Estúdio", function (Given, When, Then) {
@@ -92,6 +92,26 @@ sap.ui.define([
 		Then
 			.naPaginaListaEstudio
 			.aListaDeveConterTodosOsEstudios(25);
+	});
+
+	opaTest("Deve ir para a tela de Adicionar Estúdio", function (Given, When, Then) {
+		When
+			.naPaginaListaEstudio
+			.aoClicarEmAdicionarEstudio();
+
+		Then
+			.naPaginaAdicionarEstudio
+			.aTelaDeAdicionarDeveCarregarCorretamente("estudio.AdicionarEstudio", "adicionar");
+	});
+
+	opaTest("Deve retornar para a tela de listagem", function (Given, When, Then) {
+		When
+			.naPaginaAdicionarEstudio
+			.aoClicarEmRetornarParaTelaDeListagem("idRetornarParaPaginaAnterior", "retornar para a tela de listagem");
+
+		Then
+			.naPaginaListaEstudio
+			.aTelaDeListagemDeveCarregarCorretamente("estudio.Estudio", "listagem");
 
 		Then
 			.iTeardownMyApp();

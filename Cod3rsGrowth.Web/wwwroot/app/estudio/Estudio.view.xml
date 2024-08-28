@@ -2,42 +2,49 @@
    controllerName="ui5.cod3rsgrowth.app.estudio.Estudio"
    xmlns="sap.m"
    xmlns:mvc="sap.ui.core.mvc"
+   xmlns:l="sap.ui.layout"
    displayBlock="true">
    <Page title="{i18n>listaEstudio}">
       <customHeader>
           <Toolbar>
-             <Title text="{i18n>tituloAgendamentoEmEstudio}" titleStyle="H3" class="sapUiResponsiveMargin"/>         
-          </Toolbar>
+            <ToolbarSpacer/>
+               <Title text="{i18n>tituloAgendamentoEmEstudio}" titleStyle="H3" class="sapUiResponsiveMargin"/>         
+            <ToolbarSpacer/>
+         </Toolbar>
        </customHeader>
-      <List id="idListaEstudio"
-      class="sapUiResponsiveMargin"
-      growing="true"
-      growingThreshold="20"
-      sticky="ColumnHeaders,HeaderToolbar"
-      width="auto"
-      items="{listaEstudio>/}">
-         <headerToolbar>
-            <Toolbar>
-               <Title id="idTituloBarraDeFerramentas" text="{i18n>listaEstudio} ({= ${listaEstudio>/}.length})" titleStyle="H3"/>
-                  <ToolbarSpacer/>
-                     <Select id="idSelecionarEstaAbertoOuFechado" change=".filtroSelecaoEstaAberto">
-                        <core:Item key="todos" text="Todos"/>
-                        <core:Item key="aberto" text="Aberto"/>
-                        <core:Item key="fechado" text="Fechado"/>
-                     </Select>
-                  <SearchField id="idBarraDePesquisa" width="25%" placeholder="{i18n>textoDaBarraDePesquisa}" liveChange=".filtroBarraDePesquisa"/>
-               <Button id="idBotaoAdicionar" type="Emphasized" text="{i18n>botaoAdicionar}" enabled="false"/>
-            </Toolbar>
-         </headerToolbar>
-         <CustomListItem type="Navigation">
-            <HBox>
-               <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
-                  <Title text="{listaEstudio>nome}"/>
-                     <ObjectStatus state="{path: 'listaEstudio>estaAberto', formatter: '.formatter.formatarStatusEstaAberto'}" 
-                        text="{path: 'listaEstudio>estaAberto', formatter: '.formatter.formatarEstaAberto'}"/>
-               </VBox>
-            </HBox>
-         </CustomListItem>
-      </List>
+      <l:VerticalLayout
+         class="sapUiContentPadding"
+         width="100%">
+         <l:content>
+            <List id="idListaEstudio"
+               growing="true"
+               growingThreshold="20"
+               sticky="ColumnHeaders,HeaderToolbar"
+               items="{listaEstudio>/}">
+               <headerToolbar>
+                  <Toolbar>
+                     <Title id="idTituloBarraDeFerramentas" text="{i18n>listaEstudio} ({= ${listaEstudio>/}.length})" titleStyle="H3"/>
+                        <ToolbarSpacer/>
+                           <Select id="idSelecionarEstaAbertoOuFechado" change=".filtroSelecaoEstaAberto">
+                              <core:Item key="todos" text="Todos"/>
+                              <core:Item key="aberto" text="Aberto"/>
+                              <core:Item key="fechado" text="Fechado"/>
+                           </Select>
+                        <SearchField id="idBarraDePesquisa" width="25%" placeholder="{i18n>textoDaBarraDePesquisa}" liveChange=".filtroBarraDePesquisa"/>
+                     <Button id="idBotaoAdicionar" type="Transparent" text="{i18n>botaoAdicionar}" press=".aoClicarAdicionarEstudioTelaListagem"/>
+                  </Toolbar>
+               </headerToolbar>
+               <CustomListItem type="Navigation">
+                  <HBox>
+                     <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+                        <Title text="{listaEstudio>nome}"/>
+                           <ObjectStatus state="{path: 'listaEstudio>estaAberto', formatter: '.formatter.formatarStatusEstaAberto'}" 
+                              text="{path: 'listaEstudio>estaAberto', formatter: '.formatter.formatarEstaAberto'}"/>
+                     </VBox>
+                  </HBox>
+               </CustomListItem>
+            </List>
+         </l:content>
+      </l:VerticalLayout>
    </Page>
 </mvc:View>

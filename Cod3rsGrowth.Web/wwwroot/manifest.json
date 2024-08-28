@@ -61,6 +61,11 @@
           "pattern": "",
           "name": "appEstudio",
           "target": "estudio"
+        },
+        {
+          "pattern": "AdicionarEstudio",
+          "name": "appAdicionarEstudio",
+          "target": "adicionarEstudio"
         }
       ],
       "targets": {
@@ -74,6 +79,12 @@
           "path": "ui5.cod3rsgrowth.app.notFound",
           "id": "notFound",
           "name": "NotFound",
+          "transition": "show"
+        },
+        "adicionarEstudio": {
+          "path": "ui5.cod3rsgrowth.app.estudio",
+          "id": "adicionarEstudio",
+          "name": "AdicionarEstudio",
           "transition": "show"
         }
       }

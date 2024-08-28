@@ -28,7 +28,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7036;http://localhost:5274", 
+      "applicationUrl": "https://localhost:7036;http://localhost:5274",
       "commandLineArgs": "TesteBancoDeDados"
     },
     "IIS Express": {

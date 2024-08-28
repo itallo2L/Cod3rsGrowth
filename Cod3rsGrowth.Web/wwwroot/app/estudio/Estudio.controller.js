@@ -2,9 +2,8 @@ sap.ui.define([
    "../BaseController",
    "sap/ui/model/resource/ResourceModel",
    "sap/ui/model/json/JSONModel",
-   "../../model/formatter",
-   "sap/m/MessageBox"
-], (BaseController, ResourceModel, JSONModel, formatter, MessageBox) => {
+   "ui5/cod3rsgrowth/model/formatter"
+], (BaseController, ResourceModel, JSONModel, formatter) => {
    "use strict";
 
    const filtroVazio = "";
@@ -14,32 +13,29 @@ sap.ui.define([
 
    return BaseController.extend("ui5.cod3rsgrowth.app.estudio.EstudioController", {
       formatter: formatter,
+
       onInit: function () {
          const i18nModel = new ResourceModel({
             bundleName: "ui5.cod3rsgrowth.i18n.i18n"
          });
+
          this.getView().setModel(i18nModel, "i18n");
          const oBundle = this.getView().getModel("i18n").getResourceBundle();
          const sTitulo = oBundle.getText("tituloEstudio");
          document.title = sTitulo;
 
-         const urlEstudio = '/api/EstudioMusical';
-         this._obterTodos(urlEstudio);
+         const rotaTelaDeListagemEstudio = "appEstudio";
+         this.getRouter().getRoute(rotaTelaDeListagemEstudio).attachMatched(this._atualizarListaDeEstudios, this);
       },
 
-      _obterTodos: function (url) {
-         fetch(url).then(resposta => {
-            return resposta.ok
-               ? resposta.json()
-               : resposta.json()
-                  .then(resposta => { this._mensagemDeErroExtensaoDeProblema(resposta) })
-         })
-            .then(resposta => {
-               const dataModel = new JSONModel();
-               dataModel.setData(resposta);
+      _atualizarListaDeEstudios: function () {
+         const urlObterTodos = "/api/EstudioMusical";
+         const listaEstudio = "listaEstudio";
+         this.requisicaoGet(urlObterTodos, listaEstudio);
+      },
 
-               this.getView().setModel(dataModel, "listaEstudio");
-            })
+      aoClicarAdicionarEstudioTelaListagem: function () {
+         this.getRouter().navTo("appAdicionarEstudio", {}, true);
       },
 
       filtroBarraDePesquisa: function (oEvent) {
@@ -62,7 +58,6 @@ sap.ui.define([
                this._alterarValoresFiltroSelecao(filtroVazio, filtroVazio);
                break;
          }
-
          this._filtrosEstudioMusical();
       },
 

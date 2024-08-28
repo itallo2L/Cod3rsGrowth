@@ -9,7 +9,7 @@ sap.ui.define([
 	function (Opa5, AggregationLengthEquals, I18NText, Properties, Press, EnterText) {
 		"use strict";
 
-		const viewName = "ui5.cod3rsgrowth.app.estudio.Estudio";
+		const telaDeListagem = "estudio.Estudio";
 		const idListaEstudio = "idListaEstudio";
 
 		Opa5.createPageObjects({
@@ -17,17 +17,18 @@ sap.ui.define([
 				actions: {
 					aoClicarEmCarregarMaisEstudios: function () {
 						return this.waitFor({
-							viewName: viewName,
+							viewName: telaDeListagem,
+							controlType: sap.m.CustomListItem,
 							actions: new Press(),
 							success: () => Opa5.assert.ok(true, "O botão de carregar mais foi acionado."),
 							errorMessage: "A página não tem um botão para mostrar mais itens."
 						});
 					},
 
-					metodoPesquisarPor: function (nomeDoEstudio) {
+					_metodoPesquisarPor: function (nomeDoEstudio) {
 						return this.waitFor({
 							id: "idBarraDePesquisa",
-							viewName: viewName,
+							viewName: telaDeListagem,
 							actions: new EnterText({
 								text: nomeDoEstudio
 							}),
@@ -37,21 +38,21 @@ sap.ui.define([
 					},
 
 					aoPesquisarPor: function (nomeDoEstudio) {
-						this.metodoPesquisarPor(nomeDoEstudio);
+						this._metodoPesquisarPor(nomeDoEstudio);
 					},
 
 					aoPesquisarEstudioInexistente: function (nomeDoEstudio) {
-						this.metodoPesquisarPor(nomeDoEstudio);
+						this._metodoPesquisarPor(nomeDoEstudio);
 					},
 
 					aoLimparFiltroDePesquisa: function (nomeDoEstudio) {
-						this.metodoPesquisarPor(nomeDoEstudio);
+						this._metodoPesquisarPor(nomeDoEstudio);
 					},
 
-					metodoSelecionar: function (statusDoEstudio) {
+					_metodoSelecionar: function (statusDoEstudio) {
 						return this.waitFor({
 							id: "idSelecionarEstaAbertoOuFechado",
-							viewName: viewName,
+							viewName: telaDeListagem,
 							actions: new Press(),
 							success: function () {
 								this.waitFor({
@@ -71,58 +72,80 @@ sap.ui.define([
 					},
 
 					aoSelecionarEstudiosAbertos: function (statusDoEstudio) {
-						this.metodoSelecionar(statusDoEstudio);
+						this._metodoSelecionar(statusDoEstudio);
 					},
 
 					aoSelecionarEstudiosFechados: function (statusDoEstudio) {
-						this.metodoSelecionar(statusDoEstudio);
+						this._metodoSelecionar(statusDoEstudio);
 					},
 
 					aoSelecionarTodosOsEstudios(statusDoEstudio) {
-						this.metodoSelecionar(statusDoEstudio);
+						this._metodoSelecionar(statusDoEstudio);
+					},
+
+					aoClicarEmAdicionarEstudio: function () {
+						return this.waitFor({
+							viewName: telaDeListagem,
+							id: "idBotaoAdicionar",
+							actions: new Press(),
+							success: () => Opa5.assert.ok(true, "O botão de adicionar estúdio foi acionado."),
+							errorMessage: "O botão de adicionar estúdio não foi acionado."
+						});
 					}
 				},
 				assertions: {
-					aTelaDeveCarregarCorretamente: function () {
+					aTelaDeListagemDeveCarregarCorretamente: function (nomeDaView, tipoDaTela) {
+						this._carregarTela(nomeDaView, tipoDaTela);
+					},
+
+					aPaginaDeListagemDeveCarregarCorretamente(nomeDaView, tipoDaTela) {
+						this._carregarTela(nomeDaView, tipoDaTela);
+					},
+
+					_carregarTela: function (nomeDaView, tipoDaTela) {
 						return this.waitFor({
-							viewName: viewName,
-							success: () => Opa5.assert.ok(true, "A tela de listagem carregou corretamente."),
-							errorMessage: "A tela de listagem não carregou corretamente"
+							viewName: nomeDaView,
+							success: () => Opa5.assert.ok(true, `A tela de ${tipoDaTela} carregou corretamente.`),
+							errorMessage: `A tela de ${tipoDaTela} não carregou corretamente`
 						});
 					},
 
 					aListaDeveConterVinteEstudios: function (quantidadeDeEstudios) {
-						this.metodoQuantidadeDeEstudiosNaLista(quantidadeDeEstudios);
+						this._metodoQuantidadeDeEstudiosNaLista(quantidadeDeEstudios);
 					},
 
 					aListaDeveConterVinteECincoEstudios: function (quantidadeDeEstudios) {
-						this.metodoQuantidadeDeEstudiosNaLista(quantidadeDeEstudios);
+						this._metodoQuantidadeDeEstudiosNaLista(quantidadeDeEstudios);
+					},
+
+					aListaDeveConterVinteESeisEstudios: function (quantidadeDeEstudios) {
+						this._metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
 					},
 
 					aListaDeveConterTrezeEstudios: function (quantidadeDeEstudios) {
-						this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
+						this._metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
 					},
 
 					aListaDeveConterDozeEstudios: function (quantidadeDeEstudios) {
-						this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
+						this._metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
 					},
 
 					aListaDeveConterZeroEstudios: function (quantidadeDeEstudios) {
-						this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
+						this._metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
 					},
 
 					aListaDeveConterDozeEstudios(quantidadeDeEstudios) {
-						this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
+						this._metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
 					},
 
 					aListaDeveConterTodosOsEstudios(quantidadeDeEstudios) {
-						this.metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
+						this._metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
 					},
 
 					aListaDeveConterTresEstudios: function () {
 						return this.waitFor({
 							id: idListaEstudio,
-							viewName: viewName,
+							viewName: telaDeListagem,
 							matchers: new AggregationLengthEquals({
 								name: "items",
 								length: 3
@@ -134,10 +157,10 @@ sap.ui.define([
 						});
 					},
 
-					metodoQuantidadeDeEstudiosNoTitulo: function (quantidadeDeEstudios) {
+					_metodoQuantidadeDeEstudiosNoTitulo: function (quantidadeDeEstudios) {
 						return this.waitFor({
 							id: "idTituloBarraDeFerramentas",
-							viewName: viewName,
+							viewName: telaDeListagem,
 							matchers: new I18NText({
 								key: "tituloContadorDaBarraDeFerramentasEstudio",
 								propertyName: "text",
@@ -148,10 +171,10 @@ sap.ui.define([
 						});
 					},
 
-					metodoQuantidadeDeEstudiosNaLista: function (quantidadeDeEstudios) {
+					_metodoQuantidadeDeEstudiosNaLista: function (quantidadeDeEstudios) {
 						return this.waitFor({
 							id: idListaEstudio,
-							viewName: viewName,
+							viewName: telaDeListagem,
 							matchers: new AggregationLengthEquals({
 								name: "items",
 								length: quantidadeDeEstudios
@@ -163,6 +186,6 @@ sap.ui.define([
 						});
 					}
 				}
-			}
+			},
 		});
 	});

@@ -6,7 +6,7 @@ sap.ui.require(["sap/ui/core/Core"], async (Core) => {
 	await Core.ready();
 
 	sap.ui.require([
-		"ui5/cod3rsgrowth/test/integration/pages/JornadaEstudio"
+		"ui5/cod3rsgrowth/test/integration/TodasAsJornadas"
 	], () => {
 		QUnit.start();
 	});
