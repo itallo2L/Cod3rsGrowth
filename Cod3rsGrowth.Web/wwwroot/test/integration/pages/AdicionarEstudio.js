@@ -2,9 +2,10 @@ sap.ui.define([
 	'sap/ui/test/Opa5',
 	'sap/ui/test/actions/Press',
 	'sap/ui/core/library',
-	'sap/ui/test/actions/EnterText'
+	'sap/ui/test/actions/EnterText',
+	'sap/ui/test/matchers/PropertyStrictEquals'
 ],
-	function (Opa5, Press, PropertyStrictEquals, library, EnterText) {
+	function (Opa5, Press, library, EnterText, PropertyStrictEquals) {
 		"use strict";
 
 		const telaDeAdicionar = "adicionarEstudio.AdicionarEstudio";
@@ -16,7 +17,7 @@ sap.ui.define([
 						this._clicarEmBotao(idBotao, mensagem);
 					},
 
-					aoClinarEmSalvarSemDigitarNome: function (idBotao, mensagem) {
+					aoClicarEmSalvarSemDigitarNome: function (idBotao, mensagem) {
 						this._clicarEmBotao(idBotao, mensagem);
 					},
 

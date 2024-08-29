@@ -92,6 +92,20 @@ sap.ui.define([
 							success: () => Opa5.assert.ok(true, "O botão de adicionar estúdio foi acionado."),
 							errorMessage: "O botão de adicionar estúdio não foi acionado."
 						});
+					},
+
+					aoclicarEmUmEstudio: function () {
+						return this.waitFor({
+							viewName: telaDeListagem,
+							controlType: "sap.m.Title",
+							matchers: new PropertyStrictEquals({
+								name: "text",
+								value: "Estudio Um"
+							}),
+							actions: new Press(),
+							success: () => Opa5.assert.ok(true, "Estudio Um selecionado."),
+							errorMessage: "Estudio Um não foi selecionado."
+						});
 					}
 				},
 				assertions: {
@@ -101,6 +115,10 @@ sap.ui.define([
 
 					aPaginaDeListagemDeveCarregarCorretamente(nomeDaView, tipoDaTela) {
 						this._carregarTela(nomeDaView, tipoDaTela);
+					},
+
+					aTelaDeListagemDoEstudioDeveCarregarCorretamente: function (nomeDaView, tipoDaTela) {
+						this._carregarTela(nomeDaView, tipoDaTela)
 					},
 
 					_carregarTela: function (nomeDaView, tipoDaTela) {
