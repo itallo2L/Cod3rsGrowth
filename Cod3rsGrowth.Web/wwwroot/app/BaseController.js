@@ -30,12 +30,12 @@ sap.ui.define([
 			})
 		},
 
-		requisicaoGet: function (url, nomeDaLista) {
+		requisicaoGet: function (url, view, nomeDaLista) {
 			fetch(url).then(resposta => {
 				return resposta.ok
 					? resposta.json()
 					: resposta.json()
-						.then(resposta => { this.validacao.mostrarErroDeValidacao(resposta, this.getView()) });
+						.then(resposta => { this.validacao.mostrarErroDeValidacao(resposta, view) });
 			})
 				.then(resposta => {
 					const dataModel = new JSONModel();

@@ -31,8 +31,9 @@ sap.ui.define([
 
       _atualizarListaDeEstudios: function () {
          const urlObterTodos = "/api/EstudioMusical";
+         const view = this.getView();
          const listaEstudio = "listaEstudio";
-         this.requisicaoGet(urlObterTodos, listaEstudio);
+         this.requisicaoGet(urlObterTodos, view, listaEstudio);
       },
 
       _navegarParaDetalhes: function (id) {
@@ -63,7 +64,7 @@ sap.ui.define([
          if (filtroEstaFechado)
             query.estaFechado = filtroEstaFechado;
 
-         let url = `/api/EstudioMusical? ${new URLSearchParams(query)}`;
+         let url = `/api/EstudioMusical?${new URLSearchParams(query)}`;
 
          fetch(url).then(resposta => resposta.json()).then(resposta => {
             const dataModel = new JSONModel();

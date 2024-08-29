@@ -15,10 +15,6 @@ sap.ui.define([], () => {
 				return pacotesDeRecurso.getText("statusDeSucesso");
 			}
 			return pacotesDeRecurso.getText("statusDeErro");
-		},
-		formatarNomeEstudio: function (nomeEstudio) {
-			const pacotesDeRecurso = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-				return pacotesDeRecurso.getText(nomeEstudio);
 		}
 	};
 });

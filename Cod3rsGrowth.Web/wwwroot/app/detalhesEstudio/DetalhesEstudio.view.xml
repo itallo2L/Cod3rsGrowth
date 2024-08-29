@@ -22,14 +22,15 @@
                 <OverflowToolbar>
                     <Title text="{i18n>detalhesEstudio.titulo}" titleStyle="H3" class="sapUiResponsiveMargin"/>
                     <ToolbarSpacer/>
-                    <Button id="idBotaoRemoverEstudio" enabled="false" text="{i18n>detalhesEstudio.deletarEstudio}"></Button>
+                    <Button id="idBotaoRemoverEstudio" visible="false" enabled="false" text="{i18n>detalhesEstudio.deletarEstudio}"></Button>
                 </OverflowToolbar>
                 </f:toolbar>
                 <f:content>
-                    <Label text="{i18n>nomeEstudio}"/>
-                    <Text text="Estúdio Teste"/>
-                    <Label text="Status"/>
-                    <Text text="Aberto"/>
+                    <FlexBox class="sapUiResponsiveMargin" direction="Column">
+                        <Title text="{detalhesEstudio>/nome}" titleStyle="H4"/>
+                        <ObjectStatus text="{path: 'detalhesEstudio>/estaAberto', formatter: '.formatter.formatarEstaAberto'}" 
+                            state="{path: 'detalhesEstudio>/estaAberto', formatter: '.formatter.formatarStatusEstaAberto'}"/>
+                    </FlexBox>
                 </f:content>
             </f:SimpleForm>
         </FlexBox>
