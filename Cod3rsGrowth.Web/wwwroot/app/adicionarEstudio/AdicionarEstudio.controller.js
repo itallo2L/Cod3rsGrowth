@@ -18,15 +18,33 @@ sap.ui.define([
         validacao: validacao,
 
         onInit: function () {
-            const rotaTelaDeAdicionarEstudio = "appAdicionarEstudio"
-            this.getRouter().getRoute(rotaTelaDeAdicionarEstudio).attachMatched(this._limparNomeECheckBoxEstudio, this);
+            const rotaTelaDeAdicionarEstudio = "appAdicionarEstudio";
+            const rotaTelaDeEditarEstudio = "appEditarEstudio";
+
+            this.getRouter().getRoute(rotaTelaDeAdicionarEstudio).attachMatched(this._aoCoicidirRotaAdicionar, this);
+            this.getRouter().getRoute(rotaTelaDeEditarEstudio).attachMatched(this._aoCoicidirRotaEditar, this);
         },
 
-        _limparNomeECheckBoxEstudio: function () {
+        _aoCoicidirRotaAdicionar: function () {
             this.getView().byId(idInputEstudio).setValueState(nenhum);
             this.getView().byId(idInputEstudio).setValue("");
 
             this.getView().byId(idCheckBoxEstaAberto).setSelected(false);
+        },
+        
+        _aoCoicidirRotaEditar: function (evento) {
+            let estudioId = this._obterIdEstudio(evento);
+            const urlObterTodos = `/api/EstudioMusical/${estudioId}`;
+            const view = this.getView();
+            const detalhesEstudio = "listaEstudio";
+            estudio = this.requisicaoGet(urlObterTodos, view, detalhesEstudio);
+            debugger
+            this.getView().byId(idInputEstudio).setValue(estudio.nome);
+        },
+
+        _obterIdEstudio: function (evento) {
+            let estudioId = evento.getParameters().arguments.estudioId;
+            return estudioId;
         },
 
         aoClicarSalvarEstudio: function () {

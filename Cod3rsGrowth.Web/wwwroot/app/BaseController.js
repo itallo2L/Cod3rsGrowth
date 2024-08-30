@@ -63,10 +63,10 @@ sap.ui.define([
 
 		onNavBack: function () {
 			let oHistory, sPreviousHash;
-
+			
 			oHistory = History.getInstance();
 			sPreviousHash = oHistory.getPreviousHash();
-
+			
 			if (sPreviousHash !== undefined) {
 				window.history.go(-1);
 			} else {
