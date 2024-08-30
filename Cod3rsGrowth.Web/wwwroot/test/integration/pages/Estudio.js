@@ -4,9 +4,10 @@ sap.ui.define([
 	'sap/ui/test/matchers/I18NText',
 	'sap/ui/test/matchers/Properties',
 	'sap/ui/test/actions/Press',
-	'sap/ui/test/actions/EnterText'
+	'sap/ui/test/actions/EnterText',
+	'sap/ui/test/matchers/PropertyStrictEquals'
 ],
-	function (Opa5, AggregationLengthEquals, I18NText, Properties, Press, EnterText) {
+	function (Opa5, AggregationLengthEquals, I18NText, Properties, Press, EnterText, PropertyStrictEquals) {
 		"use strict";
 
 		const telaDeListagem = "estudio.Estudio";
@@ -18,7 +19,7 @@ sap.ui.define([
 					aoClicarEmCarregarMaisEstudios: function () {
 						return this.waitFor({
 							viewName: telaDeListagem,
-							controlType: sap.m.CustomListItem,
+							id: "idListaEstudio",
 							actions: new Press(),
 							success: () => Opa5.assert.ok(true, "O botão de carregar mais foi acionado."),
 							errorMessage: "A página não tem um botão para mostrar mais itens."
@@ -91,6 +92,20 @@ sap.ui.define([
 							success: () => Opa5.assert.ok(true, "O botão de adicionar estúdio foi acionado."),
 							errorMessage: "O botão de adicionar estúdio não foi acionado."
 						});
+					},
+
+					aoclicarEmUmEstudio: function () {
+						return this.waitFor({
+							viewName: telaDeListagem,
+							controlType: "sap.m.Title",
+							matchers: new PropertyStrictEquals({
+								name: "text",
+								value: "Estudio Um"
+							}),
+							actions: new Press(),
+							success: () => Opa5.assert.ok(true, "Estudio Um selecionado."),
+							errorMessage: "Estudio Um não foi selecionado."
+						});
 					}
 				},
 				assertions: {
@@ -100,6 +115,10 @@ sap.ui.define([
 
 					aPaginaDeListagemDeveCarregarCorretamente(nomeDaView, tipoDaTela) {
 						this._carregarTela(nomeDaView, tipoDaTela);
+					},
+
+					aTelaDeListagemDoEstudioDeveCarregarCorretamente: function (nomeDaView, tipoDaTela) {
+						this._carregarTela(nomeDaView, tipoDaTela)
 					},
 
 					_carregarTela: function (nomeDaView, tipoDaTela) {

@@ -19,7 +19,7 @@ sap.ui.define([
     opaTest("Deve acusar erro de input com nome vazio", function (Given, When, Then) {
         When
             .naPaginaAdicionarEstudio
-            .aoClinarEmSalvarSemDigitarNome("idBotaoSalvarEstudio", "adicionar");
+            .aoClicarEmSalvarSemDigitarNome("idBotaoSalvarEstudio", "adicionar");
 
         Then
             .naPaginaAdicionarEstudio

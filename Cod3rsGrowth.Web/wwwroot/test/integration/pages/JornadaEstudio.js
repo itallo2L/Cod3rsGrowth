@@ -101,7 +101,7 @@ sap.ui.define([
 
 		Then
 			.naPaginaAdicionarEstudio
-			.aTelaDeAdicionarDeveCarregarCorretamente("estudio.AdicionarEstudio", "adicionar");
+			.aTelaDeAdicionarDeveCarregarCorretamente("adicionarEstudio.AdicionarEstudio", "adicionar");
 	});
 
 	opaTest("Deve retornar para a tela de listagem", function (Given, When, Then) {

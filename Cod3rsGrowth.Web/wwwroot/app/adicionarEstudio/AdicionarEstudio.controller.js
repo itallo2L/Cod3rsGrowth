@@ -14,7 +14,7 @@ sap.ui.define([
     const nenhum = "None"
     var estudio = {};
 
-    return BaseController.extend("ui5.cod3rsgrowth.app.estudio.AdicionarEstudio", {
+    return BaseController.extend("ui5.cod3rsgrowth.app.adicionarEstudio.AdicionarEstudio", {
         validacao: validacao,
 
         onInit: function () {
@@ -31,6 +31,7 @@ sap.ui.define([
 
         aoClicarSalvarEstudio: function () {
             estudio.nome = this.getView().byId(idInputEstudio).getValue();
+
             estudio.estaAberto = this.getView().byId(idCheckBoxEstaAberto).getSelected();
 
             this.validacao.aoValidarEntrada(estudio.nome, this.getView());

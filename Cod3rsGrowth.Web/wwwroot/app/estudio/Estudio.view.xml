@@ -34,7 +34,7 @@
                      <Button id="idBotaoAdicionar" type="Transparent" text="{i18n>botaoAdicionar}" press=".aoClicarAdicionarEstudioTelaListagem"/>
                   </Toolbar>
                </headerToolbar>
-               <CustomListItem type="Navigation">
+               <CustomListItem type="Navigation" press=".aoClicarEmDetalhes">
                   <HBox>
                      <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
                         <Title text="{listaEstudio>nome}"/>

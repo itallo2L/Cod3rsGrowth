@@ -2,7 +2,8 @@ sap.ui.define([
    "../BaseController",
    "sap/ui/model/resource/ResourceModel",
    "sap/ui/model/json/JSONModel",
-   "ui5/cod3rsgrowth/model/formatter"
+   "ui5/cod3rsgrowth/model/formatter",
+
 ], (BaseController, ResourceModel, JSONModel, formatter) => {
    "use strict";
 
@@ -30,12 +31,52 @@ sap.ui.define([
 
       _atualizarListaDeEstudios: function () {
          const urlObterTodos = "/api/EstudioMusical";
+         const view = this.getView();
          const listaEstudio = "listaEstudio";
-         this.requisicaoGet(urlObterTodos, listaEstudio);
+         this.requisicaoGet(urlObterTodos, view, listaEstudio);
       },
 
-      aoClicarAdicionarEstudioTelaListagem: function () {
-         this.getRouter().navTo("appAdicionarEstudio", {}, true);
+      _navegarParaDetalhes: function (id) {
+         const rotaDetalhes = 'appDetalhesEstudio';
+         this._navegarPara(rotaDetalhes, id);
+      },
+
+      _obterEstudioPorId: function (evento) {
+         const contexto = 'listaEstudio';
+         const propriedadeId = "id";
+         let idEstudio = evento.getSource().getBindingContext(contexto).getProperty(propriedadeId);
+         return idEstudio;
+      },
+
+      _navegarPara: function (nomeRota, id) {
+         this.getRouter().navTo(nomeRota, { estudioId: id }, true);
+      },
+
+      _filtrosEstudioMusical: function () {
+         let query = {};
+
+         if (filtroNome)
+            query.nome = filtroNome;
+
+         if (filtroEstaAberto)
+            query.estaAberto = filtroEstaAberto;
+
+         if (filtroEstaFechado)
+            query.estaFechado = filtroEstaFechado;
+
+         let url = `/api/EstudioMusical?${new URLSearchParams(query)}`;
+
+         fetch(url).then(resposta => resposta.json()).then(resposta => {
+            const dataModel = new JSONModel();
+            dataModel.setData(resposta);
+
+            this.getView().setModel(dataModel, "listaEstudio");
+         });
+      },
+
+      _alterarValoresFiltroSelecao: function (estaAberto, estaFechado) {
+         filtroEstaAberto = estaAberto;
+         filtroEstaFechado = estaFechado;
       },
 
       filtroBarraDePesquisa: function (oEvent) {
@@ -61,50 +102,13 @@ sap.ui.define([
          this._filtrosEstudioMusical();
       },
 
-      _filtrosEstudioMusical: function () {
-         let query = {};
-
-         if (filtroNome)
-            query.nome = filtroNome;
-
-         if (filtroEstaAberto)
-            query.estaAberto = filtroEstaAberto;
-
-         if (filtroEstaFechado)
-            query.estaFechado = filtroEstaFechado;
-
-         let url = `/api/EstudioMusical?` + new URLSearchParams(query);
-
-         fetch(url).then(resposta => resposta.json()).then(resposta => {
-            const dataModel = new JSONModel();
-            dataModel.setData(resposta);
-
-            this.getView().setModel(dataModel, "listaEstudio");
-         });
+      aoClicarAdicionarEstudioTelaListagem: function () {
+         this.getRouter().navTo("appAdicionarEstudio", {}, true);
       },
 
-      _alterarValoresFiltroSelecao: function (estaAberto, estaFechado) {
-         filtroEstaAberto = estaAberto;
-         filtroEstaFechado = estaFechado;
-      },
-
-      _mensagemDeErroExtensaoDeProblema: function (erro) {
-         const tituloMensagem = "Erro";
-         const detalhesMensagem = "Detalhes:";
-         const statusMensagem = "Status:"
-
-         MessageBox.error(`${erro.Title}`, {
-            title: tituloMensagem,
-            id: "messageBoxErro",
-            details:
-               `<p><strong>${statusMensagem} ${erro.Status}</strong></p>` +
-               `<p><strong> ${detalhesMensagem} </strong></p>` +
-               "<ul>" +
-               `<li>${erro.Detail}</li>` +
-               "</ul>",
-            styleClass: "sResponsivePaddingClasses",
-            dependentOn: this.getView()
-         });
+      aoClicarEmDetalhes: function (oEvent) {
+         const id = this._obterEstudioPorId(oEvent);
+         this._navegarParaDetalhes(id);
       }
    });
 });

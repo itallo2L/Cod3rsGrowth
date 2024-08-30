@@ -1,5 +1,5 @@
 <mvc:View
-   controllerName="ui5.cod3rsgrowth.app.estudio.AdicionarEstudio"
+   controllerName="ui5.cod3rsgrowth.app.adicionarEstudio.AdicionarEstudio"
    xmlns="sap.m"
    xmlns:f="sap.ui.layout.form"
    xmlns:mvc="sap.ui.core.mvc">
@@ -28,7 +28,7 @@
             </f:toolbar>
             <f:content>
                <FlexBox class="sapUiResponsiveMargin" justifyContent="SpaceBetween" direction="Row" alignItems="Center" width="350px">
-                  <Label text="{i18n>adicionarEstudio.inputNomeEstudio}" required="true"/>
+                  <Label text="{i18n>nomeEstudio}" required="true"/>
                   <Input id="idInputEstudio" required="true" placeholder="Estúdio"
                   valueStateText="O Campo nome é obrigatório, máximo de 25 caracteres."
                   value="{
