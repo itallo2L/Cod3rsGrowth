@@ -12,9 +12,8 @@ sap.ui.define([
             this.getRouter().getRoute(rotaTelaDeDetalhesEstudio).attachMatched(this._obterDetalhes, this);
          },
    
-         _obterDetalhes: function () {
-            let posicaoId = 1;
-            let estudioId = this.getOwnerComponent().getRouter().getHashChanger().getHash().split("/")[posicaoId]; 
+         _obterDetalhes: function (evento) {
+            let estudioId = evento.getParameters().arguments.estudioId;
             const urlObterTodos = `/api/EstudioMusical/${estudioId}`;
             const view = this.getView();
             const detalhesEstudio = "detalhesEstudio";
