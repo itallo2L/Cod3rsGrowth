@@ -94,7 +94,15 @@ sap.ui.define([
 						});
 					},
 
-					aoclicarEmUmEstudio: function () {
+					aoClicarEmUmEstudio: function () {
+						this._metodoClicarEmUmEstudio();
+					},
+
+					aoClicarEmEstudioUm: function () {
+						this._metodoClicarEmUmEstudio();
+					},
+
+					_metodoClicarEmUmEstudio: function () {
 						return this.waitFor({
 							viewName: telaDeListagem,
 							controlType: "sap.m.Title",
@@ -106,7 +114,7 @@ sap.ui.define([
 							success: () => Opa5.assert.ok(true, "Estudio Um selecionado."),
 							errorMessage: "Estudio Um não foi selecionado."
 						});
-					}
+					},
 				},
 				assertions: {
 					aTelaDeListagemDeveCarregarCorretamente: function (nomeDaView, tipoDaTela) {

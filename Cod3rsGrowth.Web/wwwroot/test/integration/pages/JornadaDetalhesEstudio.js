@@ -15,7 +15,7 @@ sap.ui.define([
 
         When
             .naPaginaListaEstudio
-            .aoclicarEmUmEstudio();
+            .aoClicarEmUmEstudio();
 
         Then
             .naPaginaDetalhesEstudio

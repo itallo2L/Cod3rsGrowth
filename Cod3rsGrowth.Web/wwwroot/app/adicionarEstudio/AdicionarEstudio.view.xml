@@ -20,7 +20,7 @@
             columnsL="1" columnsM="1">
             <f:toolbar> 
                <OverflowToolbar>
-                  <Title text="{i18n>adicionarEstudio.titulo}" titleStyle="H3" class="sapUiResponsiveMargin"/>
+                  <Title id="idTituloAdicionarEditar" text="{i18n>adicionarEstudio.titulo}" titleStyle="H3" class="sapUiResponsiveMargin"/>
                   <ToolbarSpacer/>
                   <Button id="idBotaoSalvarEstudio" type="Emphasized" text="{i18n>adicionarEstudio.botaoSalvar}" press=".aoClicarSalvarEstudio"/>
                   <Button id="idBotaoCancelarAdicaoEstudio" type="Transparent" text="{i18n>adicionarEstudio.botaoCancelar}" press=".aoClicarCancelarEstudio" ariaHasPopup="Dialog"/>

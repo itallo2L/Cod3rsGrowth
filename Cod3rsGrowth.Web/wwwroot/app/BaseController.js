@@ -15,8 +15,8 @@ sap.ui.define([
 			return UIComponent.getRouterFor(this);
 		},
 
-		_mensagemDeSucessoAoSalvarEstudio: function (estudio) {
-			const mensagemDeSucesso = `Estúdio ${estudio.nome} adicionado com sucesso!`
+		_mensagemDeSucessoAoSalvarEditarEstudio: function (estudio, mensagem) {
+			const mensagemDeSucesso = `Estúdio "${estudio.nome}" ${mensagem} com sucesso!`
 			MessageBox.success(mensagemDeSucesso, {
 				id: "idMessageBoxSucesso",
 				styleClass: "sResponsivePaddingClasses",
@@ -45,7 +45,7 @@ sap.ui.define([
 				});
 		},
 
-		requisicao: function (tipoDaRequisicao, url, estudio) {
+		requisicao: function (tipoDaRequisicao, url, estudio, mensagem) {
 			const solicitacaoDeOpcoes = {
 				method: tipoDaRequisicao,
 				body: JSON.stringify(estudio),
@@ -55,7 +55,7 @@ sap.ui.define([
 			fetch(url, solicitacaoDeOpcoes)
 				.then(resposta => {
 					resposta.ok
-						? this._mensagemDeSucessoAoSalvarEstudio(estudio)
+						? this._mensagemDeSucessoAoSalvarEditarEstudio(estudio, mensagem)
 						: resposta.json()
 							.then(resposta => { this.validacao.mostrarErroDeValidacao(resposta, this.getView()) });
 				});
@@ -70,7 +70,8 @@ sap.ui.define([
 			if (sPreviousHash !== undefined) {
 				window.history.go(-1);
 			} else {
-				this.getRouter().navTo("appEstudio", {}, true);
+				let oRouter = this.getOwnerComponent().getRouter();
+				oRouter.navTo("appEstudio", {}, true);
 			}
 		},
 	});

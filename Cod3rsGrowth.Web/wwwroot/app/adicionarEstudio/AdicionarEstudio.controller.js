@@ -5,8 +5,9 @@ sap.ui.define([
     "sap/m/Button",
     "sap/m/library",
     "sap/m/Text",
-    "../servico/validacao"
-], (BaseController, coreLibrary, Dialog, Button, mobileLibrary, Text, validacao) => {
+    "../servico/validacao",
+   "ui5/cod3rsgrowth/model/formatter"
+], (BaseController, coreLibrary, Dialog, Button, mobileLibrary, Text, validacao, formatter) => {
     "use strict";
 
     const idInputEstudio = "idInputEstudio";
@@ -17,6 +18,7 @@ sap.ui.define([
 
     return BaseController.extend("ui5.cod3rsgrowth.app.adicionarEstudio.AdicionarEstudio", {
         validacao: validacao,
+        formatter: formatter,
 
         onInit: function () {
             const rotaTelaDeAdicionarEstudio = "appAdicionarEstudio";
@@ -36,6 +38,10 @@ sap.ui.define([
         _verificarSeContemId: function () {
             if (!idEditarEstudio)
                 return;
+
+            let i18n = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+            this.getView().byId("idTituloAdicionarEditar").setText(i18n.getText("editarEstudio.titulo"));
+            
             const view = this.getView();
             const url = `/api/EstudioMusical/${idEditarEstudio}`;
             this._obterEstudioEditar(url, view);
@@ -70,16 +76,19 @@ sap.ui.define([
 
             let urlEstudio = '/api/EstudioMusical';
 
-            let tipoDaRequisicao;
+            let tipoDaRequisicao, mensagemDeSucesso;
 
-            if (!idEditarEstudio)
+            if (!idEditarEstudio) {
                 tipoDaRequisicao = 'Post';
+                mensagemDeSucesso = 'adicionado';
+            }
             else {
                 tipoDaRequisicao = 'Patch';
+                mensagemDeSucesso = 'atualizado';
                 estudio.id = idEditarEstudio;
             }
 
-            this.requisicao(tipoDaRequisicao, urlEstudio, estudio);
+            this.requisicao(tipoDaRequisicao, urlEstudio, estudio, mensagemDeSucesso);
         },
 
         aoClicarCancelarEstudio: function () {
