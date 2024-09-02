@@ -45,9 +45,9 @@ sap.ui.define([
 				});
 		},
 
-		requisicaoPost: function (url, estudio) {
+		requisicao: function (tipoDaRequisicao, url, estudio) {
 			const solicitacaoDeOpcoes = {
-				method: 'POST',
+				method: tipoDaRequisicao,
 				body: JSON.stringify(estudio),
 				headers: { "Content-Type": "application/json" }
 			}

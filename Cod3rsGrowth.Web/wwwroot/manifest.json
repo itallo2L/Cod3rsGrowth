@@ -63,14 +63,9 @@
           "target": "estudio"
         },
         {
-          "pattern": "AdicionarEstudio",
+          "pattern": "AdicionarEstudio/:estudioId:",
           "name": "appAdicionarEstudio",
           "target": "adicionarEstudio"
-        },
-        {
-          "pattern": "EditarEstudio/:estudioId:",
-          "name": "appEditarEstudio",
-          "target": "editarEstudio"
         },
         {
           "pattern": "DetalhesEstudio/{estudioId}",
@@ -101,12 +96,6 @@
           "path": "ui5.cod3rsgrowth.app.detalhesEstudio",
           "id": "detalhesEstudio",
           "name": "DetalhesEstudio",
-          "transition": "show"
-        },
-        "editarEstudio": {
-          "path": "ui5.cod3rsgrowth.app.adicionarEstudio",
-          "id": "editarEstudio",
-          "name": "AdicionarEstudio",
           "transition": "show"
         }
       }

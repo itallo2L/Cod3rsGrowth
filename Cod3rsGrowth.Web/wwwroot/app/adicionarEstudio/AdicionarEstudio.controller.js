@@ -11,7 +11,8 @@ sap.ui.define([
 
     const idInputEstudio = "idInputEstudio";
     const idCheckBoxEstaAberto = "idCheckBoxEstaAberto";
-    const nenhum = "None"
+    const nenhum = "None";
+    var idEditarEstudio;
     var estudio = {};
 
     return BaseController.extend("ui5.cod3rsgrowth.app.adicionarEstudio.AdicionarEstudio", {
@@ -19,31 +20,44 @@ sap.ui.define([
 
         onInit: function () {
             const rotaTelaDeAdicionarEstudio = "appAdicionarEstudio";
-            const rotaTelaDeEditarEstudio = "appEditarEstudio";
 
-            this.getRouter().getRoute(rotaTelaDeAdicionarEstudio).attachMatched(this._aoCoicidirRotaAdicionar, this);
-            this.getRouter().getRoute(rotaTelaDeEditarEstudio).attachMatched(this._aoCoicidirRotaEditar, this);
+            this.getRouter().getRoute(rotaTelaDeAdicionarEstudio).attachMatched(this._aoCoicidirRota, this);
         },
 
-        _aoCoicidirRotaAdicionar: function () {
+        _aoCoicidirRota: function (oEvent) {
             this.getView().byId(idInputEstudio).setValueState(nenhum);
             this.getView().byId(idInputEstudio).setValue("");
 
             this.getView().byId(idCheckBoxEstaAberto).setSelected(false);
-        },
-        
-        _aoCoicidirRotaEditar: function (evento) {
-            let estudioId = this._obterIdEstudio(evento);
-            const urlObterTodos = `/api/EstudioMusical/${estudioId}`;
-            const view = this.getView();
-            const detalhesEstudio = "listaEstudio";
-            estudio = this.requisicaoGet(urlObterTodos, view, detalhesEstudio);
-            debugger
-            this.getView().byId(idInputEstudio).setValue(estudio.nome);
+            idEditarEstudio = this._obterIdEstudio(oEvent);
+            this._verificarSeContemId();
         },
 
-        _obterIdEstudio: function (evento) {
-            let estudioId = evento.getParameters().arguments.estudioId;
+        _verificarSeContemId: function () {
+            if (!idEditarEstudio)
+                return;
+            const view = this.getView();
+            const url = `/api/EstudioMusical/${idEditarEstudio}`;
+            this._obterEstudioEditar(url, view);
+        },
+
+        _obterEstudioEditar: function (url, view) {
+            fetch(url).then(resposta => {
+                return resposta.ok
+                    ? resposta.json()
+                        .then(resposta => { this._colocarValoresNosCampos(resposta) })
+                    : resposta.json()
+                        .then(resposta => { this.validacao.mostrarErroDeValidacao(resposta, view) })
+            });
+        },
+
+        _colocarValoresNosCampos: function (estudioQueSeraAtualizado) {
+            this.getView().byId(idInputEstudio).setValue(estudioQueSeraAtualizado.nome);
+            this.getView().byId(idCheckBoxEstaAberto).setSelected(estudioQueSeraAtualizado.estaAberto);
+        },
+
+        _obterIdEstudio: function (oEvent) {
+            let estudioId = oEvent.getParameters().arguments.estudioId;
             return estudioId;
         },
 
@@ -55,7 +69,17 @@ sap.ui.define([
             this.validacao.aoValidarEntrada(estudio.nome, this.getView());
 
             let urlEstudio = '/api/EstudioMusical';
-            this.requisicaoPost(urlEstudio, estudio);
+
+            let tipoDaRequisicao;
+
+            if (!idEditarEstudio)
+                tipoDaRequisicao = 'Post';
+            else {
+                tipoDaRequisicao = 'Patch';
+                estudio.id = idEditarEstudio;
+            }
+
+            this.requisicao(tipoDaRequisicao, urlEstudio, estudio);
         },
 
         aoClicarCancelarEstudio: function () {

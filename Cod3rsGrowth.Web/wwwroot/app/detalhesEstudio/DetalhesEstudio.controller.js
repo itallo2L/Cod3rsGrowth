@@ -23,7 +23,7 @@ sap.ui.define([
     },
 
     aoClicarEmEditar: function () {
-      this.getRouter().navTo("appEditarEstudio", { estudioId: estudioId }, true);
+      this.getRouter().navTo("appAdicionarEstudio", { estudioId: estudioId }, true);
     }
   });
 });
