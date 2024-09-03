@@ -76,7 +76,7 @@ sap.ui.define([
 
         Then
             .naPaginaListaEstudio
-            .oEstudioEditadoDeveEstarFechado("Fechado");
+            .oEstudioEditadoDeveEstarAberto("Aberto");
 
         Then
             .iTeardownMyApp();

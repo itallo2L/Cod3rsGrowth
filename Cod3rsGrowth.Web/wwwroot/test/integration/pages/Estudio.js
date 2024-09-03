@@ -126,12 +126,12 @@ sap.ui.define([
 								name: "text",
 								value: nomeEstudio
 							}),
-							success: () => Opa5.assert.ok(true, "Estudio Um alterado para Estúdio Editado"),
+							success: () => Opa5.assert.ok(true, "Estudio Um alterado para Estudio Um"),
 							errorMessage: "Estudio Um não foi editado"
 						});
 					},
 
-					oEstudioEditadoDeveEstarFechado: function (valor) {
+					oEstudioEditadoDeveEstarAberto: function (valor) {
 						return this.waitFor({
 							viewName: telaDeListagem,
 							controlType: "sap.m.ObjectStatus",
@@ -139,8 +139,8 @@ sap.ui.define([
 								name: "text",
 								value: valor
 							}),
-							success: () => Opa5.assert.ok(true, "O Estúdio Editado está Fechado"),
-							errorMessage: "O Estúdio Editado não está Fechado"
+							success: () => Opa5.assert.ok(true, "O Estudio Um está Fechado"),
+							errorMessage: "O Estudio Um não está Fechado"
 						});
 					},
 
