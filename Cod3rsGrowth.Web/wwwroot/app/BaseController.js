@@ -45,7 +45,7 @@ sap.ui.define([
 				});
 		},
 
-		requisicao: function (tipoDaRequisicao, url, estudio, mensagem) {
+		requisicaoPostOuPatch: function (tipoDaRequisicao, url, estudio, mensagem) {
 			const solicitacaoDeOpcoes = {
 				method: tipoDaRequisicao,
 				body: JSON.stringify(estudio),
@@ -60,6 +60,16 @@ sap.ui.define([
 							.then(resposta => { this.validacao.mostrarErroDeValidacao(resposta, this.getView()) });
 				});
 		},
+
+		obterEstudioEditar: function (url, view) {
+            fetch(url).then(resposta => {
+                return resposta.ok
+                    ? resposta.json()
+                        .then(resposta => { this._colocarValoresNosCampos(resposta) })
+                    : resposta.json()
+                        .then(resposta => { this.validacao.mostrarErroDeValidacao(resposta, view) })
+            });
+        },
 
 		onNavBack: function () {
 			let oHistory, sPreviousHash;

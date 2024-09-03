@@ -95,7 +95,8 @@ namespace Cod3rsGrowth.Testes.Testes
                     DataEHoraDeSaida = DateTime.Parse("30/06/2124 14:00:00"),
                     ValorTotal = 200m,
                     EstiloMusical = EstiloMusical.Blues,
-                    IdEstudio = 1 },
+                    IdEstudio = 1 
+                },
                 new Agendamento {
                     Id = 2,
                     NomeResponsavel = "Rafael",

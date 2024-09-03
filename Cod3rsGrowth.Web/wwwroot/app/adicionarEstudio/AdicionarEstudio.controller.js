@@ -32,30 +32,21 @@ sap.ui.define([
 
             this.getView().byId(idCheckBoxEstaAberto).setSelected(false);
             idEditarEstudio = this._obterIdEstudio(oEvent);
-            this._verificarSeContemId();
+
+            if(idEditarEstudio)
+                this._obterEstudioParaEditar();
         },
 
-        _verificarSeContemId: function () {
-            if (!idEditarEstudio)
-                return;
-
+        _obterEstudioParaEditar: function () {
             let i18n = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             this.getView().byId("idTituloAdicionarEditar").setText(i18n.getText("editarEstudio.titulo"));
             
             const view = this.getView();
             const url = `/api/EstudioMusical/${idEditarEstudio}`;
-            this._obterEstudioEditar(url, view);
+            this.obterEstudioEditar(url, view);
         },
 
-        _obterEstudioEditar: function (url, view) {
-            fetch(url).then(resposta => {
-                return resposta.ok
-                    ? resposta.json()
-                        .then(resposta => { this._colocarValoresNosCampos(resposta) })
-                    : resposta.json()
-                        .then(resposta => { this.validacao.mostrarErroDeValidacao(resposta, view) })
-            });
-        },
+        
 
         _colocarValoresNosCampos: function (estudioQueSeraAtualizado) {
             this.getView().byId(idInputEstudio).setValue(estudioQueSeraAtualizado.nome);
@@ -76,19 +67,16 @@ sap.ui.define([
 
             let urlEstudio = '/api/EstudioMusical';
 
-            let tipoDaRequisicao, mensagemDeSucesso;
+            let tipoDaRequisicao = 'Post';
+            let mensagemDeSucesso = 'adicionado';
 
-            if (!idEditarEstudio) {
-                tipoDaRequisicao = 'Post';
-                mensagemDeSucesso = 'adicionado';
-            }
-            else {
+            if (idEditarEstudio) {
                 tipoDaRequisicao = 'Patch';
                 mensagemDeSucesso = 'atualizado';
                 estudio.id = idEditarEstudio;
             }
 
-            this.requisicao(tipoDaRequisicao, urlEstudio, estudio, mensagemDeSucesso);
+            this.requisicaoPostOuPatch(tipoDaRequisicao, urlEstudio, estudio, mensagemDeSucesso);
         },
 
         aoClicarCancelarEstudio: function () {
