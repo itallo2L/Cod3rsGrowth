@@ -94,21 +94,21 @@ sap.ui.define([
 						});
 					},
 
-					aoClicarEmUmEstudio: function () {
-						this._metodoClicarEmUmEstudio();
+					aoClicarEmUmEstudio: function (nomeEstudio) {
+						this._metodoClicarEmUmEstudio(nomeEstudio);
 					},
 
-					aoClicarEmEstudioUm: function () {
-						this._metodoClicarEmUmEstudio();
+					aoClicarEmEstudioUm: function (nomeEstudio) {
+						this._metodoClicarEmUmEstudio(nomeEstudio);
 					},
 
-					_metodoClicarEmUmEstudio: function () {
+					_metodoClicarEmUmEstudio: function (nomeEstudio) {
 						return this.waitFor({
 							viewName: telaDeListagem,
 							controlType: "sap.m.Title",
 							matchers: new PropertyStrictEquals({
 								name: "text",
-								value: "Estudio Um"
+								value: nomeEstudio
 							}),
 							actions: new Press(),
 							success: () => Opa5.assert.ok(true, "Estudio Um selecionado."),
@@ -117,6 +117,33 @@ sap.ui.define([
 					},
 				},
 				assertions: {
+
+					oEstudioUmDeveSeChamar: function(nomeEstudio) {
+						return this.waitFor({
+							viewName: telaDeListagem,
+							controlType: "sap.m.Title",
+							matchers: new PropertyStrictEquals({
+								name: "text",
+								value: nomeEstudio
+							}),
+							success: () => Opa5.assert.ok(true, "Estudio Um alterado para Estúdio Editado"),
+							errorMessage: "Estudio Um não foi editado"
+						});
+					},
+
+					oEstudioEditadoDeveEstarFechado: function (valor) {
+						return this.waitFor({
+							viewName: telaDeListagem,
+							controlType: "sap.m.ObjectStatus",
+							matchers: new PropertyStrictEquals({
+								name: "text",
+								value: valor
+							}),
+							success: () => Opa5.assert.ok(true, "O Estúdio Editado está Fechado"),
+							errorMessage: "O Estúdio Editado não está Fechado"
+						});
+					},
+
 					aTelaDeListagemDeveCarregarCorretamente: function (nomeDaView, tipoDaTela) {
 						this._carregarTela(nomeDaView, tipoDaTela);
 					},

@@ -29,6 +29,7 @@ sap.ui.define([
                                 name: "text",
                                 value: texto
                             }),
+                            actions: new Press(),
                             success: () => Opa5.assert.ok(true, mensagemDeSucesso),
                             errorMessage: mensagemFracasso
                         });
