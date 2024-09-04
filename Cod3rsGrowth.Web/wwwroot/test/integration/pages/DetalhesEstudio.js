@@ -20,6 +20,20 @@ sap.ui.define([
                             errorMessage: `O botão de retornar para a tela de listagem não foi acionado.`
                         });
                     },
+
+                    aoClicarEmEditar: function (tipo, texto, mensagemDeSucesso, mensagemFracasso) {
+                        return this.waitFor({
+                            viewName: telaDeDetahes,
+                            controlType: tipo,
+                            matchers: new PropertyStrictEquals({
+                                name: "text",
+                                value: texto
+                            }),
+                            actions: new Press(),
+                            success: () => Opa5.assert.ok(true, mensagemDeSucesso),
+                            errorMessage: mensagemFracasso
+                        });
+                    },
                 },
                 assertions: {
                     aPaginaDeDetalhesDeveCarregarCorretamente: function () {

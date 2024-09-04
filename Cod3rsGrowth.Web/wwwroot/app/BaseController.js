@@ -15,8 +15,8 @@ sap.ui.define([
 			return UIComponent.getRouterFor(this);
 		},
 
-		_mensagemDeSucessoAoSalvarEstudio: function (estudio) {
-			const mensagemDeSucesso = `Estúdio ${estudio.nome} adicionado com sucesso!`
+		_mensagemDeSucessoAoSalvarEditarEstudio: function (estudio, mensagem) {
+			const mensagemDeSucesso = `Estúdio "${estudio.nome}" ${mensagem} com sucesso!`
 			MessageBox.success(mensagemDeSucesso, {
 				id: "idMessageBoxSucesso",
 				styleClass: "sResponsivePaddingClasses",
@@ -45,9 +45,9 @@ sap.ui.define([
 				});
 		},
 
-		requisicaoPost: function (url, estudio) {
+		requisicaoPostOuPatch: function (tipoDaRequisicao, url, estudio, mensagem) {
 			const solicitacaoDeOpcoes = {
-				method: 'POST',
+				method: tipoDaRequisicao,
 				body: JSON.stringify(estudio),
 				headers: { "Content-Type": "application/json" }
 			}
@@ -55,22 +55,33 @@ sap.ui.define([
 			fetch(url, solicitacaoDeOpcoes)
 				.then(resposta => {
 					resposta.ok
-						? this._mensagemDeSucessoAoSalvarEstudio(estudio)
+						? this._mensagemDeSucessoAoSalvarEditarEstudio(estudio, mensagem)
 						: resposta.json()
 							.then(resposta => { this.validacao.mostrarErroDeValidacao(resposta, this.getView()) });
 				});
 		},
 
+		obterEstudioEditar: function (url, view) {
+            fetch(url).then(resposta => {
+                return resposta.ok
+                    ? resposta.json()
+                        .then(resposta => { this._colocarValoresNosCampos(resposta) })
+                    : resposta.json()
+                        .then(resposta => { this.validacao.mostrarErroDeValidacao(resposta, view) })
+            });
+        },
+
 		onNavBack: function () {
 			let oHistory, sPreviousHash;
-
+			
 			oHistory = History.getInstance();
 			sPreviousHash = oHistory.getPreviousHash();
-
+			
 			if (sPreviousHash !== undefined) {
 				window.history.go(-1);
 			} else {
-				this.getRouter().navTo("appEstudio", {}, true);
+				let oRouter = this.getOwnerComponent().getRouter();
+				oRouter.navTo("appEstudio", {}, true);
 			}
 		},
 	});

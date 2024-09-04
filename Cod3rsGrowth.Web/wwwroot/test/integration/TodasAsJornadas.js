@@ -3,8 +3,9 @@ sap.ui.define([
     './arrangements/Startup',
     './pages/JornadaEstudio',
     './pages/JornadaAdicionarEstudio',
-    './pages/JornadaDetalhesEstudio'
-], function (Opa5, Startup, JornadaEstudio, JornadaAdicionarEstudio, DetalhesEstudio) {
+    './pages/JornadaDetalhesEstudio',
+    './pages/JornadaEditarEstudio'
+], function (Opa5, Startup, JornadaEstudio, JornadaAdicionarEstudio, DetalhesEstudio, JornadaEditarEstudio) {
     'use strict';
 
     Opa5.extendConfig({

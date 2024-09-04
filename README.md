@@ -47,3 +47,7 @@ Este projeto é destinado à auxiliar o agendamento de horários em um estúdio 
 ## Tela de Detalhes:
 
 ![image](https://github.com/user-attachments/assets/60cad86a-51f5-4f5f-9766-55e841df830f)
+
+## Tela de Editar:
+
+![image](https://github.com/user-attachments/assets/25ac50b9-80d4-4635-a285-749d12c44bc4)

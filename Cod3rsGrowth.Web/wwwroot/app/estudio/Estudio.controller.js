@@ -3,7 +3,6 @@ sap.ui.define([
    "sap/ui/model/resource/ResourceModel",
    "sap/ui/model/json/JSONModel",
    "ui5/cod3rsgrowth/model/formatter",
-
 ], (BaseController, ResourceModel, JSONModel, formatter) => {
    "use strict";
 

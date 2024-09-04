@@ -63,7 +63,7 @@
           "target": "estudio"
         },
         {
-          "pattern": "AdicionarEstudio",
+          "pattern": "AdicionarEstudio/:estudioId:",
           "name": "appAdicionarEstudio",
           "target": "adicionarEstudio"
         },
