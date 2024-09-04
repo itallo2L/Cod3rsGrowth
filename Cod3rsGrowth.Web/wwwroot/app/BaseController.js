@@ -45,6 +45,20 @@ sap.ui.define([
 				});
 		},
 
+		requisicaoDelete: function (url, estudio, mensagem) {
+			const solicitacaoDeOpcoes = {
+				method: "DELETE",
+			}
+
+			fetch(url, solicitacaoDeOpcoes)
+				.then(resposta => {
+					resposta.ok
+						? this._mensagemDeSucessoAoSalvarEditarEstudio(estudio, mensagem)
+						: resposta.json()
+							.then(resposta => { this.validacao.mostrarErroDeValidacao(resposta, this.getView()) });
+				});
+		},
+
 		requisicaoPostOuPatch: function (tipoDaRequisicao, url, estudio, mensagem) {
 			const solicitacaoDeOpcoes = {
 				method: tipoDaRequisicao,
