@@ -16,10 +16,10 @@ sap.ui.define([
 
     _obterDetalhes: function (evento) {
       estudioId = evento.getParameters().arguments.estudioId;
-      const urlObterTodos = `/api/EstudioMusical/${estudioId}`;
+      const urlObterPorId = `/api/EstudioMusical/${estudioId}`;
       const view = this.getView();
       const detalhesEstudio = "detalhesEstudio";
-      this.requisicaoGet(urlObterTodos, view, detalhesEstudio);
+      this.requisicaoGet(urlObterPorId, view, detalhesEstudio);
     },
 
     aoClicarEmEditar: function () {
