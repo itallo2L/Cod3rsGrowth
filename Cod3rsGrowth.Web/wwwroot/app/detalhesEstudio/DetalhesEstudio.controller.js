@@ -32,7 +32,6 @@ sap.ui.define([
     aoClicarEmDeletar: function () {
       let nomeEstudio = this.getView().byId("idNomeEstudio").getText();
       let mensagemDeletar = "deletado";
-      debugger
       const view = this.getView();
       let mensagemDeAviso = `Tem ceteza de que deseja deletar o estúdio "${nomeEstudio}"?`
       var sResponsivePaddingClasses = "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer";

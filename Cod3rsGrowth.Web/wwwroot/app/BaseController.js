@@ -45,7 +45,6 @@ sap.ui.define([
 		},
 
 		requisicaoDelete: function (url, estudio, mensagem) {
-			debugger
 			const solicitacaoDeOpcoes = {
 				method: "DELETE",
 			}
@@ -68,7 +67,7 @@ sap.ui.define([
 			}
 
 			let mensagemDeSucesso = `Estúdio "${estudio.nome}" ${mensagem} com sucesso!`
-			debugger
+
 			fetch(url, solicitacaoDeOpcoes)
 				.then(resposta => {
 					resposta.ok

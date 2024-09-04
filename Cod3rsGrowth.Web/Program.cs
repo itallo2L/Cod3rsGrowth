@@ -1,4 +1,3 @@
-using Cod3rsGrowth.Infra;
 using Cod3rsGrowth.Infra.Repositorios;
 using Cod3rsGrowth.Web.DetalhesDeProblema;
 using Cod3rsGrowth.Web.InjecaoDeDependencia;
@@ -52,14 +51,5 @@ app.UseFileServer(new FileServerOptions
 app.UseAuthorization();
 
 app.MapControllers();
-
-if (args?.FirstOrDefault() == testeBancoDeDados)
-{
-    using (var escopo = app.Services.CreateScope())
-    {
-        var servicoTesteBancoDeDados = escopo.ServiceProvider.GetRequiredService<BdCod3rsGrowth>();
-        RepositorioDeletarEstudioDeTeste.DeletarEstudioAdicionadoEmTeste(servicoTesteBancoDeDados);
-    }
-}
 
 app.Run();
