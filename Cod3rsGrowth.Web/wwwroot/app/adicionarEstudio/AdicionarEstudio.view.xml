@@ -22,8 +22,8 @@
                <OverflowToolbar>
                   <Title id="idTituloAdicionarEditar" text="{i18n>adicionarEstudio.titulo}" titleStyle="H3" class="sapUiResponsiveMargin"/>
                   <ToolbarSpacer/>
-                  <Button id="idBotaoSalvarEstudio" type="Emphasized" text="{i18n>adicionarEstudio.botaoSalvar}" press=".aoClicarSalvarEstudio"/>
-                  <Button id="idBotaoCancelarAdicaoEstudio" type="Transparent" text="{i18n>adicionarEstudio.botaoCancelar}" press=".aoClicarCancelarEstudio" ariaHasPopup="Dialog"/>
+                  <Button id="idBotaoSalvarEstudio" text="{i18n>adicionarEstudio.botaoSalvar}" press=".aoClicarSalvarEstudio"/>
+                  <Button id="idBotaoCancelarAdicaoEstudio" text="{i18n>adicionarEstudio.botaoCancelar}" press=".aoClicarCancelarEstudio" ariaHasPopup="Dialog"/>
                </OverflowToolbar>
             </f:toolbar>
             <f:content>

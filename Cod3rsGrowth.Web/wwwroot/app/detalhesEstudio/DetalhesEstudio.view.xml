@@ -23,7 +23,7 @@
                     <Title text="{i18n>detalhesEstudio.titulo}" titleStyle="H3" class="sapUiResponsiveMargin"/>
                     <ToolbarSpacer/>
                     <Button id="idBotaoRemoverEstudio" text="{i18n>detalhesEstudio.deletarEstudio}" press=".aoClicarEmDeletar"/>
-                    <Button id="idBotaoEditarEstudio"  type="Emphasized" text="{i18n>detalhesEstudio.editarEstudio}" press=".aoClicarEmEditar"/>
+                    <Button id="idBotaoEditarEstudio" text="{i18n>detalhesEstudio.editarEstudio}" press=".aoClicarEmEditar"/>
                 </OverflowToolbar>
                 </f:toolbar>
                 <f:content>

@@ -31,20 +31,8 @@ sap.ui.define([
     
     aoClicarEmDeletar: function () {
       let nomeEstudio = this.getView().byId("idNomeEstudio").getText();
-      let mensagemDeletar = "deletado";
-      const view = this.getView();
-      let mensagemDeAviso = `Tem ceteza de que deseja deletar o estúdio "${nomeEstudio}"?`
-      var sResponsivePaddingClasses = "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer";
-      MessageBox.warning(mensagemDeAviso, {
-        styleClass: sResponsivePaddingClasses,
-        dependentOn: this.getView(),
-        actions: [MessageBox.Action.YES, MessageBox.Action.CANCEL],
-        onClose: (sAction) => {
-           if(sAction == MessageBox.Action.YES){
-              this.requisicaoDelete(urlObterPorId, nomeEstudio, mensagemDeletar, view, detalhesEstudio);
-           }
-        }
-     })
+      let mensagemDeAviso = `Tem certeza que deseja deletar o estúdio "${nomeEstudio}"?`
+      this.mensagemDeAviso(mensagemDeAviso, nomeEstudio, urlObterPorId);
     }
   });
 });
