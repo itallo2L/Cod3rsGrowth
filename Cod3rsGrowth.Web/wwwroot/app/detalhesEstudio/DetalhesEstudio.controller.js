@@ -1,12 +1,14 @@
 sap.ui.define([
   "../BaseController",
   "ui5/cod3rsgrowth/model/formatter",
-  "sap/m/MessageBox"
-], (BaseController, formatter, MessageBox) => {
+  "sap/m/MessageBox",
+  "sap/m/library",
+], (BaseController, formatter, MessageBox, library) => {
   "use strict";
 
   var estudioId;
-  const existe = true;
+  var urlObterPorId;
+  const detalhesEstudio = "detalhesEstudio";
 
   return BaseController.extend("ui5.cod3rsgrowth.app.detalhesEstudio.DetalhesEstudio", {
     formatter: formatter,
@@ -16,33 +18,34 @@ sap.ui.define([
       this.getRouter().getRoute(rotaTelaDeDetalhesEstudio).attachMatched(this._obterDetalhes, this);
     },
 
-    _obterDetalhes: function (evento, deletar) {
+    _obterDetalhes: function (evento) {
       estudioId = evento.getParameters().arguments.estudioId;
-      const urlObterPorId = `/api/EstudioMusical/${estudioId}`;
+      urlObterPorId = `/api/EstudioMusical/${estudioId}`;
       const view = this.getView();
-      const detalhesEstudio = "detalhesEstudio";
       this.requisicaoGet(urlObterPorId, view, detalhesEstudio);
     },
-
+    
     aoClicarEmEditar: function () {
-      this.getRouter().navTo("appAdicionarEstudio", { estudioId: estudioId });
+      this.getRouter().navTo("appAdicionarEstudio", { estudioId: estudioId }, true);
     },
-
+    
     aoClicarEmDeletar: function () {
-      let mensagemDeAviso
+      let nomeEstudio = this.getView().byId("idNomeEstudio").getText();
+      let mensagemDeletar = "deletado";
+      debugger
+      const view = this.getView();
+      let mensagemDeAviso = `Tem ceteza de que deseja deletar o estúdio "${nomeEstudio}"?`
+      var sResponsivePaddingClasses = "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer";
       MessageBox.warning(mensagemDeAviso, {
         styleClass: sResponsivePaddingClasses,
         dependentOn: this.getView(),
-        actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+        actions: [MessageBox.Action.YES, MessageBox.Action.CANCEL],
         onClose: (sAction) => {
-           if(sAction == MessageBox.Action.OK){
-              let url = `/api/Empresa/${idEmpresa}`;
-              this.deletarEmpresa(url, nomeDaEmpresa);
+           if(sAction == MessageBox.Action.YES){
+              this.requisicaoDelete(urlObterPorId, nomeEstudio, mensagemDeletar, view, detalhesEstudio);
            }
         }
      })
-
-      this._obterDetalhes(evento, );
     }
   });
 });

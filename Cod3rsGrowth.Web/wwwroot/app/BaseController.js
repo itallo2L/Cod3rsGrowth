@@ -15,9 +15,8 @@ sap.ui.define([
 			return UIComponent.getRouterFor(this);
 		},
 
-		_mensagemDeSucessoAoSalvarEditarEstudio: function (estudio, mensagem) {
-			const mensagemDeSucesso = `Estúdio "${estudio.nome}" ${mensagem} com sucesso!`
-			MessageBox.success(mensagemDeSucesso, {
+		_mensagemDeSucesso: function (mensagem) {
+			MessageBox.success(mensagem, {
 				id: "idMessageBoxSucesso",
 				styleClass: "sResponsivePaddingClasses",
 				dependentOn: this.getView(),
@@ -46,14 +45,16 @@ sap.ui.define([
 		},
 
 		requisicaoDelete: function (url, estudio, mensagem) {
+			debugger
 			const solicitacaoDeOpcoes = {
 				method: "DELETE",
 			}
 
+			let mensagemDeSucesso = `Estúdio "${estudio}" ${mensagem} com sucesso!`
 			fetch(url, solicitacaoDeOpcoes)
 				.then(resposta => {
 					resposta.ok
-						? this._mensagemDeSucessoAoSalvarEditarEstudio(estudio, mensagem)
+						? this._mensagemDeSucesso(mensagemDeSucesso)
 						: resposta.json()
 							.then(resposta => { this.validacao.mostrarErroDeValidacao(resposta, this.getView()) });
 				});
@@ -66,10 +67,12 @@ sap.ui.define([
 				headers: { "Content-Type": "application/json" }
 			}
 
+			let mensagemDeSucesso = `Estúdio "${estudio.nome}" ${mensagem} com sucesso!`
+			debugger
 			fetch(url, solicitacaoDeOpcoes)
 				.then(resposta => {
 					resposta.ok
-						? this._mensagemDeSucessoAoSalvarEditarEstudio(estudio, mensagem)
+						? this._mensagemDeSucesso(mensagemDeSucesso)
 						: resposta.json()
 							.then(resposta => { this.validacao.mostrarErroDeValidacao(resposta, this.getView()) });
 				});
