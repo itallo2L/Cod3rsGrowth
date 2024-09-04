@@ -4,7 +4,9 @@ using Cod3rsGrowth.Infra.Singleton;
 using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Testes.InjecaoDeDependencia;
 using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics;
 using Xunit;
+using static LinqToDB.Common.Configuration;
 
 namespace Cod3rsGrowth.Testes.Testes
 {
@@ -84,6 +86,7 @@ namespace Cod3rsGrowth.Testes.Testes
         [Fact]
         public void deve_comparar_a_lista_obter_todos_com_a_lista_de_comparacao()
         {
+            string data = AdicionarDias();
             var listaDeComparacao = new List<Agendamento>
             {
                 new Agendamento
@@ -91,8 +94,8 @@ namespace Cod3rsGrowth.Testes.Testes
                     Id = 1,
                     NomeResponsavel = "Paulo",
                     CpfResponsavel = "424.977.200-45",
-                    DataEHoraDeEntrada = DateTime.Parse("30/06/2124 12:00:00"),
-                    DataEHoraDeSaida = DateTime.Parse("30/06/2124 14:00:00"),
+                    DataEHoraDeEntrada = DateTime.Parse($"{data} 12:00:00"),
+                    DataEHoraDeSaida = DateTime.Parse($"{data} 14:00:00"),
                     ValorTotal = 200m,
                     EstiloMusical = EstiloMusical.Blues,
                     IdEstudio = 1 
@@ -135,6 +138,7 @@ namespace Cod3rsGrowth.Testes.Testes
 
         public List<Agendamento> CriarLista()
         {
+            string data = AdicionarDias();
             var listasDeAgendamentos = new List<Agendamento>
             {
                 new Agendamento
@@ -142,8 +146,8 @@ namespace Cod3rsGrowth.Testes.Testes
                     Id = 1,
                     NomeResponsavel = "Paulo",
                     CpfResponsavel = "424.977.200-45",
-                    DataEHoraDeEntrada = DateTime.Parse("30/06/2124 12:00:00"),
-                    DataEHoraDeSaida = DateTime.Parse("30/06/2124 14:00:00"),
+                    DataEHoraDeEntrada = DateTime.Parse($"{data} 12:00:00"),
+                    DataEHoraDeSaida = DateTime.Parse($"{data} 14:00:00"),
                     ValorTotal = 200m,
                     EstiloMusical = EstiloMusical.Blues,
                     IdEstudio = 1
@@ -182,6 +186,12 @@ namespace Cod3rsGrowth.Testes.Testes
                 },
             };
             return listasDeAgendamentos;
+        }
+
+        public string AdicionarDias()
+        {
+            DateTime dataAtual = DateTime.Today.AddDays(30);
+            return dataAtual.ToString("dd/MM/yyyy");
         }
     }
 }
