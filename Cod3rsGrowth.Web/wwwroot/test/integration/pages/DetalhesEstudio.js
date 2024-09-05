@@ -29,6 +29,10 @@ sap.ui.define([
                         this._clicarEmBotao(tipo, texto, mensagemDeSucesso, mensagemFracasso);
                     },
 
+                    aoClicarEmRetornarParaListagem: function (mensagemDeSucesso, mensagemFracasso) {
+                        this._clicarEmBotaoPeloId(mensagemDeSucesso, mensagemFracasso);
+                    },
+
                     _clicarEmBotao: function (tipo, texto, mensagemDeSucesso, mensagemFracasso) {
                         return this.waitFor({
                             viewName: telaDeDetahes,
@@ -37,6 +41,16 @@ sap.ui.define([
                                 name: "text",
                                 value: texto
                             }),
+                            actions: new Press(),
+                            success: () => Opa5.assert.ok(true, mensagemDeSucesso),
+                            errorMessage: mensagemFracasso
+                        });
+                    },
+
+                    _clicarEmBotaoPeloId: function (mensagemDeSucesso, mensagemFracasso) {
+                        return this.waitFor({
+                            viewName: telaDeDetahes,
+                            id: "idRetornarParaTelaDeListagem",
                             actions: new Press(),
                             success: () => Opa5.assert.ok(true, mensagemDeSucesso),
                             errorMessage: mensagemFracasso
@@ -66,6 +80,18 @@ sap.ui.define([
                 },
                 assertions: {
                     aPaginaDeDetalhesDeveCarregarCorretamente: function () {
+                        this._carregarPaginaDeDetalhes();
+                    },
+
+                    aPaginaDeDetalhesDeveCarregar() {
+                        this._carregarPaginaDeDetalhes();
+                    },
+                    
+                    aPaginaDeDetalhesDeveSerCarregada() {
+                        this._carregarPaginaDeDetalhes();
+                    },
+
+                    _carregarPaginaDeDetalhes: function () {
                         return this.waitFor({
                             viewName: telaDeDetahes,
                             success: () => Opa5.assert.ok(true, `A tela de detalhes carregou corretamente.`),

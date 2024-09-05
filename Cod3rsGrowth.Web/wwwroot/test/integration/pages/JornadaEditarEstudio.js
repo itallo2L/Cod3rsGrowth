@@ -61,7 +61,7 @@ sap.ui.define([
             .aCheckBoxDeveEstarMarcada(true, "Aberto");
     });
 
-    opaTest("Deve salvar as alterações e retornar para a tela de listagem", function (Given, When, Then) {
+    opaTest("Deve salvar as alterações e retornar para a tela de detalhes", function (Given, When, Then) {
         When
             .naPaginaEditarEstudio
             .aoClicarEmSalvar("Salvar");
@@ -69,6 +69,16 @@ sap.ui.define([
         When
             .naPaginaEditarEstudio
             .aoClicarEmOKNaMessageBox("OK");
+
+        Then
+            .naPaginaDetalhesEstudio
+            .aPaginaDeDetalhesDeveSerCarregada();
+    });
+
+    opaTest("Deve retornar para a tela de listagem", function (Given, When, Then) {
+        When
+            .naPaginaDetalhesEstudio
+            .aoClicarEmRetornarParaListagem("O botão de retornar para listagem foi clicado", "Não foi possível clicar no botão de retornar para listagem");
 
         Then
             .naPaginaListaEstudio

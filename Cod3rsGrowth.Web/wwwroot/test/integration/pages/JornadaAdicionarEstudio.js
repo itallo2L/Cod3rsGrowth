@@ -70,7 +70,7 @@ sap.ui.define([
             .aPaginaDevePermanecerNaTelaDeAdicionar("adicionar");
     });
 
-    opaTest("Deve adicionar um novo estúdio", function (Given, When, Then) {
+    opaTest("Deve salvar estúdio e carregar a página de detalhes", function (Given, When, Then) {
         When
             .naPaginaAdicionarEstudio
             .aoDigitarNomeDoEstudio("Estudio Vinte e Seis");
@@ -82,6 +82,16 @@ sap.ui.define([
         When
             .naPaginaAdicionarEstudio
             .aoClicarEmOk("OK");
+
+        Then
+            .naPaginaDetalhesEstudio
+            .aPaginaDeDetalhesDeveCarregar();
+    });
+
+    opaTest("O estúdio deve ter sido deletado", function (Given, When, Then) {
+        When
+            .naPaginaDetalhesEstudio
+            .aoClicarEmRetornarParaListagem("O botão de retornar para listagem foi clicado", "Não foi possível clicar no botão de retornar para listagem");
 
         Then
             .naPaginaListaEstudio
