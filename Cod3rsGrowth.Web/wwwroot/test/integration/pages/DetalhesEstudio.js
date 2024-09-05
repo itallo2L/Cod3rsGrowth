@@ -22,6 +22,14 @@ sap.ui.define([
                     },
 
                     aoClicarEmEditar: function (tipo, texto, mensagemDeSucesso, mensagemFracasso) {
+                        this._clicarEmBotao(tipo, texto, mensagemDeSucesso, mensagemFracasso);
+                    },
+                    
+                    aoClicarEmDeletar: function (tipo, texto, mensagemDeSucesso, mensagemFracasso) {
+                        this._clicarEmBotao(tipo, texto, mensagemDeSucesso, mensagemFracasso);
+                    },
+
+                    _clicarEmBotao: function (tipo, texto, mensagemDeSucesso, mensagemFracasso) {
                         return this.waitFor({
                             viewName: telaDeDetahes,
                             controlType: tipo,
@@ -34,6 +42,27 @@ sap.ui.define([
                             errorMessage: mensagemFracasso
                         });
                     },
+
+                    aoClicarEmSimNaMessageBox: function (valorBotao) {
+                        this._clicarEmBotaoMessageBox(valorBotao);
+                    },
+                    
+                    aoClicarEmOKNaMessageBox: function (valorBotao) {
+                        this._clicarEmBotaoMessageBox(valorBotao);
+                    },
+
+                    _clicarEmBotaoMessageBox: function (valorBotao) {
+						return this.waitFor({
+							controlType: "sap.m.Button",
+							matchers: new PropertyStrictEquals({
+								name: "text",
+								value: valorBotao
+							}),
+							actions: new Press(),
+							success: () => Opa5.assert.ok(true, `Opção "${valorBotao}" selecionada na MessageBox`),
+							errorMessage: `Não foi possível selecionar a opção "${valorBotao}" na MessageBox`
+						});
+					},
                 },
                 assertions: {
                     aPaginaDeDetalhesDeveCarregarCorretamente: function () {

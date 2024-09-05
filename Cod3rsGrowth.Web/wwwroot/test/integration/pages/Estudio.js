@@ -17,6 +17,14 @@ sap.ui.define([
 			naPaginaListaEstudio: {
 				actions: {
 					aoClicarEmCarregarMaisEstudios: function () {
+						this._carregarMaisEstudios();
+					},
+					
+					aoCarregarMaisEstudios: function () {
+						this._carregarMaisEstudios();
+					},
+
+					_carregarMaisEstudios: function () {
 						return this.waitFor({
 							viewName: telaDeListagem,
 							id: "idListaEstudio",
@@ -101,6 +109,10 @@ sap.ui.define([
 					aoClicarEmEstudioUm: function (nomeEstudio) {
 						this._metodoClicarEmUmEstudio(nomeEstudio);
 					},
+					
+					aoClicarNoEstudioVinteESeis: function (nomeEstudio) {
+						this._metodoClicarEmUmEstudio(nomeEstudio);
+					},
 
 					_metodoClicarEmUmEstudio: function (nomeEstudio) {
 						return this.waitFor({
@@ -111,8 +123,8 @@ sap.ui.define([
 								value: nomeEstudio
 							}),
 							actions: new Press(),
-							success: () => Opa5.assert.ok(true, "Estudio Um selecionado."),
-							errorMessage: "Estudio Um não foi selecionado."
+							success: () => Opa5.assert.ok(true, `"${nomeEstudio}" selecionado.`),
+							errorMessage: `"${nomeEstudio}" não foi selecionado.`
 						});
 					},
 				},
@@ -193,6 +205,10 @@ sap.ui.define([
 					},
 
 					aListaDeveConterTodosOsEstudios(quantidadeDeEstudios) {
+						this._metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
+					},
+
+					aListaDeveConterVinteECincoEstudiosNoTitulo: function (quantidadeDeEstudios) {
 						this._metodoQuantidadeDeEstudiosNoTitulo(quantidadeDeEstudios);
 					},
 

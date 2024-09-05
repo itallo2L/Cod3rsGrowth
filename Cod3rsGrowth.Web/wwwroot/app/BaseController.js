@@ -4,8 +4,13 @@ sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
-	"./servico/validacao"
-], function (Controller, History, UIComponent, JSONModel, MessageBox, validacao) {
+	"./servico/validacao",
+	"sap/m/Dialog",
+    "sap/m/Button",
+    "sap/m/library",
+    "sap/m/Text",
+    "sap/ui/core/library",
+], function (Controller, History, UIComponent, JSONModel, MessageBox, validacao, Dialog, Button, mobileLibrary, Text, coreLibrary) {
 	"use strict";
 
 	return Controller.extend("ui5.cod3rsgrowth.app.BaseController", {
@@ -15,16 +20,19 @@ sap.ui.define([
 			return UIComponent.getRouterFor(this);
 		},
 
-		_mensagemDeSucessoAoSalvarEditarEstudio: function (estudio, mensagem) {
-			const mensagemDeSucesso = `Estúdio "${estudio.nome}" ${mensagem} com sucesso!`
-			MessageBox.success(mensagemDeSucesso, {
+		_mensagemDeSucesso: function (mensagem, idEstudio) {
+			MessageBox.success(mensagem, {
 				id: "idMessageBoxSucesso",
 				styleClass: "sResponsivePaddingClasses",
 				dependentOn: this.getView(),
 				actions: [MessageBox.Action.OK],
 				onClose: (sAction) => {
 					if (sAction === MessageBox.Action.OK) {
-						this.getRouter().navTo("appEstudio", {}, true);
+						debugger
+						if(idEstudio)
+							this.getRouter().navTo("appDetalhesEstudio", { estudioId : idEstudio }, true);
+						else
+							this.getRouter().navTo("appEstudio", {}, true);
 					}
 				}
 			})
@@ -45,17 +53,34 @@ sap.ui.define([
 				});
 		},
 
-		requisicaoPostOuPatch: function (tipoDaRequisicao, url, estudio, mensagem) {
+		requisicaoDelete: function (url, estudio) {
+			const solicitacaoDeOpcoes = {
+				method: "DELETE",
+			}
+
+			let mensagemDeSucesso = `Estúdio "${estudio}" deletado com sucesso!`
+			fetch(url, solicitacaoDeOpcoes)
+				.then(resposta => {
+					resposta.ok
+						? this._mensagemDeSucesso(mensagemDeSucesso)
+						: resposta.json()
+							.then(resposta => { this.validacao.mostrarErroDeValidacao(resposta, this.getView()) });
+				});
+		},
+
+		requisicaoPostOuPatch: function (tipoDaRequisicao, url, estudio, mensagem, idEstudio) {
 			const solicitacaoDeOpcoes = {
 				method: tipoDaRequisicao,
 				body: JSON.stringify(estudio),
 				headers: { "Content-Type": "application/json" }
 			}
 
+			let mensagemDeSucesso = `Estúdio "${estudio.nome}" ${mensagem} com sucesso!`
+
 			fetch(url, solicitacaoDeOpcoes)
 				.then(resposta => {
 					resposta.ok
-						? this._mensagemDeSucessoAoSalvarEditarEstudio(estudio, mensagem)
+						? this._mensagemDeSucesso(mensagemDeSucesso, idEstudio)
 						: resposta.json()
 							.then(resposta => { this.validacao.mostrarErroDeValidacao(resposta, this.getView()) });
 				});
@@ -84,5 +109,41 @@ sap.ui.define([
 				oRouter.navTo("appEstudio", {}, true);
 			}
 		},
+
+		mensagemDeAviso: function (mensagem, idEstudio, nomeEstudio, urlObterPorId) {
+			if (!this.aMensagemDeCancelarEstudio) {
+                this.aMensagemDeCancelarEstudio = new Dialog({
+                    type: mobileLibrary.DialogType.Message,
+                    title: "Aviso",
+                    state: coreLibrary.ValueState.Warning,
+                    content: new Text({ text: mensagem }),
+                    beginButton: new Button({
+                        type: mobileLibrary.ButtonType.Negative,
+                        text: "Sim",
+                        press: function () {
+							debugger
+							if(nomeEstudio) {
+								this.requisicaoDelete(urlObterPorId, nomeEstudio);
+								this.aMensagemDeCancelarEstudio.close();
+								this.getRouter().navTo("appEstudio", {}, true);
+							} else if(idEstudio) {
+								this.aMensagemDeCancelarEstudio.close();
+								this.getRouter().navTo("appEstudio", { estudioId : idEstudio }, true);
+							} else {
+								this.getRouter().navTo("appEstudio", {}, true);
+							}
+                        }.bind(this)
+                    }),
+                    endButton: new Button({
+                        type: mobileLibrary.ButtonType.Success,
+                        text: "Não",
+                        press: function () {
+                            this.aMensagemDeCancelarEstudio.close();
+                        }.bind(this)
+                    })
+                });
+            }
+            this.aMensagemDeCancelarEstudio.open();
+        }
 	});
 });
