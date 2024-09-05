@@ -24,15 +24,15 @@ sap.ui.define([
       const view = this.getView();
       this.requisicaoGet(urlObterPorId, view, detalhesEstudio);
     },
-    
+
     aoClicarEmEditar: function () {
       this.getRouter().navTo("appAdicionarEstudio", { estudioId: estudioId }, true);
     },
-    
+
     aoClicarEmDeletar: function () {
       let nomeEstudio = this.getView().byId("idNomeEstudio").getText();
       let mensagemDeAviso = `Tem certeza que deseja deletar o estúdio "${nomeEstudio}"?`
-      this.mensagemDeAviso(mensagemDeAviso, nomeEstudio, urlObterPorId);
+      this.mensagemAoCancelarRemocao(mensagemDeAviso, nomeEstudio, urlObterPorId);
     }
   });
 });

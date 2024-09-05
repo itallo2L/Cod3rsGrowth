@@ -1,7 +1,7 @@
 sap.ui.define([
     "../BaseController",
     "../servico/validacao",
-   "ui5/cod3rsgrowth/model/formatter"
+    "ui5/cod3rsgrowth/model/formatter"
 ], (BaseController, validacao, formatter) => {
     "use strict";
 
@@ -10,37 +10,36 @@ sap.ui.define([
     const nenhum = "None";
     var idEditarEstudio;
     var estudio = {};
-    
-    
+
+
     return BaseController.extend("ui5.cod3rsgrowth.app.adicionarEstudio.AdicionarEstudio", {
         validacao: validacao,
         formatter: formatter,
-        
+
         onInit: function () {
             const rotaTelaDeAdicionarEstudio = "appAdicionarEstudio";
-            
+
             this.getRouter().getRoute(rotaTelaDeAdicionarEstudio).attachMatched(this._aoCoicidirRota, this);
         },
-        
+
         _aoCoicidirRota: function (oEvent) {
             this.getView().byId(idInputEstudio).setValueState(nenhum);
             this.getView().byId(idInputEstudio).setValue("");
-            
+
             this.getView().byId(idCheckBoxEstaAberto).setSelected(false);
             idEditarEstudio = this._obterIdEstudio(oEvent);
-            
-            
+
             let i18n = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             this.getView().byId("idTituloAdicionarEditar").setText(i18n.getText("adicionarEstudio.titulo"));
-            
-            if(idEditarEstudio)
+
+            if (idEditarEstudio)
                 this._obterEstudioParaEditar();
         },
-        
+
         _obterEstudioParaEditar: function () {
             let i18n = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             this.getView().byId("idTituloAdicionarEditar").setText(i18n.getText("editarEstudio.titulo"));
-            
+
             const view = this.getView();
             const url = `/api/EstudioMusical/${idEditarEstudio}`;
             this.obterEstudioEditar(url, view);
@@ -79,8 +78,7 @@ sap.ui.define([
 
         aoClicarCancelarEstudio: function () {
             let mensagemDeAviso = "Tem certeza que deseja cancelar a operação?"
-            debugger
-            this.mensagemDeAviso(mensagemDeAviso, idEditarEstudio);
+            this.mensagemAoCancelarAdicaoOuEdicao(mensagemDeAviso, idEditarEstudio);
         }
     });
 });
