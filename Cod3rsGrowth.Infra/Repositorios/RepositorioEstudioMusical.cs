@@ -19,7 +19,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public void Adicionar(EstudioMusical estudioMusical)
         {
-            _bd.Insert(estudioMusical);
+            estudioMusical.Id = _bd.InsertWithInt32Identity(estudioMusical);
         }
 
         public void Atualizar(EstudioMusical estudioParaAtualizar)

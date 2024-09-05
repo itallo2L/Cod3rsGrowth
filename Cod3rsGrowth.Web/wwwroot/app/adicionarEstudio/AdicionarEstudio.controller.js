@@ -72,7 +72,6 @@ sap.ui.define([
                 mensagemDeSucesso = 'atualizado';
                 estudio.id = idEditarEstudio;
             }
-
             this.requisicaoPostOuPatch(tipoDaRequisicao, urlEstudio, estudio, mensagemDeSucesso, idEditarEstudio);
         },
 

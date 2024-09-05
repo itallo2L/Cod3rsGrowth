@@ -15,6 +15,7 @@ sap.ui.define([
 
 	var idDetalhesEstudio;
 	var nomeDeletarEstudio;
+
 	return Controller.extend("ui5.cod3rsgrowth.app.BaseController", {
 		validacao: validacao,
 
@@ -23,7 +24,6 @@ sap.ui.define([
 		},
 
 		_mensagemDeSucesso: function (mensagem, idEstudio) {
-			debugger
 			MessageBox.success(mensagem, {
 				id: "idMessageBoxSucesso",
 				styleClass: "sResponsivePaddingClasses",
@@ -80,11 +80,18 @@ sap.ui.define([
 
 			fetch(url, solicitacaoDeOpcoes)
 				.then(resposta => {
-					resposta.ok
-						? this._mensagemDeSucesso(mensagemDeSucesso, idEstudio)
-						: resposta.json()
-							.then(resposta => { this.validacao.mostrarErroDeValidacao(resposta, this.getView()) });
-				});
+					if (!resposta.ok) {
+						resposta.json()
+							.then(resposta => this.validacao.mostrarErroDeValidacao(resposta, this.getView()));
+					} else {
+						if(!!idEstudio){
+							this._mensagemDeSucesso(mensagemDeSucesso, idEstudio)
+						} else {
+							resposta.json()
+								.then(resposta => this._mensagemDeSucesso(mensagemDeSucesso, resposta.id))
+						}
+					}
+				})
 		},
 
 		obterEstudioEditar: function (url, view) {
