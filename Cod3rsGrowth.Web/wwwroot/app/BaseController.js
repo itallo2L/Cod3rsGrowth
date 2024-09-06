@@ -33,7 +33,7 @@ sap.ui.define([
 					if (sAction === MessageBox.Action.OK) {
 						idEstudio
 							? this.getRouter().navTo("appDetalhesEstudio", { estudioId: idEstudio }, true)
-							: this.getRouter().navTo("appEstudio", {}, true);
+							: this.getRouter().navTo("appListagemEstudio", {}, true);
 					}
 				}
 			})
@@ -114,7 +114,7 @@ sap.ui.define([
 				window.history.go(-1);
 			} else {
 				let oRouter = this.getOwnerComponent().getRouter();
-				oRouter.navTo("appEstudio", {}, true);
+				oRouter.navTo("appListagemEstudio", {}, true);
 			}
 		},
 
@@ -148,9 +148,9 @@ sap.ui.define([
 							nomeDeletarEstudio = chave;
 							this.requisicaoDelete(urlObterPorId, nomeDeletarEstudio);
 							this.aMensagemDeCancelarEstudio.close();
-							this.getRouter().navTo("appEstudio", {}, true);
+							this.getRouter().navTo("appListagemEstudio", {}, true);
 						} else {
-							this.getRouter().navTo("appEstudio", {}, true);
+							this.getRouter().navTo("appListagemEstudio", {}, true);
 						}
 					}.bind(this)
 				}),

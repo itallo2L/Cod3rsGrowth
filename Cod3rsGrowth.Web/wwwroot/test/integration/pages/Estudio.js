@@ -10,7 +10,7 @@ sap.ui.define([
 	function (Opa5, AggregationLengthEquals, I18NText, Properties, Press, EnterText, PropertyStrictEquals) {
 		"use strict";
 
-		const telaDeListagem = "estudio.Estudio";
+		const telaDeListagem = "listagemEstudio.ListagemEstudio";
 		const idListaEstudio = "idListaEstudio";
 
 		Opa5.createPageObjects({
@@ -156,21 +156,21 @@ sap.ui.define([
 						});
 					},
 
-					aTelaDeListagemDeveCarregarCorretamente: function (nomeDaView, tipoDaTela) {
-						this._carregarTela(nomeDaView, tipoDaTela);
+					aTelaDeListagemDeveCarregarCorretamente: function (tipoDaTela) {
+						this._carregarTela(tipoDaTela);
 					},
 
-					aPaginaDeListagemDeveCarregarCorretamente(nomeDaView, tipoDaTela) {
-						this._carregarTela(nomeDaView, tipoDaTela);
+					aPaginaDeListagemDeveCarregarCorretamente(tipoDaTela) {
+						this._carregarTela(tipoDaTela);
 					},
 
-					aTelaDeListagemDoEstudioDeveCarregarCorretamente: function (nomeDaView, tipoDaTela) {
-						this._carregarTela(nomeDaView, tipoDaTela)
+					aTelaDeListagemDoEstudioDeveCarregarCorretamente: function (tipoDaTela) {
+						this._carregarTela(tipoDaTela)
 					},
 
-					_carregarTela: function (nomeDaView, tipoDaTela) {
+					_carregarTela: function (tipoDaTela) {
 						return this.waitFor({
-							viewName: nomeDaView,
+							viewName: telaDeListagem,
 							success: () => Opa5.assert.ok(true, `A tela de ${tipoDaTela} carregou corretamente.`),
 							errorMessage: `A tela de ${tipoDaTela} não carregou corretamente`
 						});

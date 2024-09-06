@@ -8,10 +8,10 @@ sap.ui.define([
 
     opaTest("Deve carregar a tela de Detalhes do Estúdio", function (Given, When, Then) {
         Given.iStartMyUIComponent({
-			componentConfig: {
-				name: "ui5.cod3rsgrowth"
-			}
-		});
+            componentConfig: {
+                name: "ui5.cod3rsgrowth"
+            }
+        });
 
         When
             .naPaginaListaEstudio
@@ -25,15 +25,15 @@ sap.ui.define([
     opaTest(`Deve mostrar o nome do estúdio como "Estudio Um"`, function (Given, When, Then) {
         Then
             .naPaginaDetalhesEstudio
-            .oNomeDoEstudioDeveSerEstudioUm("sap.m.Title", "Estudio Um", 
-                "O nome do estúdio (Estudio Um) está correto.", 
+            .oNomeDoEstudioDeveSerEstudioUm("sap.m.Title", "Estudio Um",
+                "O nome do estúdio (Estudio Um) está correto.",
                 "O nome do estúdio (Estudio Um) não está correto.");
     });
 
     opaTest(`Deve mostrar "Aberto" na tela de detalhes do Estudio Um`, function (Given, When, Then) {
         Then
             .naPaginaDetalhesEstudio
-            .oEstudioDeveAparecerComoAberto("sap.m.ObjectStatus" ,"Aberto", 
+            .oEstudioDeveAparecerComoAberto("sap.m.ObjectStatus", "Aberto",
                 "O Estúdio Um está aberto", "O Estúdio Um está fechado");
     });
 
@@ -44,7 +44,7 @@ sap.ui.define([
 
         Then
             .naPaginaListaEstudio
-            .aTelaDeListagemDoEstudioDeveCarregarCorretamente("estudio.Estudio", "listagem");
+            .aTelaDeListagemDoEstudioDeveCarregarCorretamente("listagem");
 
         Then
             .iTeardownMyApp();

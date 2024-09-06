@@ -57,7 +57,7 @@ sap.ui.define([
 
         Then
             .naPaginaListaEstudio
-            .aPaginaDeListagemDeveCarregarCorretamente("estudio.Estudio", "listagem");
+            .aPaginaDeListagemDeveCarregarCorretamente("listagemEstudio.ListagemEstudio", "listagem");
     });
 
     opaTest("Deve ir para a tela de adicionar", function (Given, When, Then) {

@@ -59,8 +59,8 @@
       "routes": [
         {
           "pattern": "",
-          "name": "appEstudio",
-          "target": "estudio"
+          "name": "appListagemEstudio",
+          "target": "listagemEstudio"
         },
         {
           "pattern": "AdicionarEstudio/:estudioId:",
@@ -69,15 +69,15 @@
         },
         {
           "pattern": "DetalhesEstudio/{estudioId}",
-          "name" : "appDetalhesEstudio",
+          "name": "appDetalhesEstudio",
           "target": "detalhesEstudio"
         }
       ],
       "targets": {
-        "estudio": {
-          "path": "ui5.cod3rsgrowth.app.estudio",
-          "id": "estudio",
-          "name": "Estudio",
+        "listagemEstudio": {
+          "path": "ui5.cod3rsgrowth.app.listagemEstudio",
+          "id": "listagemEstudio",
+          "name": "ListagemEstudio",
           "level": 1
         },
         "notFound": {

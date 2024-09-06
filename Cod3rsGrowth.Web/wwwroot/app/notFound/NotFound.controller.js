@@ -14,7 +14,7 @@ sap.ui.define([
 		},
 
 		aoClicarPaginaInicial: function () {
-			this.getRouter().navTo("appEstudio", {}, true);
+			this.getRouter().navTo("appListagemEstudio", {}, true);
 		}
 	});
 });

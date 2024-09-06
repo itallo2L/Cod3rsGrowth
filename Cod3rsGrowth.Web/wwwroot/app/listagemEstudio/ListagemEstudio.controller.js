@@ -11,7 +11,7 @@ sap.ui.define([
    var filtroEstaAberto;
    var filtroEstaFechado;
 
-   return BaseController.extend("ui5.cod3rsgrowth.app.estudio.EstudioController", {
+   return BaseController.extend("ui5.cod3rsgrowth.app.listagemEstudio.ListagemEstudioController", {
       formatter: formatter,
 
       onInit: function () {
@@ -24,7 +24,7 @@ sap.ui.define([
          const sTitulo = oBundle.getText("tituloEstudio");
          document.title = sTitulo;
 
-         const rotaTelaDeListagemEstudio = "appEstudio";
+         const rotaTelaDeListagemEstudio = "appListagemEstudio";
          this.getRouter().getRoute(rotaTelaDeListagemEstudio).attachMatched(this._atualizarListaDeEstudios, this);
       },
 

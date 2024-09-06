@@ -15,7 +15,7 @@ sap.ui.define([
 
 		Then
 			.naPaginaListaEstudio
-			.aTelaDeListagemDeveCarregarCorretamente("estudio.Estudio", "listagem");
+			.aTelaDeListagemDeveCarregarCorretamente("listagemEstudio.ListagemEstudio", "listagem");
 	});
 
 	opaTest("Deve mostrar 20 Estúdios listados na view do Estúdio", function (Given, When, Then) {
@@ -111,7 +111,7 @@ sap.ui.define([
 
 		Then
 			.naPaginaListaEstudio
-			.aTelaDeListagemDeveCarregarCorretamente("estudio.Estudio", "listagem");
+			.aTelaDeListagemDeveCarregarCorretamente("listagemEstudio.ListagemEstudio", "listagem");
 
 		Then
 			.iTeardownMyApp();
