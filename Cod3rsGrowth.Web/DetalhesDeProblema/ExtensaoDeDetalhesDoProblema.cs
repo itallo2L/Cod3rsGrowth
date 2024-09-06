@@ -27,7 +27,7 @@ namespace Cod3rsGrowth.Web.DetalhesDeProblema
                         if (erroDoManipuladorDaExcecao is ValidationException excecaoDeValidacao)
                         {
                             detalhesDoProblema.Title = "Erro de validação";
-                            detalhesDoProblema.Detail = excecaoDeValidacao.Message;
+                            detalhesDoProblema.Detail = excecaoDeValidacao.StackTrace;
                             detalhesDoProblema.Type = "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.1";
                             detalhesDoProblema.Status = StatusCodes.Status400BadRequest;
                             detalhesDoProblema.Extensions["ErroDeValidacao"] = excecaoDeValidacao.Errors
