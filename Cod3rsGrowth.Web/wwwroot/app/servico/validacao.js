@@ -16,20 +16,26 @@ sap.ui.define([
         },
 
         mostrarErroDeValidacao: function (erro, view) {
-            const erroDeValidacao = "Erro de validação"
+            const erroDeValidacao = "Erro de validação";
             const tituloMensagem = "Erro";
             const detalhesMensagem = "Detalhes:";
-            const statusMensagem = "Status:"
+            const detalhesStackTrace = "StackTrace:";
+            const statusMensagem = "Status:";
 
             if (erro.Title === erroDeValidacao) {
                 const mensagensDeErro = Object.values(erro.Extensions.ErroDeValidacao).join("\r \n");
 
-                MessageBox.error(`${erro.Title} \n \n ${mensagensDeErro}`, {
+                MessageBox.error(`${erro.Title}`, {
                     title: tituloMensagem,
                     id: "idMessageBoxErroValidacao",
                     details:
-                        `<p><strong>${statusMensagem} ${erro.Status}</strong></p>` +
-                        `<p><strong> ${detalhesMensagem} </strong></p>` +
+                    `<p><strong>${statusMensagem} ${erro.Status}</strong></p>` +
+                    `<p><strong> ${detalhesMensagem} </strong></p>` +
+                        "<ul>" +
+                        `<li>${mensagensDeErro}</li>` +
+                        "</ul>" +
+
+                        `<p><strong> ${detalhesStackTrace} </strong></p>` +
                         "<ul>" +
                         `<li>${erro.Detail}</li>` +
                         "</ul>",
