@@ -32,7 +32,7 @@ namespace Cod3rsGrowth.Web.Controllers
         public IActionResult Adicionar([FromBody] EstudioMusical estudioMusical)
         {
             _servicoEstudioMusical.Adicionar(estudioMusical);
-            return Ok();
+            return Ok(estudioMusical);
         }
 
         [HttpPatch]
