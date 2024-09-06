@@ -32,7 +32,7 @@ sap.ui.define([
       _atualizarListaDeEstudios: function () {
          const urlObterTodos = "/api/EstudioMusical";
          const view = this.getView();
-         this.requisicaoGet(urlObterTodos,  listaEstudio, view);
+         this.requisicaoGet(urlObterTodos, listaEstudio, view);
       },
 
       _navegarParaDetalhes: function (id) {

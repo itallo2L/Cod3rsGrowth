@@ -84,7 +84,7 @@ sap.ui.define([
 						resposta.json()
 							.then(resposta => this.validacao.mostrarErroDeValidacao(resposta, this.getView()));
 					} else {
-						if(!!idEstudio){
+						if (!!idEstudio) {
 							this._mensagemDeSucesso(mensagemDeSucesso, idEstudio)
 						} else {
 							resposta.json()

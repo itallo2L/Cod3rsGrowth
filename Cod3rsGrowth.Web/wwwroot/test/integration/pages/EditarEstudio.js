@@ -3,7 +3,7 @@ sap.ui.define([
     'sap/ui/test/matchers/PropertyStrictEquals',
     'sap/ui/test/actions/Press',
     'sap/ui/test/matchers/Properties',
-	'sap/ui/test/actions/EnterText'
+    'sap/ui/test/actions/EnterText'
 ],
     function (Opa5, PropertyStrictEquals, Press, Properties, EnterText) {
         "use strict";
@@ -15,14 +15,14 @@ sap.ui.define([
                 actions: {
                     aoClicarNoInputNome: function () {
                         return this.waitFor({
-							viewName: telaDeEditar,
+                            viewName: telaDeEditar,
                             controlType: "sap.m.InputBase",
-							actions: new EnterText({
-								text: "Estudio Um"
-							}),
-							success: () => Opa5.assert.ok(true, '"Estudio Um" editado para "Estudio Um"'),
-							errorMessage: 'Não foi possível editar o "Estudio Um"'
-						});
+                            actions: new EnterText({
+                                text: "Estudio Um"
+                            }),
+                            success: () => Opa5.assert.ok(true, '"Estudio Um" editado para "Estudio Um"'),
+                            errorMessage: 'Não foi possível editar o "Estudio Um"'
+                        });
                     },
 
                     aoClicarNaCheckBox: function () {
@@ -54,17 +54,17 @@ sap.ui.define([
                     },
 
                     _clicarEmBotao: function (valorBotao) {
-						return this.waitFor({
-							controlType: "sap.m.Button",
-							matchers: new PropertyStrictEquals({
-								name: "text",
-								value: valorBotao
-							}),
-							actions: new Press(),
-							success: () => Opa5.assert.ok(true, `Opção "${valorBotao}" selecionada na MessageBox`),
-							errorMessage: `Não foi possível selecionar a opção "${valorBotao}" na MessageBox`
-						});
-					},
+                        return this.waitFor({
+                            controlType: "sap.m.Button",
+                            matchers: new PropertyStrictEquals({
+                                name: "text",
+                                value: valorBotao
+                            }),
+                            actions: new Press(),
+                            success: () => Opa5.assert.ok(true, `Opção "${valorBotao}" selecionada na MessageBox`),
+                            errorMessage: `Não foi possível selecionar a opção "${valorBotao}" na MessageBox`
+                        });
+                    },
                 },
                 assertions: {
                     aPaginaDeEditarDeveCarregarCorretamente: function () {
@@ -88,7 +88,7 @@ sap.ui.define([
                             viewName: telaDeEditar,
                             controlType: "sap.m.InputBase",
                             matchers:
-                                new Properties ({
+                                new Properties({
                                     value: nomeEstudio
                                 }),
                             success: () => Opa5.assert.ok(true, `O nome no input é "${nomeEstudio}"`),
@@ -108,7 +108,7 @@ sap.ui.define([
                         return this.waitFor({
                             viewName: telaDeEditar,
                             controlType: "sap.m.CheckBox",
-                            matchers: new Properties ({
+                            matchers: new Properties({
                                 selected: estado
                             }),
                             success: () => Opa5.assert.ok(true, `O estúdio está ${textoDoEstado}.`),

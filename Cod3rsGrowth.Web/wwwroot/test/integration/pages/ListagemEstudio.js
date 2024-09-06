@@ -19,7 +19,7 @@ sap.ui.define([
 					aoClicarEmCarregarMaisEstudios: function () {
 						this._carregarMaisEstudios();
 					},
-					
+
 					aoCarregarMaisEstudios: function () {
 						this._carregarMaisEstudios();
 					},
@@ -109,7 +109,7 @@ sap.ui.define([
 					aoClicarEmEstudioUm: function (nomeEstudio) {
 						this._metodoClicarEmUmEstudio(nomeEstudio);
 					},
-					
+
 					aoClicarNoEstudioVinteESeis: function (nomeEstudio) {
 						this._metodoClicarEmUmEstudio(nomeEstudio);
 					},
@@ -130,7 +130,7 @@ sap.ui.define([
 				},
 				assertions: {
 
-					oEstudioUmDeveSeChamar: function(nomeEstudio) {
+					oEstudioUmDeveSeChamar: function (nomeEstudio) {
 						return this.waitFor({
 							viewName: telaDeListagem,
 							controlType: "sap.m.Title",

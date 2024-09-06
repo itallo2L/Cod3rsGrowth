@@ -8,10 +8,10 @@ sap.ui.define([
 
     opaTest("Deve carregar a tela de Editar Estúdio", function (Given, When, Then) {
         Given.iStartMyUIComponent({
-			componentConfig: {
-				name: "ui5.cod3rsgrowth"
-			}
-		});
+            componentConfig: {
+                name: "ui5.cod3rsgrowth"
+            }
+        });
 
         When
             .naPaginaListaEstudio

@@ -24,7 +24,7 @@ sap.ui.define([
                     aoClicarEmEditar: function (tipo, texto, mensagemDeSucesso, mensagemFracasso) {
                         this._clicarEmBotao(tipo, texto, mensagemDeSucesso, mensagemFracasso);
                     },
-                    
+
                     aoClicarEmDeletar: function (tipo, texto, mensagemDeSucesso, mensagemFracasso) {
                         this._clicarEmBotao(tipo, texto, mensagemDeSucesso, mensagemFracasso);
                     },
@@ -60,23 +60,23 @@ sap.ui.define([
                     aoClicarEmSimNaMessageBox: function (valorBotao) {
                         this._clicarEmBotaoMessageBox(valorBotao);
                     },
-                    
+
                     aoClicarEmOKNaMessageBox: function (valorBotao) {
                         this._clicarEmBotaoMessageBox(valorBotao);
                     },
 
                     _clicarEmBotaoMessageBox: function (valorBotao) {
-						return this.waitFor({
-							controlType: "sap.m.Button",
-							matchers: new PropertyStrictEquals({
-								name: "text",
-								value: valorBotao
-							}),
-							actions: new Press(),
-							success: () => Opa5.assert.ok(true, `Opção "${valorBotao}" selecionada na MessageBox`),
-							errorMessage: `Não foi possível selecionar a opção "${valorBotao}" na MessageBox`
-						});
-					},
+                        return this.waitFor({
+                            controlType: "sap.m.Button",
+                            matchers: new PropertyStrictEquals({
+                                name: "text",
+                                value: valorBotao
+                            }),
+                            actions: new Press(),
+                            success: () => Opa5.assert.ok(true, `Opção "${valorBotao}" selecionada na MessageBox`),
+                            errorMessage: `Não foi possível selecionar a opção "${valorBotao}" na MessageBox`
+                        });
+                    },
                 },
                 assertions: {
                     aPaginaDeDetalhesDeveCarregarCorretamente: function () {
@@ -86,7 +86,7 @@ sap.ui.define([
                     aPaginaDeDetalhesDeveCarregar() {
                         this._carregarPaginaDeDetalhes();
                     },
-                    
+
                     aPaginaDeDetalhesDeveSerCarregada() {
                         this._carregarPaginaDeDetalhes();
                     },
