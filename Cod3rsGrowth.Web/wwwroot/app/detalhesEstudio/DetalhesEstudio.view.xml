@@ -1,7 +1,7 @@
 <mvc:View
     controllerName="ui5.cod3rsgrowth.app.detalhesEstudio.DetalhesEstudio"
     xmlns="sap.m"
-   xmlns:f="sap.ui.layout.form"
+    xmlns:f="sap.ui.layout.form"
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true">
     <Page>
