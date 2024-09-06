@@ -1,7 +1,9 @@
-﻿using LinqToDB.SqlQuery;
+﻿using FluentValidation;
+using LinqToDB.SqlQuery;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace Cod3rsGrowth.Web.DetalhesDeProblema
 {
@@ -22,12 +24,15 @@ namespace Cod3rsGrowth.Web.DetalhesDeProblema
                             Instance = contexto.Request.HttpContext.Request.Path
                         };
 
-                        if (erroDoManipuladorDaExcecao is FluentValidation.ValidationException excecaoDeValidacao)
+                        if (erroDoManipuladorDaExcecao is ValidationException excecaoDeValidacao)
                         {
                             detalhesDoProblema.Title = "Erro de validação";
-                            detalhesDoProblema.Detail = excecaoDeValidacao.Message;
+                            detalhesDoProblema.Detail = excecaoDeValidacao.Demystify().ToString();
                             detalhesDoProblema.Type = "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.1";
                             detalhesDoProblema.Status = StatusCodes.Status400BadRequest;
+                            detalhesDoProblema.Extensions["ErroDeValidacao"] = excecaoDeValidacao.Errors
+                            .GroupBy(nomePropriedade => nomePropriedade.PropertyName, mensagemErro => mensagemErro.ErrorMessage)
+                            .ToDictionary(x => x.Key, x => x.ToList());
                         }
                         else if (erroDoManipuladorDaExcecao is SqlException sqlException)
                         {
@@ -39,10 +44,10 @@ namespace Cod3rsGrowth.Web.DetalhesDeProblema
                         else
                         {
                             var logger = loggerFactory.CreateLogger("GlobalExceptionHandler");
-                            logger.LogError($"Unexpected error: {manipuladorDeExecao.Error}");
-                            detalhesDoProblema.Title = erroDoManipuladorDaExcecao.Message;
+                            logger.LogError($"Erro inesperado: {manipuladorDeExecao.Error}");
+                            detalhesDoProblema.Title = $"{manipuladorDeExecao.Error.Message}";
                             detalhesDoProblema.Status = StatusCodes.Status500InternalServerError;
-                            detalhesDoProblema.Detail = erroDoManipuladorDaExcecao.Message;
+                            detalhesDoProblema.Detail = erroDoManipuladorDaExcecao.Demystify().ToString();
                         }
 
                         contexto.Response.StatusCode = detalhesDoProblema.Status.Value;
