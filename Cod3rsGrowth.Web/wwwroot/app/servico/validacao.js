@@ -29,12 +29,11 @@ sap.ui.define([
                     title: tituloMensagem,
                     id: "idMessageBoxErroValidacao",
                     details:
-                    `<p><strong>${statusMensagem} ${erro.Status}</strong></p>` +
-                    `<p><strong> ${detalhesMensagem} </strong></p>` +
+                        `<p><strong>${statusMensagem} ${erro.Status}</strong></p>` +
+                        `<p><strong> ${detalhesMensagem} </strong></p>` +
                         "<ul>" +
                         `<li>${mensagensDeErro}</li>` +
                         "</ul>" +
-
                         `<p><strong> ${detalhesStackTrace} </strong></p>` +
                         "<ul>" +
                         `<li>${erro.Detail}</li>` +
