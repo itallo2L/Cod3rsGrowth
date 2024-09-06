@@ -39,7 +39,7 @@ sap.ui.define([
 			})
 		},
 
-		requisicaoGet: function (url, view, nomeDaLista) {
+		requisicaoGet: function (url, nomeDaLista, view) {
 			fetch(url).then(resposta => {
 				return resposta.ok
 					? resposta.json()

@@ -22,6 +22,7 @@ namespace Cod3rsGrowth.Testes.Testes
         [Fact]
         public void deve_certificar_se_o_agendamento_adicionado_esta_no_banco()
         {
+            string data = AdicionarDias();
             var estudio = new EstudioMusical
             {
                 EstaAberto = true,
@@ -36,8 +37,8 @@ namespace Cod3rsGrowth.Testes.Testes
                 Id = 1,
                 NomeResponsavel = "Paulo",
                 CpfResponsavel = "424.977.200-45",
-                DataEHoraDeEntrada = DateTime.Parse("30/07/2124 09:00:00"),
-                DataEHoraDeSaida = DateTime.Parse("30/07/2124 10:00:00"),
+                DataEHoraDeEntrada = DateTime.Parse($"{data} 09:00:00"),
+                DataEHoraDeSaida = DateTime.Parse($"{data} 10:00:00"),
                 ValorTotal = 200m,
                 EstiloMusical = EstiloMusical.Blues,
                 IdEstudio = 15

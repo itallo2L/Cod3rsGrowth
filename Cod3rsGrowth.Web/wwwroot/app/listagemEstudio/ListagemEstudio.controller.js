@@ -10,6 +10,7 @@ sap.ui.define([
    var filtroNome;
    var filtroEstaAberto;
    var filtroEstaFechado;
+   const listaEstudio = "listaEstudio";
 
    return BaseController.extend("ui5.cod3rsgrowth.app.listagemEstudio.ListagemEstudioController", {
       formatter: formatter,
@@ -31,8 +32,7 @@ sap.ui.define([
       _atualizarListaDeEstudios: function () {
          const urlObterTodos = "/api/EstudioMusical";
          const view = this.getView();
-         const listaEstudio = "listaEstudio";
-         this.requisicaoGet(urlObterTodos, view, listaEstudio);
+         this.requisicaoGet(urlObterTodos,  listaEstudio, view);
       },
 
       _navegarParaDetalhes: function (id) {
@@ -65,12 +65,7 @@ sap.ui.define([
 
          let url = `/api/EstudioMusical?${new URLSearchParams(query)}`;
 
-         fetch(url).then(resposta => resposta.json()).then(resposta => {
-            const dataModel = new JSONModel();
-            dataModel.setData(resposta);
-
-            this.getView().setModel(dataModel, "listaEstudio");
-         });
+         this.requisicaoGet(url, listaEstudio)
       },
 
       _alterarValoresFiltroSelecao: function (estaAberto, estaFechado) {

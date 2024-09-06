@@ -22,7 +22,7 @@ sap.ui.define([
       estudioId = evento.getParameters().arguments.estudioId;
       urlObterPorId = `/api/EstudioMusical/${estudioId}`;
       const view = this.getView();
-      this.requisicaoGet(urlObterPorId, view, detalhesEstudio);
+      this.requisicaoGet(urlObterPorId, detalhesEstudio, view);
     },
 
     aoClicarEmEditar: function () {
